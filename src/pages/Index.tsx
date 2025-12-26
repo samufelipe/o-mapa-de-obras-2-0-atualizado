@@ -23,6 +23,21 @@ const Index = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Scroll reveal effect
+  useEffect(() => {
+    const revealElements = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    revealElements.forEach(el => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   const scrollToForm = () => {
     const el = document.getElementById('hero');
     if (el) el.scrollIntoView({ behavior: 'smooth' });

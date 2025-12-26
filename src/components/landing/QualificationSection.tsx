@@ -3,7 +3,7 @@ import { QUALIFICATION } from "@/lib/constants";
 
 const QualificationSection = () => {
   return (
-    <section className="section-spacing bg-secondary border-y border-border">
+    <section className="section-spacing bg-secondary border-y border-border reveal">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-2xl md:text-3xl">

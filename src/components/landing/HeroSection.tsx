@@ -28,8 +28,8 @@ const HeroSection = () => {
 
   return (
     <section id="hero" className="relative pt-28 pb-16 md:pt-40 md:pb-24 bg-background overflow-hidden">
-      <div className="absolute inset-0 bg-grid"></div>
-      <div className="container mx-auto px-4 md:px-6 relative">
+      <div className="bg-grid-overlay"></div>
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div className="space-y-6 md:space-y-8 text-center lg:text-left animate-fade-up">
@@ -91,9 +91,9 @@ const HeroSection = () => {
                   <div className="flex justify-between items-end mb-4">
                     <div className="flex flex-col">
                       <span className="text-[10px] font-bold text-muted-foreground line-through uppercase">R$ 197,00</span>
-                      <span className="text-3xl font-black tracking-tighter">R$ 49,90</span>
+                      <span className="text-3xl font-black tracking-tighter animate-pulse-slow">R$ 49,90</span>
                     </div>
-                    <span className="text-[9px] font-black text-primary bg-foreground px-2 py-1 uppercase tracking-widest">LOTE 01</span>
+                    <span className="text-[9px] font-black text-primary bg-foreground px-2 py-1 uppercase tracking-widest shadow-hard">LOTE 01</span>
                   </div>
                   <button 
                     type="submit" 
@@ -112,14 +112,14 @@ const HeroSection = () => {
       </div>
       
       {/* Trust Bar */}
-      <div className="container mx-auto px-4 mt-16">
-        <div className="bg-secondary border-y border-border py-6">
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-40 grayscale">
+      <div className="mt-16 border-y border-border bg-secondary">
+        <div className="container mx-auto px-4 py-6">
+          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 text-muted-foreground/50">
             <div className="flex items-center gap-2 font-black text-[10px] uppercase tracking-widest">
               <Users className="w-4 h-4" /> +1000 Arquitetas Impactadas
             </div>
             <div className="flex items-center gap-2 font-black text-[10px] uppercase tracking-widest">
-              <Star className="w-4 h-4 fill-foreground" /> Avaliação 4.9/5.0
+              <Star className="w-4 h-4 fill-current" /> Avaliação 4.9/5.0
             </div>
             <div className="flex items-center gap-2 font-black text-[10px] uppercase tracking-widest">
               <ShieldCheck className="w-4 h-4" /> Método Validado
