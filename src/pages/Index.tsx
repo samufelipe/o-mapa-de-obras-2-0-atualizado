@@ -11,9 +11,15 @@ import BonusSection from "@/components/landing/BonusSection";
 import GuaranteeSection from "@/components/landing/GuaranteeSection";
 import FAQSection from "@/components/landing/FAQSection";
 import Footer from "@/components/landing/Footer";
+import { initAllTracking, trackCTAClick, trackSectionView } from "@/lib/gtm-tracking";
 
 const Index = () => {
   const [showStickyCTA, setShowStickyCTA] = useState(false);
+
+  // Initialize GTM tracking on mount
+  useEffect(() => {
+    initAllTracking();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,10 +29,13 @@ const Index = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Scroll reveal effect
+  // Scroll reveal effect + section tracking
   useEffect(() => {
     const revealElements = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
+    const sections = document.querySelectorAll('section[id]');
+    const trackedSections = new Set<string>();
+
+    const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('active');
@@ -34,11 +43,29 @@ const Index = () => {
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-    revealElements.forEach(el => observer.observe(el));
-    return () => observer.disconnect();
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.id;
+          if (sectionId && !trackedSections.has(sectionId)) {
+            trackedSections.add(sectionId);
+            trackSectionView(sectionId);
+          }
+        }
+      });
+    }, { threshold: 0.3 });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+    sections.forEach(el => sectionObserver.observe(el));
+
+    return () => {
+      revealObserver.disconnect();
+      sectionObserver.disconnect();
+    };
   }, []);
 
   const scrollToForm = () => {
+    trackCTAClick("sticky_cta", "mobile_bottom", "QUERO MINHA VAGA AGORA");
     const el = document.getElementById('hero');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
