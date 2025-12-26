@@ -7,7 +7,7 @@ const GuaranteeSection = () => {
   };
 
   return (
-    <section className="py-20 bg-secondary">
+    <section className="py-20 bg-secondary reveal">
       <div className="container mx-auto px-4 max-w-4xl text-center">
         <div className="bg-card border border-border p-8 md:p-12 shadow-sm flex flex-col md:flex-row items-center gap-8 mb-12">
           <div className="relative">

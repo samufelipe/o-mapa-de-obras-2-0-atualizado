@@ -26,7 +26,7 @@ const ProblemsSection = () => {
   };
 
   return (
-    <section className="py-20 bg-foreground text-background">
+    <section className="py-20 bg-foreground text-background reveal">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="text-center md:text-left mb-12 space-y-4">
           <span className="text-primary font-black text-[9px] uppercase tracking-[0.3em] block">O CUSTO DA FALTA DE MÉTODO</span>

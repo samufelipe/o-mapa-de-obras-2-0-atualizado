@@ -10,7 +10,7 @@ const BonusSection = () => {
   };
 
   return (
-    <section className="py-20 bg-background border-t border-border">
+    <section className="py-20 bg-background border-t border-border reveal">
       <div className="container mx-auto px-4 max-w-5xl text-center">
         <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-2">Seu Pacote de Ferramentas</h2>
         <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-12">Tudo o que você precisa para aplicar o método imediatamente</p>
@@ -19,7 +19,7 @@ const BonusSection = () => {
           {BONUSES.map((bonus, idx) => {
             const Icon = bonusIcons[idx];
             return (
-              <div key={idx} className="bg-card border-2 border-foreground p-8 flex flex-col items-center group relative shadow-sm">
+              <div key={idx} className="bg-card border-2 border-foreground p-8 flex flex-col items-center group relative shadow-hard hover:shadow-gold hover:-translate-y-1 transition-all duration-300">
                 <div className="mb-4 text-primary group-hover:scale-110 transition-transform">
                   <Icon className="w-5 h-5" />
                 </div>
