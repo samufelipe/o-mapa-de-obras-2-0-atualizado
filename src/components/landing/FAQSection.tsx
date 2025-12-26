@@ -26,14 +26,14 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <section className="py-20">
+    <section className="section-spacing">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-black uppercase">
+            <h2 className="text-3xl md:text-4xl uppercase">
               Dúvidas Frequentes
             </h2>
-            <p className="text-muted-foreground mt-4">
+            <p className="text-muted-foreground mt-4 text-sm">
               Tudo o que você precisa saber sobre a imersão
             </p>
           </div>
@@ -43,12 +43,12 @@ const FAQSection = () => {
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className="bg-card border border-border px-6 rounded-lg"
+                className="bg-card border border-border px-6"
               >
-                <AccordionTrigger className="text-left font-semibold hover:text-primary">
+                <AccordionTrigger className="text-left text-sm font-semibold hover:text-primary py-5">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
+                <AccordionContent className="text-muted-foreground text-sm leading-relaxed pb-5">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
@@ -60,7 +60,7 @@ const FAQSection = () => {
               href="https://wa.me/5511999999999"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block border border-primary text-primary px-8 py-4 font-bold uppercase tracking-wider hover:bg-primary hover:text-primary-foreground transition-colors"
+              className="inline-block border border-foreground text-foreground px-8 py-4 text-xs font-medium uppercase tracking-widest hover:bg-foreground hover:text-background transition-colors"
             >
               Ainda Tenho Dúvidas, Quero Falar com Vocês
             </a>

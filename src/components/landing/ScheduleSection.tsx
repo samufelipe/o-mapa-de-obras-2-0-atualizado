@@ -14,13 +14,13 @@ const afternoonTopics = [
 
 const ScheduleSection = () => {
   return (
-    <section className="py-20">
+    <section className="section-spacing">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-black uppercase">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl uppercase">
             Dinâmica da Imersão
           </h2>
-          <p className="text-muted-foreground mt-4">
+          <p className="text-muted-foreground mt-4 text-sm">
             Um dia inteiro focado na sua transformação técnica
           </p>
         </div>
@@ -28,11 +28,11 @@ const ScheduleSection = () => {
         <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {/* Morning Block */}
           <div className="bg-card border border-border p-8">
-            <div className="mb-6">
-              <span className="text-primary text-sm font-semibold uppercase tracking-wider">
+            <div className="mb-8">
+              <span className="text-primary text-xs font-medium uppercase tracking-widest">
                 Sábado 31/01 • 09:00 - 12:00
               </span>
-              <h3 className="text-xl font-bold uppercase mt-2">
+              <h3 className="text-xl font-display uppercase mt-3">
                 A Logística da Execução
               </h3>
             </div>
@@ -41,7 +41,7 @@ const ScheduleSection = () => {
               {morningTopics.map((topic, index) => (
                 <li key={index} className="flex items-start gap-3">
                   <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                  <span className="text-muted-foreground text-sm">{topic}</span>
+                  <span className="text-muted-foreground text-sm leading-relaxed">{topic}</span>
                 </li>
               ))}
             </ul>
@@ -49,11 +49,11 @@ const ScheduleSection = () => {
           
           {/* Afternoon Block */}
           <div className="bg-card border border-border p-8">
-            <div className="mb-6">
-              <span className="text-primary text-sm font-semibold uppercase tracking-wider">
+            <div className="mb-8">
+              <span className="text-primary text-xs font-medium uppercase tracking-widest">
                 Sábado 31/01 • 14:00 - 18:00
               </span>
-              <h3 className="text-xl font-bold uppercase mt-2">
+              <h3 className="text-xl font-display uppercase mt-3">
                 Liderança e Lucratividade
               </h3>
             </div>
@@ -62,7 +62,7 @@ const ScheduleSection = () => {
               {afternoonTopics.map((topic, index) => (
                 <li key={index} className="flex items-start gap-3">
                   <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                  <span className="text-muted-foreground text-sm">{topic}</span>
+                  <span className="text-muted-foreground text-sm leading-relaxed">{topic}</span>
                 </li>
               ))}
             </ul>

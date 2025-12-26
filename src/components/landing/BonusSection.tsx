@@ -26,13 +26,13 @@ const bonuses = [
 
 const BonusSection = () => {
   return (
-    <section className="py-20 bg-secondary/30">
+    <section className="section-spacing bg-secondary/50">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-black uppercase">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl uppercase">
             Seu Pacote de Ferramentas
           </h2>
-          <p className="text-muted-foreground mt-4">
+          <p className="text-muted-foreground mt-4 text-sm">
             Tudo o que você precisa para aplicar o método imediatamente
           </p>
         </div>
@@ -47,8 +47,8 @@ const BonusSection = () => {
                 <bonus.icon className="w-10 h-10 text-primary" />
                 
                 <div>
-                  <h3 className="text-lg font-bold uppercase">{bonus.title}</h3>
-                  <p className="text-primary text-sm font-medium mt-1">
+                  <h3 className="text-base font-display uppercase">{bonus.title}</h3>
+                  <p className="text-primary text-xs mt-2 uppercase tracking-widest">
                     Valor de Mercado: {bonus.value}
                   </p>
                 </div>
@@ -58,7 +58,7 @@ const BonusSection = () => {
                 </p>
                 
                 <div className="pt-4 border-t border-border">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
                     {bonus.release}
                   </span>
                 </div>

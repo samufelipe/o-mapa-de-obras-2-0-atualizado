@@ -30,15 +30,15 @@ const ProblemsSection = () => {
   };
 
   return (
-    <section className="py-20 bg-secondary/30">
+    <section className="section-spacing bg-secondary/50">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <span className="text-primary text-sm font-semibold uppercase tracking-wider">
+        <div className="text-center mb-16">
+          <span className="text-primary text-xs font-medium uppercase tracking-widest">
             O Custo da Falta de Método
           </span>
-          <h2 className="text-3xl md:text-4xl font-black uppercase mt-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl uppercase mt-4 leading-tight">
             Sua Autoridade Não Pode Depender{" "}
-            <span className="text-primary italic block">Apenas de Desenhos Bonitos.</span>
+            <span className="text-primary italic block mt-2">Apenas de Desenhos Bonitos.</span>
           </h2>
         </div>
         
@@ -48,25 +48,20 @@ const ProblemsSection = () => {
               key={index}
               className="gold-border-left bg-card p-6 hover:bg-card/80 transition-colors"
             >
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0">
-                  <problem.icon className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold uppercase mb-2">{problem.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {problem.description}
-                  </p>
-                </div>
+              <div className="space-y-3">
+                <h3 className="text-base font-display uppercase">{problem.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  {problem.description}
+                </p>
               </div>
             </div>
           ))}
         </div>
         
-        <div className="text-center mt-12">
+        <div className="text-center mt-16">
           <button
             onClick={scrollToForm}
-            className="bg-primary text-primary-foreground px-8 py-4 font-bold uppercase tracking-wider hover:bg-primary/90 transition-colors"
+            className="bg-primary text-primary-foreground px-8 py-4 text-xs font-semibold uppercase tracking-widest hover:bg-primary/90 transition-colors"
           >
             Quero Eliminar o Retrabalho na Minha Obra
           </button>
