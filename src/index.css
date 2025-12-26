@@ -2,42 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Archivo+Black&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 5%;
-    --foreground: 0 0% 98%;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 7%;
 
-    --card: 0 0% 8%;
-    --card-foreground: 0 0% 98%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 7%;
 
-    --popover: 0 0% 8%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 7%;
 
     --primary: 45 100% 50%;
-    --primary-foreground: 0 0% 5%;
+    --primary-foreground: 0 0% 7%;
 
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 0 0% 97%;
+    --secondary-foreground: 0 0% 7%;
 
-    --muted: 0 0% 18%;
-    --muted-foreground: 0 0% 55%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
 
     --accent: 45 100% 50%;
-    --accent-foreground: 0 0% 5%;
+    --accent-foreground: 0 0% 7%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 18%;
-    --input: 0 0% 12%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
     --ring: 45 100% 50%;
 
-    --radius: 0.25rem;
+    --radius: 0rem;
 
     --gold: 45 100% 50%;
     --gold-dark: 43 96% 40%;
+    
+    --brand-gold: 45 100% 50%;
+    --brand-black: 0 0% 7%;
   }
 
   .dark {
@@ -81,13 +84,14 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-foreground antialiased overflow-x-hidden;
     font-family: 'Inter', sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Archivo Black', 'Inter', sans-serif;
-    font-weight: 400;
+    font-family: 'Montserrat', 'Inter', sans-serif;
+    font-weight: 700;
+    @apply uppercase tracking-tight leading-tight;
   }
 }
 
@@ -97,10 +101,45 @@
   }
 
   .gold-border-left {
-    @apply border-l-4 border-primary pl-6;
+    @apply border-l-2 border-primary pl-6;
   }
 
   .section-spacing {
     @apply py-16 md:py-24;
+  }
+
+  .shadow-hard {
+    box-shadow: 4px 4px 0px 0px hsl(var(--brand-black));
+  }
+
+  .shadow-gold {
+    box-shadow: 4px 4px 0px 0px hsl(var(--brand-gold));
+  }
+
+  .bg-grid {
+    background-image: radial-gradient(circle, hsl(var(--foreground)) 0.5px, transparent 0.5px);
+    background-size: 24px 24px;
+    opacity: 0.03;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@layer components {
+  .main-cta {
+    @apply bg-primary text-foreground px-6 py-4 text-[10px] md:text-[11px] font-black uppercase tracking-[0.2em] hover:bg-foreground hover:text-primary transition-all border-2 border-foreground shadow-hard flex items-center justify-center gap-2;
+  }
+
+  .main-cta:active {
+    @apply scale-95;
   }
 }

@@ -1,23 +1,19 @@
-import { RefreshCw, DollarSign, VolumeX, Flame } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const problems = [
   {
-    icon: RefreshCw,
     title: "O Ralo do Retrabalho",
     description: "A falta de uma sequência lógica faz serviços serem refeitos porque o fornecedor seguinte precisava de algo que não foi antecipado.",
   },
   {
-    icon: DollarSign,
     title: "Prejuízo em Materiais",
     description: "Acabamentos nobres danificados por equipes que entram na obra no momento errado do fluxo de execução.",
   },
   {
-    icon: VolumeX,
     title: "Silêncio Técnico",
     description: "A insegurança de ser questionada pela equipe e não saber o que responder, perdendo o respeito profissional perante o cliente.",
   },
   {
-    icon: Flame,
     title: "Estresse Constante",
     description: "A exaustão de viver 'apagando incêndios' em problemas que seriam previsíveis com o Cronograma O Mapa de Obras 2.0.",
   },
@@ -30,40 +26,35 @@ const ProblemsSection = () => {
   };
 
   return (
-    <section className="section-spacing bg-secondary/50">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <span className="text-primary text-xs font-medium uppercase tracking-widest">
-            O Custo da Falta de Método
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl uppercase mt-4 leading-tight">
-            Sua Autoridade Não Pode Depender{" "}
-            <span className="text-primary italic block mt-2">Apenas de Desenhos Bonitos.</span>
+    <section className="py-20 bg-foreground text-background">
+      <div className="container mx-auto px-4 max-w-4xl">
+        <div className="text-center md:text-left mb-12 space-y-4">
+          <span className="text-primary font-black text-[9px] uppercase tracking-[0.3em] block">O CUSTO DA FALTA DE MÉTODO</span>
+          <h2 className="text-2xl md:text-3xl font-black tracking-tight leading-tight text-background">
+            Sua Autoridade Não Pode Depender <br className="hidden md:block"/>
+            <span className="text-primary italic">Apenas de Desenhos Bonitos.</span>
           </h2>
         </div>
         
-        <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-8 mb-12">
           {problems.map((problem, index) => (
-            <div
-              key={index}
-              className="gold-border-left bg-card p-6 hover:bg-card/80 transition-colors"
+            <div 
+              key={index} 
+              className="bg-foreground/50 border-l-2 border-primary p-6 hover:bg-foreground/80 transition-colors"
+              style={{ backgroundColor: 'rgba(24, 24, 27, 0.5)' }}
             >
-              <div className="space-y-3">
-                <h3 className="text-base font-display uppercase">{problem.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {problem.description}
-                </p>
-              </div>
+              <h3 className="text-sm md:text-base font-black uppercase tracking-tight mb-2 text-background">{problem.title}</h3>
+              <p className="text-[11px] md:text-xs font-medium text-background/60 leading-relaxed">{problem.description}</p>
             </div>
           ))}
         </div>
         
-        <div className="text-center mt-16">
-          <button
+        <div className="flex justify-center">
+          <button 
             onClick={scrollToForm}
-            className="bg-primary text-primary-foreground px-8 py-4 text-xs font-semibold uppercase tracking-widest hover:bg-primary/90 transition-colors"
+            className="bg-primary text-foreground px-6 py-4 text-[10px] md:text-[11px] font-black uppercase tracking-[0.2em] hover:bg-background hover:text-foreground transition-all border-2 border-foreground shadow-hard flex items-center justify-center gap-2 group active:scale-95"
           >
-            Quero Eliminar o Retrabalho na Minha Obra
+            QUERO ELIMINAR O RETRABALHO NA MINHA OBRA <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
       </div>

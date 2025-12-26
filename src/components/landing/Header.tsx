@@ -1,4 +1,4 @@
-import logoWhiteGold from "@/assets/logo-white-gold.png";
+import logoBlackGold from "@/assets/logo-black-gold.png";
 
 const Header = () => {
   const scrollToForm = () => {
@@ -7,22 +7,22 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border/50">
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm border-b border-border py-3">
+      <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
+        <div className="flex items-center gap-2">
           <img 
-            src={logoWhiteGold} 
+            src={logoBlackGold} 
             alt="Cronograma O Mapa de Obras 2.0" 
-            className="h-6 w-auto"
+            className="h-6 w-6 object-contain"
           />
-          <span className="text-xs font-medium tracking-widest uppercase hidden sm:block">
+          <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-tighter text-foreground">
             Cronograma O Mapa de Obras 2.0
           </span>
         </div>
         
         <button
           onClick={scrollToForm}
-          className="border border-foreground text-foreground px-5 py-2 text-xs font-medium uppercase tracking-widest hover:bg-foreground hover:text-background transition-colors"
+          className="bg-foreground text-primary px-3 py-1.5 text-[9px] font-black uppercase tracking-widest hover:bg-primary hover:text-foreground transition-all"
         >
           Inscrever-se
         </button>

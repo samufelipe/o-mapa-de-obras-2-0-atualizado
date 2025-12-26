@@ -1,72 +1,45 @@
-import { Check } from "lucide-react";
-
-const morningTopics = [
-  "A Engrenagem Perfeita: A sequência de serviços que evita o retrabalho e economiza até 20% do orçamento final.",
-  "Proteção do Design: Como o Cronograma O Mapa de Obras 2.0 garante que o acabamento de luxo não sofra danos de fornecedores anteriores.",
-  "O Pulo do Gato Técnico: A realidade sobre o tempo real de cura e secagem que dita o ritmo saudável de qualquer reforma.",
-];
-
-const afternoonTopics = [
-  "Posicionamento de Autoridade: Como usar o Cronograma O Mapa de Obras 2.0 para comandar a equipe com segurança técnica absoluta.",
-  "Gerenciamento Sem Estresse: O fluxo para acompanhar projetos simultâneos sem perder a qualidade ou a sanidade mental.",
-  "Execução em Prática: Como apresentar o Cronograma O Mapa de Obras 2.0 ao cliente para valorizar seus honorários de acompanhamento.",
-];
+import { CheckCircle2, ArrowRight } from "lucide-react";
+import { AGENDA } from "@/lib/constants";
 
 const ScheduleSection = () => {
+  const scrollToForm = () => {
+    const heroSection = document.getElementById("hero");
+    heroSection?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <section className="section-spacing">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl uppercase">
-            Dinâmica da Imersão
-          </h2>
-          <p className="text-muted-foreground mt-4 text-sm">
-            Um dia inteiro focado na sua transformação técnica
-          </p>
+    <section className="py-20 bg-background">
+      <div className="container mx-auto px-4 max-w-4xl text-center">
+        <div className="mb-16 space-y-4">
+          <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight">Dinâmica da Imersão</h2>
+          <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Um dia inteiro focado na sua transformação técnica</p>
+          <div className="w-12 h-1 bg-primary mx-auto"></div>
         </div>
         
-        <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {/* Morning Block */}
-          <div className="bg-card border border-border p-8">
-            <div className="mb-8">
-              <span className="text-primary text-xs font-medium uppercase tracking-widest">
-                Sábado 31/01 • 09:00 - 12:00
-              </span>
-              <h3 className="text-xl font-display uppercase mt-3">
-                A Logística da Execução
-              </h3>
+        <div className="grid md:grid-cols-2 gap-6 text-left mb-16">
+          {AGENDA.map((item, i) => (
+            <div key={i} className="bg-card p-8 border border-border shadow-sm hover:shadow-hard transition-all">
+              <span className="text-[8px] font-black text-primary uppercase tracking-widest block mb-2">{item.date}</span>
+              <h3 className="text-lg font-black uppercase mb-6 tracking-tight border-b border-border pb-2">{item.title}</h3>
+              <ul className="space-y-4">
+                {item.topics.map((topic, j) => (
+                  <li key={j} className="flex gap-3 text-[11px] font-bold text-muted-foreground">
+                    <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" /> {topic}
+                  </li>
+                ))}
+              </ul>
             </div>
-            
-            <ul className="space-y-4">
-              {morningTopics.map((topic, index) => (
-                <li key={index} className="flex items-start gap-3">
-                  <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                  <span className="text-muted-foreground text-sm leading-relaxed">{topic}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          
-          {/* Afternoon Block */}
-          <div className="bg-card border border-border p-8">
-            <div className="mb-8">
-              <span className="text-primary text-xs font-medium uppercase tracking-widest">
-                Sábado 31/01 • 14:00 - 18:00
-              </span>
-              <h3 className="text-xl font-display uppercase mt-3">
-                Liderança e Lucratividade
-              </h3>
-            </div>
-            
-            <ul className="space-y-4">
-              {afternoonTopics.map((topic, index) => (
-                <li key={index} className="flex items-start gap-3">
-                  <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                  <span className="text-muted-foreground text-sm leading-relaxed">{topic}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          ))}
+        </div>
+        
+        <div className="flex flex-col items-center gap-4">
+          <button 
+            onClick={scrollToForm}
+            className="bg-primary text-foreground px-6 py-4 text-[10px] md:text-[11px] font-black uppercase tracking-[0.2em] hover:bg-foreground hover:text-primary transition-all border-2 border-foreground shadow-hard flex items-center justify-center gap-2 group active:scale-95"
+          >
+            QUERO GARANTIR MINHA VAGA NO ZOOM <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </button>
+          <span className="text-[8px] font-black bg-primary/20 px-3 py-1 uppercase tracking-widest">Vagas Limitadas pela capacidade da sala</span>
         </div>
       </div>
     </section>
