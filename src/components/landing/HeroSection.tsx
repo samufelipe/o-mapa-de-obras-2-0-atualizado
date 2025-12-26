@@ -1,10 +1,20 @@
 import { Trophy, Video, Lock, Clock, Users, Star, ShieldCheck, ArrowRight, Loader2, CheckCircle } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { CONFIG } from "@/lib/config";
 import { submitToRDStation } from "@/lib/rdstation";
 import { trackLead, trackInitiateCheckout } from "@/lib/tracking";
 import { validateLeadForm, applyPhoneMask, type LeadFormData } from "@/lib/validations";
+import { 
+  trackFormStart, 
+  trackFormFieldFocus, 
+  trackFormFieldComplete, 
+  trackFormSubmit, 
+  trackFormError,
+  trackBeginCheckout,
+  trackLeadGenerated,
+  trackCTAClick
+} from "@/lib/gtm-tracking";
 
 type FormStatus = "idle" | "loading" | "success" | "redirecting";
 
@@ -17,6 +27,7 @@ interface FormErrors {
 const HeroSection = () => {
   const { toast } = useToast();
   const [timeLeft, setTimeLeft] = useState({ h: 0, m: 0, s: 0 });
+  const formStarted = useRef(false);
   
   // Form state
   const [formData, setFormData] = useState<LeadFormData>({
@@ -45,6 +56,15 @@ const HeroSection = () => {
     return () => clearInterval(timer);
   }, []);
 
+  // Handle focus - track form start and field focus
+  const handleFocus = (field: keyof LeadFormData) => {
+    if (!formStarted.current) {
+      formStarted.current = true;
+      trackFormStart();
+    }
+    trackFormFieldFocus(field);
+  };
+
   // Handle input changes
   const handleChange = (field: keyof LeadFormData, value: string) => {
     let processedValue = value;
@@ -62,9 +82,14 @@ const HeroSection = () => {
     }
   };
 
-  // Handle blur for validation
+  // Handle blur for validation + track field complete
   const handleBlur = (field: keyof LeadFormData) => {
     setTouched((prev) => ({ ...prev, [field]: true }));
+    
+    // Track field completion if has value
+    if (formData[field]) {
+      trackFormFieldComplete(field);
+    }
     
     // Validate single field
     const result = validateLeadForm(formData);
@@ -108,8 +133,9 @@ const HeroSection = () => {
   const redirectToHotmart = () => {
     setStatus("redirecting");
     
-    // Track checkout initiation
+    // Track checkout initiation (Meta Pixel + GTM)
     trackInitiateCheckout(49.90);
+    trackBeginCheckout();
     
     // Delay for transition screen
     setTimeout(() => {
@@ -129,6 +155,9 @@ const HeroSection = () => {
       setErrors(result.errors);
       setTouched({ name: true, email: true, phone: true });
       
+      // Track form errors
+      trackFormError(result.errors);
+      
       toast({
         title: "Campos inválidos",
         description: "Por favor, corrija os campos destacados.",
@@ -142,15 +171,17 @@ const HeroSection = () => {
     
     try {
       // Submit to RD Station
-      const rdResponse = await submitToRDStation(result.data);
+      const rdResponse = await submitToRDStation(result.data!);
       
       if (!rdResponse.success) {
         // Log error but continue - don't block user from checkout
         console.warn("RD Station error:", rdResponse.message);
       }
       
-      // Track lead event
-      trackLead(result.data);
+      // Track lead event (Meta Pixel + GTM)
+      trackLead(result.data!);
+      trackFormSubmit(result.data!);
+      trackLeadGenerated("landing_page_form");
       
       setStatus("success");
       
@@ -163,7 +194,7 @@ const HeroSection = () => {
       setTimeout(() => {
         redirectToHotmart();
       }, 500);
-      
+
     } catch (error) {
       console.error("Form submission error:", error);
       
@@ -259,16 +290,18 @@ const HeroSection = () => {
                 <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Workshop Imersivo • Sábado 31/01</p>
               </div>
               
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4" data-track="lead_form" data-track-location="hero">
                 <div>
                   <input 
                     type="text" 
                     placeholder="Nome Completo"
                     value={formData.name}
                     onChange={(e) => handleChange("name", e.target.value)}
+                    onFocus={() => handleFocus("name")}
                     onBlur={() => handleBlur("name")}
                     disabled={status === "loading" || status === "success"}
                     className={getInputClass("name")}
+                    data-track="form_field_name"
                   />
                   {errors.name && touched.name && (
                     <p className="text-[10px] text-destructive mt-1 font-medium">{errors.name}</p>
@@ -281,9 +314,11 @@ const HeroSection = () => {
                     placeholder="E-mail Profissional"
                     value={formData.email}
                     onChange={(e) => handleChange("email", e.target.value)}
+                    onFocus={() => handleFocus("email")}
                     onBlur={() => handleBlur("email")}
                     disabled={status === "loading" || status === "success"}
                     className={getInputClass("email")}
+                    data-track="form_field_email"
                   />
                   {errors.email && touched.email && (
                     <p className="text-[10px] text-destructive mt-1 font-medium">{errors.email}</p>
@@ -296,9 +331,11 @@ const HeroSection = () => {
                     placeholder="WhatsApp (99) 99999-9999"
                     value={formData.phone}
                     onChange={(e) => handleChange("phone", e.target.value)}
+                    onFocus={() => handleFocus("phone")}
                     onBlur={() => handleBlur("phone")}
                     disabled={status === "loading" || status === "success"}
                     className={getInputClass("phone")}
+                    data-track="form_field_phone"
                   />
                   {errors.phone && touched.phone && (
                     <p className="text-[10px] text-destructive mt-1 font-medium">{errors.phone}</p>
@@ -318,6 +355,8 @@ const HeroSection = () => {
                     type="submit"
                     disabled={status === "loading" || status === "success"}
                     className="w-full bg-foreground text-primary py-4 flex items-center justify-center gap-2 text-[10px] font-black tracking-widest hover:bg-primary hover:text-foreground transition-all border-2 border-foreground shadow-hard uppercase group disabled:opacity-70 disabled:cursor-not-allowed"
+                    data-track="submit_button"
+                    data-track-location="hero_form"
                   >
                     {status === "loading" && (
                       <>
