@@ -34,16 +34,16 @@ const StepsSection = () => {
   };
 
   return (
-    <section className="py-20 bg-secondary/30">
+    <section className="section-spacing bg-secondary/50">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <span className="text-primary text-sm font-semibold uppercase tracking-wider">
+        <div className="text-center mb-16">
+          <span className="text-primary text-xs font-medium uppercase tracking-widest">
             Clareza Absoluta
           </span>
-          <h2 className="text-3xl md:text-4xl font-black uppercase mt-4">
+          <h2 className="text-3xl md:text-4xl uppercase mt-4">
             O Caminho da sua Transformação
           </h2>
-          <p className="text-muted-foreground mt-4">
+          <p className="text-muted-foreground mt-4 text-sm">
             Veja o que acontece no minuto seguinte à sua inscrição
           </p>
         </div>
@@ -54,16 +54,16 @@ const StepsSection = () => {
               key={index}
               className="relative bg-card border border-border p-6 text-center hover:border-primary/50 transition-colors"
             >
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground w-8 h-8 flex items-center justify-center text-sm font-bold">
                 {index + 1}
               </div>
               
-              <div className="pt-4 space-y-4">
+              <div className="pt-6 space-y-4">
                 <step.icon className="w-8 h-8 text-primary mx-auto" />
-                <h3 className="text-sm font-bold uppercase">
+                <h3 className="text-xs font-display uppercase tracking-wider">
                   {step.number}. {step.title}
                 </h3>
-                <p className="text-muted-foreground text-sm">
+                <p className="text-muted-foreground text-sm leading-relaxed">
                   {step.description}
                 </p>
               </div>
@@ -71,10 +71,10 @@ const StepsSection = () => {
           ))}
         </div>
         
-        <div className="text-center mt-12">
+        <div className="text-center mt-16">
           <button
             onClick={scrollToForm}
-            className="bg-primary text-primary-foreground px-8 py-4 font-bold uppercase tracking-wider hover:bg-primary/90 transition-colors"
+            className="bg-primary text-primary-foreground px-8 py-4 text-xs font-semibold uppercase tracking-widest hover:bg-primary/90 transition-colors"
           >
             Quero Iniciar Minha Jornada
           </button>

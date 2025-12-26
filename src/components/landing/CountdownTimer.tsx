@@ -34,7 +34,7 @@ const CountdownTimer = () => {
   const formatNumber = (num: number) => num.toString().padStart(2, "0");
 
   return (
-    <div className="inline-flex items-center gap-2 bg-secondary/50 border border-border rounded-full px-4 py-2 text-sm">
+    <div className="inline-flex items-center gap-2 border border-border px-4 py-2 text-xs uppercase tracking-widest">
       <Clock className="w-4 h-4 text-muted-foreground" />
       <span className="text-muted-foreground">O Lote 01 Expira em:</span>
       <span className="text-primary font-semibold">
