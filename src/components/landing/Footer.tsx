@@ -1,34 +1,28 @@
-import logoWhiteGold from "@/assets/logo-white-gold.png";
+import logoBlackGold from "@/assets/logo-black-gold.png";
+import { Instagram } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="py-16 border-t border-border">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col items-center gap-8">
-          <img
-            src={logoWhiteGold}
-            alt="Cronograma O Mapa de Obras 2.0"
-            className="h-8 w-auto"
-          />
-          
-          <p className="text-muted-foreground text-sm text-center max-w-md">
-            Cronograma O Mapa de Obras 2.0 - A sequência que protege seu design e seu lucro.
-          </p>
-          
-          <div className="flex gap-8 text-xs text-muted-foreground uppercase tracking-widest">
-            <a href="#" className="hover:text-primary transition-colors">
-              Termos de Uso
-            </a>
-            <a href="#" className="hover:text-primary transition-colors">
-              Política de Privacidade
-            </a>
-          </div>
-          
-          <p className="text-muted-foreground text-xs">
-            © {new Date().getFullYear()} Inovando na Sua Obra. Todos os direitos reservados.
-          </p>
-        </div>
+    <footer className="bg-background py-12 border-t border-border text-center space-y-4">
+      <img 
+        src={logoBlackGold} 
+        alt="Cronograma O Mapa de Obras 2.0" 
+        className="w-10 h-10 mx-auto opacity-50 grayscale object-contain" 
+      />
+      <div className="flex justify-center gap-6">
+        <a 
+          href="https://instagram.com/inovandonasuaobra" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="text-muted-foreground hover:text-foreground transition-colors" 
+          aria-label="Instagram"
+        >
+          <Instagram className="w-5 h-5" />
+        </a>
       </div>
+      <p className="text-[8px] md:text-[9px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+        Cronograma O Mapa de Obras 2.0 • Todos os Direitos Reservados • {new Date().getFullYear()}
+      </p>
     </footer>
   );
 };

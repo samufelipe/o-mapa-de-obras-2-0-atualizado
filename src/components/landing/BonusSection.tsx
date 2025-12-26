@@ -1,70 +1,82 @@
-import { FileText, ClipboardCheck, MessageSquare } from "lucide-react";
+import { FileSpreadsheet, ClipboardList, FileText, Clock, Plus, ArrowRight } from "lucide-react";
+import { BONUSES, PRICING_ITEMS } from "@/lib/constants";
 
-const bonuses = [
-  {
-    icon: FileText,
-    title: "Matriz de Sequência Ideal",
-    value: "R$ 497,00",
-    description: "Sua bússola técnica. O fluxo visual detalhado para você nunca mais permitir que um fornecedor entre na obra antes da hora certa.",
-    release: "Liberado Pós-Live (31/01)",
-  },
-  {
-    icon: ClipboardCheck,
-    title: "Checklist de Visita Técnica",
-    value: "R$ 197,00",
-    description: "Um guia de conferência rápida para garantir que cada etapa do Cronograma 2.0 esteja sendo respeitada fielmente pela equipe.",
-    release: "Liberado Pós-Live (31/01)",
-  },
-  {
-    icon: MessageSquare,
-    title: "Guia de Postura e Liderança",
-    value: "R$ 297,00",
-    description: "Scripts de comunicação para alinhar prazos e cobrar qualidade dos fornecedores com autoridade e elegância.",
-    release: "Liberado Pós-Live (31/01)",
-  },
-];
+const bonusIcons = [FileSpreadsheet, ClipboardList, FileText];
 
 const BonusSection = () => {
+  const scrollToForm = () => {
+    const heroSection = document.getElementById("hero");
+    heroSection?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <section className="section-spacing bg-secondary/50">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl uppercase">
-            Seu Pacote de Ferramentas
-          </h2>
-          <p className="text-muted-foreground mt-4 text-sm">
-            Tudo o que você precisa para aplicar o método imediatamente
-          </p>
-        </div>
+    <section className="py-20 bg-background border-t border-border">
+      <div className="container mx-auto px-4 max-w-5xl text-center">
+        <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-2">Seu Pacote de Ferramentas</h2>
+        <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-12">Tudo o que você precisa para aplicar o método imediatamente</p>
         
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {bonuses.map((bonus, index) => (
-            <div
-              key={index}
-              className="bg-card border border-border p-6 hover:border-primary/50 transition-colors"
-            >
-              <div className="space-y-4">
-                <bonus.icon className="w-10 h-10 text-primary" />
-                
-                <div>
-                  <h3 className="text-base font-display uppercase">{bonus.title}</h3>
-                  <p className="text-primary text-xs mt-2 uppercase tracking-widest">
-                    Valor de Mercado: {bonus.value}
-                  </p>
+        <div className="grid md:grid-cols-3 gap-6 mb-16 relative">
+          {BONUSES.map((bonus, idx) => {
+            const Icon = bonusIcons[idx];
+            return (
+              <div key={idx} className="bg-card border-2 border-foreground p-8 flex flex-col items-center group relative shadow-sm">
+                <div className="mb-4 text-primary group-hover:scale-110 transition-transform">
+                  <Icon className="w-5 h-5" />
                 </div>
-                
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {bonus.description}
-                </p>
-                
-                <div className="pt-4 border-t border-border">
-                  <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
-                    {bonus.release}
+                <h3 className="text-[10px] font-black uppercase mb-1 tracking-widest">{bonus.title}</h3>
+                <span className="text-[11px] font-black bg-primary/10 px-3 py-1 uppercase tracking-tighter mb-4">
+                  Valor de Mercado: {bonus.value}
+                </span>
+                <p className="text-[11px] text-muted-foreground mb-6 font-medium leading-relaxed">{bonus.description}</p>
+                <div className="mt-auto pt-4 border-t border-border w-full">
+                  <span className="text-[8px] font-black text-primary uppercase tracking-widest flex items-center justify-center gap-1">
+                    <Clock className="w-3 h-3"/> LIBERADO PÓS-LIVE (31/01)
                   </span>
                 </div>
               </div>
+            );
+          })}
+        </div>
+
+        {/* Pricing Stack */}
+        <div className="max-w-xl mx-auto bg-foreground border-2 border-primary p-8 md:p-12 shadow-hard relative overflow-hidden">
+          <div className="absolute top-0 right-0 bg-primary text-foreground px-4 py-1 text-[9px] font-black uppercase tracking-widest transform rotate-45 translate-x-8 translate-y-4">
+            OFERTA ATIVA
+          </div>
+          
+          <div className="space-y-3 mb-8 text-left border-b border-background/20 pb-8">
+            {PRICING_ITEMS.map((item, index) => (
+              <div key={index} className="flex justify-between items-center text-background/60 text-[11px] font-bold uppercase tracking-wider">
+                <span className="flex items-center gap-1">
+                  {index > 0 && <Plus className="inline w-3 h-3 mr-1"/>}
+                  {item.name}
+                </span>
+                <span className={item.price === "Incluso" ? "text-primary bg-primary/10 px-2 py-0.5" : "text-background/40"}>
+                  {item.price === "Incluso" ? item.price : `PAGARIA: ${item.price}`}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <div className="mb-8 text-center">
+            <p className="text-background/60 text-[9px] font-bold uppercase tracking-widest mb-1">
+              Preço total se comprado separadamente: <span className="line-through text-background/40">R$ 1.188,00</span>
+            </p>
+            
+            <div className="mb-2">
+              <span className="text-primary text-[10px] font-black uppercase tracking-[0.3em] block mb-1">INVESTIMENTO ÚNICO</span>
+              <h3 className="text-background text-4xl md:text-5xl font-black tracking-tighter uppercase leading-tight animate-pulse-slow">
+                APENAS R$ 49,90
+              </h3>
             </div>
-          ))}
+          </div>
+
+          <button 
+            onClick={scrollToForm} 
+            className="w-full bg-primary text-foreground py-5 text-xs font-black uppercase tracking-[0.2em] hover:bg-background transition-all shadow-hard active:scale-95 group flex items-center justify-center gap-2"
+          >
+            GARANTIR MINHA VAGA AGORA <ArrowRight className="inline w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </button>
         </div>
       </div>
     </section>
