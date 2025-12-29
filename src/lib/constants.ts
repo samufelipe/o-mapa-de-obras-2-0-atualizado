@@ -30,7 +30,7 @@ export const QUALIFICATION = {
   ],
   notFor: [
     "Quem aceita o caos e o erro como parte normal da rotina.",
-    "Quem não preza pela proteção dos acabamentos e materiais.",
+    "Quem acredita que arquiteto deve ficar apenas no escritório fazendo projeto e não precisa saber nada sobre obra.",
     "Quem prefere confiar na intuição em vez de um método validado.",
     "Quem não está disposta a elevar seu padrão de entrega técnica."
   ]
