@@ -30,7 +30,7 @@ const StepsSection = () => {
   };
 
   return (
-    <section className="py-24 bg-secondary border-y border-border overflow-hidden reveal">
+    <section id="steps" className="py-24 bg-secondary border-y border-border overflow-hidden reveal">
       <div className="container mx-auto px-4 max-w-6xl text-center">
         <div className="mb-16 space-y-4">
           <span className="text-primary font-black text-[9px] uppercase tracking-[0.4em] block">CLAREZA ABSOLUTA</span>

@@ -10,7 +10,7 @@ const BonusSection = () => {
   };
 
   return (
-    <section className="py-20 bg-background border-t border-border reveal">
+    <section id="bonus" className="py-20 bg-background border-t border-border reveal">
       <div className="container mx-auto px-4 max-w-5xl text-center">
         <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-2">Seu Pacote de Ferramentas</h2>
         <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-12">Tudo o que você precisa para aplicar o método imediatamente</p>
