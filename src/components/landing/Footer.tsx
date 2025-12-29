@@ -56,7 +56,7 @@ const Footer = () => {
                 <button
                   key={link.sectionId}
                   onClick={() => scrollToSection(link.sectionId)}
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300 text-left py-1 hover:translate-x-1 transform"
+                  className="text-sm text-foreground/70 hover:text-primary transition-colors duration-300 text-left py-1 hover:translate-x-1 transform"
                 >
                   {link.label}
                 </button>
@@ -78,12 +78,12 @@ const Footer = () => {
                 className="group relative border border-primary/30 hover:border-primary hover:bg-primary/10 p-3.5 rounded-md transition-all duration-300"
                 aria-label="Instagram"
               >
-                <Instagram className="w-5 h-5 text-primary/70 group-hover:text-primary transition-colors duration-300" />
+                <Instagram className="w-5 h-5 text-primary group-hover:text-primary transition-colors duration-300" />
                 <div className="absolute inset-0 bg-primary/5 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </a>
             </div>
             
-            <p className="text-sm text-muted-foreground font-light">
+            <p className="text-sm text-foreground/70 font-medium">
               @inovandonasuaobra
             </p>
           </div>
@@ -94,18 +94,18 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             
             {/* Copyright */}
-            <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-muted-foreground text-center md:text-left">
+            <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-foreground/60 text-center md:text-left">
               Imersão A Virada da Arquiteta © {new Date().getFullYear()} • Todos os direitos reservados
             </p>
             
             {/* Voltar ao Topo */}
             <button
               onClick={scrollToTop}
-              className="group flex items-center gap-3 text-xs text-muted-foreground hover:text-primary transition-colors duration-300"
+              className="group flex items-center gap-3 text-xs text-foreground/70 hover:text-primary transition-colors duration-300"
             >
               <span className="uppercase tracking-[0.15em] font-medium">Voltar ao Topo</span>
               <div className="border border-primary/30 group-hover:border-primary group-hover:bg-primary/10 p-2 rounded transition-all duration-300">
-                <ArrowUp className="w-3.5 h-3.5 text-primary/70 group-hover:text-primary group-hover:-translate-y-0.5 transition-all duration-300" />
+                <ArrowUp className="w-3.5 h-3.5 text-primary group-hover:text-primary group-hover:-translate-y-0.5 transition-all duration-300" />
               </div>
             </button>
           </div>
