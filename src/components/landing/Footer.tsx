@@ -27,24 +27,13 @@ const Footer = () => {
     <footer className="bg-[#0a0a0a] text-white/90 py-20 border-t border-primary/20">
       <div className="container mx-auto px-4 max-w-6xl">
         
-        {/* Logo centralizada com tratamento para fundo */}
-        <div className="flex justify-center mb-16">
-          <div className="relative bg-[#0a0a0a] p-4 rounded-lg">
-            <img 
-              src={logoVirada} 
-              alt="Imersão A Virada da Arquiteta" 
-              className="w-72 md:w-96 h-auto object-contain"
-              style={{
-                filter: "brightness(1.1) contrast(1.05)",
-                mixBlendMode: "multiply"
-              }}
-            />
-            {/* Overlay para escurecer o fundo branco */}
-            <div 
-              className="absolute inset-0 bg-[#0a0a0a] mix-blend-color rounded-lg pointer-events-none"
-              aria-hidden="true"
-            />
-          </div>
+        {/* Logo centralizada */}
+        <div className="flex justify-center mb-14">
+          <img 
+            src={logoVirada} 
+            alt="Imersão A Virada da Arquiteta" 
+            className="w-56 md:w-72 h-auto object-contain rounded-lg"
+          />
         </div>
 
         {/* Linha decorativa dourada */}
