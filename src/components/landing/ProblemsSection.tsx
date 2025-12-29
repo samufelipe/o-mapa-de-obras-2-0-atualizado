@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 const problems = [
   {
     title: "O Ralo do Retrabalho",
-    description: "A falta de uma sequência lógica faz serviços serem refeitos porque o fornecedor seguinte precisava de algo que não foi antecipado.",
+    description: "A falta de saber a sequência de serviços da obra faz serviços ocasiona em muitos retrabalhos porque o fornecedor seguinte precisava de algo que não foi antecipado.",
   },
   {
     title: "Prejuízo em Materiais",
@@ -15,7 +15,7 @@ const problems = [
   },
   {
     title: "Estresse Constante",
-    description: "A exaustão de viver 'apagando incêndios' em problemas que seriam previsíveis com o Cronograma O Mapa de Obras 2.0.",
+    description: "A exaustão de viver 'apagando incêndios' em problemas que seriam previsíveis com o Cronograma",
   },
 ];
 
@@ -29,7 +29,7 @@ const ProblemsSection = () => {
     <section className="py-20 bg-foreground text-background reveal">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="text-center md:text-left mb-12 space-y-4">
-          <span className="text-primary font-black text-[9px] uppercase tracking-[0.3em] block">O CUSTO DA FALTA DE MÉTODO</span>
+          <span className="text-primary font-black text-[9px] uppercase tracking-[0.3em] block">O CUSTO DE NÃO SABER DE OBRA</span>
           <h2 className="text-2xl md:text-3xl font-black tracking-tight leading-tight text-background">
             Sua Autoridade Não Pode Depender <br className="hidden md:block"/>
             <span className="text-primary italic">Apenas de Desenhos Bonitos.</span>
