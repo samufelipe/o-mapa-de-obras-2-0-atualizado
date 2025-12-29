@@ -287,7 +287,7 @@ const HeroSection = () => {
             <div className="bg-card border-2 border-foreground p-6 md:p-8 shadow-gold max-w-md mx-auto">
               <div className="mb-6 text-center lg:text-left">
                 <h2 className="text-lg font-black uppercase tracking-tight">Vaga Exclusiva</h2>
-                <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Workshop Imersivo • Sábado 31/01</p>
+                <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Imersão Ao Vivo • Sábado 31/01</p>
               </div>
               
               <form onSubmit={handleSubmit} className="space-y-4" data-track="lead_form" data-track-location="hero">

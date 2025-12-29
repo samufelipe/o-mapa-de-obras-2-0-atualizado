@@ -7,7 +7,7 @@ const QualificationSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-2xl md:text-3xl">
-            Esse Workshop é Para Você?
+            Essa Imersão é Para Você?
           </h2>
         </div>
         
@@ -15,7 +15,7 @@ const QualificationSection = () => {
           {/* For Who */}
           <div className="bg-card border-2 border-foreground p-8 shadow-hard">
             <h3 className="text-lg font-display uppercase tracking-tight mb-6 text-center">
-              Esse Workshop é Para Você Se...
+              Essa Imersão é Para Você Se...
             </h3>
             <ul className="space-y-4">
               {QUALIFICATION.for.map((item, index) => (
