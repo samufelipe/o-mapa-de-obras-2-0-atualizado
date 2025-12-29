@@ -264,9 +264,12 @@ const HeroSection = () => {
             </div>
             
             <h1 className="text-2xl md:text-4xl lg:text-5xl font-black tracking-tight leading-[1.1]">
-              A Sequência que Protege seu <br className="hidden md:block"/>
-              <span className="text-primary italic">Design e seu Lucro.</span>
+              <span className="text-primary italic">A Virada da Arquiteta</span>
             </h1>
+            
+            <h2 className="text-lg md:text-2xl lg:text-3xl font-bold tracking-tight text-muted-foreground">
+              A Sequência que Protege seu Design e seu Lucro.
+            </h2>
             
             <div className="text-sm md:text-base text-muted-foreground max-w-lg mx-auto lg:mx-0 font-medium leading-relaxed space-y-3">
               <p>
