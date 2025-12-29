@@ -7,7 +7,7 @@ const Footer = () => {
       <img 
         src={logoIcon} 
         alt="Cronograma O Mapa de Obras 2.0" 
-        className="w-20 h-20 mx-auto opacity-60 object-contain" 
+        className="w-32 h-32 mx-auto object-contain" 
       />
       <div className="flex justify-center gap-6">
         <a 
