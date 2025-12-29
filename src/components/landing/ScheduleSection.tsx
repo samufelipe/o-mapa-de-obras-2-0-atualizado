@@ -8,7 +8,7 @@ const ScheduleSection = () => {
   };
 
   return (
-    <section className="py-20 bg-background reveal">
+    <section id="schedule" className="py-20 bg-background reveal">
       <div className="container mx-auto px-4 max-w-4xl text-center">
         <div className="mb-16 space-y-4">
           <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight">Dinâmica da Imersão</h2>

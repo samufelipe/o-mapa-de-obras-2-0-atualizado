@@ -8,7 +8,7 @@ const AboutSection = () => {
   };
 
   return (
-    <section className="py-20 bg-background reveal">
+    <section id="about" className="py-20 bg-background reveal">
       <div className="container mx-auto px-4 max-w-5xl">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="relative group">
