@@ -24,27 +24,27 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-[#0a0a0a] text-white/90 py-20 border-t border-primary/20">
+    <footer className="bg-[#0a0a0a] text-white/90 py-12 border-t border-primary/20">
       <div className="container mx-auto px-4 max-w-6xl">
         
         {/* Logo centralizada com efeito de destaque */}
-        <div className="flex justify-center mb-14">
+        <div className="flex justify-center mb-8">
           <div className="relative">
             <img 
               src={logoVirada} 
               alt="Imersão A Virada da Arquiteta" 
-              className="w-64 md:w-80 h-auto object-contain drop-shadow-[0_0_25px_rgba(212,175,55,0.3)]"
+              className="w-48 md:w-56 h-auto object-contain drop-shadow-[0_0_15px_rgba(212,175,55,0.25)]"
             />
           </div>
         </div>
 
         {/* Linha decorativa dourada */}
-        <div className="flex justify-center mb-12">
+        <div className="flex justify-center mb-8">
           <div className="w-24 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent" />
         </div>
 
         {/* Grid de navegação e redes */}
-        <div className="grid md:grid-cols-2 gap-16 mb-16">
+        <div className="grid md:grid-cols-2 gap-10 mb-10">
           
           {/* Navegação */}
           <div className="text-center md:text-left">
