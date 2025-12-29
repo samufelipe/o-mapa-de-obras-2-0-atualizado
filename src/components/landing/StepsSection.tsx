@@ -14,7 +14,7 @@ const steps = [
   { 
     icon: Calendar, 
     title: "03. IMERSÃO (31/01)", 
-    desc: "Dia inteiro de workshop ao vivo no Zoom com aplicação direta do método." 
+    desc: "Dia inteiro de imersão ao vivo no Zoom com aplicação direta do método." 
   },
   { 
     icon: Gift, 
