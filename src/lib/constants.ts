@@ -64,7 +64,7 @@ export const FAQ_ITEMS = [
   },
   {
     question: "Quando receberei os bônus e materiais?",
-    answer: "Os materiais bônus (Matriz, Checklist e Guia) são ferramentas complementares à imersão. Para garantir que você saiba exatamente como usá-los, eles serão liberados logo após o encerramento da live no dia 31/01."
+    answer: "A Apostila de Acompanhamento será liberada 1 dia antes da live (30/01) para você já chegar preparada. O Modelo de Cronograma e o Checklist de Levantamento serão liberados logo após o encerramento da imersão no dia 31/01, garantindo que você saiba exatamente como aplicá-los."
   },
   {
     question: "Como funciona o Grupo VIP de WhatsApp?",
