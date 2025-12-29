@@ -38,19 +38,22 @@ export const QUALIFICATION = {
 
 export const BONUSES = [
   {
-    title: "Matriz de Sequência Ideal",
-    value: "R$ 497,00",
-    description: "Sua bússola técnica. O fluxo visual detalhado para você nunca mais permitir que um fornecedor entre na obra antes da hora certa.",
+    title: "Apostila de Acompanhamento",
+    value: "R$ 80,00",
+    description: "Material completo com tarefas práticas para você acompanhar a imersão com foco total e aplicar cada conceito em tempo real.",
+    release: "LIBERADO 1 DIA ANTES DA LIVE"
   },
   {
-    title: "Checklist de Visita Técnica",
+    title: "Modelo de Cronograma",
     value: "R$ 197,00",
-    description: "Um guia de conferência rápida para garantir que cada etapa do Cronograma 2.0 esteja sendo respeitada fielmente pela equipe.",
+    description: "Template pronto para aplicar no seu escritório e nas suas obras. Personalize e tenha controle absoluto de cada projeto.",
+    release: "LIBERADO PÓS-LIVE (31/01)"
   },
   {
-    title: "Guia de Postura e Liderança",
-    value: "R$ 297,00",
-    description: "Scripts de comunicação para alinhar prazos e cobrar qualidade dos fornecedores com autoridade e elegância.",
+    title: "Checklist de Levantamento",
+    value: "R$ 50,00",
+    description: "Ferramenta de organização para garantir que nenhum detalhe passe despercebido no levantamento e planejamento da obra.",
+    release: "LIBERADO PÓS-LIVE (31/01)"
   }
 ];
 
@@ -79,8 +82,8 @@ export const FAQ_ITEMS = [
 
 export const PRICING_ITEMS = [
   { name: "Imersão Cronograma 2.0 (Ao Vivo)", price: "R$ 197,00" },
-  { name: "Matriz de Sequência Ideal", price: "R$ 497,00" },
-  { name: "Checklist de Visita Técnica", price: "R$ 197,00" },
-  { name: "Guia de Postura e Liderança", price: "R$ 297,00" },
+  { name: "Apostila de Acompanhamento", price: "R$ 80,00" },
+  { name: "Modelo de Cronograma", price: "R$ 197,00" },
+  { name: "Checklist de Levantamento", price: "R$ 50,00" },
   { name: "Acesso ao Grupo VIP", price: "Incluso" },
 ];
