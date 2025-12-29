@@ -9,7 +9,7 @@ const steps = [
   { 
     icon: MessageCircle, 
     title: "02. GRUPO VIP", 
-    desc: "Entrada na comunidade exclusiva de WhatsApp para Networking e avisos." 
+    desc: "Entrada no grupo exclusivo de WhatsApp para receber avisos e lembretes." 
   },
   { 
     icon: Calendar, 

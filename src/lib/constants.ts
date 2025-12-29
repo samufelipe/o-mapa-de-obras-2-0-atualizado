@@ -68,7 +68,7 @@ export const FAQ_ITEMS = [
   },
   {
     question: "Como funciona o Grupo VIP de WhatsApp?",
-    answer: "É o nosso 'QG'. Assim que o pagamento for aprovado, você recebe o link. Lá você fará networking com outras arquitetas, receberá avisos exclusivos e o link direto para a nossa sala de ZOOM no dia do evento."
+    answer: "É o nosso canal oficial de avisos. Assim que o pagamento for aprovado, você recebe o link. Lá você receberá todos os comunicados importantes, lembretes e o link direto para a nossa sala de ZOOM no dia do evento."
   },
   {
     question: "O valor de R$ 49,90 é real? Tem pegadinha?",
