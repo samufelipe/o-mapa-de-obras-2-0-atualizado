@@ -1,11 +1,11 @@
-import logoBlackGold from "@/assets/logo-black-gold.png";
+import logoIcon from "@/assets/logo-icon.svg";
 import { Instagram } from "lucide-react";
 
 const Footer = () => {
   return (
     <footer className="bg-background py-12 border-t border-border text-center space-y-4">
       <img 
-        src={logoBlackGold} 
+        src={logoIcon} 
         alt="Cronograma O Mapa de Obras 2.0" 
         className="w-10 h-10 mx-auto opacity-50 grayscale object-contain" 
       />
