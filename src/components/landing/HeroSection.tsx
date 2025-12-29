@@ -263,14 +263,12 @@ const HeroSection = () => {
               </span>
             </div>
             
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1]">
-              A Virada da <span className="text-primary italic">Arquiteta</span>
+            <h1 className="text-2xl md:text-4xl lg:text-5xl font-black tracking-tight leading-[1.1]">
+              A Sequência que Protege seu <br className="hidden md:block"/>
+              <span className="text-primary italic">Design e seu Lucro.</span>
             </h1>
             
             <div className="text-sm md:text-base text-muted-foreground max-w-lg mx-auto lg:mx-0 font-medium leading-relaxed space-y-3">
-              <p className="text-base md:text-lg text-foreground font-bold">
-                A sequência que protege seu design e seu lucro.
-              </p>
               <p>
                 A imersão que todo arquiteto deveria fazer antes de começar o ano.
               </p>
