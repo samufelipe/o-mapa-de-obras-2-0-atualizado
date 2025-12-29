@@ -43,8 +43,8 @@ const ProblemsSection = () => {
               className="bg-foreground/50 border-l-2 border-primary p-6 hover:bg-foreground/80 transition-colors"
               style={{ backgroundColor: 'rgba(24, 24, 27, 0.5)' }}
             >
-              <h3 className="text-sm md:text-base font-black uppercase tracking-tight mb-2 text-background">{problem.title}</h3>
-              <p className="text-[11px] md:text-xs font-medium text-background/60 leading-relaxed">{problem.description}</p>
+              <h3 className="text-base md:text-lg font-black uppercase tracking-tight mb-3 text-background">{problem.title}</h3>
+              <p className="text-sm md:text-base font-medium text-background/60 leading-relaxed">{problem.description}</p>
             </div>
           ))}
         </div>
