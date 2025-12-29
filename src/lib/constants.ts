@@ -56,6 +56,10 @@ export const BONUSES = [
 
 export const FAQ_ITEMS = [
   {
+    question: "Como faço para participar da imersão ao vivo?",
+    answer: "A imersão acontecerá AO VIVO pelo Zoom no dia 31/01. Para participar, basta baixar o aplicativo Zoom gratuitamente: no celular, acesse a App Store (iPhone) ou Google Play (Android) e busque por 'Zoom'. No computador, acesse zoom.us/download e instale o 'Zoom Desktop Client'. No dia do evento, você receberá o link de acesso no Grupo VIP do WhatsApp — é só clicar e entrar!"
+  },
+  {
     question: "Quando receberei os bônus e materiais?",
     answer: "Os materiais bônus (Matriz, Checklist e Guia) são ferramentas complementares à imersão. Para garantir que você saiba exatamente como usá-los, eles serão liberados logo após o encerramento da live no dia 31/01."
   },
