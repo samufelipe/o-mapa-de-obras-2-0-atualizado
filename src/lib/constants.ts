@@ -23,16 +23,16 @@ export const AGENDA = [
 
 export const QUALIFICATION = {
   for: [
-    "Arquitetas que querem saber como funciona a obra de interiores.",
-    "Profissionais que querem eliminar o prejuízo com retrabalhos.",
-    "Quem deseja proteger materiais nobres de danos na obra.",
-    "Quem busca segurança para liderar grandes equipes de fornecedores."
+    "Você quer entender como funciona a obra de interiores na prática.",
+    "Você quer eliminar o prejuízo com retrabalhos nas suas obras.",
+    "Você quer proteger materiais nobres de danos durante a execução.",
+    "Você busca segurança para liderar equipes de fornecedores com autoridade."
   ],
   notFor: [
-    "Quem aceita o caos e o erro como parte normal da rotina.",
-    "Quem acredita que arquiteto deve ficar apenas no escritório fazendo projeto e não precisa saber nada sobre obra.",
-    "Quem prefere confiar na intuição em vez de um método validado.",
-    "Quem não está disposta a elevar seu padrão de entrega técnica."
+    "Você aceita o caos e o erro como parte normal da rotina.",
+    "Você acredita que arquiteto deve ficar apenas no escritório fazendo projeto e não precisa saber nada sobre obra.",
+    "Você prefere confiar na intuição em vez de um método validado.",
+    "Você não está disposta a elevar seu padrão de entrega técnica."
   ]
 };
 
