@@ -31,8 +31,8 @@ const ProblemsSection = () => {
         <div className="text-center md:text-left mb-12 space-y-4">
           <span className="text-primary font-black text-[9px] uppercase tracking-[0.3em] block">O CUSTO DE NÃO SABER DE OBRA</span>
           <h2 className="text-2xl md:text-3xl font-black tracking-tight leading-tight text-background">
-            Sua Autoridade Não Pode Depender <br className="hidden md:block"/>
-            <span className="text-primary italic">Apenas de Desenhos Bonitos.</span>
+            Você Não Pode Depender <br className="hidden md:block"/>
+            <span className="text-primary italic">Apenas de Projetos.</span>
           </h2>
         </div>
         
