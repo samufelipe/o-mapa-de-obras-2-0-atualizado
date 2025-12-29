@@ -24,7 +24,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-white text-foreground py-12 border-t border-border">
+    <footer className="bg-secondary text-foreground py-12 border-t border-border">
       <div className="container mx-auto px-4 max-w-6xl">
         
         {/* Logo centralizada com efeito de destaque */}
