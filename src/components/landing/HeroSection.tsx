@@ -268,9 +268,17 @@ const HeroSection = () => {
               <span className="text-primary italic">Design e seu Lucro.</span>
             </h1>
             
-            <p className="text-sm md:text-lg text-muted-foreground max-w-lg mx-auto lg:mx-0 font-medium leading-relaxed">
-              Domine a sequência ideal de serviços com o <strong className="text-foreground">Cronograma O Mapa de Obras 2.0</strong> e elimine o retrabalho na sua execução com segurança técnica absoluta.
-            </p>
+            <div className="text-sm md:text-base text-muted-foreground max-w-lg mx-auto lg:mx-0 font-medium leading-relaxed space-y-3">
+              <p>
+                A imersão que todo arquiteto deveria fazer antes de começar o ano.
+              </p>
+              <p>
+                <strong className="text-foreground">Cronograma, planejamento de obra e método</strong> para arquitetas que querem ganhar mais em 2026.
+              </p>
+              <p className="text-primary font-bold">
+                Porque autoridade e dinheiro se constroem na obra.
+              </p>
+            </div>
 
             <div className="flex flex-wrap justify-center lg:justify-start gap-3">
               <div className="flex items-center gap-1.5 px-3 py-1.5 bg-secondary border border-border text-[9px] font-bold uppercase tracking-wider text-muted-foreground">
