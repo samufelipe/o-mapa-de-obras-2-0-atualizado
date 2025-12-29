@@ -1,4 +1,4 @@
-import logoIcon from "@/assets/logo-icon.svg";
+import logoVirada from "@/assets/logo-virada.png";
 import { Instagram, ArrowUp } from "lucide-react";
 
 const footerLinks = [
@@ -26,26 +26,26 @@ const Footer = () => {
   return (
     <footer className="bg-foreground text-background py-16 border-t border-border">
       <div className="container mx-auto px-4 max-w-5xl">
-        {/* Logo e Navegação */}
-        <div className="grid md:grid-cols-3 gap-12 mb-12">
-          {/* Coluna 1 - Logo e Descrição */}
-          <div className="text-center md:text-left space-y-4">
+        {/* Logo centralizada no topo */}
+        <div className="flex justify-center mb-12">
+          <div className="relative">
             <img 
-              src={logoIcon} 
-              alt="Cronograma O Mapa de Obras 2.0" 
-              className="w-20 h-20 mx-auto md:mx-0 object-contain" 
+              src={logoVirada} 
+              alt="Imersão A Virada da Arquiteta" 
+              className="w-64 md:w-80 h-auto object-contain mix-blend-lighten brightness-110" 
             />
-            <p className="text-sm text-background/60 leading-relaxed">
-              A imersão definitiva para arquitetas que querem dominar a execução de obras de interiores.
-            </p>
           </div>
+        </div>
+
+        {/* Navegação e Redes */}
+        <div className="grid md:grid-cols-2 gap-12 mb-12">
           
-          {/* Coluna 2 - Links de Navegação */}
+          {/* Coluna 1 - Links de Navegação */}
           <div className="text-center md:text-left">
             <h4 className="text-sm font-black uppercase tracking-wider mb-4 text-primary">
               Navegação
             </h4>
-            <nav className="grid grid-cols-2 gap-2">
+            <nav className="grid grid-cols-3 gap-2">
               {footerLinks.map((link) => (
                 <button
                   key={link.sectionId}
@@ -58,12 +58,12 @@ const Footer = () => {
             </nav>
           </div>
           
-          {/* Coluna 3 - Contato e Redes */}
-          <div className="text-center md:text-left">
+          {/* Coluna 2 - Redes Sociais */}
+          <div className="text-center md:text-right">
             <h4 className="text-sm font-black uppercase tracking-wider mb-4 text-primary">
               Redes Sociais
             </h4>
-            <div className="flex justify-center md:justify-start gap-4 mb-6">
+            <div className="flex justify-center md:justify-end gap-4 mb-4">
               <a 
                 href="https://instagram.com/inovandonasuaobra" 
                 target="_blank" 
@@ -84,7 +84,7 @@ const Footer = () => {
         <div className="border-t border-background/10 pt-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-[10px] md:text-xs font-medium uppercase tracking-wider text-background/40 text-center md:text-left">
-              Cronograma O Mapa de Obras 2.0 • Todos os Direitos Reservados • {new Date().getFullYear()}
+              Imersão A Virada da Arquiteta • Todos os Direitos Reservados • {new Date().getFullYear()}
             </p>
             
             {/* Botão Voltar ao Topo */}
