@@ -23,7 +23,7 @@ export const AGENDA = [
 
 export const QUALIFICATION = {
   for: [
-    "Arquitetas que buscam domínio técnico sobre a execução.",
+    "Arquitetas que querem saber como funciona a obra de interiores.",
     "Profissionais que querem eliminar o prejuízo com retrabalhos.",
     "Quem deseja proteger materiais nobres de danos na obra.",
     "Quem busca segurança para liderar grandes equipes de fornecedores."
