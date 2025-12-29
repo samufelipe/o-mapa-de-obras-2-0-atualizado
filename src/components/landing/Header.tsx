@@ -13,7 +13,7 @@ const Header = () => {
           <img 
             src={logoVirada} 
             alt="Imersão A Virada da Arquiteta" 
-            className="h-8 md:h-9 w-auto object-contain"
+            className="h-12 md:h-14 w-auto object-contain"
           />
         </div>
         
