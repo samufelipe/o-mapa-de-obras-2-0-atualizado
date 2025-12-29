@@ -27,13 +27,15 @@ const Footer = () => {
     <footer className="bg-[#0a0a0a] text-white/90 py-20 border-t border-primary/20">
       <div className="container mx-auto px-4 max-w-6xl">
         
-        {/* Logo centralizada */}
+        {/* Logo centralizada com efeito de destaque */}
         <div className="flex justify-center mb-14">
-          <img 
-            src={logoVirada} 
-            alt="Imersão A Virada da Arquiteta" 
-            className="w-56 md:w-72 h-auto object-contain rounded-lg"
-          />
+          <div className="relative">
+            <img 
+              src={logoVirada} 
+              alt="Imersão A Virada da Arquiteta" 
+              className="w-64 md:w-80 h-auto object-contain drop-shadow-[0_0_25px_rgba(212,175,55,0.3)]"
+            />
+          </div>
         </div>
 
         {/* Linha decorativa dourada */}
