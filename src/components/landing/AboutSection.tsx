@@ -31,7 +31,10 @@ const AboutSection = () => {
                 Somos <span className="text-foreground font-bold">Ingrid Zarza e Fernanda Bradaschia</span>. Com mais de <span className="text-foreground font-bold">250 execuções entregues</span>, descobrimos que a chave do sucesso na obra não é o improviso, mas o <strong>conhecimento estratégico do fluxo de serviços</strong>.
               </p>
               <p>
-                O <strong>Cronograma O Mapa de Obras 2.0</strong> é a ponte prática que a formação acadêmica não consegue alcançar em profundidade. Não entregamos apenas uma ferramenta, mas a segurança que você precisa para ser a líder técnica respeitada em cada projeto.
+                O <strong>Cronograma O Mapa de Obras 2.0</strong> é a ponte prática que a faculdade não te ensinou e não consegue alcançar em profundidade. Não entregamos apenas uma ferramenta, mas a segurança que você precisa para ser a líder técnica respeitada em cada projeto.
+              </p>
+              <p>
+                Acreditamos que todo arquiteto deve saber de obra e que o mercado será muito mais valorizado com bons profissionais.
               </p>
             </div>
             <button 
