@@ -30,7 +30,7 @@ const BonusSection = () => {
                 <p className="text-[11px] text-muted-foreground mb-6 font-medium leading-relaxed">{bonus.description}</p>
                 <div className="mt-auto pt-4 border-t border-border w-full">
                   <span className="text-[8px] font-black text-primary uppercase tracking-widest flex items-center justify-center gap-1">
-                    <Clock className="w-3 h-3"/> LIBERADO PÓS-LIVE (31/01)
+                    <Clock className="w-3 h-3"/> {bonus.release}
                   </span>
                 </div>
               </div>
@@ -60,7 +60,7 @@ const BonusSection = () => {
 
           <div className="mb-8 text-center">
             <p className="text-background/60 text-[9px] font-bold uppercase tracking-widest mb-1">
-              Preço total se comprado separadamente: <span className="line-through text-background/40">R$ 1.188,00</span>
+              Preço total se comprado separadamente: <span className="line-through text-background/40">R$ 524,00</span>
             </p>
             
             <div className="mb-2">
