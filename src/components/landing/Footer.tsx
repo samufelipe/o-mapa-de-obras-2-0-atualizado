@@ -24,7 +24,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-[#0a0a0a] text-white/90 py-12 border-t border-primary/20">
+    <footer className="bg-white text-foreground py-12 border-t border-border">
       <div className="container mx-auto px-4 max-w-6xl">
         
         {/* Logo centralizada com efeito de destaque */}
@@ -48,7 +48,7 @@ const Footer = () => {
           
           {/* Navegação */}
           <div className="text-center md:text-left">
-            <h4 className="text-xs font-bold uppercase tracking-[0.2em] mb-6 text-primary/80">
+            <h4 className="text-xs font-bold uppercase tracking-[0.2em] mb-6 text-primary">
               Navegação
             </h4>
             <nav className="grid grid-cols-3 gap-x-4 gap-y-3">
@@ -56,7 +56,7 @@ const Footer = () => {
                 <button
                   key={link.sectionId}
                   onClick={() => scrollToSection(link.sectionId)}
-                  className="text-sm text-white/50 hover:text-primary transition-colors duration-300 text-left py-1 hover:translate-x-1 transform"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300 text-left py-1 hover:translate-x-1 transform"
                 >
                   {link.label}
                 </button>
@@ -66,7 +66,7 @@ const Footer = () => {
           
           {/* Redes Sociais */}
           <div className="text-center md:text-right">
-            <h4 className="text-xs font-bold uppercase tracking-[0.2em] mb-6 text-primary/80">
+            <h4 className="text-xs font-bold uppercase tracking-[0.2em] mb-6 text-primary">
               Siga-nos
             </h4>
             
@@ -83,25 +83,25 @@ const Footer = () => {
               </a>
             </div>
             
-            <p className="text-sm text-white/40 font-light">
+            <p className="text-sm text-muted-foreground font-light">
               @inovandonasuaobra
             </p>
           </div>
         </div>
         
         {/* Divisor */}
-        <div className="border-t border-white/10 pt-8">
+        <div className="border-t border-border pt-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             
             {/* Copyright */}
-            <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-white/30 text-center md:text-left">
+            <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-muted-foreground text-center md:text-left">
               Imersão A Virada da Arquiteta © {new Date().getFullYear()} • Todos os direitos reservados
             </p>
             
             {/* Voltar ao Topo */}
             <button
               onClick={scrollToTop}
-              className="group flex items-center gap-3 text-xs text-white/40 hover:text-primary transition-colors duration-300"
+              className="group flex items-center gap-3 text-xs text-muted-foreground hover:text-primary transition-colors duration-300"
             >
               <span className="uppercase tracking-[0.15em] font-medium">Voltar ao Topo</span>
               <div className="border border-primary/30 group-hover:border-primary group-hover:bg-primary/10 p-2 rounded transition-all duration-300">
