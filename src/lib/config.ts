@@ -21,7 +21,7 @@ export const CONFIG = {
   hotmart: {
     // Link do checkout do produto
     // Obter em: Hotmart → Produtos → Seu Produto → Links de Divulgação
-    checkoutUrl: "PREENCHER_LINK_HOTMART",
+    checkoutUrl: "https://pay.hotmart.com/K103578257F?checkoutMode=10&bid=1767049086095",
     
     // Se true, passa os dados do lead para pré-preencher o checkout
     preFillCheckout: true,
@@ -58,9 +58,7 @@ export const isConfigValid = (): { valid: boolean; missing: string[] } => {
     missing.push("RD Station Webhook URL");
   }
   
-  if (CONFIG.hotmart.checkoutUrl === "PREENCHER_LINK_HOTMART") {
-    missing.push("Hotmart Checkout URL");
-  }
+  // Hotmart URL já está configurada, não precisa validar
   
   if (CONFIG.metaPixel.pixelId === "PREENCHER_PIXEL_ID") {
     missing.push("Meta Pixel ID");
