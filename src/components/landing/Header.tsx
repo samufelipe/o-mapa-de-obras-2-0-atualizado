@@ -1,4 +1,4 @@
-import logoBlackGold from "@/assets/logo-black-gold.png";
+import logoVirada from "@/assets/logo-virada.png";
 
 const Header = () => {
   const scrollToForm = () => {
@@ -11,12 +11,12 @@ const Header = () => {
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <img 
-            src={logoBlackGold} 
-            alt="Cronograma O Mapa de Obras 2.0" 
-            className="h-6 w-6 object-contain"
+            src={logoVirada} 
+            alt="Imersão A Virada da Arquiteta" 
+            className="h-8 w-auto object-contain"
           />
           <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-tighter text-foreground">
-            Cronograma O Mapa de Obras 2.0
+            Imersão A Virada da Arquiteta
           </span>
         </div>
         
