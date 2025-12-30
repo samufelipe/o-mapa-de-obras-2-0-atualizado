@@ -49,7 +49,7 @@ export const submitToRDStation = async (
   const { apiKey, conversionIdentifier } = CONFIG.rdStation;
   
   // Verificar se a API Key está configurada
-  if (apiKey === "PREENCHER_API_KEY_RD_STATION") {
+  if (!apiKey || apiKey.length < 10) {
     console.warn("⚠️ RD Station API Key não configurada");
     // Em desenvolvimento, simular sucesso
     if (import.meta.env.DEV) {

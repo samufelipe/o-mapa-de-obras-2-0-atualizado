@@ -8,7 +8,7 @@ export const CONFIG = {
   rdStation: {
     // API Key do RD Station Marketing
     // Obter em: https://appstore.rdstation.com/pt-BR/publisher
-    apiKey: "PREENCHER_API_KEY_RD_STATION",
+    apiKey: "GqXXPYwrOpwBGbWtQdtmSOVlxApBvNpeGAEy",
     
     // Identificador da conversão (nome do evento no RD)
     conversionIdentifier: "inscricao-mapa-obras-2",
@@ -51,7 +51,7 @@ export const CONFIG = {
 export const isConfigValid = (): { valid: boolean; missing: string[] } => {
   const missing: string[] = [];
   
-  if (CONFIG.rdStation.apiKey === "PREENCHER_API_KEY_RD_STATION") {
+  if (!CONFIG.rdStation.apiKey || CONFIG.rdStation.apiKey.length < 10) {
     missing.push("RD Station API Key");
   }
   
