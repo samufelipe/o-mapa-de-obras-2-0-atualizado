@@ -110,10 +110,12 @@ const HeroSection = () => {
     }
     
     // Add query params to pre-fill checkout
+    // Hotmart uses specific parameter names: name, email, phonenumber
+    const phoneClean = formData.phone.replace(/\D/g, "");
     const params = new URLSearchParams({
       name: formData.name,
       email: formData.email,
-      phone: formData.phone.replace(/\D/g, ""),
+      phonenumber: phoneClean,
     });
     
     // Preserve UTM params
