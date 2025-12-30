@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Check, Copy, Link, ChevronDown, ChevronUp } from "lucide-react";
+import { Check, Copy, Link, ChevronDown, ChevronUp, Code, FileText, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import {
@@ -42,6 +42,21 @@ const emailFileMap: Record<string, string> = {
 
 const getBaseUrl = () => {
   return window.location.origin;
+};
+
+// Extrai apenas o conteúdo interno (sem html, head, body tags)
+const extractInnerContent = (html: string): string => {
+  // Remove doctype, html, head e body tags, mantendo apenas o conteúdo
+  const bodyMatch = html.match(/<body[^>]*>([\s\S]*)<\/body>/i);
+  if (bodyMatch) {
+    return bodyMatch[1].trim();
+  }
+  // Se não encontrar body, tenta encontrar a tabela principal
+  const tableMatch = html.match(/(<table[\s\S]*<\/table>)/i);
+  if (tableMatch) {
+    return tableMatch[1].trim();
+  }
+  return html;
 };
 
 const journeys: Journey[] = [
@@ -98,17 +113,30 @@ const journeys: Journey[] = [
 export default function AdminEmails() {
   const { toast } = useToast();
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [copiedBlockId, setCopiedBlockId] = useState<string | null>(null);
   const [copiedLinkId, setCopiedLinkId] = useState<string | null>(null);
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [showInstructions, setShowInstructions] = useState(false);
 
-  const copyToClipboard = async (html: string, id: string) => {
+  const copyFullHtml = async (html: string, id: string) => {
     await navigator.clipboard.writeText(html);
     setCopiedId(id);
     toast({
-      title: "HTML copiado!",
-      description: "Cole no editor de e-mail do RD Station.",
+      title: "HTML completo copiado!",
+      description: "Contém todo o documento HTML.",
     });
     setTimeout(() => setCopiedId(null), 2000);
+  };
+
+  const copyBlockHtml = async (html: string, id: string) => {
+    const innerContent = extractInnerContent(html);
+    await navigator.clipboard.writeText(innerContent);
+    setCopiedBlockId(id);
+    toast({
+      title: "HTML para bloco copiado!",
+      description: "Cole no bloco 'Código HTML' do RD Station.",
+    });
+    setTimeout(() => setCopiedBlockId(null), 2000);
   };
 
   const copyLinkToClipboard = async (url: string, id: string) => {
@@ -133,9 +161,44 @@ export default function AdminEmails() {
           <h1 className="text-3xl font-bold text-foreground mb-2">
             Templates de E-mail
           </h1>
-          <p className="text-muted-foreground">
-            Use "Copiar Link" para importar o template no RD Station via URL.
+          <p className="text-muted-foreground mb-4">
+            Use <strong>"Copiar Bloco"</strong> para colar o HTML diretamente no editor do RD Station.
           </p>
+          
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setShowInstructions(!showInstructions)}
+            className="gap-2"
+          >
+            <Info className="h-4 w-4" />
+            {showInstructions ? "Ocultar instruções" : "Como usar no RD Station"}
+          </Button>
+
+          {showInstructions && (
+            <div className="mt-4 p-4 bg-muted/50 rounded-lg border border-border">
+              <h3 className="font-semibold text-foreground mb-3">📧 Como usar os templates no RD Station:</h3>
+              <ol className="list-decimal list-inside space-y-2 text-sm text-muted-foreground">
+                <li>No RD Station, crie um <strong>novo e-mail</strong></li>
+                <li>Escolha "Modelo em branco" ou um modelo simples</li>
+                <li>Adicione um bloco <strong>"Código HTML"</strong></li>
+                <li>Clique no botão <strong>"Copiar Bloco"</strong> do template desejado aqui</li>
+                <li>Cole o HTML no bloco de código do RD Station</li>
+                <li>Substitua as variáveis conforme necessário</li>
+              </ol>
+              
+              <div className="mt-4 p-3 bg-amber-500/10 border border-amber-500/30 rounded-lg">
+                <p className="text-sm font-medium text-amber-600 dark:text-amber-400 mb-2">⚠️ Variáveis a substituir:</p>
+                <ul className="text-xs text-muted-foreground space-y-1">
+                  <li><code className="bg-muted px-1 rounded">{"{{nome}}"}</code> → Variável do RD Station (substitui automaticamente)</li>
+                  <li><code className="bg-muted px-1 rounded">HEADER_IMAGE_URL</code> → URL da imagem do cabeçalho</li>
+                  <li><code className="bg-muted px-1 rounded">LINK_DA_APOSTILA</code> → Link para download da apostila</li>
+                  <li><code className="bg-muted px-1 rounded">WHATSAPP_GROUP_URL</code> → Link do grupo do WhatsApp</li>
+                  <li><code className="bg-muted px-1 rounded">ZOOM_LINK</code> → Link da sala do Zoom</li>
+                </ul>
+              </div>
+            </div>
+          )}
         </header>
 
         <div className="space-y-8">
@@ -164,9 +227,6 @@ export default function AdminEmails() {
                         <p className="text-sm text-muted-foreground">
                           <strong>Assunto:</strong> {email.subject}
                         </p>
-                        <p className="text-xs text-muted-foreground/70 mt-1 font-mono">
-                          {email.publicUrl}
-                        </p>
                       </div>
 
                       <div className="flex gap-2 flex-wrap">
@@ -188,9 +248,26 @@ export default function AdminEmails() {
                           )}
                         </Button>
                         <Button
+                          size="sm"
+                          onClick={() => copyBlockHtml(email.html, email.id)}
+                          className="bg-primary text-primary-foreground hover:bg-primary/90"
+                        >
+                          {copiedBlockId === email.id ? (
+                            <>
+                              <Check className="h-4 w-4 mr-1" />
+                              Copiado!
+                            </>
+                          ) : (
+                            <>
+                              <Code className="h-4 w-4 mr-1" />
+                              Copiar Bloco
+                            </>
+                          )}
+                        </Button>
+                        <Button
                           variant="outline"
                           size="sm"
-                          onClick={() => copyToClipboard(email.html, email.id)}
+                          onClick={() => copyFullHtml(email.html, email.id)}
                         >
                           {copiedId === email.id ? (
                             <>
@@ -199,15 +276,15 @@ export default function AdminEmails() {
                             </>
                           ) : (
                             <>
-                              <Copy className="h-4 w-4 mr-1" />
-                              Copiar HTML
+                              <FileText className="h-4 w-4 mr-1" />
+                              HTML Completo
                             </>
                           )}
                         </Button>
                         <Button
+                          variant="ghost"
                           size="sm"
                           onClick={() => copyLinkToClipboard(email.publicUrl, email.id)}
-                          className="bg-primary text-primary-foreground hover:bg-primary/90"
                         >
                           {copiedLinkId === email.id ? (
                             <>
@@ -217,7 +294,7 @@ export default function AdminEmails() {
                           ) : (
                             <>
                               <Link className="h-4 w-4 mr-1" />
-                              Copiar Link
+                              Link
                             </>
                           )}
                         </Button>
@@ -226,9 +303,11 @@ export default function AdminEmails() {
 
                     {expandedId === email.id && (
                       <div className="mt-4 border rounded-lg overflow-hidden">
-                        <div
-                          className="bg-white p-4"
-                          dangerouslySetInnerHTML={{ __html: email.html }}
+                        <iframe
+                          srcDoc={email.html}
+                          className="w-full bg-white"
+                          style={{ height: "600px" }}
+                          title={`Preview ${email.name}`}
                         />
                       </div>
                     )}
@@ -241,12 +320,7 @@ export default function AdminEmails() {
 
         <footer className="mt-10 text-center text-sm text-muted-foreground">
           <p>
-            Os arquivos HTML públicos estão em <code className="bg-muted px-1 rounded">/emails/</code>.
-          </p>
-          <p className="mt-2">
-            Lembre-se de substituir <code className="bg-muted px-1 rounded">HEADER_IMAGE_URL</code>,{" "}
-            <code className="bg-muted px-1 rounded">WHATSAPP_GROUP_URL</code> e{" "}
-            <code className="bg-muted px-1 rounded">ZOOM_LINK</code> nos arquivos HTML.
+            Use <strong>"Copiar Bloco"</strong> para o método recomendado no RD Station.
           </p>
         </footer>
       </div>
