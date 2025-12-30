@@ -2,13 +2,12 @@
  * Templates de E-mail - A Virada da Arquiteta
  * 
  * Todos os templates estão formatados para copiar e colar no RD Station.
- * Variáveis dinâmicas: {{nome}}, {{email}}
+ * Variáveis dinâmicas: *|NOME:Arquiteta|* (RD Station)
  * 
  * INSTRUÇÕES:
- * 1. Crie o header no Canva (600x150px) com logo
- * 2. Hospede a imagem do header (use imgur.com ou similar)
- * 3. Substitua HEADER_IMAGE_URL pela URL da imagem
- * 4. Copie o HTML para o RD Station
+ * 1. Copie o HTML para o RD Station
+ * 2. Configure as URLs (checkout, WhatsApp, Zoom)
+ * 3. Teste o envio
  */
 
 // ============================================================
@@ -16,11 +15,11 @@
 // ============================================================
 
 export const EMAIL_CONFIG = {
-  headerImageUrl: "HEADER_IMAGE_URL", // Substituir pela URL real
   checkoutUrl: "https://pay.hotmart.com/W98444850C?checkoutMode=10",
   instagramUrl: "https://www.instagram.com/inovandonasuaobra/",
   whatsappGroupUrl: "WHATSAPP_GROUP_URL", // Substituir pela URL real
   zoomLink: "ZOOM_LINK", // Substituir pela URL real
+  apostilaUrl: "APOSTILA_URL", // Substituir pela URL real
   colors: {
     background: "#18181B",
     gold: "#D4AF37",
@@ -33,46 +32,74 @@ export const EMAIL_CONFIG = {
 // ESTRUTURA BASE DO E-MAIL
 // ============================================================
 
-const createEmailWrapper = (content: string) => `
+const createEmailWrapper = (content: string, preheaderText: string = "") => `
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="color-scheme" content="dark only">
+  <meta name="supported-color-schemes" content="dark only">
+  <!--[if !mso]><!-->
+  <style>
+    :root { color-scheme: dark only; supported-color-schemes: dark only; }
+    @media (prefers-color-scheme: dark) {
+      body, .email-bg, .email-container { background-color: #18181B !important; }
+    }
+    @media (prefers-color-scheme: light) {
+      body, .email-bg, .email-container { background-color: #18181B !important; }
+    }
+    @media screen and (max-width: 600px) {
+      .email-container { width: 100% !important; }
+      .content-padding { padding: 16px !important; }
+      .button-full { width: 100% !important; display: block !important; text-align: center !important; }
+      .mobile-text { font-size: 15px !important; }
+    }
+    u + .body { background-color: #18181B !important; }
+  </style>
+  <!--<![endif]-->
 </head>
-<body style="margin: 0; padding: 0; background-color: #18181B; font-family: Arial, sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #18181B;">
+<body class="body" style="margin: 0; padding: 0; background-color: #18181B !important; font-family: Arial, Helvetica, sans-serif; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; width: 100% !important;">
+  <!-- Preheader invisível -->
+  <div style="display:none;font-size:1px;color:#18181B;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;">
+    ${preheaderText}
+  </div>
+  <div class="email-bg" style="background-color: #18181B !important;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #18181B !important;" bgcolor="#18181B">
     <tr>
-      <td align="center" style="padding: 20px;">
-        <table width="600" cellpadding="0" cellspacing="0" style="background-color: #18181B; max-width: 600px;">
-          <!-- Header com Logo -->
-          <tr>
-            <td align="center" style="padding-bottom: 30px;">
-              <img src="${EMAIL_CONFIG.headerImageUrl}" alt="A Virada da Arquiteta" width="600" style="max-width: 100%; height: auto;">
-            </td>
-          </tr>
+      <td align="center" style="padding: 20px 10px; background-color: #18181B !important;" bgcolor="#18181B">
+        <table role="presentation" class="email-container" width="100%" cellpadding="0" cellspacing="0" style="background-color: #18181B !important; max-width: 600px; margin: 0 auto;" bgcolor="#18181B">
           <!-- Conteúdo -->
           <tr>
-            <td style="padding: 0 20px; color: #FFFFFF; font-size: 16px; line-height: 1.6;">
+            <td class="content-padding" style="padding: 0 24px; color: #FFFFFF !important; font-size: 16px; line-height: 1.7; background-color: #18181B !important;" bgcolor="#18181B">
               ${content}
             </td>
           </tr>
           <!-- Assinatura -->
           <tr>
-            <td style="padding: 40px 20px 20px; color: #FFFFFF; font-size: 16px; line-height: 1.6;">
-              <p style="margin: 0;">Um abraço,</p>
-              <p style="margin: 10px 0 0; color: #D4AF37; font-weight: bold;">Ingrid Zarza e Fernanda Bradaschia</p>
-              <p style="margin: 5px 0 0; color: #A1A1AA; font-size: 14px;">Mentoras da Virada da Arquiteta</p>
+            <td class="content-padding" style="padding: 36px 24px 20px; color: #FFFFFF !important; font-size: 16px; line-height: 1.6; background-color: #18181B !important;" bgcolor="#18181B">
+              <p style="margin: 0; color: #FFFFFF !important;">Um abraço,</p>
+              <p style="margin: 10px 0 0; color: #D4AF37 !important; font-weight: bold;">Ingrid Zarza e Fernanda Bradaschia</p>
+              <p style="margin: 5px 0 0; color: #A1A1AA !important; font-size: 14px;">Mentoras da Virada da Arquiteta</p>
               <p style="margin: 15px 0 0;">
-                <a href="${EMAIL_CONFIG.instagramUrl}" style="color: #D4AF37; text-decoration: none;">@inovandonasuaobra</a>
+                <a href="${EMAIL_CONFIG.instagramUrl}" style="color: #D4AF37 !important; text-decoration: none;">@inovandonasuaobra</a>
               </p>
             </td>
           </tr>
           <!-- Footer -->
           <tr>
-            <td align="center" style="padding: 30px 20px; border-top: 1px solid #27272A;">
-              <p style="margin: 0; color: #71717A; font-size: 12px;">
+            <td align="center" style="padding: 24px; border-top: 1px solid #27272A; background-color: #18181B !important;" bgcolor="#18181B">
+              <p style="margin: 0; color: #71717A !important; font-size: 12px;">
                 © 2025 A Virada da Arquiteta. Todos os direitos reservados.
+              </p>
+              <p style="margin: 5px 0 0; color: #71717A !important; font-size: 11px;">
+                A Virada da Arquiteta - São Paulo, SP
+              </p>
+              <p style="margin: 10px 0 0;">
+                <a href="*|UNSUBSCRIBE|*" style="color: #71717A !important; text-decoration: underline; font-size: 11px;">
+                  Não quer mais receber nossos e-mails? Clique aqui
+                </a>
               </p>
             </td>
           </tr>
@@ -80,6 +107,7 @@ const createEmailWrapper = (content: string) => `
       </td>
     </tr>
   </table>
+  </div>
 </body>
 </html>
 `;
