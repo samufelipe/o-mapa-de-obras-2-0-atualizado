@@ -71,7 +71,7 @@ export const trackLead = (data: {
   
   window.fbq("track", "Lead", {
     content_name: CONFIG.rdStation.conversionIdentifier,
-    content_category: "Workshop Mapa de Obras",
+    content_category: "Imersão Virada da Arquiteta",
     // Dados hasheados para melhor match rate
     value: 49.90,
     currency: "BRL",
@@ -88,7 +88,7 @@ export const trackInitiateCheckout = (value: number = 49.90): void => {
   
   window.fbq("track", "InitiateCheckout", {
     content_name: CONFIG.rdStation.conversionIdentifier,
-    content_category: "Workshop Mapa de Obras",
+    content_category: "Imersão Virada da Arquiteta",
     value: value,
     currency: "BRL",
     num_items: 1,
