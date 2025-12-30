@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Check, Copy, ChevronDown, ChevronUp } from "lucide-react";
+import { Check, Copy, Link, ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import {
@@ -15,6 +15,7 @@ interface EmailTemplate {
   subject: string;
   timing: string;
   html: string;
+  publicUrl: string;
 }
 
 interface Journey {
@@ -22,6 +23,26 @@ interface Journey {
   color: string;
   emails: EmailTemplate[];
 }
+
+// Mapeamento de IDs para nomes de arquivos públicos
+const emailFileMap: Record<string, string> = {
+  R1: "resgate-1.html",
+  R2: "resgate-2.html",
+  R3: "resgate-3.html",
+  R4: "resgate-4.html",
+  R5: "resgate-5.html",
+  B1: "boas-vindas-1.html",
+  B2: "boas-vindas-2.html",
+  B3: "boas-vindas-3.html",
+  C1: "carrinho-1.html",
+  C2: "carrinho-2.html",
+  C3: "carrinho-3.html",
+  RE1: "reembolso-1.html",
+};
+
+const getBaseUrl = () => {
+  return window.location.origin;
+};
 
 const journeys: Journey[] = [
   {
@@ -33,6 +54,7 @@ const journeys: Journey[] = [
       subject: e.assunto,
       timing: e.delay,
       html: e.html,
+      publicUrl: `/emails/${emailFileMap[e.id]}`,
     })),
   },
   {
@@ -44,6 +66,7 @@ const journeys: Journey[] = [
       subject: e.assunto,
       timing: e.delay,
       html: e.html,
+      publicUrl: `/emails/${emailFileMap[e.id]}`,
     })),
   },
   {
@@ -55,6 +78,7 @@ const journeys: Journey[] = [
       subject: e.assunto,
       timing: e.delay,
       html: e.html,
+      publicUrl: `/emails/${emailFileMap[e.id]}`,
     })),
   },
   {
@@ -66,6 +90,7 @@ const journeys: Journey[] = [
       subject: e.assunto,
       timing: e.delay,
       html: e.html,
+      publicUrl: `/emails/${emailFileMap[e.id]}`,
     })),
   },
 ];
@@ -73,6 +98,7 @@ const journeys: Journey[] = [
 export default function AdminEmails() {
   const { toast } = useToast();
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [copiedLinkId, setCopiedLinkId] = useState<string | null>(null);
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
   const copyToClipboard = async (html: string, id: string) => {
@@ -83,6 +109,17 @@ export default function AdminEmails() {
       description: "Cole no editor de e-mail do RD Station.",
     });
     setTimeout(() => setCopiedId(null), 2000);
+  };
+
+  const copyLinkToClipboard = async (url: string, id: string) => {
+    const fullUrl = `${getBaseUrl()}${url}`;
+    await navigator.clipboard.writeText(fullUrl);
+    setCopiedLinkId(id);
+    toast({
+      title: "Link copiado!",
+      description: "Cole no campo de URL do RD Station.",
+    });
+    setTimeout(() => setCopiedLinkId(null), 2000);
   };
 
   const togglePreview = (id: string) => {
@@ -97,7 +134,7 @@ export default function AdminEmails() {
             Templates de E-mail
           </h1>
           <p className="text-muted-foreground">
-            Clique em "Copiar HTML" para copiar o código e colar no RD Station.
+            Use "Copiar Link" para importar o template no RD Station via URL.
           </p>
         </header>
 
@@ -127,9 +164,12 @@ export default function AdminEmails() {
                         <p className="text-sm text-muted-foreground">
                           <strong>Assunto:</strong> {email.subject}
                         </p>
+                        <p className="text-xs text-muted-foreground/70 mt-1 font-mono">
+                          {email.publicUrl}
+                        </p>
                       </div>
 
-                      <div className="flex gap-2">
+                      <div className="flex gap-2 flex-wrap">
                         <Button
                           variant="outline"
                           size="sm"
@@ -148,9 +188,9 @@ export default function AdminEmails() {
                           )}
                         </Button>
                         <Button
+                          variant="outline"
                           size="sm"
                           onClick={() => copyToClipboard(email.html, email.id)}
-                          className="bg-primary text-primary-foreground hover:bg-primary/90"
                         >
                           {copiedId === email.id ? (
                             <>
@@ -161,6 +201,23 @@ export default function AdminEmails() {
                             <>
                               <Copy className="h-4 w-4 mr-1" />
                               Copiar HTML
+                            </>
+                          )}
+                        </Button>
+                        <Button
+                          size="sm"
+                          onClick={() => copyLinkToClipboard(email.publicUrl, email.id)}
+                          className="bg-primary text-primary-foreground hover:bg-primary/90"
+                        >
+                          {copiedLinkId === email.id ? (
+                            <>
+                              <Check className="h-4 w-4 mr-1" />
+                              Copiado!
+                            </>
+                          ) : (
+                            <>
+                              <Link className="h-4 w-4 mr-1" />
+                              Copiar Link
                             </>
                           )}
                         </Button>
@@ -184,8 +241,12 @@ export default function AdminEmails() {
 
         <footer className="mt-10 text-center text-sm text-muted-foreground">
           <p>
-            Lembre-se de substituir <code className="bg-muted px-1 rounded">[WHATSAPP_GROUP_URL]</code> e{" "}
-            <code className="bg-muted px-1 rounded">[ZOOM_LINK]</code> pelos links reais.
+            Os arquivos HTML públicos estão em <code className="bg-muted px-1 rounded">/emails/</code>.
+          </p>
+          <p className="mt-2">
+            Lembre-se de substituir <code className="bg-muted px-1 rounded">HEADER_IMAGE_URL</code>,{" "}
+            <code className="bg-muted px-1 rounded">WHATSAPP_GROUP_URL</code> e{" "}
+            <code className="bg-muted px-1 rounded">ZOOM_LINK</code> nos arquivos HTML.
           </p>
         </footer>
       </div>
