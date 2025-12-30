@@ -170,13 +170,12 @@ export function RDStationGuide() {
                 <p className="text-xs text-muted-foreground mt-1">E-mail do lead</p>
               </div>
             </div>
-            
-            <div className="flex items-center justify-between p-3 bg-background rounded-lg border">
-              <div>
-                <code className="text-sm font-mono text-blue-600 dark:text-blue-400">*|UNSUBSCRIBE|*</code>
-                <p className="text-xs text-muted-foreground mt-1">Link de descadastro (automático)</p>
-              </div>
-            </div>
+          </div>
+          
+          <div className="p-3 bg-green-500/10 border border-green-500/30 rounded-lg">
+            <p className="text-sm text-green-600 dark:text-green-400">
+              <strong>Link de descadastro:</strong> O RD Station adiciona automaticamente o link de descadastro no rodapé de todos os e-mails. Não é necessário incluir manualmente.
+            </p>
           </div>
           
           <div className="p-3 bg-blue-500/10 border border-blue-500/30 rounded-lg">
