@@ -42,6 +42,11 @@ const emailFileMap: Record<string, string> = {
   C2: "carrinho-2.html",
   C3: "carrinho-3.html",
   RE1: "reembolso-1.html",
+  N1: "nutricao-1.html",
+  N2: "nutricao-2.html",
+  N3: "nutricao-3.html",
+  N4: "nutricao-4.html",
+  N5: "nutricao-5.html",
 };
 
 const getBaseUrl = () => window.location.origin;
@@ -52,6 +57,54 @@ const extractInnerContent = (html: string): string => {
   const tableMatch = html.match(/(<table[\s\S]*<\/table>)/i);
   if (tableMatch) return tableMatch[1].trim();
   return html;
+};
+
+// Jornada de Nutrição (não existe em email-templates.ts, criada aqui)
+const JORNADA_NUTRICAO = {
+  nome: "Nutrição Comprador",
+  gatilho: "pagamento-imersao-virada-arquiteta",
+  emails: [
+    {
+      id: "N1",
+      nome: "Reforço da Compra",
+      delay: "D+2 (2 dias após compra)",
+      assunto: "Você tomou a melhor decisão, *|NOME:Arquiteta|*",
+      previewText: "Por que essa imersão vai mudar a forma como você gerencia suas obras",
+      html: "", // Carregado do arquivo HTML
+    },
+    {
+      id: "N2",
+      nome: "Case de Sucesso",
+      delay: "D+4 (4 dias após compra)",
+      assunto: "O que arquitetas de sucesso fazem diferente",
+      previewText: "A história de uma arquiteta que entregava 8 obras por ano e hoje entrega 40",
+      html: "",
+    },
+    {
+      id: "N3",
+      nome: "Preview do Conteúdo",
+      delay: "D+7 (7 dias após compra)",
+      assunto: "Preview: o que você vai aprender na imersão",
+      previewText: "Confira a agenda completa dos 2 dias de imersão",
+      html: "",
+    },
+    {
+      id: "N4",
+      nome: "Exercício de Reflexão",
+      delay: "D+10 (10 dias após compra)",
+      assunto: "Exercício: suas 3 maiores dores na gestão de obras",
+      previewText: "Um exercício rápido para você aproveitar ainda mais a imersão",
+      html: "",
+    },
+    {
+      id: "N5",
+      nome: "Contagem Regressiva",
+      delay: "D-3 (3 dias antes da live)",
+      assunto: "Faltam 3 dias! Prepare-se assim 🔥",
+      previewText: "Checklist final para aproveitar 100% da imersão",
+      html: "",
+    },
+  ],
 };
 
 const journeys: Journey[] = [
@@ -71,6 +124,18 @@ const journeys: Journey[] = [
     name: "Jornada Boas-vindas (3 e-mails)",
     color: "bg-green-500/20 border-green-500/50",
     emails: JORNADA_BOAS_VINDAS.emails.map((e) => ({
+      id: e.id,
+      name: e.nome,
+      subject: e.assunto,
+      timing: e.delay,
+      html: e.html,
+      publicUrl: `/emails/${emailFileMap[e.id]}`,
+    })),
+  },
+  {
+    name: "Jornada Nutrição (5 e-mails)",
+    color: "bg-blue-500/20 border-blue-500/50",
+    emails: JORNADA_NUTRICAO.emails.map((e) => ({
       id: e.id,
       name: e.nome,
       subject: e.assunto,
