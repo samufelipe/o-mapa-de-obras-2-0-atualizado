@@ -569,6 +569,223 @@ export const JORNADA_REEMBOLSO = {
 };
 
 // ============================================================
+// JORNADA 5: NUTRIÇÃO COMPRADOR (5 E-MAILS)
+// Gatilho: Converteram em "pagamento-imersao-virada-arquiteta"
+// Objetivo: Manter engajamento até a data da imersão
+// ============================================================
+
+export const JORNADA_NUTRICAO = {
+  nome: "Nutrição Comprador",
+  gatilho: "pagamento-imersao-virada-arquiteta",
+  emails: [
+    {
+      id: "N1",
+      nome: "Reforço da Compra",
+      delay: "D+2 (2 dias após compra)",
+      assunto: "Você tomou a melhor decisão, *|NOME:Arquiteta|*",
+      previewText: "Por que essa imersão vai mudar a forma como você gerencia suas obras",
+      html: createEmailWrapper(`
+        <p style="margin: 0 0 20px;">*|NOME:Arquiteta|*, quero te parabenizar mais uma vez!</p>
+        
+        <p style="margin: 0 0 20px;">Você tomou uma decisão que poucas arquitetas têm coragem de tomar: <strong style="color: #D4AF37;">investir em si mesma e no seu negócio.</strong></p>
+        
+        <p style="margin: 0 0 20px;">Enquanto a maioria continua apagando incêndios nas obras, você decidiu aprender um método que já transformou a gestão de mais de 250 projetos.</p>
+        
+        <p style="margin: 0 0 10px; color: #D4AF37; font-weight: bold;">O que você pode esperar da imersão:</p>
+        
+        <ul style="margin: 0 0 20px; padding-left: 20px; color: #FFFFFF;">
+          <li style="margin-bottom: 10px;">✓ Um método testado e aprovado em obras reais</li>
+          <li style="margin-bottom: 10px;">✓ Ferramentas práticas para aplicar imediatamente</li>
+          <li style="margin-bottom: 10px;">✓ Acesso direto às mentoras para tirar dúvidas</li>
+          <li style="margin-bottom: 10px;">✓ Uma comunidade de arquitetas que entendem seus desafios</li>
+        </ul>
+        
+        <p style="margin: 0 0 20px;">Nos próximos dias, vou te enviar alguns conteúdos exclusivos para você já ir se preparando. Fique de olho no seu e-mail!</p>
+        
+        <table width="100%" cellpadding="0" cellspacing="0" style="margin: 20px 0;">
+          <tr>
+            <td style="padding: 20px; background-color: #27272A; border-radius: 8px;">
+              <p style="margin: 0 0 10px; color: #D4AF37; font-weight: bold;">📌 LEMBRETE IMPORTANTE</p>
+              <p style="margin: 0; color: #FFFFFF;">Você já entrou no grupo do WhatsApp? É por lá que enviamos avisos importantes e o link do Zoom.</p>
+            </td>
+          </tr>
+        </table>
+        
+        ${createButton("ENTRAR NO GRUPO DO WHATSAPP", EMAIL_CONFIG.whatsappGroupUrl)}
+        
+        <p style="margin: 0; color: #A1A1AA; font-size: 14px;">Estamos ansiosas para te ver na imersão! 💛</p>
+      `),
+    },
+    {
+      id: "N2",
+      nome: "Case de Sucesso",
+      delay: "D+4 (4 dias após compra)",
+      assunto: "O que arquitetas de sucesso fazem diferente",
+      previewText: "A história de uma arquiteta que entregava 8 obras por ano e hoje entrega 40",
+      html: createEmailWrapper(`
+        <p style="margin: 0 0 20px;">*|NOME:Arquiteta|*, deixa eu te contar uma história.</p>
+        
+        <p style="margin: 0 0 20px;">Quando a Mariana entrou em contato comigo, ela estava exausta. Entregava 8 obras por ano e mal conseguia respirar entre um projeto e outro.</p>
+        
+        <p style="margin: 0 0 20px;"><strong style="color: #D4AF37;">O problema não era falta de talento. Era falta de método.</strong></p>
+        
+        <p style="margin: 0 0 20px;">Ela passava mais tempo apagando incêndios do que efetivamente gerenciando. Cada semana era uma surpresa nova: fornecedor atrasou, cliente mudou de ideia, orçamento estourou...</p>
+        
+        <p style="margin: 0 0 20px;">Depois de aplicar o método que você vai aprender na imersão, a transformação foi impressionante:</p>
+        
+        <table width="100%" cellpadding="0" cellspacing="0" style="margin: 20px 0;">
+          <tr>
+            <td style="padding: 20px; background-color: #27272A; border-radius: 8px;">
+              <p style="margin: 0 0 15px; color: #D4AF37; font-weight: bold;">📈 RESULTADOS DA MARIANA</p>
+              <p style="margin: 0 0 10px; color: #FFFFFF;">→ De 8 para <strong>40 obras por ano</strong></p>
+              <p style="margin: 0 0 10px; color: #FFFFFF;">→ Reduziu retrabalho em <strong>75%</strong></p>
+              <p style="margin: 0 0 10px; color: #FFFFFF;">→ Clientes agora <strong>indicam espontaneamente</strong></p>
+              <p style="margin: 0; color: #FFFFFF;">→ Conseguiu finalmente <strong>tirar férias</strong></p>
+            </td>
+          </tr>
+        </table>
+        
+        <p style="margin: 0 0 20px;">A diferença? Um cronograma que funciona de verdade e processos claros para cada etapa da obra.</p>
+        
+        <p style="margin: 0 0 20px;">Isso é exatamente o que você vai aprender nos dias 31/01 e 01/02.</p>
+        
+        <p style="margin: 0; color: #A1A1AA; font-size: 14px;">Ansiosa para te ajudar a ter resultados como esses!</p>
+      `),
+    },
+    {
+      id: "N3",
+      nome: "Preview do Conteúdo",
+      delay: "D+7 (7 dias após compra)",
+      assunto: "Preview: o que você vai aprender na imersão",
+      previewText: "Confira a agenda completa dos 2 dias de imersão",
+      html: createEmailWrapper(`
+        <p style="margin: 0 0 20px;">*|NOME:Arquiteta|*, você está cada vez mais perto!</p>
+        
+        <p style="margin: 0 0 20px;">Para você já ir se preparando, resolvi compartilhar um <strong style="color: #D4AF37;">preview do que vamos abordar na imersão.</strong></p>
+        
+        <table width="100%" cellpadding="0" cellspacing="0" style="margin: 20px 0;">
+          <tr>
+            <td style="padding: 20px; background-color: #27272A; border-radius: 8px; margin-bottom: 15px;">
+              <p style="margin: 0 0 10px; color: #D4AF37; font-weight: bold;">📅 DIA 1 - 31/01 (Sexta)</p>
+              <p style="margin: 0 0 10px; color: #FFFFFF; font-weight: bold;">Fundamentos da Gestão de Obras</p>
+              <ul style="margin: 0; padding-left: 20px; color: #FFFFFF;">
+                <li style="margin-bottom: 8px;">Diagnóstico: onde está o gargalo da sua operação</li>
+                <li style="margin-bottom: 8px;">Os 3 pilares de uma obra bem gerenciada</li>
+                <li style="margin-bottom: 8px;">Como criar um cronograma à prova de imprevistos</li>
+                <li style="margin-bottom: 0;">Ferramenta: Modelo de cronograma profissional</li>
+              </ul>
+            </td>
+          </tr>
+        </table>
+        
+        <table width="100%" cellpadding="0" cellspacing="0" style="margin: 20px 0;">
+          <tr>
+            <td style="padding: 20px; background-color: #27272A; border-radius: 8px;">
+              <p style="margin: 0 0 10px; color: #D4AF37; font-weight: bold;">📅 DIA 2 - 01/02 (Sábado)</p>
+              <p style="margin: 0 0 10px; color: #FFFFFF; font-weight: bold;">Execução e Controle</p>
+              <ul style="margin: 0; padding-left: 20px; color: #FFFFFF;">
+                <li style="margin-bottom: 8px;">Sistema de acompanhamento semanal</li>
+                <li style="margin-bottom: 8px;">Como lidar com fornecedores e prazos</li>
+                <li style="margin-bottom: 8px;">Comunicação eficiente com o cliente</li>
+                <li style="margin-bottom: 0;">Checklist de entrega perfeita</li>
+              </ul>
+            </td>
+          </tr>
+        </table>
+        
+        <p style="margin: 0 0 20px;"><strong>Dica:</strong> Já pense em uma obra atual (ou recente) para usar como base durante a imersão. Vamos trabalhar com casos reais!</p>
+        
+        <p style="margin: 0; color: #A1A1AA; font-size: 14px;">Te vejo em breve! 💛</p>
+      `),
+    },
+    {
+      id: "N4",
+      nome: "Exercício de Reflexão",
+      delay: "D+10 (10 dias após compra)",
+      assunto: "Exercício: suas 3 maiores dores na gestão de obras",
+      previewText: "Um exercício rápido para você aproveitar ainda mais a imersão",
+      html: createEmailWrapper(`
+        <p style="margin: 0 0 20px;">*|NOME:Arquiteta|*, tenho um desafio para você.</p>
+        
+        <p style="margin: 0 0 20px;">Para que você aproveite 100% da imersão, quero te propor um <strong style="color: #D4AF37;">exercício de reflexão.</strong></p>
+        
+        <p style="margin: 0 0 20px;">É simples, mas poderoso:</p>
+        
+        <table width="100%" cellpadding="0" cellspacing="0" style="margin: 20px 0;">
+          <tr>
+            <td style="padding: 20px; background-color: #27272A; border-radius: 8px;">
+              <p style="margin: 0 0 15px; color: #D4AF37; font-weight: bold;">✍️ EXERCÍCIO</p>
+              <p style="margin: 0 0 15px; color: #FFFFFF;">Liste as <strong>3 maiores dores</strong> que você enfrenta hoje na gestão das suas obras:</p>
+              <p style="margin: 0 0 10px; color: #FFFFFF;">1. _______________________</p>
+              <p style="margin: 0 0 10px; color: #FFFFFF;">2. _______________________</p>
+              <p style="margin: 0; color: #FFFFFF;">3. _______________________</p>
+            </td>
+          </tr>
+        </table>
+        
+        <p style="margin: 0 0 20px;">Pode ser algo como:</p>
+        
+        <ul style="margin: 0 0 20px; padding-left: 20px; color: #FFFFFF;">
+          <li style="margin-bottom: 10px;">→ "Fornecedores que atrasam e eu fico refém"</li>
+          <li style="margin-bottom: 10px;">→ "Cliente muda de ideia no meio da obra"</li>
+          <li style="margin-bottom: 10px;">→ "Orçamento estoura e eu não sei onde"</li>
+        </ul>
+        
+        <p style="margin: 0 0 20px;"><strong style="color: #D4AF37;">Quer compartilhar comigo?</strong></p>
+        
+        <p style="margin: 0 0 20px;">Responda este e-mail com suas 3 dores. Vou ler cada resposta e, quem sabe, posso abordar seu caso durante a imersão!</p>
+        
+        <p style="margin: 0; color: #A1A1AA; font-size: 14px;">Sua resposta nos ajuda a tornar a imersão ainda mais relevante para você.</p>
+      `),
+    },
+    {
+      id: "N5",
+      nome: "Contagem Regressiva",
+      delay: "D-3 (3 dias antes da live)",
+      assunto: "Faltam 3 dias! Prepare-se assim 🔥",
+      previewText: "Checklist final para aproveitar 100% da imersão",
+      html: createEmailWrapper(`
+        <p style="margin: 0 0 20px;"><strong style="color: #D4AF37; font-size: 24px;">Faltam apenas 3 dias, *|NOME:Arquiteta|*! 🔥</strong></p>
+        
+        <p style="margin: 0 0 20px;">A contagem regressiva começou e eu estou muito empolgada!</p>
+        
+        <p style="margin: 0 0 20px;">Para garantir que você aproveite 100% da imersão, preparei um <strong style="color: #D4AF37;">checklist final:</strong></p>
+        
+        <table width="100%" cellpadding="0" cellspacing="0" style="margin: 20px 0;">
+          <tr>
+            <td style="padding: 20px; background-color: #27272A; border-radius: 8px;">
+              <p style="margin: 0 0 15px; color: #D4AF37; font-weight: bold;">✅ CHECKLIST FINAL</p>
+              <p style="margin: 0 0 10px; color: #FFFFFF;">☐ Agenda bloqueada: 31/01 e 01/02, das 9h às 12h</p>
+              <p style="margin: 0 0 10px; color: #FFFFFF;">☐ Grupo do WhatsApp: já estou participando</p>
+              <p style="margin: 0 0 10px; color: #FFFFFF;">☐ Internet estável: testar conexão</p>
+              <p style="margin: 0 0 10px; color: #FFFFFF;">☐ Ambiente tranquilo: avisar a família/equipe</p>
+              <p style="margin: 0 0 10px; color: #FFFFFF;">☐ Caderno e caneta: para anotar insights</p>
+              <p style="margin: 0; color: #FFFFFF;">☐ Obra em mente: para usar como exemplo</p>
+            </td>
+          </tr>
+        </table>
+        
+        <table width="100%" cellpadding="0" cellspacing="0" style="margin: 20px 0;">
+          <tr>
+            <td style="padding: 20px; background-color: #27272A; border-radius: 8px;">
+              <p style="margin: 0 0 10px; color: #D4AF37; font-weight: bold;">📅 DATAS E HORÁRIOS</p>
+              <p style="margin: 0 0 5px; color: #FFFFFF;"><strong>Dia 1:</strong> 31 de Janeiro (Sexta) • 9h às 12h</p>
+              <p style="margin: 0; color: #FFFFFF;"><strong>Dia 2:</strong> 01 de Fevereiro (Sábado) • 9h às 12h</p>
+            </td>
+          </tr>
+        </table>
+        
+        <p style="margin: 0 0 20px;">O link do Zoom será enviado no grupo do WhatsApp no dia 30/01.</p>
+        
+        ${createButton("ENTRAR NO GRUPO DO WHATSAPP", EMAIL_CONFIG.whatsappGroupUrl)}
+        
+        <p style="margin: 0; color: #A1A1AA; font-size: 14px;">Nos vemos em 3 dias! Vai ser transformador! 💛</p>
+      `),
+    },
+  ],
+};
+
+// ============================================================
 // EXPORTAÇÃO COMPLETA
 // ============================================================
 
@@ -577,6 +794,7 @@ export const TODAS_JORNADAS = {
   boasVindas: JORNADA_BOAS_VINDAS,
   carrinho: JORNADA_CARRINHO,
   reembolso: JORNADA_REEMBOLSO,
+  nutricao: JORNADA_NUTRICAO,
 };
 
 // ============================================================

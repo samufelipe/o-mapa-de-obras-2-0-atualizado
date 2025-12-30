@@ -8,6 +8,7 @@ import {
   JORNADA_BOAS_VINDAS,
   JORNADA_CARRINHO,
   JORNADA_REEMBOLSO,
+  JORNADA_NUTRICAO,
 } from "@/lib/email-templates";
 import { EmailConfigPanel } from "@/components/admin/EmailConfigPanel";
 import { RDStationGuide } from "@/components/admin/RDStationGuide";
@@ -59,53 +60,6 @@ const extractInnerContent = (html: string): string => {
   return html;
 };
 
-// Jornada de Nutrição (não existe em email-templates.ts, criada aqui)
-const JORNADA_NUTRICAO = {
-  nome: "Nutrição Comprador",
-  gatilho: "pagamento-imersao-virada-arquiteta",
-  emails: [
-    {
-      id: "N1",
-      nome: "Reforço da Compra",
-      delay: "D+2 (2 dias após compra)",
-      assunto: "Você tomou a melhor decisão, *|NOME:Arquiteta|*",
-      previewText: "Por que essa imersão vai mudar a forma como você gerencia suas obras",
-      html: "", // Carregado do arquivo HTML
-    },
-    {
-      id: "N2",
-      nome: "Case de Sucesso",
-      delay: "D+4 (4 dias após compra)",
-      assunto: "O que arquitetas de sucesso fazem diferente",
-      previewText: "A história de uma arquiteta que entregava 8 obras por ano e hoje entrega 40",
-      html: "",
-    },
-    {
-      id: "N3",
-      nome: "Preview do Conteúdo",
-      delay: "D+7 (7 dias após compra)",
-      assunto: "Preview: o que você vai aprender na imersão",
-      previewText: "Confira a agenda completa dos 2 dias de imersão",
-      html: "",
-    },
-    {
-      id: "N4",
-      nome: "Exercício de Reflexão",
-      delay: "D+10 (10 dias após compra)",
-      assunto: "Exercício: suas 3 maiores dores na gestão de obras",
-      previewText: "Um exercício rápido para você aproveitar ainda mais a imersão",
-      html: "",
-    },
-    {
-      id: "N5",
-      nome: "Contagem Regressiva",
-      delay: "D-3 (3 dias antes da live)",
-      assunto: "Faltam 3 dias! Prepare-se assim 🔥",
-      previewText: "Checklist final para aproveitar 100% da imersão",
-      html: "",
-    },
-  ],
-};
 
 const journeys: Journey[] = [
   {
