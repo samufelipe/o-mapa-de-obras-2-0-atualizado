@@ -6,15 +6,12 @@
 export const CONFIG = {
   // RD Station Marketing
   rdStation: {
-    // Webhook URL do RD Station para receber conversões
-    // Obter em: RD Station → Integrações → Webhook
-    webhookUrl: "PREENCHER_WEBHOOK_RD_STATION",
+    // API Key do RD Station Marketing
+    // Obter em: https://appstore.rdstation.com/pt-BR/publisher
+    apiKey: "PREENCHER_API_KEY_RD_STATION",
     
     // Identificador da conversão (nome do evento no RD)
     conversionIdentifier: "inscricao-mapa-obras-2",
-    
-    // Tags para segmentação no RD Station
-    tags: ["workshop-mapa-obras", "lead-meta-ads", "lote-01"],
   },
   
   // Hotmart Checkout
@@ -54,8 +51,8 @@ export const CONFIG = {
 export const isConfigValid = (): { valid: boolean; missing: string[] } => {
   const missing: string[] = [];
   
-  if (CONFIG.rdStation.webhookUrl === "PREENCHER_WEBHOOK_RD_STATION") {
-    missing.push("RD Station Webhook URL");
+  if (CONFIG.rdStation.apiKey === "PREENCHER_API_KEY_RD_STATION") {
+    missing.push("RD Station API Key");
   }
   
   // Hotmart URL já está configurada, não precisa validar

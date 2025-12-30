@@ -2,7 +2,8 @@ import { CONFIG } from "./config";
 
 // ============================================
 // RD STATION MARKETING INTEGRATION
-// Serviço para envio de leads para o RD Station
+// Usando API de Conversões (método oficial)
+// Documentação: https://developers.rdstation.com/reference/conversao
 // ============================================
 
 export interface LeadData {
@@ -40,56 +41,50 @@ export const getUtmParams = (): Partial<LeadData> => {
 };
 
 /**
- * Envia os dados do lead para o RD Station via Webhook
+ * Envia os dados do lead para o RD Station via API de Conversões
  */
 export const submitToRDStation = async (
   data: LeadData
 ): Promise<RDStationResponse> => {
-  const { webhookUrl, conversionIdentifier, tags } = CONFIG.rdStation;
+  const { apiKey, conversionIdentifier } = CONFIG.rdStation;
   
-  // Verificar se o webhook está configurado
-  if (webhookUrl === "PREENCHER_WEBHOOK_RD_STATION") {
-    console.warn("⚠️ RD Station Webhook não configurado");
+  // Verificar se a API Key está configurada
+  if (apiKey === "PREENCHER_API_KEY_RD_STATION") {
+    console.warn("⚠️ RD Station API Key não configurada");
     // Em desenvolvimento, simular sucesso
-    if (process.env.NODE_ENV === "development") {
+    if (import.meta.env.DEV) {
       console.log("📤 [DEV] Simulando envio para RD Station:", data);
       return { success: true, message: "Simulação de envio (dev mode)" };
     }
-    return { success: false, message: "Webhook não configurado" };
+    return { success: false, message: "API Key não configurada" };
   }
   
   // Capturar UTMs da URL
   const utmParams = getUtmParams();
   
-  // Montar payload para o RD Station
+  // Montar payload no formato da API de Conversões do RD Station
   const payload = {
-    // Identificador da conversão
-    conversion_identifier: conversionIdentifier,
-    
-    // Dados do lead
-    name: data.name,
-    email: data.email,
-    personal_phone: data.phone,
-    mobile_phone: data.phone,
-    
-    // Tags para segmentação
-    tags: tags,
-    
-    // UTMs para rastreamento de origem
-    traffic_source: utmParams.utmSource || "direct",
-    traffic_medium: utmParams.utmMedium,
-    traffic_campaign: utmParams.utmCampaign,
-    traffic_value: utmParams.utmContent,
-    
-    // Campos customizados
-    cf_utm_source: utmParams.utmSource,
-    cf_utm_medium: utmParams.utmMedium,
-    cf_utm_campaign: utmParams.utmCampaign,
-    cf_utm_content: utmParams.utmContent,
-    cf_utm_term: utmParams.utmTerm,
-    cf_pagina_origem: typeof window !== "undefined" ? window.location.href : "",
-    cf_data_inscricao: new Date().toISOString(),
+    event_type: "CONVERSION",
+    event_family: "CDP",
+    payload: {
+      conversion_identifier: conversionIdentifier,
+      name: data.name,
+      email: data.email,
+      personal_phone: formatPhoneForRD(data.phone),
+      mobile_phone: formatPhoneForRD(data.phone),
+      
+      // Campos customizados para UTMs
+      cf_utm_source: utmParams.utmSource || "direct",
+      cf_utm_medium: utmParams.utmMedium || "",
+      cf_utm_campaign: utmParams.utmCampaign || "",
+      cf_utm_content: utmParams.utmContent || "",
+      cf_utm_term: utmParams.utmTerm || "",
+      cf_pagina_origem: typeof window !== "undefined" ? window.location.href : "",
+      cf_data_inscricao: new Date().toISOString(),
+    },
   };
+  
+  const apiUrl = `https://api.rd.services/platform/conversions?api_key=${apiKey}`;
   
   try {
     console.log("📤 Enviando lead para RD Station...", { 
@@ -97,23 +92,37 @@ export const submitToRDStation = async (
       conversion: conversionIdentifier 
     });
     
-    const response = await fetch(webhookUrl, {
+    const response = await fetch(apiUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Accept": "application/json",
       },
-      mode: "no-cors", // RD Station pode não aceitar CORS
       body: JSON.stringify(payload),
     });
     
-    // Com no-cors não temos acesso ao status real
-    // Assumimos sucesso se não houver erro
-    console.log("✅ Lead enviado para RD Station com sucesso");
+    if (response.ok) {
+      console.log("✅ Lead enviado para RD Station com sucesso");
+      return {
+        success: true,
+        message: "Lead registrado com sucesso",
+      };
+    }
     
-    return {
-      success: true,
-      message: "Lead registrado com sucesso",
-    };
+    // Tratar erros da API
+    const errorData = await response.json().catch(() => ({}));
+    console.error("❌ Erro da API do RD Station:", response.status, errorData);
+    
+    if (response.status === 401) {
+      return { success: false, message: "API Key inválida" };
+    }
+    
+    if (response.status === 400 || response.status === 422) {
+      return { success: false, message: "Dados inválidos enviados para RD Station" };
+    }
+    
+    return { success: false, message: `Erro ${response.status} ao enviar dados` };
+    
   } catch (error) {
     console.error("❌ Erro ao enviar para RD Station:", error);
     
