@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Check, Copy, Monitor, Smartphone } from "lucide-react";
+import { Check, Copy, FileCode } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
@@ -26,7 +26,7 @@ interface Block {
 export function ModularEmailBlocks({ emailName, emailContent, config }: ModularEmailBlocksProps) {
   const { toast } = useToast();
   const [copiedBlock, setCopiedBlock] = useState<string | null>(null);
-  const [copiedFull, setCopiedFull] = useState<"desktop" | "mobile" | null>(null);
+  const [copiedFull, setCopiedFull] = useState(false);
 
   const applyConfig = (html: string): string => {
     return html
@@ -116,24 +116,15 @@ export function ModularEmailBlocks({ emailName, emailContent, config }: ModularE
     setTimeout(() => setCopiedBlock(null), 2000);
   };
 
-  const copyFullHtml = async (format: "desktop" | "mobile") => {
-    let html = applyConfig(emailContent);
-    
-    if (format === "mobile") {
-      // Ajustar largura para mobile (100% ao invés de 600px)
-      html = html
-        .replace(/width:\s*600px/gi, "width: 100%")
-        .replace(/max-width:\s*600px/gi, "max-width: 100%")
-        .replace(/width="600"/gi, 'width="100%"');
-    }
-    
+  const copyFullHtml = async () => {
+    const html = applyConfig(emailContent);
     await navigator.clipboard.writeText(html);
-    setCopiedFull(format);
+    setCopiedFull(true);
     toast({
-      title: `HTML ${format === "desktop" ? "Desktop" : "Mobile"} copiado!`,
-      description: "Cole diretamente no editor HTML do RD Station",
+      title: "HTML Completo copiado!",
+      description: "Cole diretamente no editor HTML do RD Station (já otimizado para desktop e mobile)",
     });
-    setTimeout(() => setCopiedFull(null), 2000);
+    setTimeout(() => setCopiedFull(false), 2000);
   };
 
   return (
@@ -147,45 +138,29 @@ export function ModularEmailBlocks({ emailName, emailContent, config }: ModularE
         </p>
       </CardHeader>
       <CardContent className="space-y-4">
-        {/* Botões para copiar HTML completo */}
-        <div className="flex flex-wrap gap-2 p-3 bg-primary/10 rounded-lg border border-primary/20">
-          <p className="w-full text-xs font-medium text-primary mb-1">Copiar HTML Completo:</p>
+        {/* Botão para copiar HTML completo responsivo */}
+        <div className="p-3 bg-primary/10 rounded-lg border border-primary/20">
           <Button
             size="sm"
-            variant={copiedFull === "desktop" ? "default" : "outline"}
-            onClick={() => copyFullHtml("desktop")}
-            className="flex-1 min-w-[120px]"
+            variant={copiedFull ? "default" : "outline"}
+            onClick={copyFullHtml}
+            className="w-full"
           >
-            {copiedFull === "desktop" ? (
+            {copiedFull ? (
               <>
-                <Check className="h-3 w-3 mr-1" />
+                <Check className="h-4 w-4 mr-2" />
                 Copiado!
               </>
             ) : (
               <>
-                <Monitor className="h-3 w-3 mr-1" />
-                Desktop (600px)
+                <FileCode className="h-4 w-4 mr-2" />
+                Copiar HTML Completo (Desktop + Mobile)
               </>
             )}
           </Button>
-          <Button
-            size="sm"
-            variant={copiedFull === "mobile" ? "default" : "outline"}
-            onClick={() => copyFullHtml("mobile")}
-            className="flex-1 min-w-[120px]"
-          >
-            {copiedFull === "mobile" ? (
-              <>
-                <Check className="h-3 w-3 mr-1" />
-                Copiado!
-              </>
-            ) : (
-              <>
-                <Smartphone className="h-3 w-3 mr-1" />
-                Mobile (100%)
-              </>
-            )}
-          </Button>
+          <p className="text-xs text-muted-foreground mt-2 text-center">
+            HTML responsivo otimizado para ambos os formatos
+          </p>
         </div>
 
         {/* Blocos individuais */}
