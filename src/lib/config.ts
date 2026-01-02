@@ -11,7 +11,7 @@ export const CONFIG = {
     apiKey: "GqXXPYwrOpwBGbWtQdtmSOVlxApBvNpeGAEy",
     
     // Identificador da conversão (nome do evento no RD)
-    conversionIdentifier: "inscricao-imersao-virada-arquiteta",
+    conversionIdentifier: "inscricao-cronograma-2-0",
   },
   
   // Hotmart Checkout

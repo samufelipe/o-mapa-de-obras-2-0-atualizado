@@ -81,7 +81,7 @@ export const submitToRDStation = async (
       cf_utm_term: utmParams.utmTerm || "",
       cf_pagina_origem: typeof window !== "undefined" ? window.location.href : "",
       cf_data_inscricao: new Date().toISOString(),
-      cf_status_virada: "inscrito",
+      cf_status_cronograma: "inscrito",
     },
   };
   
