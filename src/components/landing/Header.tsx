@@ -1,4 +1,4 @@
-import logoCronograma from "@/assets/logo-cronograma-dark.svg";
+import logoIcon from "@/assets/logo-cronograma-icon.svg";
 
 const Header = () => {
   const scrollToForm = () => {
@@ -7,14 +7,18 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 border-b border-border py-3" style={{ backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}>
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 border-b border-border py-2" style={{ backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}>
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
-        <div className="flex items-center">
+        <div className="flex items-center gap-3">
           <img 
-            src={logoCronograma} 
-            alt="Imersão Cronograma 2.0: O Mapa da Obra" 
-            className="h-14 md:h-16 w-auto object-contain"
+            src={logoIcon} 
+            alt="Cronograma 2.0" 
+            className="h-10 md:h-12 w-auto"
           />
+          <div className="hidden sm:flex flex-col">
+            <span className="text-xs md:text-sm font-bold text-foreground tracking-wide">CRONOGRAMA 2.0</span>
+            <span className="text-[10px] md:text-xs text-primary font-medium">O Mapa da Obra</span>
+          </div>
         </div>
         
         <button

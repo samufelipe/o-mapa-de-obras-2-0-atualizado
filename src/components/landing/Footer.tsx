@@ -1,4 +1,4 @@
-import logoCronograma from "@/assets/logo-cronograma-light.png";
+import logoIcon from "@/assets/logo-cronograma-icon.svg";
 import { Instagram, ArrowUp } from "lucide-react";
 
 const footerLinks = [
@@ -27,15 +27,15 @@ const Footer = () => {
     <footer className="bg-secondary text-foreground py-12 border-t border-border">
       <div className="container mx-auto px-4 max-w-6xl">
         
-        {/* Logo centralizada com efeito de destaque */}
-        <div className="flex justify-center mb-8">
-          <div className="relative">
-            <img 
-              src={logoCronograma} 
-              alt="Imersão Cronograma 2.0: O Mapa da Obra" 
-              className="w-56 md:w-64 h-auto object-contain drop-shadow-[0_0_15px_rgba(212,175,55,0.25)]"
-            />
-          </div>
+        {/* Logo centralizada com texto */}
+        <div className="flex flex-col items-center mb-8">
+          <img 
+            src={logoIcon} 
+            alt="Cronograma 2.0" 
+            className="h-16 md:h-20 w-auto mb-3"
+          />
+          <h3 className="text-lg md:text-xl font-bold text-foreground tracking-wide">CRONOGRAMA 2.0</h3>
+          <p className="text-sm text-primary font-medium">O Mapa da Obra</p>
         </div>
 
         {/* Linha decorativa dourada */}
