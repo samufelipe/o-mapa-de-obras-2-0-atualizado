@@ -1,5 +1,5 @@
 /**
- * Templates de E-mail - A Virada da Arquiteta
+ * Templates de E-mail - Imersão Cronograma 2.0: O Mapa da Obra
  * 
  * Todos os templates estão formatados para copiar e colar no RD Station.
  * Variáveis dinâmicas: *|NOME:Arquiteta|* (RD Station)
@@ -81,7 +81,7 @@ const createEmailWrapper = (content: string, preheaderText: string = "") => `
             <td class="content-padding" style="padding: 36px 24px 20px; color: #FFFFFF !important; font-size: 16px; line-height: 1.6; background-color: #18181B !important;" bgcolor="#18181B">
               <p style="margin: 0; color: #FFFFFF !important;">Um abraço,</p>
               <p style="margin: 10px 0 0; color: #D4AF37 !important; font-weight: bold;">Ingrid Zarza e Fernanda Bradaschia</p>
-              <p style="margin: 5px 0 0; color: #A1A1AA !important; font-size: 14px;">Mentoras da Virada da Arquiteta</p>
+              <p style="margin: 5px 0 0; color: #A1A1AA !important; font-size: 14px;">Mentoras da Imersão Cronograma 2.0</p>
               <p style="margin: 15px 0 0;">
                 <a href="${EMAIL_CONFIG.instagramUrl}" style="color: #D4AF37 !important; text-decoration: none;">@inovandonasuaobra</a>
               </p>
@@ -91,10 +91,10 @@ const createEmailWrapper = (content: string, preheaderText: string = "") => `
           <tr>
             <td align="center" style="padding: 24px; border-top: 1px solid #27272A; background-color: #18181B !important;" bgcolor="#18181B">
               <p style="margin: 0; color: #71717A !important; font-size: 12px;">
-                © 2025 A Virada da Arquiteta. Todos os direitos reservados.
+                © 2025 Cronograma 2.0: O Mapa da Obra. Todos os direitos reservados.
               </p>
               <p style="margin: 5px 0 0; color: #71717A !important; font-size: 11px;">
-                A Virada da Arquiteta - São Paulo, SP
+                Cronograma 2.0 - São Paulo, SP
               </p>
             </td>
           </tr>
@@ -121,14 +121,14 @@ const createButton = (text: string, url: string) => `
 
 // ============================================================
 // JORNADA 1: RESGATE INSCRIÇÃO (5 E-MAILS)
-// Gatilho: Converteram em "inscricao-imersao-virada-arquiteta"
-// Condição de saída: Converteram em "pagamento-imersao-virada-arquiteta"
+// Gatilho: Converteram em "inscricao-cronograma-2-0"
+// Condição de saída: Converteram em "pagamento-cronograma-2-0"
 // ============================================================
 
 export const JORNADA_RESGATE = {
   nome: "Resgate Inscrição",
-  gatilho: "inscricao-imersao-virada-arquiteta",
-  condicaoSaida: "pagamento-imersao-virada-arquiteta",
+  gatilho: "inscricao-cronograma-2-0",
+  condicaoSaida: "pagamento-cronograma-2-0",
   emails: [
     {
       id: "R1",
@@ -139,7 +139,7 @@ export const JORNADA_RESGATE = {
       html: createEmailWrapper(`
         <p style="margin: 0 0 20px;">Olá, {{nome}}!</p>
         
-        <p style="margin: 0 0 20px;">Vi que você se inscreveu na <strong style="color: #D4AF37;">Imersão A Virada da Arquiteta</strong>, mas ainda não garantiu sua vaga.</p>
+        <p style="margin: 0 0 20px;">Vi que você se inscreveu na <strong style="color: #D4AF37;">Imersão Cronograma 2.0: O Mapa da Obra</strong>, mas ainda não garantiu sua vaga.</p>
         
         <p style="margin: 0 0 20px;">Enquanto isso, me conta...</p>
         
@@ -189,7 +189,7 @@ export const JORNADA_RESGATE = {
           <li style="margin-bottom: 10px;">→ Lucro preservado em cada projeto</li>
         </ul>
         
-        <p style="margin: 0 0 20px;">Na <strong style="color: #D4AF37;">Imersão A Virada da Arquiteta</strong>, elas vão compartilhar o método exato que usam há anos.</p>
+        <p style="margin: 0 0 20px;">Na <strong style="color: #D4AF37;">Imersão Cronograma 2.0: O Mapa da Obra</strong>, elas vão compartilhar o método exato que usam há anos.</p>
         
         <p style="margin: 0 0 20px;">Não é teoria. É o que funciona na prática, obra após obra.</p>
         
@@ -241,7 +241,7 @@ export const JORNADA_RESGATE = {
       html: createEmailWrapper(`
         <p style="margin: 0 0 20px;">{{nome}}, preciso te contar sobre algo especial.</p>
         
-        <p style="margin: 0 0 20px;">Quem se inscrever na <strong style="color: #D4AF37;">Imersão A Virada da Arquiteta</strong> vai receber <strong>3 bônus exclusivos</strong> que, sozinhos, já valem o investimento:</p>
+        <p style="margin: 0 0 20px;">Quem se inscrever na <strong style="color: #D4AF37;">Imersão Cronograma 2.0: O Mapa da Obra</strong> vai receber <strong>3 bônus exclusivos</strong> que, sozinhos, já valem o investimento:</p>
         
         <table width="100%" cellpadding="0" cellspacing="0" style="margin: 20px 0;">
           <tr>
@@ -291,7 +291,7 @@ export const JORNADA_RESGATE = {
       html: createEmailWrapper(`
         <p style="margin: 0 0 20px;">{{nome}}, vou ser direta com você:</p>
         
-        <p style="margin: 0 0 20px;"><strong style="color: #D4AF37;">A Imersão A Virada da Arquiteta começa em poucos dias.</strong></p>
+        <p style="margin: 0 0 20px;"><strong style="color: #D4AF37;">A Imersão Cronograma 2.0: O Mapa da Obra começa em poucos dias.</strong></p>
         
         <p style="margin: 0 0 20px;">Depois disso, as vagas não preenchidas serão liberadas para a lista de espera.</p>
         
@@ -327,25 +327,25 @@ export const JORNADA_RESGATE = {
 
 // ============================================================
 // JORNADA 2: BOAS-VINDAS COMPRADOR (3 E-MAILS)
-// Gatilho: Converteram em "pagamento-imersao-virada-arquiteta"
+// Gatilho: Converteram em "pagamento-cronograma-2-0"
 // ============================================================
 
 export const JORNADA_BOAS_VINDAS = {
   nome: "Boas-vindas Comprador",
-  gatilho: "pagamento-imersao-virada-arquiteta",
+  gatilho: "pagamento-cronograma-2-0",
   emails: [
     {
       id: "B1",
       nome: "Confirmação + Próximos Passos",
       delay: "Imediato",
-      assunto: "🎉 Parabéns! Você está oficialmente na Virada",
+      assunto: "🎉 Parabéns! Você está oficialmente na Imersão Cronograma 2.0",
       previewText: "Sua vaga está confirmada. Veja os próximos passos.",
       html: createEmailWrapper(`
         <p style="margin: 0 0 20px;"><strong style="color: #D4AF37; font-size: 24px;">Parabéns, {{nome}}! 🎉</strong></p>
         
         <p style="margin: 0 0 20px;">Você acabou de dar um passo gigante para transformar a gestão das suas obras.</p>
         
-        <p style="margin: 0 0 20px;">Sua vaga na <strong style="color: #D4AF37;">Imersão A Virada da Arquiteta</strong> está <strong>CONFIRMADA!</strong></p>
+        <p style="margin: 0 0 20px;">Sua vaga na <strong style="color: #D4AF37;">Imersão Cronograma 2.0: O Mapa da Obra</strong> está <strong>CONFIRMADA!</strong></p>
         
         <table width="100%" cellpadding="0" cellspacing="0" style="margin: 20px 0;">
           <tr>
@@ -417,7 +417,7 @@ export const JORNADA_BOAS_VINDAS = {
       html: createEmailWrapper(`
         <p style="margin: 0 0 20px;"><strong style="color: #D4AF37; font-size: 20px;">{{nome}}, chegou a hora! 🔥</strong></p>
         
-        <p style="margin: 0 0 20px;">A <strong>Imersão A Virada da Arquiteta</strong> começa em <strong>1 hora</strong>.</p>
+        <p style="margin: 0 0 20px;">A <strong>Imersão Cronograma 2.0: O Mapa da Obra</strong> começa em <strong>1 hora</strong>.</p>
         
         <table width="100%" cellpadding="0" cellspacing="0" style="margin: 20px 0;">
           <tr>
@@ -455,7 +455,7 @@ export const JORNADA_BOAS_VINDAS = {
 
 export const JORNADA_CARRINHO = {
   nome: "Carrinho Abandonado",
-  gatilho: "checkout-abandonado-virada-arquiteta",
+  gatilho: "checkout-abandonado-cronograma-2-0",
   emails: [
     {
       id: "C1",
@@ -466,7 +466,7 @@ export const JORNADA_CARRINHO = {
       html: createEmailWrapper(`
         <p style="margin: 0 0 20px;">Oi, {{nome}}!</p>
         
-        <p style="margin: 0 0 20px;">Percebi que você iniciou a inscrição na <strong style="color: #D4AF37;">Imersão A Virada da Arquiteta</strong> mas não finalizou.</p>
+        <p style="margin: 0 0 20px;">Percebi que você iniciou a inscrição na <strong style="color: #D4AF37;">Imersão Cronograma 2.0: O Mapa da Obra</strong> mas não finalizou.</p>
         
         <p style="margin: 0 0 20px;">Acontece! Às vezes a internet cai, o telefone toca, a vida acontece...</p>
         
@@ -500,7 +500,7 @@ export const JORNADA_CARRINHO = {
         
         <p style="margin: 0 0 20px;">Tudo isso tem um custo. E geralmente é muito maior que R$ 297.</p>
         
-        <p style="margin: 0 0 20px;">A <strong style="color: #D4AF37;">Imersão A Virada da Arquiteta</strong> existe para resolver exatamente isso. Em 2 dias, você vai aprender o sistema que usamos para entregar +250 obras sem perder o controle.</p>
+        <p style="margin: 0 0 20px;">A <strong style="color: #D4AF37;">Imersão Cronograma 2.0: O Mapa da Obra</strong> existe para resolver exatamente isso. Em 2 dias, você vai aprender o sistema que usamos para entregar +250 obras sem perder o controle.</p>
         
         <p style="margin: 0 0 20px;">Não é teoria. É prática pura.</p>
         
@@ -544,12 +544,12 @@ export const JORNADA_CARRINHO = {
 
 // ============================================================
 // JORNADA 4: REEMBOLSO (1 E-MAIL)
-// Gatilho: Converteram em "reembolso-imersao-virada-arquiteta"
+// Gatilho: Converteram em "reembolso-cronograma-2-0"
 // ============================================================
 
 export const JORNADA_REEMBOLSO = {
   nome: "Reembolso",
-  gatilho: "reembolso-imersao-virada-arquiteta",
+  gatilho: "reembolso-cronograma-2-0",
   emails: [
     {
       id: "RE1",
@@ -560,7 +560,7 @@ export const JORNADA_REEMBOLSO = {
       html: createEmailWrapper(`
         <p style="margin: 0 0 20px;">Olá, {{nome}}.</p>
         
-        <p style="margin: 0 0 20px;">Confirmamos que seu reembolso da <strong>Imersão A Virada da Arquiteta</strong> foi processado com sucesso.</p>
+        <p style="margin: 0 0 20px;">Confirmamos que seu reembolso da <strong>Imersão Cronograma 2.0: O Mapa da Obra</strong> foi processado com sucesso.</p>
         
         <table width="100%" cellpadding="0" cellspacing="0" style="margin: 20px 0;">
           <tr>
@@ -593,13 +593,13 @@ export const JORNADA_REEMBOLSO = {
 
 // ============================================================
 // JORNADA 5: NUTRIÇÃO COMPRADOR (5 E-MAILS)
-// Gatilho: Converteram em "pagamento-imersao-virada-arquiteta"
+// Gatilho: Converteram em "pagamento-cronograma-2-0"
 // Objetivo: Manter engajamento até a data da imersão
 // ============================================================
 
 export const JORNADA_NUTRICAO = {
   nome: "Nutrição Comprador",
-  gatilho: "pagamento-imersao-virada-arquiteta",
+  gatilho: "pagamento-cronograma-2-0",
   emails: [
     {
       id: "N1",
@@ -836,13 +836,13 @@ GUIA DE CONFIGURAÇÃO NO RD STATION BASIC
 JORNADA 1: RESGATE INSCRIÇÃO
 --------------------------------------------------------------------------------
 
-AUTOMAÇÃO: "Resgate - Imersão Virada Arquiteta"
+AUTOMAÇÃO: "Resgate - Imersão Cronograma 2.0"
 
 Gatilho: 
-  → Converteram no evento: "inscricao-imersao-virada-arquiteta"
+  → Converteram no evento: "inscricao-cronograma-2-0"
 
 Condição de saída:
-  → Converteram no evento: "pagamento-imersao-virada-arquiteta"
+  → Converteram no evento: "pagamento-cronograma-2-0"
 
 Fluxo:
   1. [ESPERAR] 1 dia
@@ -860,10 +860,10 @@ Fluxo:
 JORNADA 2: BOAS-VINDAS COMPRADOR
 --------------------------------------------------------------------------------
 
-AUTOMAÇÃO: "Boas-vindas - Imersão Virada Arquiteta"
+AUTOMAÇÃO: "Boas-vindas - Imersão Cronograma 2.0"
 
 Gatilho:
-  → Converteram no evento: "pagamento-imersao-virada-arquiteta"
+  → Converteram no evento: "pagamento-cronograma-2-0"
 
 Fluxo:
   1. [ENVIAR E-MAIL] B1 - Confirmação + Próximos Passos
@@ -876,14 +876,14 @@ Fluxo:
 JORNADA 3: CARRINHO ABANDONADO
 --------------------------------------------------------------------------------
 
-AUTOMAÇÃO: "Carrinho Abandonado - Imersão Virada Arquiteta"
+AUTOMAÇÃO: "Carrinho Abandonado - Imersão Cronograma 2.0"
 
 Gatilho:
-  → Converteram no evento: "checkout-abandonado-virada-arquiteta"
+  → Converteram no evento: "checkout-abandonado-cronograma-2-0"
   (Enviado via Pluga quando Hotmart detecta checkout abandonado)
 
 Condição de saída:
-  → Converteram no evento: "pagamento-imersao-virada-arquiteta"
+  → Converteram no evento: "pagamento-cronograma-2-0"
 
 Fluxo:
   1. [ESPERAR] 30 minutos
@@ -897,10 +897,10 @@ Fluxo:
 JORNADA 4: REEMBOLSO
 --------------------------------------------------------------------------------
 
-AUTOMAÇÃO: "Reembolso - Imersão Virada Arquiteta"
+AUTOMAÇÃO: "Reembolso - Imersão Cronograma 2.0"
 
 Gatilho:
-  → Converteram no evento: "reembolso-imersao-virada-arquiteta"
+  → Converteram no evento: "reembolso-cronograma-2-0"
   (Enviado via Pluga quando Hotmart processa reembolso)
 
 Fluxo:
@@ -913,19 +913,19 @@ CONFIGURAÇÃO DO PLUGA (Hotmart → RD Station)
 CENÁRIO 1: Compra Aprovada
   Gatilho Hotmart: "Compra aprovada"
   Ação RD Station: "Registrar conversão"
-  Identificador: "pagamento-imersao-virada-arquiteta"
+  Identificador: "pagamento-cronograma-2-0"
   Mapear campos: nome, email, telefone
 
 CENÁRIO 2: Reembolso
   Gatilho Hotmart: "Compra reembolsada"
   Ação RD Station: "Registrar conversão"
-  Identificador: "reembolso-imersao-virada-arquiteta"
+  Identificador: "reembolso-cronograma-2-0"
   Mapear campos: nome, email
 
 CENÁRIO 3: Carrinho Abandonado (se disponível no Hotmart)
   Gatilho Hotmart: "Checkout abandonado"
   Ação RD Station: "Registrar conversão"
-  Identificador: "checkout-abandonado-virada-arquiteta"
+  Identificador: "checkout-abandonado-cronograma-2-0"
   Mapear campos: nome, email
 
 ================================================================================

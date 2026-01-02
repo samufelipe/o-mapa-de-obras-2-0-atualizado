@@ -32,7 +32,7 @@ const Footer = () => {
           <div className="relative">
             <img 
               src={logoVirada} 
-              alt="Imersão A Virada da Arquiteta" 
+              alt="Imersão Cronograma 2.0: O Mapa da Obra" 
               className="w-48 md:w-56 h-auto object-contain drop-shadow-[0_0_15px_rgba(212,175,55,0.25)]"
             />
           </div>
@@ -95,7 +95,7 @@ const Footer = () => {
             
             {/* Copyright */}
             <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-foreground/60 text-center md:text-left">
-              Imersão A Virada da Arquiteta © {new Date().getFullYear()} • Todos os direitos reservados
+              Imersão Cronograma 2.0 © {new Date().getFullYear()} • Todos os direitos reservados
             </p>
             
             {/* Voltar ao Topo */}
