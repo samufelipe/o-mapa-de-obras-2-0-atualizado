@@ -1,4 +1,4 @@
-import logoVirada from "@/assets/logo-virada.png";
+import logoCronograma from "@/assets/logo-cronograma-dark.svg";
 
 const Header = () => {
   const scrollToForm = () => {
@@ -11,9 +11,9 @@ const Header = () => {
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
         <div className="flex items-center">
           <img 
-            src={logoVirada} 
-            alt="Imersão A Virada da Arquiteta" 
-            className="h-16 md:h-20 w-auto object-contain"
+            src={logoCronograma} 
+            alt="Imersão Cronograma 2.0: O Mapa da Obra" 
+            className="h-14 md:h-16 w-auto object-contain"
           />
         </div>
         

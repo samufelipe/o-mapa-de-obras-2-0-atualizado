@@ -1,4 +1,4 @@
-import logoVirada from "@/assets/logo-virada.png";
+import logoCronograma from "@/assets/logo-cronograma-light.png";
 import { Instagram, ArrowUp } from "lucide-react";
 
 const footerLinks = [
@@ -31,9 +31,9 @@ const Footer = () => {
         <div className="flex justify-center mb-8">
           <div className="relative">
             <img 
-              src={logoVirada} 
+              src={logoCronograma} 
               alt="Imersão Cronograma 2.0: O Mapa da Obra" 
-              className="w-48 md:w-56 h-auto object-contain drop-shadow-[0_0_15px_rgba(212,175,55,0.25)]"
+              className="w-56 md:w-64 h-auto object-contain drop-shadow-[0_0_15px_rgba(212,175,55,0.25)]"
             />
           </div>
         </div>
