@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Check, Copy, Link, ChevronDown, ChevronUp, Code, FileText, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -88,6 +88,7 @@ export default function AdminEmails() {
   const { toast } = useToast();
   const [copiedLinkId, setCopiedLinkId] = useState<string | null>(null);
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [emailContents, setEmailContents] = useState<Record<string, string>>({});
   const [showGuide, setShowGuide] = useState(false);
   const [config, setConfig] = useState({
     headerImageUrl: "",
@@ -95,6 +96,21 @@ export default function AdminEmails() {
     zoomLink: "",
     apostilaLink: "",
   });
+
+  // Carregar HTML do email quando expandir
+  useEffect(() => {
+    if (expandedId) {
+      const email = journeys.flatMap(j => j.emails).find(e => e.id === expandedId);
+      if (email && !emailContents[expandedId]) {
+        fetch(email.publicUrl)
+          .then(res => res.text())
+          .then(html => {
+            setEmailContents(prev => ({ ...prev, [expandedId]: html }));
+          })
+          .catch(err => console.error("Erro ao carregar email:", err));
+      }
+    }
+  }, [expandedId]);
 
   const copyLinkToClipboard = async (url: string, id: string) => {
     const fullUrl = `${getBaseUrl()}${url}`;
@@ -148,8 +164,34 @@ export default function AdminEmails() {
                         <Button size="sm" variant="ghost" onClick={() => copyLinkToClipboard(email.publicUrl, email.id)}>
                           {copiedLinkId === email.id ? <><Check className="h-4 w-4 mr-1" />Copiado!</> : <><Link className="h-4 w-4 mr-1" />Link</>}
                         </Button>
+                        <Button
+                          size="sm"
+                          variant="secondary"
+                          onClick={() => setExpandedId(expandedId === email.id ? null : email.id)}
+                        >
+                          <Code className="h-4 w-4 mr-1" />
+                          Copiar Bloco
+                          {expandedId === email.id ? <ChevronUp className="h-4 w-4 ml-1" /> : <ChevronDown className="h-4 w-4 ml-1" />}
+                        </Button>
                       </div>
                     </div>
+
+                    {expandedId === email.id && (
+                      <div className="mt-4 pt-4 border-t space-y-4">
+                        {emailContents[email.id] ? (
+                          <>
+                            <ModularEmailBlocks
+                              emailName={email.name}
+                              emailContent={emailContents[email.id]}
+                              config={config}
+                            />
+                            <EmailPreview html={emailContents[email.id]} config={config} />
+                          </>
+                        ) : (
+                          <p className="text-center text-muted-foreground py-4">Carregando...</p>
+                        )}
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
