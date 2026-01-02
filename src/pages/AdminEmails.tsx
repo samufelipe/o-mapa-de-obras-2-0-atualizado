@@ -67,12 +67,17 @@ const journeys: Journey[] = [
     ],
   },
   {
-    name: "Jornada Carrinho Abandonado (3 e-mails)",
+    name: "Jornada Carrinho Abandonado (8 e-mails)",
     color: "bg-red-500/20 border-red-500/50",
     emails: [
-      { id: "C1", name: "Carrinho esperando", subject: "Seu carrinho está esperando", timing: "+1 hora", publicUrl: "/emails/carrinho-1.html" },
-      { id: "C2", name: "Quanto você já perdeu?", subject: "Quanto você já perdeu em retrabalho?", timing: "+1 dia", publicUrl: "/emails/carrinho-2.html" },
-      { id: "C3", name: "Última chance", subject: "Última chance: finalizar compra", timing: "+3 dias", publicUrl: "/emails/carrinho-3.html" },
+      { id: "C1", name: "Lembrete imediato", subject: "Você estava quase lá...", timing: "+1 hora", publicUrl: "/emails/carrinho-1.html" },
+      { id: "C2", name: "Transformação + Prova social", subject: "O que arquitetas bem-sucedidas fazem diferente", timing: "+1 dia", publicUrl: "/emails/carrinho-2.html" },
+      { id: "C3", name: "Quebra de objeções", subject: "Será que é o momento certo?", timing: "+2 dias", publicUrl: "/emails/carrinho-3.html" },
+      { id: "C4", name: "Case de sucesso", subject: "A história de quem estava no seu lugar...", timing: "+4 dias", publicUrl: "/emails/carrinho-4.html" },
+      { id: "C5", name: "Resumo + Bônus", subject: "Presente especial para você", timing: "+6 dias", publicUrl: "/emails/carrinho-5.html" },
+      { id: "C6", name: "Contagem 48h", subject: "⏰ Restam 48 horas", timing: "+8 dias", publicUrl: "/emails/carrinho-6.html" },
+      { id: "C7", name: "Penúltimo dia", subject: "AMANHÃ acaba sua chance", timing: "+9 dias", publicUrl: "/emails/carrinho-7.html" },
+      { id: "C8", name: "Última chance (3h)", subject: "🚨 ÚLTIMA CHANCE — Carrinho fecha em 3 horas", timing: "+10 dias", publicUrl: "/emails/carrinho-8.html" },
     ],
   },
   {
