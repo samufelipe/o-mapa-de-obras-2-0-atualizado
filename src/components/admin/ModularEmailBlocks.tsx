@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Check, Copy } from "lucide-react";
+import { Check, Copy, Monitor, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
@@ -26,6 +26,7 @@ interface Block {
 export function ModularEmailBlocks({ emailName, emailContent, config }: ModularEmailBlocksProps) {
   const { toast } = useToast();
   const [copiedBlock, setCopiedBlock] = useState<string | null>(null);
+  const [copiedFull, setCopiedFull] = useState<"desktop" | "mobile" | null>(null);
 
   const applyConfig = (html: string): string => {
     return html
@@ -115,6 +116,26 @@ export function ModularEmailBlocks({ emailName, emailContent, config }: ModularE
     setTimeout(() => setCopiedBlock(null), 2000);
   };
 
+  const copyFullHtml = async (format: "desktop" | "mobile") => {
+    let html = applyConfig(emailContent);
+    
+    if (format === "mobile") {
+      // Ajustar largura para mobile (100% ao invés de 600px)
+      html = html
+        .replace(/width:\s*600px/gi, "width: 100%")
+        .replace(/max-width:\s*600px/gi, "max-width: 100%")
+        .replace(/width="600"/gi, 'width="100%"');
+    }
+    
+    await navigator.clipboard.writeText(html);
+    setCopiedFull(format);
+    toast({
+      title: `HTML ${format === "desktop" ? "Desktop" : "Mobile"} copiado!`,
+      description: "Cole diretamente no editor HTML do RD Station",
+    });
+    setTimeout(() => setCopiedFull(null), 2000);
+  };
+
   return (
     <Card className="border-blue-500/30 bg-blue-500/5">
       <CardHeader className="pb-3">
@@ -125,7 +146,49 @@ export function ModularEmailBlocks({ emailName, emailContent, config }: ModularE
           Copie cada bloco e cole no componente correspondente do RD Station
         </p>
       </CardHeader>
-      <CardContent>
+      <CardContent className="space-y-4">
+        {/* Botões para copiar HTML completo */}
+        <div className="flex flex-wrap gap-2 p-3 bg-primary/10 rounded-lg border border-primary/20">
+          <p className="w-full text-xs font-medium text-primary mb-1">Copiar HTML Completo:</p>
+          <Button
+            size="sm"
+            variant={copiedFull === "desktop" ? "default" : "outline"}
+            onClick={() => copyFullHtml("desktop")}
+            className="flex-1 min-w-[120px]"
+          >
+            {copiedFull === "desktop" ? (
+              <>
+                <Check className="h-3 w-3 mr-1" />
+                Copiado!
+              </>
+            ) : (
+              <>
+                <Monitor className="h-3 w-3 mr-1" />
+                Desktop (600px)
+              </>
+            )}
+          </Button>
+          <Button
+            size="sm"
+            variant={copiedFull === "mobile" ? "default" : "outline"}
+            onClick={() => copyFullHtml("mobile")}
+            className="flex-1 min-w-[120px]"
+          >
+            {copiedFull === "mobile" ? (
+              <>
+                <Check className="h-3 w-3 mr-1" />
+                Copiado!
+              </>
+            ) : (
+              <>
+                <Smartphone className="h-3 w-3 mr-1" />
+                Mobile (100%)
+              </>
+            )}
+          </Button>
+        </div>
+
+        {/* Blocos individuais */}
         <div className="space-y-2">
           {blocks.map((block) => (
             <div
