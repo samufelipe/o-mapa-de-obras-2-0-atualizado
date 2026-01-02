@@ -3,13 +3,6 @@ import { Check, Copy, Link, ChevronDown, ChevronUp, Code, FileText, BookOpen } f
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
-import {
-  JORNADA_RESGATE,
-  JORNADA_BOAS_VINDAS,
-  JORNADA_CARRINHO,
-  JORNADA_REEMBOLSO,
-  JORNADA_NUTRICAO,
-} from "@/lib/email-templates";
 import { EmailConfigPanel } from "@/components/admin/EmailConfigPanel";
 import { RDStationGuide } from "@/components/admin/RDStationGuide";
 import { ModularEmailBlocks } from "@/components/admin/ModularEmailBlocks";
@@ -20,7 +13,6 @@ interface EmailTemplate {
   name: string;
   subject: string;
   timing: string;
-  html: string;
   publicUrl: string;
 }
 
@@ -30,104 +22,70 @@ interface Journey {
   emails: EmailTemplate[];
 }
 
-const emailFileMap: Record<string, string> = {
-  R1: "resgate-1.html",
-  R2: "resgate-2.html",
-  R3: "resgate-3.html",
-  R4: "resgate-4.html",
-  R5: "resgate-5.html",
-  B1: "boas-vindas-1.html",
-  B2: "boas-vindas-2.html",
-  B3: "boas-vindas-3.html",
-  C1: "carrinho-1.html",
-  C2: "carrinho-2.html",
-  C3: "carrinho-3.html",
-  RE1: "reembolso-1.html",
-  N1: "nutricao-1.html",
-  N2: "nutricao-2.html",
-  N3: "nutricao-3.html",
-  N4: "nutricao-4.html",
-  N5: "nutricao-5.html",
-};
-
 const getBaseUrl = () => window.location.origin;
-
-const extractInnerContent = (html: string): string => {
-  const bodyMatch = html.match(/<body[^>]*>([\s\S]*)<\/body>/i);
-  if (bodyMatch) return bodyMatch[1].trim();
-  const tableMatch = html.match(/(<table[\s\S]*<\/table>)/i);
-  if (tableMatch) return tableMatch[1].trim();
-  return html;
-};
-
 
 const journeys: Journey[] = [
   {
-    name: "Jornada Resgate (5 e-mails)",
-    color: "bg-amber-500/20 border-amber-500/50",
-    emails: JORNADA_RESGATE.emails.map((e) => ({
-      id: e.id,
-      name: e.nome,
-      subject: e.assunto,
-      timing: e.delay,
-      html: e.html,
-      publicUrl: `/emails/${emailFileMap[e.id]}`,
-    })),
-  },
-  {
     name: "Jornada Boas-vindas (3 e-mails)",
     color: "bg-green-500/20 border-green-500/50",
-    emails: JORNADA_BOAS_VINDAS.emails.map((e) => ({
-      id: e.id,
-      name: e.nome,
-      subject: e.assunto,
-      timing: e.delay,
-      html: e.html,
-      publicUrl: `/emails/${emailFileMap[e.id]}`,
-    })),
+    emails: [
+      { id: "B1", name: "Vaga Confirmada", subject: "Sua vaga está confirmada!", timing: "Imediato", publicUrl: "/emails/boas-vindas-1.html" },
+      { id: "B2", name: "Você tomou a melhor decisão", subject: "Você tomou a melhor decisão", timing: "+1 dia", publicUrl: "/emails/boas-vindas-2.html" },
+      { id: "B3", name: "Link do Zoom", subject: "Seu link do Zoom está aqui!", timing: "Véspera", publicUrl: "/emails/boas-vindas-3.html" },
+    ],
   },
   {
-    name: "Jornada Nutrição (5 e-mails)",
+    name: "Jornada Nutrição (8 e-mails)",
     color: "bg-blue-500/20 border-blue-500/50",
-    emails: JORNADA_NUTRICAO.emails.map((e) => ({
-      id: e.id,
-      name: e.nome,
-      subject: e.assunto,
-      timing: e.delay,
-      html: e.html,
-      publicUrl: `/emails/${emailFileMap[e.id]}`,
-    })),
+    emails: [
+      { id: "N1", name: "Acesso Liberado: 6 Aulas", subject: "🎁 Acesso Liberado: 6 Aulas Preparatórias", timing: "Imediato", publicUrl: "/emails/nutricao-1.html" },
+      { id: "N2", name: "Já assistiu a primeira aula?", subject: "Já assistiu a primeira aula?", timing: "+1 dia", publicUrl: "/emails/nutricao-2.html" },
+      { id: "N3", name: "Preview da Live", subject: "Preview: o que você vai dominar na live", timing: "+3 dias", publicUrl: "/emails/nutricao-3.html" },
+      { id: "N4", name: "Exercício de Reflexão", subject: "Exercício: O que você descobriu nas aulas?", timing: "+5 dias", publicUrl: "/emails/nutricao-4.html" },
+      { id: "N5", name: "Prepare seu Zoom", subject: "Prepare seu Zoom para a Imersão", timing: "-4 dias", publicUrl: "/emails/nutricao-5.html" },
+      { id: "N6", name: "Cronograma Completo", subject: "Cronograma Completo: Sábado 31/01", timing: "-3 dias", publicUrl: "/emails/nutricao-6.html" },
+      { id: "N7", name: "Checklist Final", subject: "Faltam 2 dias! Checklist Final", timing: "-2 dias", publicUrl: "/emails/nutricao-7.html" },
+      { id: "N8", name: "AMANHÃ! Último Lembrete", subject: "🚀 AMANHÃ! Último lembrete", timing: "-1 dia", publicUrl: "/emails/nutricao-8.html" },
+    ],
+  },
+  {
+    name: "Jornada Pós-Live (1 e-mail)",
+    color: "bg-purple-500/20 border-purple-500/50",
+    emails: [
+      { id: "PL1", name: "Replay 48h", subject: "🎬 Replay disponível por 48h - Assista AGORA", timing: "+1 dia após live", publicUrl: "/emails/pos-live-1.html" },
+    ],
+  },
+  {
+    name: "Jornada Resgate (5 e-mails)",
+    color: "bg-amber-500/20 border-amber-500/50",
+    emails: [
+      { id: "R1", name: "Quase lá!", subject: "Você estava quase lá...", timing: "+30 min", publicUrl: "/emails/resgate-1.html" },
+      { id: "R2", name: "+250 obras entregues", subject: "+250 obras entregues: o que elas têm em comum?", timing: "+1 dia", publicUrl: "/emails/resgate-2.html" },
+      { id: "R3", name: "Última chance", subject: "Última chance: sua vaga expira hoje", timing: "+3 dias", publicUrl: "/emails/resgate-3.html" },
+      { id: "R4", name: "Oferta especial", subject: "Presente especial para você", timing: "+5 dias", publicUrl: "/emails/resgate-4.html" },
+      { id: "R5", name: "Encerramento", subject: "Encerrando sua oportunidade", timing: "+7 dias", publicUrl: "/emails/resgate-5.html" },
+    ],
   },
   {
     name: "Jornada Carrinho Abandonado (3 e-mails)",
     color: "bg-red-500/20 border-red-500/50",
-    emails: JORNADA_CARRINHO.emails.map((e) => ({
-      id: e.id,
-      name: e.nome,
-      subject: e.assunto,
-      timing: e.delay,
-      html: e.html,
-      publicUrl: `/emails/${emailFileMap[e.id]}`,
-    })),
+    emails: [
+      { id: "C1", name: "Carrinho esperando", subject: "Seu carrinho está esperando", timing: "+1 hora", publicUrl: "/emails/carrinho-1.html" },
+      { id: "C2", name: "Quanto você já perdeu?", subject: "Quanto você já perdeu em retrabalho?", timing: "+1 dia", publicUrl: "/emails/carrinho-2.html" },
+      { id: "C3", name: "Última chance", subject: "Última chance: finalizar compra", timing: "+3 dias", publicUrl: "/emails/carrinho-3.html" },
+    ],
   },
   {
     name: "Jornada Reembolso (1 e-mail)",
     color: "bg-gray-500/20 border-gray-500/50",
-    emails: JORNADA_REEMBOLSO.emails.map((e) => ({
-      id: e.id,
-      name: e.nome,
-      subject: e.assunto,
-      timing: e.delay,
-      html: e.html,
-      publicUrl: `/emails/${emailFileMap[e.id]}`,
-    })),
+    emails: [
+      { id: "RE1", name: "Reembolso processado", subject: "Seu reembolso foi processado", timing: "Imediato", publicUrl: "/emails/reembolso-1.html" },
+    ],
   },
 ];
 
 export default function AdminEmails() {
   const { toast } = useToast();
-  const [copiedId, setCopiedId] = useState<string | null>(null);
-  const [copiedBlockId, setCopiedBlockId] = useState<string | null>(null);
   const [copiedLinkId, setCopiedLinkId] = useState<string | null>(null);
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [showGuide, setShowGuide] = useState(false);
@@ -137,29 +95,6 @@ export default function AdminEmails() {
     zoomLink: "",
     apostilaLink: "",
   });
-
-  const applyConfig = (html: string): string => {
-    return html
-      .replace(/HEADER_IMAGE_URL/g, config.headerImageUrl || "HEADER_IMAGE_URL")
-      .replace(/WHATSAPP_GROUP_URL/g, config.whatsappGroupUrl || "WHATSAPP_GROUP_URL")
-      .replace(/ZOOM_LINK/g, config.zoomLink || "ZOOM_LINK")
-      .replace(/LINK_DA_APOSTILA/g, config.apostilaLink || "LINK_DA_APOSTILA");
-  };
-
-  const copyFullHtml = async (html: string, id: string) => {
-    await navigator.clipboard.writeText(applyConfig(html));
-    setCopiedId(id);
-    toast({ title: "HTML completo copiado!", description: "Com as configurações aplicadas." });
-    setTimeout(() => setCopiedId(null), 2000);
-  };
-
-  const copyBlockHtml = async (html: string, id: string) => {
-    const innerContent = extractInnerContent(applyConfig(html));
-    await navigator.clipboard.writeText(innerContent);
-    setCopiedBlockId(id);
-    toast({ title: "HTML para bloco copiado!", description: "Cole no bloco 'Código HTML' do RD Station." });
-    setTimeout(() => setCopiedBlockId(null), 2000);
-  };
 
   const copyLinkToClipboard = async (url: string, id: string) => {
     const fullUrl = `${getBaseUrl()}${url}`;
@@ -179,23 +114,16 @@ export default function AdminEmails() {
           </p>
         </header>
 
-        {/* Painel de Configuração */}
         <EmailConfigPanel config={config} onChange={setConfig} />
 
-        {/* Guia RD Station */}
         <div>
-          <Button
-            variant="outline"
-            onClick={() => setShowGuide(!showGuide)}
-            className="gap-2 mb-4"
-          >
+          <Button variant="outline" onClick={() => setShowGuide(!showGuide)} className="gap-2 mb-4">
             <BookOpen className="h-4 w-4" />
             {showGuide ? "Ocultar Guia" : "Como usar no RD Station"}
           </Button>
           {showGuide && <RDStationGuide />}
         </div>
 
-        {/* Jornadas */}
         <div className="space-y-6">
           {journeys.map((journey) => (
             <section key={journey.name} className={`border rounded-lg p-4 ${journey.color}`}>
@@ -204,7 +132,7 @@ export default function AdminEmails() {
               <div className="space-y-4">
                 {journey.emails.map((email) => (
                   <div key={email.id} className="bg-background/90 backdrop-blur rounded-lg border p-4">
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-3">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1 flex-wrap">
                           <span className="text-xs font-medium px-2 py-0.5 bg-muted rounded">{email.timing}</span>
@@ -214,35 +142,14 @@ export default function AdminEmails() {
                       </div>
 
                       <div className="flex gap-2 flex-wrap">
-                        <Button size="sm" variant="outline" onClick={() => setExpandedId(expandedId === email.id ? null : email.id)}>
-                          {expandedId === email.id ? <><ChevronUp className="h-4 w-4 mr-1" />Fechar</> : <><ChevronDown className="h-4 w-4 mr-1" />Detalhes</>}
-                        </Button>
-                        <Button size="sm" onClick={() => copyBlockHtml(email.html, email.id)} className="bg-primary text-primary-foreground">
-                          {copiedBlockId === email.id ? <><Check className="h-4 w-4 mr-1" />Copiado!</> : <><Code className="h-4 w-4 mr-1" />Copiar Bloco</>}
-                        </Button>
-                        <Button size="sm" variant="outline" onClick={() => copyFullHtml(email.html, email.id)}>
-                          {copiedId === email.id ? <><Check className="h-4 w-4 mr-1" />Copiado!</> : <><FileText className="h-4 w-4 mr-1" />HTML</>}
+                        <Button size="sm" variant="outline" onClick={() => window.open(email.publicUrl, '_blank')}>
+                          <FileText className="h-4 w-4 mr-1" />Preview
                         </Button>
                         <Button size="sm" variant="ghost" onClick={() => copyLinkToClipboard(email.publicUrl, email.id)}>
                           {copiedLinkId === email.id ? <><Check className="h-4 w-4 mr-1" />Copiado!</> : <><Link className="h-4 w-4 mr-1" />Link</>}
                         </Button>
                       </div>
                     </div>
-
-                    {expandedId === email.id && (
-                      <Tabs defaultValue="preview" className="mt-4">
-                        <TabsList className="grid w-full grid-cols-2">
-                          <TabsTrigger value="preview">Preview</TabsTrigger>
-                          <TabsTrigger value="blocks">Blocos Modulares</TabsTrigger>
-                        </TabsList>
-                        <TabsContent value="preview" className="mt-4">
-                          <EmailPreview html={email.html} config={config} />
-                        </TabsContent>
-                        <TabsContent value="blocks" className="mt-4">
-                          <ModularEmailBlocks emailName={email.name} emailContent={email.html} config={config} />
-                        </TabsContent>
-                      </Tabs>
-                    )}
                   </div>
                 ))}
               </div>
