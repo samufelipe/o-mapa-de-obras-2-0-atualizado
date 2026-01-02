@@ -49,10 +49,11 @@ const journeys: Journey[] = [
     ],
   },
   {
-    name: "Jornada Pós-Live (1 e-mail)",
+    name: "Jornada Pós-Live (2 e-mails)",
     color: "bg-purple-500/20 border-purple-500/50",
     emails: [
       { id: "PL1", name: "Replay 48h", subject: "🎬 Replay disponível por 48h - Assista AGORA", timing: "+1 dia após live", publicUrl: "/emails/pos-live-1.html" },
+      { id: "PL2", name: "Agradecimento + Feedback", subject: "💛 Obrigada por participar! Queremos ouvir você", timing: "+3 dias após live", publicUrl: "/emails/pos-live-2.html" },
     ],
   },
   {
