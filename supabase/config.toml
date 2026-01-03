@@ -1,0 +1,35 @@
+project_id = "npthhlpmffjqwivarvpw"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+shadow_port = 54320
+major_version = 15
+
+[studio]
+enabled = true
+port = 54323
+api_url = "http://127.0.0.1"
+
+[auth]
+enabled = true
+
+[storage]
+enabled = true
+
+# Edge Functions - Carrinho Abandonado First-Party
+
+[functions.log-checkout-intent]
+verify_jwt = false
+
+[functions.hotmart-webhook]
+verify_jwt = false
+
+[functions.abandonment-sweeper]
+verify_jwt = false
