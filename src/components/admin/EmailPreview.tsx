@@ -5,9 +5,12 @@ import { cn } from "@/lib/utils";
 
 interface EmailConfig {
   headerImageUrl: string;
-  whatsappGroupUrl: string;
+  imersaoWhatsappUrl: string;
+  mentoriaWhatsappUrl: string;
   zoomLink: string;
   apostilaLink: string;
+  imersaoCheckoutUrl: string;
+  mentoriaCheckoutUrl: string;
 }
 
 interface EmailPreviewProps {
@@ -21,9 +24,12 @@ export function EmailPreview({ html, config }: EmailPreviewProps) {
   const applyConfig = (content: string): string => {
     return content
       .replace(/HEADER_IMAGE_URL/g, config.headerImageUrl || "HEADER_IMAGE_URL")
-      .replace(/WHATSAPP_GROUP_URL/g, config.whatsappGroupUrl || "WHATSAPP_GROUP_URL")
+      .replace(/WHATSAPP_GROUP_URL/g, config.imersaoWhatsappUrl || "WHATSAPP_GROUP_URL")
+      .replace(/MENTORIA_WHATSAPP_URL/g, config.mentoriaWhatsappUrl || "MENTORIA_WHATSAPP_URL")
       .replace(/ZOOM_LINK/g, config.zoomLink || "ZOOM_LINK")
-      .replace(/LINK_DA_APOSTILA/g, config.apostilaLink || "LINK_DA_APOSTILA");
+      .replace(/LINK_DA_APOSTILA/g, config.apostilaLink || "LINK_DA_APOSTILA")
+      .replace(/IMERSAO_CHECKOUT_URL/g, config.imersaoCheckoutUrl || "IMERSAO_CHECKOUT_URL")
+      .replace(/MENTORIA_CHECKOUT_URL/g, config.mentoriaCheckoutUrl || "MENTORIA_CHECKOUT_URL");
   };
 
   const processedHtml = applyConfig(html);

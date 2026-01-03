@@ -292,6 +292,66 @@ export function RDStationGuide() {
           </div>
         </CardContent>
       </Card>
+
+      {/* Configuração de Fluxos de Automação */}
+      <Card className="border-cyan-500/30 bg-cyan-500/5">
+        <CardHeader className="pb-4">
+          <CardTitle className="flex items-center gap-2 text-lg text-cyan-600 dark:text-cyan-400">
+            <LayoutTemplate className="h-5 w-5" />
+            Configurar Fluxos de Automação
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <p className="text-sm text-muted-foreground">
+            Passo a passo para criar fluxos com gatilhos de conversão e regras de saída:
+          </p>
+
+          <div className="grid gap-3">
+            <div className="flex gap-3 p-3 bg-background rounded-lg border">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">1</div>
+              <div>
+                <p className="font-medium text-foreground">Criar novo Fluxo de Automação</p>
+                <p className="text-sm text-muted-foreground">Relacionar → Automação de Marketing → Criar Fluxo</p>
+              </div>
+            </div>
+
+            <div className="flex gap-3 p-3 bg-background rounded-lg border">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">2</div>
+              <div>
+                <p className="font-medium text-foreground">Adicionar Gatilho "Conversão"</p>
+                <p className="text-sm text-muted-foreground">
+                  Escolha "Conversão" → Cole o <code className="px-1 bg-muted rounded">conversion_identifier</code> exato do Pluga
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-3 p-3 bg-background rounded-lg border">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">3</div>
+              <div>
+                <p className="font-medium text-foreground">Montar sequência de e-mails</p>
+                <p className="text-sm text-muted-foreground">Adicione ações "Enviar e-mail" com delays entre cada um</p>
+              </div>
+            </div>
+
+            <div className="flex gap-3 p-3 bg-background rounded-lg border border-amber-500/50 bg-amber-500/10">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-600 dark:text-amber-400 font-bold">4</div>
+              <div>
+                <p className="font-medium text-amber-600 dark:text-amber-400">Configurar Regra de Saída (carrinho abandonado)</p>
+                <p className="text-sm text-muted-foreground">
+                  Nas configurações do fluxo → "Regras de saída" → Adicionar condição "Realizou conversão" com o identificador de compra aprovada. 
+                  Isso remove automaticamente quem já comprou.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="p-3 bg-cyan-500/10 border border-cyan-500/30 rounded-lg">
+            <p className="text-sm text-cyan-600 dark:text-cyan-400">
+              <strong>Dica:</strong> Teste cada fluxo com um lead de teste antes de ativar. Verifique se os e-mails estão sendo enviados nos intervalos corretos.
+            </p>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
