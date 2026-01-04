@@ -8,6 +8,13 @@ const corsHeaders = {
 
 // Token de segurança do webhook Hotmart (opcional)
 const HOTMART_HOTTOK = Deno.env.get("HOTMART_HOTTOK");
+const RD_STATION_API_KEY = Deno.env.get("RD_STATION_API_KEY");
+
+// Identificadores de conversão para compra no RD Station
+const PURCHASE_CONVERSION_IDENTIFIERS = {
+  imersao: "compra-imersao",
+  mentoria: "compra-mentoria",
+};
 
 interface HotmartWebhookPayload {
   event?: string;
@@ -135,11 +142,63 @@ serve(async (req: Request) => {
       console.log("ℹ️ Nenhum intent pendente encontrado para este email/produto");
     }
 
+    // Enviar evento de compra para RD Station
+    let rdSuccess = false;
+    if (RD_STATION_API_KEY) {
+      const conversionIdentifier = PURCHASE_CONVERSION_IDENTIFIERS[product];
+      
+      const rdPayload = {
+        event_type: "CONVERSION",
+        event_family: "CDP",
+        payload: {
+          conversion_identifier: conversionIdentifier,
+          email: email.toLowerCase().trim(),
+          name: buyerName || "",
+          cf_produto: product,
+          cf_status_carrinho: "comprado",
+          cf_data_compra: new Date().toISOString(),
+        },
+      };
+
+      console.log("📤 Enviando evento de compra para RD Station:", {
+        email: email.toLowerCase().trim(),
+        conversion: conversionIdentifier,
+        product,
+      });
+
+      try {
+        const rdResponse = await fetch(
+          `https://api.rd.services/platform/conversions?api_key=${RD_STATION_API_KEY}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json",
+            },
+            body: JSON.stringify(rdPayload),
+          }
+        );
+
+        if (rdResponse.ok) {
+          console.log("✅ Evento de compra enviado para RD Station");
+          rdSuccess = true;
+        } else {
+          const errorData = await rdResponse.json().catch(() => ({}));
+          console.error("❌ Erro ao enviar para RD Station:", rdResponse.status, errorData);
+        }
+      } catch (rdError) {
+        console.error("❌ Erro na requisição ao RD Station:", rdError);
+      }
+    } else {
+      console.warn("⚠️ RD_STATION_API_KEY não configurada, evento de compra não enviado");
+    }
+
     return new Response(
       JSON.stringify({ 
         success: true, 
         message: "Webhook processado",
         intents_updated: intents?.length || 0,
+        rd_purchase_sent: rdSuccess,
       }),
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
