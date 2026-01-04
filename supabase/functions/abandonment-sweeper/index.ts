@@ -7,7 +7,7 @@ const corsHeaders = {
 };
 
 // Configurações
-const ABANDONMENT_THRESHOLD_MINUTES = 60; // Considerar abandonado após 60 minutos
+const ABANDONMENT_THRESHOLD_MINUTES = 15; // Considerar abandonado após 15 minutos
 const RD_STATION_API_KEY = Deno.env.get("RD_STATION_API_KEY");
 const MAX_RD_ATTEMPTS = 3;
 
