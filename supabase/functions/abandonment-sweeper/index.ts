@@ -11,9 +11,9 @@ const ABANDONMENT_THRESHOLD_MINUTES = 15; // Considerar abandonado após 15 minu
 const RD_STATION_API_KEY = Deno.env.get("RD_STATION_API_KEY");
 const MAX_RD_ATTEMPTS = 3;
 
-// Identificadores de conversão no RD Station
+// Identificadores de conversão no RD Station (nomes exatos do Pluga)
 const CONVERSION_IDENTIFIERS = {
-  imersao: "carrinho-abandonado-imersao",
+  imersao: "imersao-cronograma-2.0-o-mapa-da-obra-carrinho-abandonado",
   mentoria: "carrinho-abandonado-mentoria",
 };
 

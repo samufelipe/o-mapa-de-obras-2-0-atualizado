@@ -10,9 +10,9 @@ const corsHeaders = {
 const HOTMART_HOTTOK = Deno.env.get("HOTMART_HOTTOK");
 const RD_STATION_API_KEY = Deno.env.get("RD_STATION_API_KEY");
 
-// Identificadores de conversão para compra no RD Station
+// Identificadores de conversão para compra no RD Station (nomes exatos do Pluga)
 const PURCHASE_CONVERSION_IDENTIFIERS = {
-  imersao: "compra-imersao",
+  imersao: "imersao-cronograma-2.0-o-mapa-da-obra-compra-aprovada",
   mentoria: "compra-mentoria",
 };
 
