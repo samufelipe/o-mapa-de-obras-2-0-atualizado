@@ -6,15 +6,15 @@ const problems = [
     description: "A falta de saber a sequência de serviços da obra faz serviços ocasiona em muitos retrabalhos porque o fornecedor seguinte precisava de algo que não foi antecipado.",
   },
   {
-    title: "Prejuízo em Materiais",
+    title: "O Custo dos Materiais",
     description: "Acabamentos nobres danificados por equipes que entram na obra no momento errado do fluxo de execução.",
   },
   {
-    title: "Silêncio Técnico",
+    title: "O Medo das Perguntas",
     description: "A insegurança de ser questionada pela equipe e não saber o que responder, perdendo o respeito profissional perante o cliente.",
   },
   {
-    title: "Estresse Constante",
+    title: "O Desgaste Diário",
     description: "A exaustão de viver 'apagando incêndios' em problemas que seriam previsíveis com o Cronograma",
   },
 ];
