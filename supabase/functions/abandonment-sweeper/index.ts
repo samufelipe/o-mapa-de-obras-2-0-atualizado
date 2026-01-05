@@ -14,7 +14,7 @@ const MAX_RD_ATTEMPTS = 3;
 // Identificadores de conversão no RD Station (nomes exatos do Pluga)
 const CONVERSION_IDENTIFIERS = {
   imersao: "imersao-cronograma-2.0-o-mapa-da-obra-carrinho-abandonado",
-  mentoria: "carrinho-abandonado-mentoria",
+  mentoria: "mentoria-inovando-na-sua-obra-carrinho-abandonado",
 };
 
 interface CheckoutIntent {

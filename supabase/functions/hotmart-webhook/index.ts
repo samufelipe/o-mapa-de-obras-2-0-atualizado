@@ -13,7 +13,7 @@ const RD_STATION_API_KEY = Deno.env.get("RD_STATION_API_KEY");
 // Identificadores de conversão para compra no RD Station (nomes exatos do Pluga)
 const PURCHASE_CONVERSION_IDENTIFIERS = {
   imersao: "imersao-cronograma-2.0-o-mapa-da-obra-compra-aprovada",
-  mentoria: "compra-mentoria",
+  mentoria: "mentoria-inovando-na-sua-obra-compra-aprovada",
 };
 
 interface HotmartWebhookPayload {
