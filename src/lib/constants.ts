@@ -38,6 +38,12 @@ export const QUALIFICATION = {
 
 export const BONUSES = [
   {
+    title: "6 Aulas Preparatórias",
+    value: "R$ 147,00",
+    description: "Conteúdo exclusivo para você construir a base necessária e chegar na imersão pronta para absorver 100% do método.",
+    release: "ACESSO IMEDIATO"
+  },
+  {
     title: "Apostila de Acompanhamento",
     value: "R$ 80,00",
     description: "Material completo com tarefas práticas para você acompanhar a imersão com foco total e aplicar cada conceito em tempo real.",
@@ -77,11 +83,16 @@ export const FAQ_ITEMS = [
   {
     question: "A imersão será cansativa por ser o dia todo?",
     answer: "De forma alguma! Nossa dinâmica é focada em blocos curtos de conteúdo denso seguidos de interação e intervalos. Foi projetada para ser o sábado mais produtivo da sua carreira, não uma palestra monótona."
+  },
+  {
+    question: "Como funcionam as 6 aulas preparatórias?",
+    answer: "São aulas em vídeo liberadas imediatamente após a confirmação do pagamento. Foram criadas para você construir a base necessária e chegar no dia 31/01 pronta para absorver o conteúdo avançado da imersão. Recomendamos assistir antes do evento."
   }
 ];
 
 export const PRICING_ITEMS = [
   { name: "Imersão Cronograma 2.0 (Ao Vivo)", price: "R$ 197,00" },
+  { name: "6 Aulas Preparatórias (Acesso Imediato)", price: "R$ 147,00" },
   { name: "Apostila de Acompanhamento", price: "R$ 80,00" },
   { name: "Modelo de Cronograma", price: "R$ 197,00" },
   { name: "Checklist de Levantamento", price: "R$ 50,00" },

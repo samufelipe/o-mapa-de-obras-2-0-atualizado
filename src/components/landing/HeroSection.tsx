@@ -280,8 +280,8 @@ const HeroSection = () => {
               <p>
                 <strong className="text-foreground">Cronograma, planejamento de obra e método</strong> para arquitetas que querem ganhar mais em 2026.
               </p>
-              <p className="text-foreground font-bold">
-                Porque autoridade e dinheiro se constroem na obra.
+              <p className="text-primary font-bold">
+                + 6 aulas preparatórias com acesso imediato para você chegar pronta.
               </p>
             </div>
 

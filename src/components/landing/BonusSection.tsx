@@ -1,7 +1,7 @@
-import { FileSpreadsheet, ClipboardList, FileText, Clock, Plus, ArrowRight } from "lucide-react";
+import { FileSpreadsheet, ClipboardList, FileText, Clock, Plus, ArrowRight, PlayCircle } from "lucide-react";
 import { BONUSES, PRICING_ITEMS } from "@/lib/constants";
 
-const bonusIcons = [FileSpreadsheet, ClipboardList, FileText];
+const bonusIcons = [PlayCircle, FileSpreadsheet, ClipboardList, FileText];
 
 const BonusSection = () => {
   const scrollToForm = () => {
@@ -15,21 +15,27 @@ const BonusSection = () => {
         <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-2">Seu Pacote de Ferramentas</h2>
         <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-12">Tudo o que você precisa para aplicar o método imediatamente</p>
         
-        <div className="grid md:grid-cols-3 gap-6 mb-16 relative">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 relative">
           {BONUSES.map((bonus, idx) => {
             const Icon = bonusIcons[idx];
+            const isImmediate = bonus.release === "ACESSO IMEDIATO";
             return (
-              <div key={idx} className="bg-card border-2 border-foreground p-8 flex flex-col items-center group relative shadow-hard hover:shadow-gold hover:-translate-y-1 transition-all duration-300">
+              <div key={idx} className={`bg-card border-2 p-8 flex flex-col items-center group relative shadow-hard hover:shadow-gold hover:-translate-y-1 transition-all duration-300 ${isImmediate ? 'border-primary' : 'border-foreground'}`}>
+                {isImmediate && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-foreground px-3 py-1 text-[8px] font-black uppercase tracking-widest whitespace-nowrap">
+                    LIBERADO NA HORA
+                  </div>
+                )}
                 <div className="mb-4 text-primary group-hover:scale-110 transition-transform">
                   <Icon className="w-5 h-5" />
                 </div>
-                <h3 className="text-[10px] font-black uppercase mb-1 tracking-widest">{bonus.title}</h3>
+                <h3 className="text-[10px] font-black uppercase mb-1 tracking-widest text-center">{bonus.title}</h3>
                 <span className="text-[11px] font-black bg-primary/10 px-3 py-1 uppercase tracking-tighter mb-4">
-                  Valor de Mercado: {bonus.value}
+                  Valor: {bonus.value}
                 </span>
-                <p className="text-[11px] text-muted-foreground mb-6 font-medium leading-relaxed">{bonus.description}</p>
+                <p className="text-[11px] text-muted-foreground mb-6 font-medium leading-relaxed text-center">{bonus.description}</p>
                 <div className="mt-auto pt-4 border-t border-border w-full">
-                  <span className="text-[8px] font-black text-primary uppercase tracking-widest flex items-center justify-center gap-1">
+                  <span className={`text-[8px] font-black uppercase tracking-widest flex items-center justify-center gap-1 ${isImmediate ? 'text-primary' : 'text-muted-foreground'}`}>
                     <Clock className="w-3 h-3"/> {bonus.release}
                   </span>
                 </div>
@@ -60,7 +66,7 @@ const BonusSection = () => {
 
           <div className="mb-8 text-center">
             <p className="text-background/60 text-[9px] font-bold uppercase tracking-widest mb-1">
-              Preço total se comprado separadamente: <span className="line-through text-background/40">R$ 524,00</span>
+              Preço total se comprado separadamente: <span className="line-through text-background/40">R$ 671,00</span>
             </p>
             
             <div className="mb-2">
