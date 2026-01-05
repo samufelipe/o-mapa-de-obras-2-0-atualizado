@@ -122,13 +122,13 @@ const createButton = (text: string, url: string) => `
 // ============================================================
 // JORNADA 1: RESGATE INSCRIÇÃO (5 E-MAILS)
 // Gatilho: Converteram em "inscricao-cronograma-2-0"
-// Condição de saída: Converteram em "pagamento-cronograma-2-0"
+// Condição de saída: Converteram em "imersao-cronograma-2.0-o-mapa-da-obra-compra-aprovada"
 // ============================================================
 
 export const JORNADA_RESGATE = {
   nome: "Resgate Inscrição",
   gatilho: "inscricao-cronograma-2-0",
-  condicaoSaida: "pagamento-cronograma-2-0",
+  condicaoSaida: "imersao-cronograma-2.0-o-mapa-da-obra-compra-aprovada",
   emails: [
     {
       id: "R1",
