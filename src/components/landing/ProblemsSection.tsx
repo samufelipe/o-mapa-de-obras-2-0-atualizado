@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react";
 
 const problems = [
   {
-    title: "O Ralo do Retrabalho",
+    title: "O Ciclo do Retrabalho",
     description: "A falta de saber a sequência de serviços da obra faz serviços ocasiona em muitos retrabalhos porque o fornecedor seguinte precisava de algo que não foi antecipado.",
   },
   {
