@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Check, Copy, Link, ChevronDown, ChevronUp, Code, FileText, BookOpen, Zap, Tag, ShieldCheck } from "lucide-react";
+import { Check, Copy, Link, ChevronDown, ChevronUp, Code, FileText, BookOpen, Zap, Tag, ShieldCheck, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
@@ -8,6 +8,7 @@ import { RDStationGuide } from "@/components/admin/RDStationGuide";
 import { PlugaIntegrationGuide } from "@/components/admin/PlugaIntegrationGuide";
 import { ModularEmailBlocks } from "@/components/admin/ModularEmailBlocks";
 import { EmailPreview } from "@/components/admin/EmailPreview";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 interface EmailTemplate {
   id: string;
@@ -131,6 +132,7 @@ export default function AdminEmails() {
   const [emailContents, setEmailContents] = useState<Record<string, string>>({});
   const [showGuide, setShowGuide] = useState(false);
   const [showPlugaGuide, setShowPlugaGuide] = useState(false);
+  const [openJourneys, setOpenJourneys] = useState<Record<string, boolean>>({});
   const [config, setConfig] = useState({
     headerImageUrl: "",
     imersaoWhatsappUrl: "",
@@ -170,6 +172,15 @@ export default function AdminEmails() {
     toast({ title: "Identificador copiado!", description: name });
     setTimeout(() => setCopiedIdentifier(null), 2000);
   };
+
+  const toggleJourney = (journeyName: string) => {
+    setOpenJourneys(prev => ({
+      ...prev,
+      [journeyName]: !prev[journeyName]
+    }));
+  };
+
+  const getJourneyKey = (productId: string, journeyName: string) => `${productId}-${journeyName}`;
 
   return (
     <div className="min-h-screen bg-background p-4 md:p-8">
@@ -211,92 +222,113 @@ export default function AdminEmails() {
                 </div>
               </div>
 
-              {/* Jornadas do Produto */}
-              <div className="space-y-6">
-                {product.journeys.map((journey) => (
-                  <section key={journey.name} className={`border rounded-lg p-4 ${journey.color}`}>
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-4">
-                      <h3 className="text-lg font-semibold text-foreground">{journey.name}</h3>
-                      
-                      {/* Badges de integração */}
-                      <div className="flex flex-wrap gap-2">
-                        {journey.conversionIdentifier && (
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            className="gap-1 text-xs h-7"
-                            onClick={() => copyIdentifier(journey.conversionIdentifier!, journey.name)}
-                          >
-                            {copiedIdentifier === journey.conversionIdentifier ? (
-                              <Check className="h-3 w-3" />
-                            ) : (
-                              <Copy className="h-3 w-3" />
-                            )}
-                            <span className="hidden md:inline">Gatilho:</span>
-                            <code className="font-mono">{journey.conversionIdentifier.split("-").slice(-2).join("-")}</code>
-                          </Button>
-                        )}
-                        {journey.exitCondition && (
-                          <Badge variant="secondary" className="gap-1 text-xs">
-                            <ShieldCheck className="h-3 w-3" />
-                            Saída: compra-aprovada
-                          </Badge>
-                        )}
-                      </div>
-                    </div>
+              {/* Jornadas do Produto - Agora Colapsáveis */}
+              <div className="space-y-3">
+                {product.journeys.map((journey) => {
+                  const journeyKey = getJourneyKey(product.identifier, journey.name);
+                  const isOpen = openJourneys[journeyKey] || false;
 
-                    <div className="space-y-4">
-                      {journey.emails.map((email) => (
-                        <div key={email.id} className="bg-background/90 backdrop-blur rounded-lg border p-4">
-                          <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
-                            <div className="flex-1">
-                              <div className="flex items-center gap-2 mb-1 flex-wrap">
-                                <span className="text-xs font-medium px-2 py-0.5 bg-muted rounded">{email.timing}</span>
-                                <span className="font-medium text-foreground">{email.name}</span>
-                              </div>
-                              <p className="text-sm text-muted-foreground"><strong>Assunto:</strong> {email.subject}</p>
+                  return (
+                    <Collapsible
+                      key={journey.name}
+                      open={isOpen}
+                      onOpenChange={() => toggleJourney(journeyKey)}
+                    >
+                      <div className={`border rounded-lg ${journey.color}`}>
+                        <CollapsibleTrigger asChild>
+                          <button className="w-full p-4 flex items-center justify-between hover:bg-muted/30 transition-colors rounded-lg">
+                            <div className="flex items-center gap-3">
+                              <ChevronRight className={`h-5 w-5 text-muted-foreground transition-transform ${isOpen ? 'rotate-90' : ''}`} />
+                              <h3 className="text-lg font-semibold text-foreground text-left">{journey.name}</h3>
                             </div>
-
-                            <div className="flex gap-2 flex-wrap">
-                              <Button size="sm" variant="outline" onClick={() => window.open(email.publicUrl, '_blank')}>
-                                <FileText className="h-4 w-4 mr-1" />Preview
-                              </Button>
-                              <Button size="sm" variant="ghost" onClick={() => copyLinkToClipboard(email.publicUrl, email.id)}>
-                                {copiedLinkId === email.id ? <><Check className="h-4 w-4 mr-1" />Copiado!</> : <><Link className="h-4 w-4 mr-1" />Link</>}
-                              </Button>
-                              <Button
-                                size="sm"
-                                variant="secondary"
-                                onClick={() => setExpandedId(expandedId === email.id ? null : email.id)}
-                              >
-                                <Code className="h-4 w-4 mr-1" />
-                                Copiar Bloco
-                                {expandedId === email.id ? <ChevronUp className="h-4 w-4 ml-1" /> : <ChevronDown className="h-4 w-4 ml-1" />}
-                              </Button>
-                            </div>
-                          </div>
-
-                          {expandedId === email.id && (
-                            <div className="mt-4 pt-4 border-t space-y-4">
-                              {emailContents[email.id] ? (
-                                <>
-                                  <ModularEmailBlocks
-                                    emailName={email.name}
-                                    emailContent={emailContents[email.id]}
-                                    config={config}
-                                  />
-                                  <EmailPreview html={emailContents[email.id]} config={config} />
-                                </>
-                              ) : (
-                                <p className="text-center text-muted-foreground py-4">Carregando...</p>
+                            
+                            {/* Badges de integração */}
+                            <div className="flex flex-wrap gap-2">
+                              {journey.conversionIdentifier && (
+                                <Button
+                                  size="sm"
+                                  variant="outline"
+                                  className="gap-1 text-xs h-7"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    copyIdentifier(journey.conversionIdentifier!, journey.name);
+                                  }}
+                                >
+                                  {copiedIdentifier === journey.conversionIdentifier ? (
+                                    <Check className="h-3 w-3" />
+                                  ) : (
+                                    <Copy className="h-3 w-3" />
+                                  )}
+                                  <span className="hidden md:inline">Gatilho:</span>
+                                  <code className="font-mono">{journey.conversionIdentifier.split("-").slice(-2).join("-")}</code>
+                                </Button>
+                              )}
+                              {journey.exitCondition && (
+                                <Badge variant="secondary" className="gap-1 text-xs">
+                                  <ShieldCheck className="h-3 w-3" />
+                                  Saída: compra-aprovada
+                                </Badge>
                               )}
                             </div>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </section>
-                ))}
+                          </button>
+                        </CollapsibleTrigger>
+
+                        <CollapsibleContent>
+                          <div className="p-4 pt-0 space-y-4">
+                            {journey.emails.map((email) => (
+                              <div key={email.id} className="bg-background/90 backdrop-blur rounded-lg border p-4">
+                                <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+                                  <div className="flex-1">
+                                    <div className="flex items-center gap-2 mb-1 flex-wrap">
+                                      <span className="text-xs font-medium px-2 py-0.5 bg-muted rounded">{email.timing}</span>
+                                      <span className="font-medium text-foreground">{email.name}</span>
+                                    </div>
+                                    <p className="text-sm text-muted-foreground"><strong>Assunto:</strong> {email.subject}</p>
+                                  </div>
+
+                                  <div className="flex gap-2 flex-wrap">
+                                    <Button size="sm" variant="outline" onClick={() => window.open(email.publicUrl, '_blank')}>
+                                      <FileText className="h-4 w-4 mr-1" />Preview
+                                    </Button>
+                                    <Button size="sm" variant="ghost" onClick={() => copyLinkToClipboard(email.publicUrl, email.id)}>
+                                      {copiedLinkId === email.id ? <><Check className="h-4 w-4 mr-1" />Copiado!</> : <><Link className="h-4 w-4 mr-1" />Link</>}
+                                    </Button>
+                                    <Button
+                                      size="sm"
+                                      variant="secondary"
+                                      onClick={() => setExpandedId(expandedId === email.id ? null : email.id)}
+                                    >
+                                      <Code className="h-4 w-4 mr-1" />
+                                      Copiar Bloco
+                                      {expandedId === email.id ? <ChevronUp className="h-4 w-4 ml-1" /> : <ChevronDown className="h-4 w-4 ml-1" />}
+                                    </Button>
+                                  </div>
+                                </div>
+
+                                {expandedId === email.id && (
+                                  <div className="mt-4 pt-4 border-t space-y-4">
+                                    {emailContents[email.id] ? (
+                                      <>
+                                        <ModularEmailBlocks
+                                          emailName={email.name}
+                                          emailContent={emailContents[email.id]}
+                                          config={config}
+                                        />
+                                        <EmailPreview html={emailContents[email.id]} config={config} />
+                                      </>
+                                    ) : (
+                                      <p className="text-center text-muted-foreground py-4">Carregando...</p>
+                                    )}
+                                  </div>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        </CollapsibleContent>
+                      </div>
+                    </Collapsible>
+                  );
+                })}
               </div>
             </div>
           ))}
