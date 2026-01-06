@@ -266,11 +266,11 @@ const HeroSection = () => {
             </div>
             
             <h1 className="text-2xl md:text-4xl lg:text-5xl font-black tracking-tight leading-[1.1]">
-              <span className="text-primary italic block">Imersão Cronograma 2.0</span>
-              <span className="text-primary italic block">O Mapa da Obra</span>
+              <span className="text-primary italic block animate-fade-in" style={{ animationDelay: '0.1s', animationFillMode: 'both' }}>Imersão Cronograma 2.0</span>
+              <span className="text-primary italic block animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'both' }}>O Mapa da Obra</span>
             </h1>
             
-            <h2 className="text-lg md:text-2xl lg:text-3xl font-bold tracking-tight text-muted-foreground">
+            <h2 className="text-lg md:text-2xl lg:text-3xl font-bold tracking-tight text-muted-foreground animate-fade-in" style={{ animationDelay: '0.5s', animationFillMode: 'both' }}>
               A Sequência que Protege seu Design e seu Lucro.
             </h2>
             
