@@ -78,11 +78,11 @@ const products: Product[] = [
         conversionIdentifier: "imersao-cronograma-2.0-o-mapa-da-obra-carrinho-abandonado",
         exitCondition: "imersao-cronograma-2.0-o-mapa-da-obra-compra-aprovada",
         emails: [
-          { id: "IC1", name: "Lembrete imediato", subject: "Sua vaga de R$49,90 ainda está aqui...", timing: "+1 hora", publicUrl: "/emails/imersao/carrinho-1.html" },
+          { id: "IC1", name: "Lembrete imediato", subject: "Sua vaga de R$29,90 ainda está aqui...", timing: "+1 hora", publicUrl: "/emails/imersao/carrinho-1.html" },
           { id: "IC2", name: "Dores específicas", subject: "O motivo #1 que faz suas obras atrasarem", timing: "+1 dia", publicUrl: "/emails/imersao/carrinho-2.html" },
           { id: "IC3", name: "Quebra de objeções", subject: "8 horas que vão te economizar meses de estresse", timing: "+2 dias", publicUrl: "/emails/imersao/carrinho-3.html" },
           { id: "IC4", name: "Case de sucesso", subject: "De caos total a obra no prazo (história real)", timing: "+4 dias", publicUrl: "/emails/imersao/carrinho-4.html" },
-          { id: "IC5", name: "Conteúdo + Bônus (Lote 01)", subject: "R$524 em bônus por apenas R$49,90 (Lote 01)", timing: "+6 dias", publicUrl: "/emails/imersao/carrinho-5.html" },
+          { id: "IC5", name: "Conteúdo + Bônus (1º Lote)", subject: "R$721 em bônus por apenas R$29,90 (1º Lote)", timing: "+6 dias", publicUrl: "/emails/imersao/carrinho-5.html" },
           { id: "IC6", name: "Urgência: Vagas acabando", subject: "As vagas estão acabando — sala do Zoom lotando", timing: "+8 dias", publicUrl: "/emails/imersao/carrinho-6.html" },
           { id: "IC7", name: "Urgência: Inscrições encerrando", subject: "Inscrições encerrando — últimas vagas disponíveis", timing: "+9 dias", publicUrl: "/emails/imersao/carrinho-7.html" },
           { id: "IC8", name: "Última Chance", subject: "🚨 ÚLTIMA CHANCE — Inscrições prestes a encerrar", timing: "+10 dias", publicUrl: "/emails/imersao/carrinho-8.html" },
