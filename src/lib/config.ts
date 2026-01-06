@@ -18,7 +18,7 @@ export const CONFIG = {
   hotmart: {
     // Link do checkout do produto
     // Obter em: Hotmart → Produtos → Seu Produto → Links de Divulgação
-    checkoutUrl: "https://pay.hotmart.com/K103578257F?checkoutMode=10&bid=1767049086095",
+    checkoutUrl: "https://pay.hotmart.com/V103686527Y?bid=1767708320405",
     
     // Se true, passa os dados do lead para pré-preencher o checkout
     preFillCheckout: true,
