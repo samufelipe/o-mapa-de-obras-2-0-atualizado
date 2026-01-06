@@ -72,7 +72,7 @@ const BonusSection = () => {
             <div className="mb-2">
               <span className="text-primary text-[10px] font-black uppercase tracking-[0.3em] block mb-1">INVESTIMENTO ÚNICO</span>
               <h3 className="text-background text-4xl md:text-5xl font-black tracking-tighter uppercase leading-tight animate-pulse-slow">
-                APENAS R$ 49,90
+                APENAS R$ 29,90
               </h3>
             </div>
           </div>

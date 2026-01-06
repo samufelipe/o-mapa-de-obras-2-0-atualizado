@@ -2,22 +2,29 @@ export const AGENDA = [
   {
     day: "MÓDULO MANHÃ",
     date: "SÁBADO 31/01 • 09:00 - 12:00",
-    title: "A Logística da Execução",
+    title: "Fundamentos da Execução Inteligente",
     topics: [
-      "A Engrenagem Perfeita: A sequência de serviços que evita o retrabalho e economiza até 20% do orçamento final.",
-      "Proteção do Design: Como o Cronograma O Mapa de Obras 2.0 garante que o acabamento de luxo não sofra danos de fornecedores anteriores.",
-      "O Pulo do Gato Técnico: A realidade sobre o tempo real de cura e secagem que dita o ritmo saudável de qualquer reforma."
+      "Contexto e Depoimentos: Por que arquitetas que dominam obra ganham até 3x mais honorários",
+      "O que Elas Desejam: Entenda exatamente o que suas clientes esperam (e como entregar além)",
+      "Planejamento da Obra: O passo-a-passo que elimina 80% dos problemas antes de começar",
+      "Escopo de Obra com IA: Atividade prática para criar escopos profissionais em minutos",
+      "Sequência de Serviços com IA: Monte a ordem perfeita que protege acabamentos caros"
     ]
   },
   {
     day: "MÓDULO TARDE",
-    date: "SÁBADO 31/01 • 14:00 - 18:00",
-    title: "Liderança e Lucratividade",
+    date: "SÁBADO 31/01 • 13:00 - 17:00",
+    title: "Cronograma, Lucro e Próximos Passos",
     topics: [
-      "Posicionamento de Autoridade: Como usar o Cronograma O Mapa de Obras 2.0 para comandar a equipe com segurança técnica absoluta.",
-      "Gerenciamento Sem Estresse: O fluxo para acompanhar projetos simultâneos sem perder a qualidade ou a sanidade mental.",
-      "Execução em Prática: Como apresentar o Cronograma O Mapa de Obras 2.0 ao cliente para valorizar seus honorários de acompanhamento."
-    ]
+      "Cronograma de Obra em 8 Passos: O método validado para nunca mais errar prazos",
+      "Exercício Prático: Você vai sair com seu cronograma pronto para usar",
+      "Como Ganhar Mais: Estratégias para cobrar honorários premium pelo gerenciamento",
+      "Planejamento do Seu Negócio: Para quem a Mentoria é o próximo passo ideal"
+    ],
+    surprise: {
+      title: "Momento Especial",
+      description: "Uma surpresa exclusiva será revelada ao vivo para quem permanecer até o final"
+    }
   }
 ];
 
@@ -38,9 +45,9 @@ export const QUALIFICATION = {
 
 export const BONUSES = [
   {
-    title: "6 Aulas Preparatórias",
-    value: "R$ 147,00",
-    description: "Conteúdo exclusivo para você construir a base necessária e chegar na imersão pronta para absorver 100% do método.",
+    title: "8 Aulas Preparatórias",
+    value: "R$ 197,00",
+    description: "Conteúdo exclusivo com temas como Contexto do Mercado, Método Inovando, Oportunidades 2026 e muito mais para você chegar na imersão pronta.",
     release: "ACESSO IMEDIATO"
   },
   {
@@ -63,6 +70,17 @@ export const BONUSES = [
   }
 ];
 
+export const PREPARATORY_CLASSES = [
+  { number: 1, title: "Aula de Boas-Vindas", description: "Acesso ao conteúdo preparatório" },
+  { number: 2, title: "Como Baixar o Zoom", description: "Configure seu acesso e adicione ao calendário" },
+  { number: 3, title: "Contexto Atual do Mercado", description: "Panorama do mercado de arquitetura" },
+  { number: 4, title: "Método Gerenciamento Inovando", description: "Introdução ao método na sua obra" },
+  { number: 5, title: "Oportunidade 2026: Interiores vs Construção", description: "Onde está o dinheiro" },
+  { number: 6, title: "Sazonalidade do Mercado", description: "Planeje seus melhores meses" },
+  { number: 7, title: "Quebra de Objeções", description: "Acompanhamento vs Gerenciamento e FAQs" },
+  { number: 8, title: "O que é a Mentoria", description: "Próximos passos na sua evolução" }
+];
+
 export const FAQ_ITEMS = [
   {
     question: "Como faço para participar da imersão ao vivo?",
@@ -70,29 +88,29 @@ export const FAQ_ITEMS = [
   },
   {
     question: "Quando receberei os bônus e materiais?",
-    answer: "A Apostila de Acompanhamento será liberada 1 dia antes da live (30/01) para você já chegar preparada. O Modelo de Cronograma e o Checklist de Levantamento serão liberados logo após o encerramento da imersão no dia 31/01, garantindo que você saiba exatamente como aplicá-los."
+    answer: "As 8 Aulas Preparatórias são liberadas imediatamente após a confirmação do pagamento. A Apostila de Acompanhamento será liberada 1 dia antes da live (30/01) para você já chegar preparada. O Modelo de Cronograma e o Checklist de Levantamento serão liberados logo após o encerramento da imersão no dia 31/01, garantindo que você saiba exatamente como aplicá-los."
   },
   {
     question: "Como funciona o Grupo VIP de WhatsApp?",
     answer: "É o nosso canal oficial de avisos. Assim que o pagamento for aprovado, você recebe o link. Lá você receberá todos os comunicados importantes, lembretes e o link direto para a nossa sala de ZOOM no dia do evento."
   },
   {
-    question: "O valor de R$ 49,90 é real? Tem pegadinha?",
-    answer: "É real e sem pegadinhas. Este valor é simbólico para reunir arquitetas comprometidas em elevar o nível técnico do mercado. O objetivo é que você conheça nosso método e tenha resultados imediatos na sua próxima obra."
+    question: "O valor de R$ 29,90 é real? Tem pegadinha?",
+    answer: "É real e sem pegadinhas. Este valor é simbólico para o 1º Lote, criado para reunir arquitetas comprometidas em elevar o nível técnico do mercado. O objetivo é que você conheça nosso método e tenha resultados imediatos na sua próxima obra."
   },
   {
     question: "A imersão será cansativa por ser o dia todo?",
-    answer: "De forma alguma! Nossa dinâmica é focada em blocos curtos de conteúdo denso seguidos de interação e intervalos. Foi projetada para ser o sábado mais produtivo da sua carreira, não uma palestra monótona."
+    answer: "De forma alguma! Nossa dinâmica é focada em blocos curtos de conteúdo denso seguidos de interação, atividades práticas com IA e intervalos. Foi projetada para ser o sábado mais produtivo da sua carreira, não uma palestra monótona."
   },
   {
-    question: "Como funcionam as 6 aulas preparatórias?",
-    answer: "São aulas em vídeo liberadas imediatamente após a confirmação do pagamento. Foram criadas para você construir a base necessária e chegar no dia 31/01 pronta para absorver o conteúdo avançado da imersão. Recomendamos assistir antes do evento."
+    question: "Como funcionam as 8 aulas preparatórias?",
+    answer: "São aulas em vídeo liberadas imediatamente após a confirmação do pagamento. Incluem desde o tutorial de como usar o Zoom até conteúdos sobre o mercado atual, método Inovando, oportunidades para 2026 e quebra de objeções. Foram criadas para você construir a base necessária e chegar no dia 31/01 pronta para absorver o conteúdo avançado da imersão."
   }
 ];
 
 export const PRICING_ITEMS = [
   { name: "Imersão Cronograma 2.0 (Ao Vivo)", price: "R$ 197,00" },
-  { name: "6 Aulas Preparatórias (Acesso Imediato)", price: "R$ 147,00" },
+  { name: "8 Aulas Preparatórias (Acesso Imediato)", price: "R$ 197,00" },
   { name: "Apostila de Acompanhamento", price: "R$ 80,00" },
   { name: "Modelo de Cronograma", price: "R$ 197,00" },
   { name: "Checklist de Levantamento", price: "R$ 50,00" },

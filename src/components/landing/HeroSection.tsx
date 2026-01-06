@@ -136,7 +136,7 @@ const HeroSection = () => {
     setStatus("redirecting");
     
     // Track checkout initiation (Meta Pixel + GTM)
-    trackInitiateCheckout(49.90);
+    trackInitiateCheckout(29.90);
     trackBeginCheckout();
     
     // Delay for transition screen
@@ -275,13 +275,10 @@ const HeroSection = () => {
             
             <div className="text-sm md:text-base text-muted-foreground max-w-lg mx-auto lg:mx-0 font-medium leading-relaxed space-y-3">
               <p>
-                A imersão que todo arquiteto deveria fazer antes de começar o ano.
-              </p>
-              <p>
-                <strong className="text-foreground">Cronograma, planejamento de obra e método</strong> para arquitetas que querem ganhar mais em 2026.
+                A virada de chave que toda arquiteta precisa para começar 2026 com <strong className="text-foreground">mais autoridade, previsibilidade e valorização.</strong>
               </p>
               <p className="text-primary font-bold">
-                + 6 aulas preparatórias com acesso imediato para você chegar pronta.
+                + 8 aulas preparatórias com acesso imediato para você chegar pronta.
               </p>
             </div>
 
@@ -358,8 +355,8 @@ const HeroSection = () => {
                 <div className="pt-4">
                   <div className="flex justify-between items-end mb-4">
                     <div className="flex flex-col">
-                      <span className="text-[10px] font-bold text-muted-foreground line-through uppercase">R$ 197,00</span>
-                      <span className="text-3xl font-black tracking-tighter animate-pulse-slow">R$ 49,90</span>
+                      <span className="text-[10px] font-bold text-muted-foreground line-through uppercase">R$ 97,00</span>
+                      <span className="text-3xl font-black tracking-tighter animate-pulse-slow">R$ 29,90</span>
                     </div>
                     <span className="text-[9px] font-black text-primary bg-foreground px-2 py-1 uppercase tracking-widest shadow-hard">LOTE 01</span>
                   </div>

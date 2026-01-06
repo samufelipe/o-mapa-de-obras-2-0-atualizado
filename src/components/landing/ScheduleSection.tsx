@@ -1,5 +1,16 @@
-import { CheckCircle2, ArrowRight } from "lucide-react";
+import { CheckCircle2, ArrowRight, Sparkles } from "lucide-react";
 import { AGENDA } from "@/lib/constants";
+
+interface AgendaItem {
+  day: string;
+  date: string;
+  title: string;
+  topics: string[];
+  surprise?: {
+    title: string;
+    description: string;
+  };
+}
 
 const ScheduleSection = () => {
   const scrollToForm = () => {
@@ -17,7 +28,7 @@ const ScheduleSection = () => {
         </div>
         
         <div className="grid md:grid-cols-2 gap-6 text-left mb-16">
-          {AGENDA.map((item, i) => (
+          {(AGENDA as AgendaItem[]).map((item, i) => (
             <div key={i} className="bg-card p-8 border border-border shadow-sm hover:shadow-hard transition-all">
               <span className="text-[8px] font-black text-primary uppercase tracking-widest block mb-2">{item.date}</span>
               <h3 className="text-lg font-black uppercase mb-6 tracking-tight border-b border-border pb-2">{item.title}</h3>
@@ -28,6 +39,23 @@ const ScheduleSection = () => {
                   </li>
                 ))}
               </ul>
+              
+              {/* Surprise Section */}
+              {item.surprise && (
+                <div className="mt-6 pt-4 border-t border-primary/30">
+                  <div className="bg-primary/10 border border-primary/30 p-4 rounded-sm">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Sparkles className="w-4 h-4 text-primary" />
+                      <span className="text-[10px] font-black text-primary uppercase tracking-widest">
+                        {item.surprise.title}
+                      </span>
+                    </div>
+                    <p className="text-[11px] font-medium text-muted-foreground italic">
+                      {item.surprise.description}
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
           ))}
         </div>

@@ -4,7 +4,7 @@ const steps = [
   { 
     icon: Zap, 
     title: "01. ACESSO IMEDIATO", 
-    desc: "Confirmação por e-mail + liberação das 6 aulas preparatórias para você começar agora." 
+    desc: "Confirmação por e-mail + liberação das 8 aulas preparatórias para você começar agora." 
   },
   { 
     icon: MessageCircle, 
