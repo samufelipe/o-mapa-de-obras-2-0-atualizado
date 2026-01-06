@@ -73,7 +73,7 @@ export const trackLead = (data: {
     content_name: CONFIG.rdStation.conversionIdentifier,
     content_category: "Imersão Cronograma 2.0",
     // Dados hasheados para melhor match rate
-    value: 49.90,
+    value: 29.90,
     currency: "BRL",
   });
   logTracking("Lead", { content_name: CONFIG.rdStation.conversionIdentifier });
@@ -83,7 +83,7 @@ export const trackLead = (data: {
  * Dispara evento de início de checkout
  * Use quando o usuário for redirecionado para o Hotmart
  */
-export const trackInitiateCheckout = (value: number = 49.90): void => {
+export const trackInitiateCheckout = (value: number = 29.90): void => {
   if (!isPixelAvailable()) return;
   
   window.fbq("track", "InitiateCheckout", {
