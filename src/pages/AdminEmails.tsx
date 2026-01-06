@@ -52,17 +52,16 @@ const products: Product[] = [
         ],
       },
       {
-        name: "Nutrição Imersão (8 e-mails)",
+        name: "Nutrição Imersão (7 e-mails)",
         color: "bg-blue-500/20 border-blue-500/50",
         emails: [
           { id: "N1", name: "Acesso Liberado: 8 Aulas", subject: "🎁 Acesso Liberado: 8 Aulas Preparatórias", timing: "Imediato", publicUrl: "/emails/nutricao-1.html" },
           { id: "N2", name: "Já assistiu a primeira aula?", subject: "Já assistiu a primeira aula?", timing: "+1 dia", publicUrl: "/emails/nutricao-2.html" },
-          { id: "N3", name: "Preview da Live", subject: "Preview: o que você vai dominar na live", timing: "+3 dias", publicUrl: "/emails/nutricao-3.html" },
-          { id: "N4", name: "Exercício de Reflexão", subject: "Exercício: O que você descobriu nas aulas?", timing: "+5 dias", publicUrl: "/emails/nutricao-4.html" },
+          { id: "N3", name: "Preview da Live + Agenda", subject: "Preview: o que você vai dominar na live", timing: "+3 dias", publicUrl: "/emails/nutricao-3.html" },
+          { id: "N4", name: "IA no Gerenciamento de Obras", subject: "🤖 O segredo que vai mudar sua rotina de obras", timing: "+5 dias", publicUrl: "/emails/nutricao-4.html" },
           { id: "N5", name: "Prepare seu Zoom", subject: "Prepare seu Zoom para a Imersão", timing: "-4 dias", publicUrl: "/emails/nutricao-5.html" },
-          { id: "N6", name: "Cronograma Completo", subject: "Cronograma Completo: Sábado 31/01", timing: "-3 dias", publicUrl: "/emails/nutricao-6.html" },
-          { id: "N7", name: "Checklist Final", subject: "Faltam 2 dias! Checklist Final", timing: "-2 dias", publicUrl: "/emails/nutricao-7.html" },
-          { id: "N8", name: "AMANHÃ! Último Lembrete", subject: "🚀 AMANHÃ! Último lembrete", timing: "-1 dia", publicUrl: "/emails/nutricao-8.html" },
+          { id: "N6", name: "Checklist Final", subject: "Faltam 2 dias! Checklist Final", timing: "-2 dias", publicUrl: "/emails/nutricao-7.html" },
+          { id: "N7", name: "AMANHÃ! Último Lembrete", subject: "🚀 AMANHÃ! Último lembrete", timing: "-1 dia", publicUrl: "/emails/nutricao-8.html" },
         ],
       },
       {
