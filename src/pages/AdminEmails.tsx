@@ -55,7 +55,7 @@ const products: Product[] = [
         name: "Nutrição Imersão (8 e-mails)",
         color: "bg-blue-500/20 border-blue-500/50",
         emails: [
-          { id: "N1", name: "Acesso Liberado: 6 Aulas", subject: "🎁 Acesso Liberado: 6 Aulas Preparatórias", timing: "Imediato", publicUrl: "/emails/nutricao-1.html" },
+          { id: "N1", name: "Acesso Liberado: 8 Aulas", subject: "🎁 Acesso Liberado: 8 Aulas Preparatórias", timing: "Imediato", publicUrl: "/emails/nutricao-1.html" },
           { id: "N2", name: "Já assistiu a primeira aula?", subject: "Já assistiu a primeira aula?", timing: "+1 dia", publicUrl: "/emails/nutricao-2.html" },
           { id: "N3", name: "Preview da Live", subject: "Preview: o que você vai dominar na live", timing: "+3 dias", publicUrl: "/emails/nutricao-3.html" },
           { id: "N4", name: "Exercício de Reflexão", subject: "Exercício: O que você descobriu nas aulas?", timing: "+5 dias", publicUrl: "/emails/nutricao-4.html" },
