@@ -48,8 +48,8 @@ const StepsSection = () => {
               <div className="mb-6 flex justify-center text-primary">
                 <step.icon className="w-6 h-6" />
               </div>
-              <h4 className="text-[11px] font-black uppercase tracking-widest mb-3">{step.title}</h4>
-              <p className="text-[11px] text-muted-foreground font-medium leading-relaxed">{step.desc}</p>
+              <h4 className="text-xs font-black uppercase tracking-widest mb-3">{step.title}</h4>
+              <p className="text-xs text-muted-foreground font-medium leading-relaxed">{step.desc}</p>
             </div>
           ))}
         </div>
