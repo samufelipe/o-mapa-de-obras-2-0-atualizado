@@ -288,7 +288,7 @@ const HeroSection = () => {
             
             <h1 className="text-2xl md:text-4xl lg:text-5xl font-black tracking-tight leading-[1.1]">
               <span className="text-primary italic block animate-fade-in" style={{ animationDelay: '0.1s', animationFillMode: 'both' }}>Imersão Cronograma 2.0</span>
-              <span className="text-primary italic block animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'both' }}>O Mapa da Obra</span>
+              <span className="text-primary italic block text-xl md:text-3xl lg:text-4xl animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'both' }}>O Mapa da Obra de Interiores</span>
             </h1>
             
             <h2 className="text-lg md:text-2xl lg:text-3xl font-bold tracking-tight text-muted-foreground animate-fade-in" style={{ animationDelay: '0.5s', animationFillMode: 'both' }}>
@@ -386,7 +386,7 @@ const HeroSection = () => {
                   <button 
                     type="submit"
                     disabled={status === "loading" || status === "success"}
-                    className="w-full bg-foreground text-primary py-4 flex items-center justify-center gap-2 text-[10px] font-black tracking-widest hover:bg-primary hover:text-foreground transition-all border-2 border-foreground shadow-hard uppercase group disabled:opacity-70 disabled:cursor-not-allowed"
+                    className="w-full bg-green-600 text-white py-4 flex items-center justify-center gap-2 text-xs font-black tracking-widest hover:bg-green-700 transition-all border-2 border-green-600 shadow-hard uppercase group disabled:opacity-70 disabled:cursor-not-allowed"
                     data-track="submit_button"
                     data-track-location="hero_form"
                   >
@@ -422,14 +422,14 @@ const HeroSection = () => {
       {/* Trust Bar */}
       <div className="mt-16 border-y border-border bg-secondary">
         <div className="container mx-auto px-4 py-6">
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 text-muted-foreground/50">
-            <div className="flex items-center gap-2 font-black text-[10px] uppercase tracking-widest">
+          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 text-foreground">
+            <div className="flex items-center gap-2 font-black text-xs uppercase tracking-widest">
               <Users className="w-4 h-4" /> +1000 Arquitetas Impactadas
             </div>
-            <div className="flex items-center gap-2 font-black text-[10px] uppercase tracking-widest">
+            <div className="flex items-center gap-2 font-black text-xs uppercase tracking-widest">
               <Star className="w-4 h-4 fill-current" /> Avaliação 4.9/5.0
             </div>
-            <div className="flex items-center gap-2 font-black text-[10px] uppercase tracking-widest">
+            <div className="flex items-center gap-2 font-black text-xs uppercase tracking-widest">
               <ShieldCheck className="w-4 h-4" /> Método Validado
             </div>
           </div>
