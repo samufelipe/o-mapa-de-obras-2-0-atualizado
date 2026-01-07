@@ -6,9 +6,8 @@
 export const CONFIG = {
   // RD Station Marketing
   rdStation: {
-    // API Key do RD Station Marketing
-    // Obter em: https://appstore.rdstation.com/pt-BR/publisher
-    apiKey: "GqXXPYwrOpwBGbWtQdtmSOVlxApBvNpeGAEy",
+    // API Key é gerenciada via secrets no backend (edge functions)
+    // NÃO exponha a API key aqui - ela é usada apenas server-side
     
     // Identificador da conversão (nome do evento no RD)
     conversionIdentifier: "inscricao-cronograma-2-0",
@@ -51,9 +50,8 @@ export const CONFIG = {
 export const isConfigValid = (): { valid: boolean; missing: string[] } => {
   const missing: string[] = [];
   
-  if (!CONFIG.rdStation.apiKey || CONFIG.rdStation.apiKey.length < 10) {
-    missing.push("RD Station API Key");
-  }
+  // RD Station API Key é gerenciada via secrets no backend
+  // Não precisa mais validar aqui
   
   // Hotmart URL já está configurada, não precisa validar
   

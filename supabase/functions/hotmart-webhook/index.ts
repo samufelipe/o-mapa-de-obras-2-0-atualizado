@@ -6,7 +6,7 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-hotmart-hottok",
 };
 
-// Token de segurança do webhook Hotmart (opcional)
+// Token de segurança do webhook Hotmart (OBRIGATÓRIO)
 const HOTMART_HOTTOK = Deno.env.get("HOTMART_HOTTOK");
 const RD_STATION_API_KEY = Deno.env.get("RD_STATION_API_KEY");
 
@@ -51,21 +51,27 @@ serve(async (req: Request) => {
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-    // Validar token Hotmart se configurado
-    if (HOTMART_HOTTOK) {
-      const hottok = req.headers.get("x-hotmart-hottok");
-      if (hottok !== HOTMART_HOTTOK) {
-        console.warn("⚠️ Token Hotmart inválido");
-        return new Response(
-          JSON.stringify({ error: "Unauthorized" }),
-          { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-        );
-      }
+    // Validar token Hotmart - OBRIGATÓRIO
+    if (!HOTMART_HOTTOK) {
+      console.error("❌ HOTMART_HOTTOK não configurado no servidor");
+      return new Response(
+        JSON.stringify({ error: "Webhook não configurado corretamente" }),
+        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    const hottok = req.headers.get("x-hotmart-hottok");
+    if (!hottok || hottok !== HOTMART_HOTTOK) {
+      console.warn("⚠️ Token Hotmart inválido ou ausente");
+      return new Response(
+        JSON.stringify({ error: "Unauthorized - Invalid or missing Hotmart token" }),
+        { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
     }
 
     const body: HotmartWebhookPayload = await req.json();
     
-    console.log("📥 Webhook Hotmart recebido:", JSON.stringify(body, null, 2));
+    console.log("📥 Webhook Hotmart recebido (autenticado):", JSON.stringify(body, null, 2));
 
     // Extrair dados (suporta formato direto Hotmart e Pluga)
     const email = body.data?.buyer?.email || body.buyer_email;
