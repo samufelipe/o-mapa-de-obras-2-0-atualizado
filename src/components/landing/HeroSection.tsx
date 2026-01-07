@@ -131,7 +131,7 @@ const HeroSection = () => {
     return `${baseUrl}${separator}${params.toString()}`;
   };
 
-  // Redirect to Hotmart
+  // Redirect via CheckoutBridge (registers intent before going to Hotmart)
   const redirectToHotmart = () => {
     setStatus("redirecting");
     
@@ -141,8 +141,24 @@ const HeroSection = () => {
     
     // Delay for transition screen
     setTimeout(() => {
-      const url = buildHotmartUrl();
-      window.location.href = url;
+      // Build CheckoutBridge URL with all parameters
+      const phoneClean = formData.phone.replace(/\D/g, "");
+      const params = new URLSearchParams({
+        name: formData.name,
+        email: formData.email,
+        phone: phoneClean,
+      });
+      
+      // Capture UTMs from current URL
+      const currentParams = new URLSearchParams(window.location.search);
+      const utmParams = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
+      utmParams.forEach((utm) => {
+        const value = currentParams.get(utm);
+        if (value) params.set(utm, value);
+      });
+      
+      // Redirect via CheckoutBridge (logs intent to database)
+      window.location.href = `/checkout/imersao?${params.toString()}`;
     }, CONFIG.form.redirectDelay);
   };
 
