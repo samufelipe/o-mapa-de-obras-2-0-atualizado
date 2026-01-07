@@ -88,7 +88,15 @@ export default function CheckoutBridge() {
         if (CONFIG.hotmart.preFillCheckout) {
           if (email) checkoutUrl.searchParams.set("email", email);
           if (name) checkoutUrl.searchParams.set("name", name);
-          if (phone) checkoutUrl.searchParams.set("phone", phone.replace(/\D/g, ""));
+          if (phone) {
+            const cleanPhone = phone.replace(/\D/g, "");
+            if (cleanPhone.length >= 10) {
+              const ddd = cleanPhone.substring(0, 2);
+              const number = cleanPhone.substring(2);
+              checkoutUrl.searchParams.set("phoneac", ddd);
+              checkoutUrl.searchParams.set("phonenumber", number);
+            }
+          }
         }
 
         // Passar UTMs para o checkout
