@@ -11,9 +11,9 @@ const TransformationSection = () => {
   };
 
   const steps = [
-    { highlight: "ESCOPO DE OBRA", text: "DESSA COZINHA" },
-    { highlight: "SEQUÊNCIA DE SERVIÇOS", text: "DESSA COZINHA" },
-    { highlight: "O CRONOGRAMA", text: "DESSA COZINHA" },
+    { highlight: "ESCOPO DE OBRA", text: "dessa cozinha" },
+    { highlight: "SEQUÊNCIA DE SERVIÇOS", text: "dessa cozinha" },
+    { highlight: "O CRONOGRAMA", text: "dessa cozinha" },
   ];
 
   return (
@@ -26,47 +26,50 @@ const TransformationSection = () => {
         </div>
 
         {/* Before/After Images - Side by Side */}
-        <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 mb-12 reveal">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-14 reveal">
           {/* Before */}
-          <div className="flex flex-col items-center">
-            <div className="relative overflow-hidden border-2 border-foreground shadow-hard">
+          <div className="flex flex-col items-center text-center">
+            <div className="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
               <img 
                 src={cozinhaAntes} 
                 alt="Cozinha antes da reforma" 
-                className="w-64 md:w-80 h-48 md:h-60 object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                className="w-full max-w-sm h-auto object-contain grayscale hover:grayscale-0 transition-all duration-500"
               />
             </div>
-            <span className="mt-4 text-lg md:text-xl font-black uppercase tracking-widest">Disso</span>
-          </div>
-
-          {/* Arrow */}
-          <div className="flex items-center justify-center py-4 md:py-0">
-            <div className="bg-primary p-3 md:p-4 rounded-full border-2 border-foreground shadow-hard">
-              <ArrowRight className="w-6 h-6 md:w-8 md:h-8 text-foreground rotate-90 md:rotate-0" />
+            <div className="mt-6 space-y-2">
+              <span className="text-2xl md:text-3xl font-black uppercase tracking-wider text-foreground">Disso...</span>
+              <p className="text-sm md:text-base text-muted-foreground max-w-xs">
+                Obra sem planejamento, prazos estourados e estresse
+              </p>
             </div>
           </div>
 
           {/* After */}
-          <div className="flex flex-col items-center">
-            <div className="relative overflow-hidden border-2 border-foreground shadow-hard">
+          <div className="flex flex-col items-center text-center">
+            <div className="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
               <img 
                 src={cozinhaDepois} 
                 alt="Cozinha depois da reforma" 
-                className="w-64 md:w-80 h-48 md:h-60 object-cover"
+                className="w-full max-w-sm h-auto object-contain hover:scale-[1.02] transition-transform duration-500"
               />
             </div>
-            <span className="mt-4 text-lg md:text-xl font-black uppercase tracking-widest">Para isso</span>
+            <div className="mt-6 space-y-2">
+              <span className="text-2xl md:text-3xl font-black uppercase tracking-wider text-primary">Para isso!</span>
+              <p className="text-sm md:text-base text-muted-foreground max-w-xs">
+                Obra organizada, cliente satisfeita e resultado impecável
+              </p>
+            </div>
           </div>
         </div>
 
         {/* Steps */}
-        <div className="bg-background border-2 border-foreground shadow-hard p-6 md:p-8 mb-10 reveal">
+        <div className="bg-card border border-border shadow-lg rounded-xl p-6 md:p-8 mb-10 reveal">
           <ul className="space-y-4">
             {steps.map((step, index) => (
               <li key={index} className="flex items-start gap-3">
                 <span className="text-primary font-black text-lg">•</span>
-                <p className="text-sm md:text-base font-medium uppercase tracking-wide">
-                  Vamos montar um <span className="font-black text-primary">{step.highlight}</span> {step.text}
+                <p className="text-sm md:text-base font-medium">
+                  Vamos montar o <span className="font-black text-primary uppercase">{step.highlight}</span> {step.text}
                 </p>
               </li>
             ))}
@@ -77,7 +80,7 @@ const TransformationSection = () => {
         <div className="text-center reveal">
           <button 
             onClick={scrollToForm}
-            className="group bg-primary text-foreground py-4 px-8 text-xs font-black uppercase tracking-widest border-2 border-foreground shadow-hard hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all duration-300 flex items-center gap-3 mx-auto"
+            className="group bg-primary text-primary-foreground py-4 px-8 text-xs font-black uppercase tracking-widest rounded-lg shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 flex items-center gap-3 mx-auto"
           >
             <span>QUERO PARTICIPAR DA IMERSÃO</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
