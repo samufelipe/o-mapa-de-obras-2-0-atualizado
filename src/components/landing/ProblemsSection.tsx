@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 const problems = [
   {
     title: "Maior Faturamento",
-    description: "É o domínio da obra — sequência de serviços, cronograma e planejamento — que permite projetar melhor, evitar erros, passar segurança ao cliente e, principalmente, oferecer serviços muito mais lucrativos, como acompanhamento e gerenciamento de obra.",
+    description: "É o domínio da obra, sequência de serviços, cronograma e planejamento, que permite projetar melhor, evitar erros, passar segurança ao cliente e, principalmente, oferecer serviços muito mais lucrativos, como acompanhamento e gerenciamento de obra.",
   },
   {
     title: "Fim do Retrabalho",
