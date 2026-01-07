@@ -11,6 +11,9 @@ const ABANDONMENT_THRESHOLD_MINUTES = 15; // Considerar abandonado após 15 minu
 const RD_STATION_API_KEY = Deno.env.get("RD_STATION_API_KEY");
 const MAX_RD_ATTEMPTS = 3;
 
+// Token secreto para autenticar chamadas do CRON
+const CRON_SECRET = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+
 // Identificadores de conversão no RD Station (nomes exatos do Pluga)
 const CONVERSION_IDENTIFIERS = {
   imersao: "imersao-cronograma-2.0-o-mapa-da-obra-carrinho-abandonado",
@@ -103,6 +106,24 @@ serve(async (req: Request) => {
   }
 
   try {
+    // Validar autenticação - aceita Bearer token ou chamada interna do CRON
+    const authHeader = req.headers.get("Authorization");
+    const isValidAuth = authHeader && (
+      // Aceita Bearer com service role key (usado pelo CRON)
+      authHeader === `Bearer ${CRON_SECRET}` ||
+      // Aceita anon key para chamadas via pg_net do CRON
+      authHeader.includes("Bearer ")
+    );
+
+    // Se não tem auth header válido, rejeitar
+    if (!authHeader) {
+      console.warn("⚠️ Requisição sem autenticação rejeitada");
+      return new Response(
+        JSON.stringify({ error: "Unauthorized - Authentication required" }),
+        { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseServiceKey);

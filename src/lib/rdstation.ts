@@ -1,9 +1,9 @@
-import { CONFIG } from "./config";
+import { supabase } from "@/integrations/supabase/client";
 
 // ============================================
 // RD STATION MARKETING INTEGRATION
-// Usando API de Conversões (método oficial)
-// Documentação: https://developers.rdstation.com/reference/conversao
+// Os leads são enviados via edge function (server-side)
+// para proteger a API key
 // ============================================
 
 export interface LeadData {
@@ -41,88 +41,48 @@ export const getUtmParams = (): Partial<LeadData> => {
 };
 
 /**
- * Envia os dados do lead para o RD Station via API de Conversões
+ * Envia os dados do lead para o RD Station via edge function
+ * A API key é mantida segura no backend
  */
 export const submitToRDStation = async (
   data: LeadData
 ): Promise<RDStationResponse> => {
-  const { apiKey, conversionIdentifier } = CONFIG.rdStation;
-  
-  // Verificar se a API Key está configurada
-  if (!apiKey || apiKey.length < 10) {
-    console.warn("⚠️ RD Station API Key não configurada");
-    // Em desenvolvimento, simular sucesso
-    if (import.meta.env.DEV) {
-      console.log("📤 [DEV] Simulando envio para RD Station:", data);
-      return { success: true, message: "Simulação de envio (dev mode)" };
-    }
-    return { success: false, message: "API Key não configurada" };
-  }
-  
   // Capturar UTMs da URL
   const utmParams = getUtmParams();
   
-  // Montar payload no formato da API de Conversões do RD Station
-  const payload = {
-    event_type: "CONVERSION",
-    event_family: "CDP",
-    payload: {
-      conversion_identifier: conversionIdentifier,
-      name: data.name,
-      email: data.email,
-      personal_phone: formatPhoneForRD(data.phone),
-      mobile_phone: formatPhoneForRD(data.phone),
-      
-      // Campos customizados para UTMs
-      cf_utm_source: utmParams.utmSource || "direct",
-      cf_utm_medium: utmParams.utmMedium || "",
-      cf_utm_campaign: utmParams.utmCampaign || "",
-      cf_utm_content: utmParams.utmContent || "",
-      cf_utm_term: utmParams.utmTerm || "",
-      cf_pagina_origem: typeof window !== "undefined" ? window.location.href : "",
-      cf_data_inscricao: new Date().toISOString(),
-      cf_status_cronograma: "inscrito",
-    },
-  };
-  
-  const apiUrl = `https://api.rd.services/platform/conversions?api_key=${apiKey}`;
-  
   try {
-    console.log("📤 Enviando lead para RD Station...", { 
+    console.log("📤 Enviando lead via edge function...", { 
       email: data.email,
-      conversion: conversionIdentifier 
     });
     
-    const response = await fetch(apiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-      },
-      body: JSON.stringify(payload),
+    const { data: response, error } = await supabase.functions.invoke('log-checkout-intent', {
+      body: {
+        product: "imersao", // Default product
+        email: data.email,
+        name: data.name,
+        phone: data.phone,
+        utm_source: utmParams.utmSource || "direct",
+        utm_medium: utmParams.utmMedium,
+        utm_campaign: utmParams.utmCampaign,
+        utm_content: utmParams.utmContent,
+        utm_term: utmParams.utmTerm,
+        page_url: typeof window !== "undefined" ? window.location.href : "",
+      }
     });
     
-    if (response.ok) {
-      console.log("✅ Lead enviado para RD Station com sucesso");
+    if (error) {
+      console.error("❌ Erro ao enviar lead:", error);
       return {
-        success: true,
-        message: "Lead registrado com sucesso",
+        success: false,
+        message: error.message || "Erro ao enviar dados",
       };
     }
     
-    // Tratar erros da API
-    const errorData = await response.json().catch(() => ({}));
-    console.error("❌ Erro da API do RD Station:", response.status, errorData);
-    
-    if (response.status === 401) {
-      return { success: false, message: "API Key inválida" };
-    }
-    
-    if (response.status === 400 || response.status === 422) {
-      return { success: false, message: "Dados inválidos enviados para RD Station" };
-    }
-    
-    return { success: false, message: `Erro ${response.status} ao enviar dados` };
+    console.log("✅ Lead registrado com sucesso");
+    return {
+      success: true,
+      message: "Lead registrado com sucesso",
+    };
     
   } catch (error) {
     console.error("❌ Erro ao enviar para RD Station:", error);
