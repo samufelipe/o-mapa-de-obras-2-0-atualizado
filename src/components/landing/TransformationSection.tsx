@@ -1,9 +1,12 @@
-import { ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import cozinhaAntes from "@/assets/cozinha-antes.jpg";
 import cozinhaDepois from "@/assets/cozinha-depois.jpg";
 import { trackCTAClick } from "@/lib/gtm-tracking";
 
 const TransformationSection = () => {
+  const [showAfter, setShowAfter] = useState(false);
+
   const scrollToForm = () => {
     trackCTAClick("transformation_cta", "transformation_section", "QUERO PARTICIPAR DA IMERSÃO");
     const el = document.getElementById('hero');
@@ -25,37 +28,80 @@ const TransformationSection = () => {
           </h2>
         </div>
 
-        {/* Before/After Images */}
-        <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 mb-12 reveal">
-          {/* Before */}
-          <div className="flex flex-col items-center">
-            <div className="relative overflow-hidden border-2 border-foreground shadow-hard">
-              <img 
-                src={cozinhaAntes} 
-                alt="Cozinha antes da reforma" 
-                className="w-64 md:w-80 h-48 md:h-60 object-cover grayscale hover:grayscale-0 transition-all duration-500"
-              />
+        {/* Interactive Slider */}
+        <div className="relative mb-12 reveal">
+          {/* Images Container */}
+          <div className="relative overflow-hidden border-2 border-foreground shadow-hard mx-auto max-w-3xl">
+            <div 
+              className="flex transition-transform duration-500 ease-out"
+              style={{ transform: showAfter ? 'translateX(-50%)' : 'translateX(0)' }}
+            >
+              {/* Before Image */}
+              <div className="w-full flex-shrink-0 relative">
+                <img 
+                  src={cozinhaAntes} 
+                  alt="Cozinha antes da reforma" 
+                  className="w-full h-64 md:h-96 object-cover"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-foreground/90 to-transparent p-4 md:p-6">
+                  <span className="text-background text-lg md:text-2xl font-black uppercase tracking-widest">
+                    Disso...
+                  </span>
+                  <p className="text-background/80 text-xs md:text-sm mt-1">
+                    Obra sem planejamento, prazos estourados, retrabalho
+                  </p>
+                </div>
+              </div>
+
+              {/* After Image */}
+              <div className="w-full flex-shrink-0 relative">
+                <img 
+                  src={cozinhaDepois} 
+                  alt="Cozinha depois da reforma" 
+                  className="w-full h-64 md:h-96 object-cover"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-foreground/90 to-transparent p-4 md:p-6">
+                  <span className="text-primary text-lg md:text-2xl font-black uppercase tracking-widest">
+                    Para isso! ✨
+                  </span>
+                  <p className="text-background/80 text-xs md:text-sm mt-1">
+                    Resultado impecável, cliente satisfeita, obra entregue no prazo
+                  </p>
+                </div>
+              </div>
             </div>
-            <span className="mt-4 text-lg md:text-xl font-black uppercase tracking-widest">Disso</span>
+
+            {/* Navigation Arrows */}
+            <button 
+              onClick={() => setShowAfter(false)}
+              className={`absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-background/90 border-2 border-foreground p-2 md:p-3 transition-all duration-300 ${!showAfter ? 'opacity-30 cursor-default' : 'hover:bg-primary shadow-hard'}`}
+              disabled={!showAfter}
+            >
+              <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
+            </button>
+            <button 
+              onClick={() => setShowAfter(true)}
+              className={`absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-background/90 border-2 border-foreground p-2 md:p-3 transition-all duration-300 ${showAfter ? 'opacity-30 cursor-default' : 'hover:bg-primary shadow-hard'}`}
+              disabled={showAfter}
+            >
+              <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
+            </button>
           </div>
 
-          {/* Arrow */}
-          <div className="flex items-center justify-center py-4 md:py-0">
-            <div className="bg-primary p-3 md:p-4 rounded-full border-2 border-foreground shadow-hard">
-              <ArrowRight className="w-6 h-6 md:w-8 md:h-8 text-foreground rotate-90 md:rotate-0" />
-            </div>
-          </div>
-
-          {/* After */}
-          <div className="flex flex-col items-center">
-            <div className="relative overflow-hidden border-2 border-foreground shadow-hard">
-              <img 
-                src={cozinhaDepois} 
-                alt="Cozinha depois da reforma" 
-                className="w-64 md:w-80 h-48 md:h-60 object-cover"
-              />
-            </div>
-            <span className="mt-4 text-lg md:text-xl font-black uppercase tracking-widest">Para isso</span>
+          {/* Slider Indicators */}
+          <div className="flex justify-center gap-3 mt-6">
+            <button 
+              onClick={() => setShowAfter(false)}
+              className={`px-4 py-2 text-[10px] font-black uppercase tracking-widest border-2 border-foreground transition-all duration-300 ${!showAfter ? 'bg-foreground text-background shadow-hard' : 'bg-background hover:bg-muted'}`}
+            >
+              Antes
+            </button>
+            <button 
+              onClick={() => setShowAfter(true)}
+              className={`px-4 py-2 text-[10px] font-black uppercase tracking-widest border-2 border-foreground transition-all duration-300 ${showAfter ? 'bg-primary text-foreground shadow-hard' : 'bg-background hover:bg-muted'}`}
+            >
+              Depois
+            </button>
           </div>
         </div>
 
