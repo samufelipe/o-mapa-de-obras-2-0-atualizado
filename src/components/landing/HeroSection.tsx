@@ -110,13 +110,18 @@ const HeroSection = () => {
     }
     
     // Add query params to pre-fill checkout
-    // Hotmart uses specific parameter names: name, email, phonenumber
+    // Hotmart uses: name, email, phoneac (DDD), phonenumber (número)
     const phoneClean = formData.phone.replace(/\D/g, "");
     const params = new URLSearchParams({
       name: formData.name,
       email: formData.email,
-      phonenumber: phoneClean,
     });
+    
+    // Separar DDD e número para a Hotmart
+    if (phoneClean.length >= 10) {
+      params.set("phoneac", phoneClean.substring(0, 2));
+      params.set("phonenumber", phoneClean.substring(2));
+    }
     
     // Preserve UTM params
     const currentParams = new URLSearchParams(window.location.search);
