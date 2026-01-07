@@ -4,11 +4,10 @@ export const AGENDA = [
     date: "SÁBADO 31/01 • 09:00 - 12:00",
     title: "Fundamentos da Execução Inteligente",
     topics: [
-      "Contexto e Depoimentos: Por que arquitetas que dominam obra ganham até 3x mais honorários",
-      "O que Elas Desejam: Entenda exatamente o que suas clientes esperam (e como entregar além)",
-      "Planejamento da Obra: O passo-a-passo que elimina 80% dos problemas antes de começar",
-      "Escopo de Obra com IA: Atividade prática para criar escopos profissionais em minutos",
-      "Sequência de Serviços com IA: Monte a ordem perfeita que protege acabamentos caros"
+      "Por que profissionais que dominam obra ganham até 3x mais",
+      "Planejamento da Obra: O passo-a-passo que elimina 80% dos problemas antes de começar a obra",
+      "Escopo de Obra: Atividade prática para criar escopos profissionais e uso de IA",
+      "Sequência de Serviços: Monte a ordem perfeita que evita retrabalho"
     ]
   },
   {
@@ -19,7 +18,7 @@ export const AGENDA = [
       "Cronograma de Obra em 8 Passos: O método validado para nunca mais errar prazos",
       "Exercício Prático: Você vai sair com seu cronograma pronto para usar",
       "Como Ganhar Mais: Estratégias para cobrar honorários premium pelo gerenciamento",
-      "Planejamento do Seu Negócio: Para quem a Mentoria é o próximo passo ideal"
+      "Planejando faturar mais: conheça o seu próximo passo e como se tornar uma profissional da gestão de obra com a Mentoria Inovando na Sua Obra"
     ],
     surprise: {
       title: "Momento Especial",
