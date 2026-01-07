@@ -287,20 +287,17 @@ const HeroSection = () => {
             </div>
             
             <h1 className="text-2xl md:text-4xl lg:text-5xl font-black tracking-tight leading-[1.1]">
-              <span className="text-primary italic block animate-fade-in" style={{ animationDelay: '0.1s', animationFillMode: 'both' }}>Imersão Cronograma 2.0</span>
-              <span className="text-primary italic block text-xl md:text-3xl lg:text-4xl animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'both' }}>O Mapa da Obra de Interiores</span>
+              <span className="text-foreground block animate-fade-in" style={{ animationDelay: '0.1s', animationFillMode: 'both' }}>PROJETOS INCRÍVEIS NÃO SOBREVIVEM À OBRA</span>
+              <span className="text-primary italic block text-xl md:text-3xl lg:text-4xl animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'both' }}>SEM MÉTODO.</span>
             </h1>
             
             <h2 className="text-lg md:text-2xl lg:text-3xl font-bold tracking-tight text-muted-foreground animate-fade-in" style={{ animationDelay: '0.5s', animationFillMode: 'both' }}>
-              Domine a sequência exata de uma reforma de interiores em apenas um dia.
+              Entenda por que dominar o cronograma e entender de obra é o que separa arquitetos profissionais dos amadores que vivem no prejuízo.
             </h2>
             
             <div className="text-sm md:text-base text-muted-foreground max-w-lg mx-auto lg:mx-0 font-medium leading-relaxed space-y-3">
               <p>
-                A virada de chave que toda arquiteta precisa para começar 2026 com <strong className="text-foreground">mais autoridade, previsibilidade e valorização.</strong>
-              </p>
-              <p className="text-primary font-bold">
-                + 8 aulas preparatórias com acesso imediato para você chegar pronta.
+                É o domínio da obra — sequência de serviços, cronograma e planejamento — que permite projetar melhor, evitar erros, passar segurança ao cliente e, principalmente, <strong className="text-foreground">oferecer serviços muito mais lucrativos, como acompanhamento e gerenciamento de obra.</strong>
               </p>
             </div>
 
