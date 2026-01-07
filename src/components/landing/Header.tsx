@@ -13,7 +13,7 @@ const Header = () => {
           <img 
             src={logoIcon} 
             alt="Cronograma 2.0" 
-            className="h-16 md:h-20 w-auto"
+            className="h-20 md:h-20 w-auto"
           />
           <div className="hidden sm:flex flex-col">
             <span className="text-xs md:text-sm font-bold text-foreground tracking-wide">Cronograma 2.0</span>
