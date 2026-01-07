@@ -29,12 +29,14 @@ const TransformationSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-14 reveal">
           {/* Before */}
           <div className="flex flex-col items-center text-center">
-            <div className="relative overflow-hidden rounded-xl border-2 border-foreground shadow-hard hover:shadow-lg transition-all duration-300 w-full">
-              <img 
-                src={cozinhaAntes} 
-                alt="Cozinha antes da reforma" 
-                className="w-full h-[500px] md:h-[600px] object-cover grayscale hover:grayscale-0 transition-all duration-500"
-              />
+            <div className="relative overflow-hidden rounded-xl border-2 border-foreground shadow-hard hover:shadow-lg transition-all duration-300 w-full bg-muted">
+              <div className="aspect-[3/4] flex items-center justify-center">
+                <img 
+                  src={cozinhaAntes} 
+                  alt="Cozinha antes da reforma" 
+                  className="w-full h-full object-contain grayscale hover:grayscale-0 transition-all duration-500"
+                />
+              </div>
             </div>
             <div className="mt-6 space-y-2">
               <span className="text-2xl md:text-3xl font-black uppercase tracking-wider text-foreground">Disso...</span>
@@ -46,16 +48,18 @@ const TransformationSection = () => {
 
           {/* After */}
           <div className="flex flex-col items-center text-center">
-            <div className="relative overflow-hidden rounded-xl border-2 border-primary shadow-gold hover:-translate-y-1 transition-all duration-300 w-full">
+            <div className="relative overflow-hidden rounded-xl border-2 border-primary shadow-gold hover:-translate-y-1 transition-all duration-300 w-full bg-muted">
               {/* Badge */}
               <div className="absolute top-0 left-0 right-0 bg-primary text-primary-foreground text-xs font-black uppercase tracking-widest py-2 text-center z-10">
                 Resultado Final
               </div>
-              <img 
-                src={cozinhaDepois} 
-                alt="Cozinha depois da reforma" 
-                className="w-full h-[500px] md:h-[600px] object-cover hover:scale-[1.02] transition-transform duration-500"
-              />
+              <div className="aspect-[3/4] flex items-center justify-center">
+                <img 
+                  src={cozinhaDepois} 
+                  alt="Cozinha depois da reforma" 
+                  className="w-full h-full object-contain hover:scale-[1.02] transition-transform duration-500"
+                />
+              </div>
             </div>
             <div className="mt-6 space-y-2">
               <span className="text-2xl md:text-3xl font-black uppercase tracking-wider text-primary">Para isso!</span>
