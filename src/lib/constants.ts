@@ -57,13 +57,13 @@ export const BONUSES = [
   },
   {
     title: "Modelo de Cronograma",
-    value: "R$ 197,00",
+    value: "R$ 59,90",
     description: "Template pronto para aplicar no seu escritório e nas suas obras. Personalize e tenha controle absoluto de cada projeto.",
     release: "LIBERADO PÓS-LIVE (31/01)"
   },
   {
     title: "Guia de Prompts de IA para Obras",
-    value: "R$ 59,90",
+    value: "R$ 50,00",
     description: "Ferramenta de organização para garantir que nenhum detalhe passe despercebido no levantamento e planejamento da obra.",
     release: "LIBERADO PÓS-LIVE (31/01)"
   }
@@ -111,7 +111,7 @@ export const PRICING_ITEMS = [
   { name: "Imersão Cronograma 2.0 (Ao Vivo)", price: "R$ 197,00" },
   { name: "8 Aulas Preparatórias (Acesso Imediato)", price: "R$ 197,00" },
   { name: "Apostila de Acompanhamento", price: "R$ 80,00" },
-  { name: "Modelo de Cronograma", price: "R$ 197,00" },
-  { name: "Guia de Prompts de IA para Obras", price: "R$ 59,90" },
+  { name: "Modelo de Cronograma", price: "R$ 59,90" },
+  { name: "Guia de Prompts de IA para Obras", price: "R$ 50,00" },
   { name: "Acesso ao Grupo VIP", price: "Incluso" },
 ];

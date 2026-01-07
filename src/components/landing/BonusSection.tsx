@@ -58,7 +58,7 @@ const BonusSection = () => {
                   {item.name}
                 </span>
                 <span className={item.price === "Incluso" ? "text-primary bg-primary/10 px-2 py-0.5" : "text-background/40"}>
-                  {item.price === "Incluso" ? item.price : `PAGARIA: ${item.price}`}
+                  {item.price}
                 </span>
               </div>
             ))}
@@ -66,7 +66,7 @@ const BonusSection = () => {
 
           <div className="mb-8 text-center">
             <p className="text-background/60 text-[9px] font-bold uppercase tracking-widest mb-1">
-              Preço total se comprado separadamente: <span className="line-through text-background/40">R$ 671,00</span>
+              Preço total se comprado separadamente: <span className="line-through text-background/40">R$ 583,90</span>
             </p>
             
             <div className="mb-2">
