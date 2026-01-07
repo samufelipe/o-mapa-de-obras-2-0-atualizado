@@ -292,7 +292,7 @@ const HeroSection = () => {
             </h1>
             
             <h2 className="text-lg md:text-2xl lg:text-3xl font-bold tracking-tight text-muted-foreground animate-fade-in" style={{ animationDelay: '0.5s', animationFillMode: 'both' }}>
-              A Sequência que Protege seu Design e seu Lucro.
+              Domine a sequência exata de uma reforma de interiores em apenas um dia.
             </h2>
             
             <div className="text-sm md:text-base text-muted-foreground max-w-lg mx-auto lg:mx-0 font-medium leading-relaxed space-y-3">

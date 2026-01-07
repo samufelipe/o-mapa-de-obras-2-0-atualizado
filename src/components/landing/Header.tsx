@@ -16,8 +16,8 @@ const Header = () => {
             className="h-12 md:h-14 w-auto"
           />
           <div className="hidden sm:flex flex-col">
-            <span className="text-xs md:text-sm font-bold text-foreground tracking-wide">CRONOGRAMA 2.0</span>
-            <span className="text-[10px] md:text-xs text-primary font-medium">O Mapa da Obra</span>
+            <span className="text-xs md:text-sm font-bold text-foreground tracking-wide">Cronograma 2.0</span>
+            <span className="text-[10px] md:text-xs text-primary font-medium">O Mapa da Obra de Interiores</span>
           </div>
         </div>
         
