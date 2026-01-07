@@ -1,4 +1,4 @@
-import { CheckCircle2, ArrowRight, Sparkles } from "lucide-react";
+import { CheckCircle2, ArrowRight } from "lucide-react";
 import { AGENDA } from "@/lib/constants";
 
 interface AgendaItem {
@@ -23,7 +23,7 @@ const ScheduleSection = () => {
       <div className="container mx-auto px-4 max-w-4xl text-center">
         <div className="mb-16 space-y-4">
           <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight">Dinâmica da Imersão</h2>
-          <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Um dia inteiro focado na sua transformação técnica</p>
+          <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Um dia inteiro focado na sua transformação técnica</p>
           <div className="w-12 h-1 bg-primary mx-auto"></div>
         </div>
         
@@ -45,7 +45,7 @@ const ScheduleSection = () => {
                 <div className="mt-6 pt-4 border-t border-primary/30">
                   <div className="bg-primary/10 border border-primary/30 p-4 rounded-sm">
                     <div className="flex items-center gap-2 mb-2">
-                      <Sparkles className="w-4 h-4 text-primary" />
+                      <span className="text-base">💛</span>
                       <span className="text-[10px] font-black text-primary uppercase tracking-widest">
                         {item.surprise.title}
                       </span>
