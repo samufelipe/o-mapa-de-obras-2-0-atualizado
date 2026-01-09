@@ -33,3 +33,6 @@ verify_jwt = false
 
 [functions.abandonment-sweeper]
 verify_jwt = false
+
+[functions.test-hotmart-webhook]
+verify_jwt = false
