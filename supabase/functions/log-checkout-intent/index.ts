@@ -119,39 +119,50 @@ serve(async (req: Request) => {
       );
     }
 
-    // Enviar para RD Station primeiro
-    const rdResult = await sendToRDStation(body);
-
-    // Salvar no banco de dados
+    // Executar RD Station e banco em PARALELO para maior velocidade
     const today = new Date().toISOString().split("T")[0];
     
-    const { data, error } = await supabase
-      .from("checkout_intents")
-      .upsert(
-        {
-          email: body.email.toLowerCase().trim(),
-          product: body.product,
-          name: body.name || null,
-          phone: body.phone || null,
-          utm_source: body.utm_source || "direct",
-          utm_medium: body.utm_medium || null,
-          utm_campaign: body.utm_campaign || null,
-          utm_content: body.utm_content || null,
-          utm_term: body.utm_term || null,
-          page_url: body.page_url || null,
-          intent_date: today,
-          status: "started",
+    const [rdResult, dbResult] = await Promise.all([
+      sendToRDStation(body),
+      supabase
+        .from("checkout_intents")
+        .upsert(
+          {
+            email: body.email.toLowerCase().trim(),
+            product: body.product,
+            name: body.name || null,
+            phone: body.phone || null,
+            utm_source: body.utm_source || "direct",
+            utm_medium: body.utm_medium || null,
+            utm_campaign: body.utm_campaign || null,
+            utm_content: body.utm_content || null,
+            utm_term: body.utm_term || null,
+            page_url: body.page_url || null,
+            intent_date: today,
+            status: "started",
+            rd_attempts: 1,
+          },
+          {
+            onConflict: "email,product,intent_date",
+            ignoreDuplicates: false,
+          }
+        )
+        .select()
+        .single()
+    ]);
+
+    const { data, error } = dbResult;
+    
+    // Atualizar registro com resultado do RD Station
+    if (data && !error) {
+      await supabase
+        .from("checkout_intents")
+        .update({
           sent_to_rd_at: rdResult.success ? new Date().toISOString() : null,
           rd_response: rdResult.response || rdResult.error || null,
-          rd_attempts: 1,
-        },
-        {
-          onConflict: "email,product,intent_date",
-          ignoreDuplicates: false,
-        }
-      )
-      .select()
-      .single();
+        })
+        .eq("id", data.id);
+    }
 
     if (error) {
       console.error("❌ Erro ao inserir checkout intent:", error);

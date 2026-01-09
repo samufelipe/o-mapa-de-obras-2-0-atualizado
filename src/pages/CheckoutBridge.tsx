@@ -60,10 +60,15 @@ export default function CheckoutBridge() {
       };
 
       try {
-        // Fire-and-forget: Registrar checkout intent via Edge Function (não bloqueia)
+        // Registrar checkout intent via Edge Function (síncrono com timeout)
         console.log("📤 Registrando checkout intent...", { email, product: validProduct });
         
-        supabase.functions.invoke("log-checkout-intent", {
+        // Timeout de 3 segundos para não bloquear muito
+        const timeoutPromise = new Promise((_, reject) => 
+          setTimeout(() => reject(new Error("Timeout")), 3000)
+        );
+        
+        const invokePromise = supabase.functions.invoke("log-checkout-intent", {
           body: {
             product: validProduct,
             email: email.toLowerCase().trim(),
@@ -72,13 +77,19 @@ export default function CheckoutBridge() {
             ...utmData,
             page_url: window.location.href,
           },
-        }).then(({ data, error: fnError }) => {
+        });
+
+        try {
+          const { data, error: fnError } = await Promise.race([invokePromise, timeoutPromise]) as { data: unknown; error: Error | null };
+          
           if (fnError) {
             console.error("❌ Erro ao registrar intent:", fnError);
           } else {
             console.log("✅ Checkout intent registrado:", data);
           }
-        }).catch(err => console.error("❌ Erro:", err));
+        } catch (timeoutErr) {
+          console.warn("⏱️ Timeout no registro (sweeper vai pegar):", timeoutErr);
+        }
 
         // Montar URL do checkout com parâmetros
         const checkoutUrl = new URL(CHECKOUT_URLS[validProduct]);
@@ -107,11 +118,9 @@ export default function CheckoutBridge() {
 
         setStatus("redirecting");
 
-        // Redirecionar imediatamente (backend é fire-and-forget)
+        // Redirecionar imediatamente após registro
         console.log("🔗 Redirecionando para:", checkoutUrl.toString());
-        setTimeout(() => {
-          window.location.href = checkoutUrl.toString();
-        }, 200);
+        window.location.href = checkoutUrl.toString();
 
       } catch (err) {
         console.error("❌ Erro no processamento:", err);
