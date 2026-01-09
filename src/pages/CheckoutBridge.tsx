@@ -60,10 +60,10 @@ export default function CheckoutBridge() {
       };
 
       try {
-        // Registrar checkout intent via Edge Function
+        // Fire-and-forget: Registrar checkout intent via Edge Function (não bloqueia)
         console.log("📤 Registrando checkout intent...", { email, product: validProduct });
         
-        const { data, error: fnError } = await supabase.functions.invoke("log-checkout-intent", {
+        supabase.functions.invoke("log-checkout-intent", {
           body: {
             product: validProduct,
             email: email.toLowerCase().trim(),
@@ -72,14 +72,13 @@ export default function CheckoutBridge() {
             ...utmData,
             page_url: window.location.href,
           },
-        });
-
-        if (fnError) {
-          console.error("❌ Erro ao registrar intent:", fnError);
-          // Continuar mesmo com erro - não bloquear checkout
-        } else {
-          console.log("✅ Checkout intent registrado:", data);
-        }
+        }).then(({ data, error: fnError }) => {
+          if (fnError) {
+            console.error("❌ Erro ao registrar intent:", fnError);
+          } else {
+            console.log("✅ Checkout intent registrado:", data);
+          }
+        }).catch(err => console.error("❌ Erro:", err));
 
         // Montar URL do checkout com parâmetros
         const checkoutUrl = new URL(CHECKOUT_URLS[validProduct]);
@@ -108,12 +107,11 @@ export default function CheckoutBridge() {
 
         setStatus("redirecting");
 
-        // Aguardar um momento para garantir que o registro foi feito
-        await new Promise((resolve) => setTimeout(resolve, 500));
-
-        // Redirecionar para o checkout
+        // Redirecionar imediatamente (backend é fire-and-forget)
         console.log("🔗 Redirecionando para:", checkoutUrl.toString());
-        window.location.href = checkoutUrl.toString();
+        setTimeout(() => {
+          window.location.href = checkoutUrl.toString();
+        }, 200);
 
       } catch (err) {
         console.error("❌ Erro no processamento:", err);
