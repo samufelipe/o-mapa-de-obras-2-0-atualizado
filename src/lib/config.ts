@@ -39,7 +39,7 @@ export const CONFIG = {
     redirectDelay: 2000,
     
     // Mensagem de transição
-    redirectMessage: "Redirecionando para pagamento seguro...",
+    redirectMessage: "Abrindo página de pagamento...",
   },
 } as const;
 

@@ -151,10 +151,13 @@ export default function CheckoutBridge() {
       <div className="text-center p-8">
         <Loader2 className="h-12 w-12 animate-spin text-primary mx-auto mb-6" />
         <h1 className="text-2xl font-bold text-foreground mb-2">
-          {status === "loading" ? "Preparando seu acesso..." : "Redirecionando para pagamento seguro..."}
+          {status === "loading" ? "Abrindo página de pagamento..." : "Redirecionando para checkout..."}
         </h1>
-        <p className="text-muted-foreground">
+        <p className="text-muted-foreground mb-2">
           {productName}
+        </p>
+        <p className="text-sm text-primary font-semibold">
+          Falta só o último passo para garantir sua vaga!
         </p>
       </div>
     </div>
