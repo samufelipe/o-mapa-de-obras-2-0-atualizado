@@ -36,7 +36,7 @@ export const CONFIG = {
   // Configurações do formulário
   form: {
     // Tempo de exibição da tela de transição antes do redirect (em ms)
-    redirectDelay: 2000,
+    redirectDelay: 800,
     
     // Mensagem de transição
     redirectMessage: "Abrindo página de pagamento...",

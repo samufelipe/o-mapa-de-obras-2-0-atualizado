@@ -2,7 +2,6 @@ import { Trophy, Video, Lock, Clock, Users, Star, ShieldCheck, ArrowRight, Loade
 import { useState, useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { CONFIG } from "@/lib/config";
-import { submitToRDStation } from "@/lib/rdstation";
 import { trackLead, trackInitiateCheckout } from "@/lib/tracking";
 import { validateLeadForm, applyPhoneMask, type LeadFormData } from "@/lib/validations";
 import { 
@@ -193,15 +192,7 @@ const HeroSection = () => {
     setErrors({});
     
     try {
-      // Submit to RD Station
-      const rdResponse = await submitToRDStation(result.data!);
-      
-      if (!rdResponse.success) {
-        // Log error but continue - don't block user from checkout
-        console.warn("RD Station error:", rdResponse.message);
-      }
-      
-      // Track lead event (Meta Pixel + GTM)
+      // Track lead event (Meta Pixel + GTM) - non-blocking
       trackLead(result.data!);
       trackFormSubmit(result.data!);
       trackLeadGenerated("landing_page_form");
@@ -210,13 +201,13 @@ const HeroSection = () => {
       
       toast({
         title: "Dados registrados!",
-        description: "Redirecionando para o pagamento seguro...",
+        description: "Redirecionando para o pagamento...",
       });
       
-      // Redirect to Hotmart after brief success state
+      // Redirect immediately after brief visual feedback
       setTimeout(() => {
         redirectToHotmart();
-      }, 500);
+      }, 300);
 
     } catch (error) {
       console.error("Form submission error:", error);
