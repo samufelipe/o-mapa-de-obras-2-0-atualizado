@@ -117,6 +117,9 @@ serve(async (req: Request) => {
       product,
     });
 
+    // Extrair ID da transação Hotmart para referência
+    const transactionId = body.data?.purchase?.transaction || null;
+
     // Buscar e marcar como purchased todos os intents pendentes deste email/produto
     const { data: intents, error: selectError } = await supabase
       .from("checkout_intents")
@@ -129,20 +132,29 @@ serve(async (req: Request) => {
       console.error("❌ Erro ao buscar intents:", selectError);
     }
 
+    let updatedIntentIds: string[] = [];
+    
     if (intents && intents.length > 0) {
       console.log(`📝 Encontrados ${intents.length} intents para marcar como purchased`);
       
-      const { error: updateError } = await supabase
+      // Marcar como purchased com dados de auditoria
+      const { data: updatedIntents, error: updateError } = await supabase
         .from("checkout_intents")
-        .update({ status: "purchased" })
+        .update({ 
+          status: "purchased",
+          purchased_at: new Date().toISOString(),
+          hotmart_transaction_id: transactionId,
+        })
         .eq("email", email.toLowerCase().trim())
         .eq("product", product)
-        .eq("status", "started");
+        .eq("status", "started")
+        .select("id");
 
       if (updateError) {
         console.error("❌ Erro ao atualizar intents:", updateError);
       } else {
-        console.log("✅ Intents marcados como purchased");
+        console.log("✅ Intents marcados como purchased com auditoria");
+        updatedIntentIds = updatedIntents?.map(i => i.id) || [];
       }
     } else {
       console.log("ℹ️ Nenhum intent pendente encontrado para este email/produto");
@@ -199,11 +211,31 @@ serve(async (req: Request) => {
       console.warn("⚠️ RD_STATION_API_KEY não configurada, evento de compra não enviado");
     }
 
+    // Registrar auditoria do envio ao RD Station nos intents atualizados
+    if (updatedIntentIds.length > 0) {
+      const { error: auditError } = await supabase
+        .from("checkout_intents")
+        .update({
+          purchase_sent_to_rd_at: RD_STATION_API_KEY ? new Date().toISOString() : null,
+          purchase_rd_success: rdSuccess,
+        })
+        .in("id", updatedIntentIds);
+
+      if (auditError) {
+        console.error("❌ Erro ao registrar auditoria RD:", auditError);
+      } else {
+        console.log("✅ Auditoria de envio ao RD registrada:", {
+          intents_updated: updatedIntentIds.length,
+          rd_success: rdSuccess,
+        });
+      }
+    }
+
     return new Response(
       JSON.stringify({ 
         success: true, 
         message: "Webhook processado",
-        intents_updated: intents?.length || 0,
+        intents_updated: updatedIntentIds.length,
         rd_purchase_sent: rdSuccess,
       }),
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }

@@ -18,12 +18,16 @@ export type Database = {
         Row: {
           created_at: string
           email: string
+          hotmart_transaction_id: string | null
           id: string
           intent_date: string
           name: string | null
           page_url: string | null
           phone: string | null
           product: string
+          purchase_rd_success: boolean | null
+          purchase_sent_to_rd_at: string | null
+          purchased_at: string | null
           rd_attempts: number | null
           rd_response: Json | null
           sent_to_rd_at: string | null
@@ -38,12 +42,16 @@ export type Database = {
         Insert: {
           created_at?: string
           email: string
+          hotmart_transaction_id?: string | null
           id?: string
           intent_date?: string
           name?: string | null
           page_url?: string | null
           phone?: string | null
           product: string
+          purchase_rd_success?: boolean | null
+          purchase_sent_to_rd_at?: string | null
+          purchased_at?: string | null
           rd_attempts?: number | null
           rd_response?: Json | null
           sent_to_rd_at?: string | null
@@ -58,12 +66,16 @@ export type Database = {
         Update: {
           created_at?: string
           email?: string
+          hotmart_transaction_id?: string | null
           id?: string
           intent_date?: string
           name?: string | null
           page_url?: string | null
           phone?: string | null
           product?: string
+          purchase_rd_success?: boolean | null
+          purchase_sent_to_rd_at?: string | null
+          purchased_at?: string | null
           rd_attempts?: number | null
           rd_response?: Json | null
           sent_to_rd_at?: string | null
