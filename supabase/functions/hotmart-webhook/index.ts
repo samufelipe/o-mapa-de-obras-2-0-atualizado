@@ -10,6 +10,9 @@ const corsHeaders = {
 const HOTMART_HOTTOK = Deno.env.get("HOTMART_HOTTOK");
 const RD_STATION_API_KEY = Deno.env.get("RD_STATION_API_KEY");
 
+// 🔧 MODO DEBUG: Quando ativo, aceita requisições sem validar token
+const DEBUG_MODE = Deno.env.get("HOTMART_DEBUG_MODE") === "true";
+
 // Identificadores de conversão para compra no RD Station
 const PURCHASE_CONVERSION_IDENTIFIERS: Record<string, string> = {
   imersao: "imersao-cronograma-2.0-o-mapa-da-obra-compra-aprovada",
@@ -110,26 +113,33 @@ serve(async (req: Request) => {
       serverHottok: HOTMART_HOTTOK ? "configurado" : "NÃO CONFIGURADO",
     });
 
-    // Verificar se o token está configurado no servidor
-    if (!HOTMART_HOTTOK) {
-      console.error(`[${requestId}] ❌ HOTMART_HOTTOK não configurado no servidor`);
-      return new Response(
-        JSON.stringify({ error: "Webhook não configurado corretamente" }),
-        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
-    }
+    // 🔧 MODO DEBUG - Loga TUDO e pula validação de token
+    if (DEBUG_MODE) {
+      console.warn(`[${requestId}] ⚠️⚠️⚠️ DEBUG MODE ATIVO - ACEITANDO REQUISIÇÃO SEM VALIDAR TOKEN ⚠️⚠️⚠️`);
+      console.log(`[${requestId}] 🔍 DEBUG - Payload completo:`, JSON.stringify(body, null, 2));
+      console.log(`[${requestId}] 🔍 DEBUG - Headers completo:`, JSON.stringify(headers, null, 2));
+    } else {
+      // Verificar se o token está configurado no servidor
+      if (!HOTMART_HOTTOK) {
+        console.error(`[${requestId}] ❌ HOTMART_HOTTOK não configurado no servidor`);
+        return new Response(
+          JSON.stringify({ error: "Webhook não configurado corretamente" }),
+          { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
 
-    // Validar token (aceita header ou body)
-    if (!receivedHottok || receivedHottok !== HOTMART_HOTTOK) {
-      console.warn(`[${requestId}] ⚠️ Token Hotmart inválido ou ausente`);
-      console.warn(`[${requestId}] Token recebido: ${receivedHottok ? "***PRESENT***" : "MISSING"}`);
-      return new Response(
-        JSON.stringify({ error: "Unauthorized - Invalid or missing Hotmart token" }),
-        { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
-    }
+      // Validar token (aceita header ou body)
+      if (!receivedHottok || receivedHottok !== HOTMART_HOTTOK) {
+        console.warn(`[${requestId}] ⚠️ Token Hotmart inválido ou ausente`);
+        console.warn(`[${requestId}] Token recebido: ${receivedHottok ? "***PRESENT***" : "MISSING"}`);
+        return new Response(
+          JSON.stringify({ error: "Unauthorized - Invalid or missing Hotmart token" }),
+          { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
 
-    console.log(`[${requestId}] ✅ Token Hotmart válido`);
+      console.log(`[${requestId}] ✅ Token Hotmart válido`);
+    }
 
     // Extrair dados (suporta múltiplos formatos)
     const email = 
