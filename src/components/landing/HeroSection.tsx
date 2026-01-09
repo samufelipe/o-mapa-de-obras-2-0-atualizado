@@ -259,7 +259,7 @@ const HeroSection = () => {
                 {CONFIG.form.redirectMessage}
               </h2>
               <p className="text-sm text-muted-foreground">
-                Você será direcionado para o checkout da Hotmart.
+                Complete o pagamento para confirmar sua inscrição.
               </p>
               <div className="mt-6 flex items-center justify-center gap-2 text-[9px] font-bold text-muted-foreground uppercase tracking-widest">
                 <Lock className="w-3 h-3" />
