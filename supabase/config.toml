@@ -36,3 +36,6 @@ verify_jwt = false
 
 [functions.test-hotmart-webhook]
 verify_jwt = false
+
+[functions.sync-purchases-to-rd]
+verify_jwt = false
