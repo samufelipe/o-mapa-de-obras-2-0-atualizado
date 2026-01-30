@@ -4,12 +4,13 @@ import MentoriaHero from "@/components/mentoria/MentoriaHero";
 import MentoriaSkills from "@/components/mentoria/MentoriaSkills";
 import MentoriaAudience from "@/components/mentoria/MentoriaAudience";
 import MentoriaHowItWorks from "@/components/mentoria/MentoriaHowItWorks";
-import MentoriaInside from "@/components/mentoria/MentoriaInside";
 import MentoriaModules from "@/components/mentoria/MentoriaModules";
-import MentoriaMentors from "@/components/mentoria/MentoriaMentors";
+import MentoriaDocuments from "@/components/mentoria/MentoriaDocuments";
 import MentoriaRevenue from "@/components/mentoria/MentoriaRevenue";
 import MentoriaPricing from "@/components/mentoria/MentoriaPricing";
+import MentoriaTestimonials from "@/components/mentoria/MentoriaTestimonials";
 import MentoriaGuarantee from "@/components/mentoria/MentoriaGuarantee";
+import MentoriaMentors from "@/components/mentoria/MentoriaMentors";
 import MentoriaFAQ from "@/components/mentoria/MentoriaFAQ";
 import MentoriaFooter from "@/components/mentoria/MentoriaFooter";
 import MentoriaMobileCTA from "@/components/mentoria/MentoriaMobileCTA";
@@ -38,12 +39,13 @@ export default function MentoriaLanding() {
         <MentoriaSkills />
         <MentoriaAudience />
         <MentoriaHowItWorks />
-        <MentoriaInside />
         <MentoriaModules />
-        <MentoriaMentors />
+        <MentoriaDocuments />
         <MentoriaRevenue />
         <MentoriaPricing />
+        <MentoriaTestimonials onCtaClick={scrollToPricing} />
         <MentoriaGuarantee />
+        <MentoriaMentors />
         <MentoriaFAQ />
       </main>
       <MentoriaFooter />
