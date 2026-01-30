@@ -1,22 +1,33 @@
-import { MENTORIA_IMAGES } from "@/lib/mentoria-constants";
+import { MENTORIA_HOW_IT_WORKS } from "@/lib/mentoria-constants";
+import { ArrowRight } from "lucide-react";
 
 export default function MentoriaHowItWorks() {
   return (
-    <section className="py-16 md:py-24 bg-background">
+    <section className="py-16 md:py-20 bg-white">
       <div className="container mx-auto px-4">
-        <h2 className="text-2xl md:text-4xl font-bold text-center text-foreground mb-4 animate-fade-up">
-          Como funciona a <span className="text-primary">Mentoria?</span>
+        <h2 className="text-2xl md:text-4xl font-bold text-center text-primary italic mb-12 animate-fade-up">
+          Como funciona a<br />
+          <span className="text-foreground not-italic">Mentoria Inovando na sua Obra?</span>
         </h2>
-        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto animate-fade-up animation-delay-100">
-          Um método estruturado para você dominar o gerenciamento de obras em poucos meses.
-        </p>
 
-        <div className="max-w-5xl mx-auto animate-fade-up animation-delay-200">
-          <img
-            src={MENTORIA_IMAGES.howItWorks}
-            alt="Como funciona a Mentoria"
-            className="w-full h-auto rounded-2xl shadow-lg"
-          />
+        <div className="max-w-3xl mx-auto">
+          <ul className="space-y-4">
+            {MENTORIA_HOW_IT_WORKS.map((item, index) => (
+              <li 
+                key={index} 
+                className="flex items-start gap-3 animate-fade-up"
+                style={{ animationDelay: `${index * 50}ms` }}
+              >
+                <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <ArrowRight className="w-4 h-4 text-foreground" />
+                </div>
+                <p className="text-foreground text-base md:text-lg">
+                  <span className="font-bold">{item.bold}</span>
+                  {item.text && ` ${item.text}`}
+                </p>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
