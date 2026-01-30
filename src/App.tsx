@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound";
 import AdminEmails from "./pages/AdminEmails";
 import CheckoutBridge from "./pages/CheckoutBridge";
 import BackgroundRemover from "./pages/BackgroundRemover";
+import MentoriaLanding from "./pages/MentoriaLanding";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/mentoria" element={<MentoriaLanding />} />
           <Route path="/admin/emails" element={<AdminEmails />} />
           <Route path="/checkout/:product" element={<CheckoutBridge />} />
           <Route path="/tools/background-remover" element={<BackgroundRemover />} />
