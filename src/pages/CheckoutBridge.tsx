@@ -8,12 +8,18 @@ type Product = "imersao" | "mentoria";
 
 interface CheckoutUrls {
   imersao: string;
-  mentoria: string;
+  mentoria: {
+    default: string;
+    boleto: string;
+  };
 }
 
 const CHECKOUT_URLS: CheckoutUrls = {
   imersao: CONFIG.hotmart.checkoutUrl,
-  mentoria: "https://pay.hotmart.com/K103578257F?checkoutMode=10&bid=1767049086095", // URL da mentoria
+  mentoria: {
+    default: "https://pay.hotmart.com/Y93975016X?off=22jnl093&bid=1759350326376",
+    boleto: "https://pay.hotmart.com/Y93975016X?off=et69m72o&bid=1759350383011"
+  }
 };
 
 const PRODUCT_NAMES: Record<Product, string> = {
@@ -92,7 +98,18 @@ export default function CheckoutBridge() {
         }
 
         // Montar URL do checkout com parâmetros
-        const checkoutUrl = new URL(CHECKOUT_URLS[validProduct]);
+        const paymentMethod = searchParams.get("payment");
+        let baseCheckoutUrl: string;
+        
+        if (validProduct === "mentoria") {
+          baseCheckoutUrl = paymentMethod === "boleto" 
+            ? CHECKOUT_URLS.mentoria.boleto 
+            : CHECKOUT_URLS.mentoria.default;
+        } else {
+          baseCheckoutUrl = CHECKOUT_URLS.imersao;
+        }
+        
+        const checkoutUrl = new URL(baseCheckoutUrl);
         
         // Adicionar dados para pré-preenchimento se configurado
         if (CONFIG.hotmart.preFillCheckout) {
@@ -126,9 +143,14 @@ export default function CheckoutBridge() {
         console.error("❌ Erro no processamento:", err);
         // Tentar redirecionar mesmo com erro
         setStatus("redirecting");
-        const checkoutUrl = CHECKOUT_URLS[validProduct];
+        let fallbackUrl: string;
+        if (validProduct === "mentoria") {
+          fallbackUrl = CHECKOUT_URLS.mentoria.default;
+        } else {
+          fallbackUrl = CHECKOUT_URLS.imersao;
+        }
         setTimeout(() => {
-          window.location.href = checkoutUrl;
+          window.location.href = fallbackUrl;
         }, 1000);
       }
     };
