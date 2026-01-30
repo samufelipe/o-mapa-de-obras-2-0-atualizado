@@ -1,5 +1,12 @@
-import { MENTORIA_DOCUMENTS, MENTORIA_BONUS_EXPERTS } from "@/lib/mentoria-constants";
+import { MENTORIA_DOCUMENTS, MENTORIA_BONUS_EXPERTS, MENTORIA_IMAGES } from "@/lib/mentoria-constants";
 import { ArrowRight } from "lucide-react";
+
+const expertImages: Record<string, string> = {
+  luciana: MENTORIA_IMAGES.bonusLuciana,
+  imira: MENTORIA_IMAGES.bonusImira,
+  juliana: MENTORIA_IMAGES.bonusJuliana,
+  renata: MENTORIA_IMAGES.bonusRenata,
+};
 
 export default function MentoriaDocuments() {
   return (
@@ -26,38 +33,86 @@ export default function MentoriaDocuments() {
             </div>
 
             <div className="animate-fade-up animation-delay-200 flex justify-center">
-              {/* Illustration placeholder - checklist illustration */}
-              <div className="w-48 h-48 bg-primary/20 rounded-lg flex items-center justify-center">
-                <span className="text-6xl">✅</span>
-              </div>
+              <img 
+                src={MENTORIA_IMAGES.documentsIcon} 
+                alt="Pack de documentos"
+                className="w-48 h-48 object-contain"
+              />
             </div>
           </div>
         </div>
 
         {/* Bonus Experts */}
-        <h2 className="text-2xl md:text-4xl font-bold text-center text-primary italic mb-4 animate-fade-up">
+        <h2 className="text-2xl md:text-4xl font-bold text-center text-primary italic mb-2 animate-fade-up">
           Aulas Bônus exclusivas!
         </h2>
         <h3 className="text-xl md:text-2xl font-bold text-center text-foreground mb-12 animate-fade-up animation-delay-100">
           Time de Especialistas
         </h3>
 
-        <div className="flex flex-wrap justify-center gap-6 max-w-4xl mx-auto mb-8">
-          {MENTORIA_BONUS_EXPERTS.map((expert, index) => (
-            <div
-              key={index}
-              className="text-center animate-fade-up"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-primary/30 border-4 border-primary mx-auto mb-3 overflow-hidden">
-                <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/40 flex items-center justify-center">
-                  <span className="text-4xl">👩‍💼</span>
+        {/* Experts Grid - Staggered Layout */}
+        <div className="max-w-4xl mx-auto mb-12">
+          <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:gap-x-8 md:gap-y-12">
+            {/* Luciana - Top Left */}
+            <div className="flex flex-col items-center md:items-end animate-fade-up">
+              <div className="relative">
+                <p className="text-primary font-bold text-xs md:text-sm mb-1 text-center md:text-right">LUCIANA GUERRA</p>
+                <p className="text-foreground text-[10px] md:text-xs italic text-center md:text-right mb-2">Iluminação aplicada na<br />Arquitetura e na Obra</p>
+                <div className="w-28 h-28 md:w-36 md:h-36 rounded-full border-4 border-primary overflow-hidden mx-auto md:mx-0">
+                  <img 
+                    src={expertImages.luciana} 
+                    alt="Luciana Guerra"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
-              <p className="text-primary font-bold text-sm md:text-base">{expert.name}</p>
-              <p className="text-foreground text-xs md:text-sm italic max-w-[140px]">{expert.topic}</p>
             </div>
-          ))}
+
+            {/* Juliana - Top Right */}
+            <div className="flex flex-col items-center md:items-start animate-fade-up animation-delay-100">
+              <div className="relative">
+                <p className="text-primary font-bold text-xs md:text-sm mb-1 text-center md:text-left">JULIANA CAMPELO</p>
+                <p className="text-foreground text-[10px] md:text-xs italic text-center md:text-left mb-2">Gestão de escritório de<br />Arquitetura</p>
+                <div className="w-28 h-28 md:w-36 md:h-36 rounded-full border-4 border-primary overflow-hidden mx-auto md:mx-0">
+                  <img 
+                    src={expertImages.juliana} 
+                    alt="Juliana Campelo"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Imira - Bottom Left */}
+            <div className="flex flex-col items-center md:items-end animate-fade-up animation-delay-200">
+              <div className="relative">
+                <div className="w-28 h-28 md:w-36 md:h-36 rounded-full border-4 border-primary overflow-hidden mx-auto md:mx-0 mb-2">
+                  <img 
+                    src={expertImages.imira} 
+                    alt="Imira de Holanda"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <p className="text-primary font-bold text-xs md:text-sm mb-1 text-center md:text-right">IMIRA DE HOLANDA</p>
+                <p className="text-foreground text-[10px] md:text-xs italic text-center md:text-right">Marketing para Arquitetos</p>
+              </div>
+            </div>
+
+            {/* Renata - Bottom Right */}
+            <div className="flex flex-col items-center md:items-start animate-fade-up animation-delay-300">
+              <div className="relative">
+                <div className="w-28 h-28 md:w-36 md:h-36 rounded-full border-4 border-primary overflow-hidden mx-auto md:mx-0 mb-2">
+                  <img 
+                    src={expertImages.renata} 
+                    alt="Renata Fuentes"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <p className="text-primary font-bold text-xs md:text-sm mb-1 text-center md:text-left">RENATA FUENTES</p>
+                <p className="text-foreground text-[10px] md:text-xs italic text-center md:text-left">Rochas Naturais nos<br />projetos de Arquitetura</p>
+              </div>
+            </div>
+          </div>
         </div>
 
         <p className="text-center text-primary italic text-base md:text-lg animate-fade-up">
