@@ -9,10 +9,20 @@ import AdminEmails from "./pages/AdminEmails";
 import CheckoutBridge from "./pages/CheckoutBridge";
 import BackgroundRemover from "./pages/BackgroundRemover";
 import MentoriaLanding from "./pages/MentoriaLanding";
+import MaintenancePage from "./components/MaintenancePage";
 
 const queryClient = new QueryClient();
 
-const App = () => (
+// Verificar se o modo manutenção está ativado
+const isMaintenanceMode = import.meta.env.VITE_MAINTENANCE_MODE === 'true';
+
+const App = () => {
+  // Se modo manutenção estiver ativado, mostrar apenas a página de manutenção
+  if (isMaintenanceMode) {
+    return <MaintenancePage />;
+  }
+
+  return (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
@@ -30,6 +40,7 @@ const App = () => (
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
-);
+  );
+};
 
 export default App;
