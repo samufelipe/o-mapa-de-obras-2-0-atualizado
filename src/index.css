@@ -126,6 +126,18 @@
     opacity: 0.04;
   }
 
+  .bg-grain {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+  }
+
+  .shadow-premium {
+    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5), 0 0 20px rgba(212, 175, 55, 0.05);
+  }
+
+  .shadow-premium-gold {
+    box-shadow: 0 20px 40px -10px rgba(212, 175, 55, 0.2), 0 0 20px rgba(212, 175, 55, 0.1);
+  }
+
   .reveal {
     opacity: 0;
     transform: translateY(20px);
@@ -180,7 +192,7 @@
 
 @layer components {
   .main-cta {
-    @apply bg-primary text-foreground px-6 py-4 text-[10px] md:text-[11px] font-black uppercase tracking-[0.2em] hover:bg-foreground hover:text-primary transition-all border-2 border-foreground shadow-hard flex items-center justify-center gap-2;
+    @apply bg-primary text-foreground px-6 py-4 text-[10px] md:text-[11px] font-black uppercase tracking-[0.2em] hover:bg-foreground hover:text-primary transition-all duration-300 border-2 border-foreground shadow-premium flex items-center justify-center gap-2 hover:shadow-premium-gold hover:-translate-y-1;
   }
 
   .main-cta:active {

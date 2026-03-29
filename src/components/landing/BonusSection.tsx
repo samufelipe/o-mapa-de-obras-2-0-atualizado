@@ -20,7 +20,7 @@ const BonusSection = () => {
             const Icon = bonusIcons[idx];
             const isImmediate = bonus.release === "ACESSO IMEDIATO";
             return (
-              <div key={idx} className={`bg-card border-2 p-8 flex flex-col items-center group relative shadow-hard hover:shadow-gold hover:-translate-y-1 transition-all duration-300 ${isImmediate ? 'border-primary' : 'border-foreground'}`}>
+              <div key={idx} className={`bg-card border-2 p-8 flex flex-col items-center group relative shadow-premium hover:shadow-premium-gold hover:-translate-y-1 transition-all duration-300 ${isImmediate ? 'border-primary' : 'border-foreground'}`}>
                 {isImmediate && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-foreground px-3 py-1 text-[8px] font-black uppercase tracking-widest whitespace-nowrap">
                     LIBERADO NA HORA
@@ -45,7 +45,7 @@ const BonusSection = () => {
         </div>
 
         {/* Pricing Stack */}
-        <div className="max-w-xl mx-auto bg-foreground border-2 border-primary p-8 md:p-12 shadow-hard relative overflow-hidden">
+        <div className="max-w-xl mx-auto bg-foreground border-2 border-primary p-8 md:p-12 shadow-premium relative overflow-hidden">
           <div className="absolute top-0 right-0 bg-primary text-foreground px-4 py-1 text-[9px] font-black uppercase tracking-widest transform rotate-45 translate-x-8 translate-y-4">
             OFERTA ATIVA
           </div>
@@ -72,14 +72,14 @@ const BonusSection = () => {
             <div className="mb-2">
               <span className="text-primary text-[10px] font-black uppercase tracking-[0.3em] block mb-1">INVESTIMENTO ÚNICO</span>
               <h3 className="text-background text-4xl md:text-5xl font-black tracking-tighter uppercase leading-tight animate-pulse-slow">
-                APENAS R$ 29,90
+                APENAS R$ 39,90
               </h3>
             </div>
           </div>
 
           <button 
             onClick={scrollToForm} 
-            className="w-full bg-primary text-foreground py-5 text-xs font-black uppercase tracking-[0.2em] hover:bg-background transition-all shadow-hard active:scale-95 group flex items-center justify-center gap-2"
+            className="w-full bg-primary text-foreground py-5 text-xs font-black uppercase tracking-[0.2em] hover:bg-background transition-all duration-300 shadow-premium hover:shadow-premium-gold hover:-translate-y-1 active:scale-95 group flex items-center justify-center gap-2"
           >
             GARANTIR MINHA VAGA AGORA <ArrowRight className="inline w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </button>

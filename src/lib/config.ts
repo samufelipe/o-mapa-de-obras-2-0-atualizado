@@ -4,14 +4,8 @@
 // ============================================
 
 export const CONFIG = {
-  // RD Station Marketing
-  rdStation: {
-    // API Key é gerenciada via secrets no backend (edge functions)
-    // NÃO exponha a API key aqui - ela é usada apenas server-side
-    
-    // Identificador da conversão (nome do evento no RD)
-    conversionIdentifier: "inscricao-cronograma-2-0",
-  },
+  // Identificador da conversão (nome do evento)
+  conversionIdentifier: "inscricao-cronograma-2-0",
   
   // Hotmart Checkout
   hotmart: {

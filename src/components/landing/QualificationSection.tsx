@@ -13,7 +13,7 @@ const QualificationSection = () => {
         
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {/* For Who */}
-          <div className="bg-card border-2 border-foreground p-8 shadow-hard">
+          <div className="bg-card border-2 border-foreground p-8 shadow-premium">
             <h3 className="text-lg font-display uppercase tracking-tight mb-6 text-center">
               Essa Imersão é Para Você Se...
             </h3>

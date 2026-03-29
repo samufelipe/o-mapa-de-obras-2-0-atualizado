@@ -13,7 +13,7 @@ const steps = [
   },
   { 
     icon: Calendar, 
-    title: "03. IMERSÃO (31/01)", 
+    title: "03. IMERSÃO (30/05)", 
     desc: "Dia inteiro de imersão ao vivo no Zoom com aplicação direta do método." 
   },
   { 
@@ -57,7 +57,7 @@ const StepsSection = () => {
         <div className="flex flex-col items-center gap-4">
           <button 
             onClick={scrollToForm}
-            className="bg-primary text-foreground px-6 py-4 text-[10px] md:text-[11px] font-black uppercase tracking-[0.2em] hover:bg-foreground hover:text-primary transition-all border-2 border-foreground shadow-hard flex items-center justify-center gap-2 group active:scale-95"
+            className="bg-primary text-foreground px-6 py-4 text-[10px] md:text-[11px] font-black uppercase tracking-[0.2em] hover:bg-foreground hover:text-primary transition-all duration-300 border-2 border-foreground shadow-premium hover:shadow-premium-gold hover:-translate-y-1 flex items-center justify-center gap-2 group active:scale-95"
           >
             QUERO MEU ACESSO IMEDIATO <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </button>

@@ -51,7 +51,7 @@ const ProblemsSection = () => {
         <div className="flex justify-center">
           <button 
             onClick={scrollToForm}
-            className="bg-primary text-foreground px-6 py-4 text-[10px] md:text-[11px] font-black uppercase tracking-[0.2em] hover:bg-background hover:text-foreground transition-all border-2 border-foreground shadow-hard flex items-center justify-center gap-2 group active:scale-95"
+            className="bg-primary text-foreground px-6 py-4 text-[10px] md:text-[11px] font-black uppercase tracking-[0.2em] hover:bg-background hover:text-foreground transition-all duration-300 border-2 border-foreground shadow-premium hover:shadow-premium-gold hover:-translate-y-1 flex items-center justify-center gap-2 group active:scale-95"
           >
             QUERO DOMINAR O MEU CRONOGRAMA E ELIMINAR O CAOS <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </button>

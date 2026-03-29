@@ -1,7 +1,7 @@
 export const AGENDA = [
   {
     day: "MÓDULO MANHÃ",
-    date: "SÁBADO 31/01 • 09:00 - 12:00",
+    date: "SÁBADO 30/05 • 09:00 - 12:00",
     title: "Fundamentos da Execução Inteligente",
     topics: [
       "Por que profissionais que dominam obra ganham até 3x mais",
@@ -12,7 +12,7 @@ export const AGENDA = [
   },
   {
     day: "MÓDULO TARDE",
-    date: "SÁBADO 31/01 • 13:00 - 17:00",
+    date: "SÁBADO 30/05 • 13:00 - 17:00",
     title: "Cronograma, Lucro e Próximos Passos",
     topics: [
       "Cronograma de Obra em 8 Passos: O método validado para nunca mais errar prazos",
@@ -59,13 +59,13 @@ export const BONUSES = [
     title: "Modelo de Cronograma",
     value: "R$ 59,90",
     description: "Template pronto para aplicar no seu escritório e nas suas obras. Personalize e tenha controle absoluto de cada projeto.",
-    release: "LIBERADO PÓS-LIVE (31/01)"
+    release: "LIBERADO PÓS-LIVE (30/05)"
   },
   {
     title: "Guia de Prompts de IA para Obras",
     value: "R$ 50,00",
     description: "Ferramenta de organização para garantir que nenhum detalhe passe despercebido no levantamento e planejamento da obra.",
-    release: "LIBERADO PÓS-LIVE (31/01)"
+    release: "LIBERADO PÓS-LIVE (30/05)"
   }
 ];
 
@@ -83,18 +83,18 @@ export const PREPARATORY_CLASSES = [
 export const FAQ_ITEMS = [
   {
     question: "Como faço para participar da imersão ao vivo?",
-    answer: "A imersão acontecerá AO VIVO pelo Zoom no dia 31/01. Para participar, basta baixar o aplicativo Zoom gratuitamente: no celular, acesse a App Store (iPhone) ou Google Play (Android) e busque por 'Zoom'. No computador, acesse zoom.us/download e instale o 'Zoom Desktop Client'. No dia do evento, você receberá o link de acesso no Grupo VIP do WhatsApp — é só clicar e entrar!"
+    answer: "A imersão acontecerá AO VIVO pelo Zoom no dia 30/05. Para participar, basta baixar o aplicativo Zoom gratuitamente: no celular, acesse a App Store (iPhone) ou Google Play (Android) e busque por 'Zoom'. No computador, acesse zoom.us/download e instale o 'Zoom Desktop Client'. No dia do evento, você receberá o link de acesso no Grupo VIP do WhatsApp — é só clicar e entrar!"
   },
   {
     question: "Quando receberei os bônus e materiais?",
-    answer: "As 8 Aulas Preparatórias são liberadas imediatamente após a confirmação do pagamento. A Apostila de Acompanhamento será liberada 1 dia antes da live (30/01) para você já chegar preparada. O Modelo de Cronograma e o Checklist de Levantamento serão liberados logo após o encerramento da imersão no dia 31/01, garantindo que você saiba exatamente como aplicá-los."
+    answer: "As 8 Aulas Preparatórias são liberadas imediatamente após a confirmação do pagamento. A Apostila de Acompanhamento será liberada 1 dia antes da live (29/05) para você já chegar preparada. O Modelo de Cronograma e o Checklist de Levantamento serão liberados logo após o encerramento da imersão no dia 30/05, garantindo que você saiba exatamente como aplicá-los."
   },
   {
     question: "Como funciona o Grupo VIP de WhatsApp?",
     answer: "É o nosso canal oficial de avisos. Assim que o pagamento for aprovado, você recebe o link. Lá você receberá todos os comunicados importantes, lembretes e o link direto para a nossa sala de ZOOM no dia do evento."
   },
   {
-    question: "O valor de R$ 29,90 é real? Tem pegadinha?",
+    question: "O valor de R$ 39,90 é real? Tem pegadinha?",
     answer: "É real e sem pegadinhas. Este valor é simbólico para o 1º Lote, criado para reunir arquitetas comprometidas em elevar o nível técnico do mercado. O objetivo é que você conheça nosso método e tenha resultados imediatos na sua próxima obra."
   },
   {
@@ -103,7 +103,7 @@ export const FAQ_ITEMS = [
   },
   {
     question: "Como funcionam as 8 aulas preparatórias?",
-    answer: "São aulas em vídeo liberadas imediatamente após a confirmação do pagamento. Incluem desde o tutorial de como usar o Zoom até conteúdos sobre o mercado atual, método Inovando, oportunidades para 2026 e quebra de objeções. Foram criadas para você construir a base necessária e chegar no dia 31/01 pronta para absorver o conteúdo avançado da imersão."
+    answer: "São aulas em vídeo liberadas imediatamente após a confirmação do pagamento. Incluem desde o tutorial de como usar o Zoom até conteúdos sobre o mercado atual, método Inovando, oportunidades para 2026 e quebra de objeções. Foram criadas para você construir a base necessária e chegar no dia 30/05 pronta para absorver o conteúdo avançado da imersão."
   }
 ];
 

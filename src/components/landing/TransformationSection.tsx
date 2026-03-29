@@ -29,7 +29,7 @@ const TransformationSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-14 reveal">
           {/* Before */}
           <div className="flex flex-col items-center text-center">
-            <div className="relative overflow-hidden rounded-xl border-2 border-foreground shadow-hard hover:shadow-lg transition-all duration-300 w-full bg-muted">
+            <div className="relative overflow-hidden rounded-xl border-2 border-foreground shadow-premium hover:shadow-lg transition-all duration-300 w-full bg-muted">
               <div className="aspect-[3/4] flex items-center justify-center">
                 <img 
                   src={cozinhaAntes} 
@@ -48,7 +48,7 @@ const TransformationSection = () => {
 
           {/* After */}
           <div className="flex flex-col items-center text-center">
-            <div className="relative overflow-hidden rounded-xl border-2 border-primary shadow-gold hover:-translate-y-1 transition-all duration-300 w-full bg-muted">
+            <div className="relative overflow-hidden rounded-xl border-2 border-primary shadow-premium-gold hover:-translate-y-1 transition-all duration-300 w-full bg-muted">
               {/* Badge */}
               <div className="absolute top-0 left-0 right-0 bg-primary text-primary-foreground text-xs font-black uppercase tracking-widest py-2 text-center z-10">
                 Resultado Final
@@ -71,7 +71,7 @@ const TransformationSection = () => {
         </div>
 
         {/* Steps - Premium Dark Card */}
-        <div className="bg-foreground border-2 border-primary shadow-hard rounded-xl p-6 md:p-8 mb-10 reveal">
+        <div className="bg-foreground border-2 border-primary shadow-premium rounded-xl p-6 md:p-8 mb-10 reveal">
           <ul className="space-y-4">
             {steps.map((step, index) => (
               <li key={index} className="flex items-start gap-3">

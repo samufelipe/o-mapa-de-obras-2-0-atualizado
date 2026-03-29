@@ -140,7 +140,7 @@ const HeroSection = () => {
     setStatus("redirecting");
     
     // Track checkout initiation (Meta Pixel + GTM)
-    trackInitiateCheckout(29.90);
+    trackInitiateCheckout(39.90);
     trackBeginCheckout();
     
     // Delay for transition screen
@@ -242,6 +242,7 @@ const HeroSection = () => {
     return (
       <section id="hero" className="relative pt-28 pb-16 md:pt-40 md:pb-24 bg-background overflow-hidden">
         <div className="bg-grid-overlay"></div>
+      <div className="bg-grain absolute inset-0 pointer-events-none"></div>
         <div className="container mx-auto px-4 md:px-6 relative z-10">
           <div className="flex flex-col items-center justify-center min-h-[400px] animate-fade-up">
             <div className="bg-card border-2 border-foreground p-8 md:p-12 shadow-gold text-center max-w-md">
@@ -266,6 +267,7 @@ const HeroSection = () => {
   return (
     <section id="hero" className="relative pt-28 pb-16 md:pt-40 md:pb-24 bg-background overflow-hidden">
       <div className="bg-grid-overlay"></div>
+      <div className="bg-grain absolute inset-0 pointer-events-none"></div>
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
@@ -307,10 +309,10 @@ const HeroSection = () => {
 
           {/* Right Form Card */}
           <div id="ingresso" className="scroll-mt-24 animate-fade-up">
-            <div className="bg-card border-2 border-foreground p-6 md:p-8 shadow-gold max-w-md mx-auto">
+            <div className="bg-card border-2 border-foreground p-6 md:p-8 shadow-premium max-w-md mx-auto">
               <div className="mb-6 text-center lg:text-left">
                 <h2 className="text-lg font-black uppercase tracking-tight">Vaga Exclusiva</h2>
-                <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Imersão Ao Vivo • Sábado 31/01</p>
+                <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Imersão Ao Vivo • Sábado 30/05</p>
               </div>
               
               <form onSubmit={handleSubmit} className="space-y-4" data-track="lead_form" data-track-location="hero">
@@ -369,7 +371,7 @@ const HeroSection = () => {
                   <div className="flex justify-between items-end mb-4">
                     <div className="flex flex-col">
                       <span className="text-[10px] font-bold text-muted-foreground line-through uppercase">R$ 97,00</span>
-                      <span className="text-3xl font-black tracking-tighter animate-pulse-slow">R$ 29,90</span>
+                      <span className="text-3xl font-black tracking-tighter animate-pulse-slow">R$ 39,90</span>
                     </div>
                     <span className="text-[9px] font-black text-primary bg-foreground px-2 py-1 uppercase tracking-widest shadow-hard">LOTE 01</span>
                   </div>
@@ -377,7 +379,7 @@ const HeroSection = () => {
                   <button 
                     type="submit"
                     disabled={status === "loading" || status === "success"}
-                    className="w-full bg-green-600 text-white py-4 flex items-center justify-center gap-2 text-xs font-black tracking-widest hover:bg-green-700 transition-all border-2 border-green-600 shadow-hard uppercase group disabled:opacity-70 disabled:cursor-not-allowed"
+                    className="w-full bg-green-600 text-white py-4 flex items-center justify-center gap-2 text-xs font-black tracking-widest hover:bg-green-700 transition-all duration-300 border-2 border-green-600 shadow-premium hover:shadow-premium-gold hover:-translate-y-1 uppercase group disabled:opacity-70 disabled:cursor-not-allowed"
                     data-track="submit_button"
                     data-track-location="hero_form"
                   >

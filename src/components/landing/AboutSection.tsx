@@ -16,7 +16,7 @@ const AboutSection = () => {
             <img 
               src={mentorasImg} 
               alt="Ingrid e Fernanda" 
-              className="relative z-10 w-full h-auto grayscale hover:grayscale-0 transition-all duration-700 border-2 border-foreground shadow-hard block" 
+              className="relative z-10 w-full h-auto grayscale hover:grayscale-0 transition-all duration-700 border-2 border-foreground shadow-premium block" 
               loading="lazy"
             />
           </div>
@@ -39,7 +39,7 @@ const AboutSection = () => {
             </div>
             <button 
               onClick={scrollToForm}
-              className="w-full md:w-auto bg-primary text-foreground px-6 py-4 text-[10px] md:text-[11px] font-black uppercase tracking-[0.2em] hover:bg-foreground hover:text-primary transition-all border-2 border-foreground shadow-hard flex items-center justify-center gap-2 group active:scale-95"
+              className="w-full md:w-auto bg-primary text-foreground px-6 py-4 text-[10px] md:text-[11px] font-black uppercase tracking-[0.2em] hover:bg-foreground hover:text-primary transition-all duration-300 border-2 border-foreground shadow-premium hover:shadow-premium-gold hover:-translate-y-1 flex items-center justify-center gap-2 group active:scale-95"
             >
               QUERO DOMINAR A EXECUÇÃO <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>

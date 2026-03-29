@@ -70,13 +70,13 @@ export const trackLead = (data: {
   if (!isPixelAvailable()) return;
   
   window.fbq("track", "Lead", {
-    content_name: CONFIG.rdStation.conversionIdentifier,
+    content_name: CONFIG.conversionIdentifier,
     content_category: "Imersão Cronograma 2.0",
     // Dados hasheados para melhor match rate
     value: 29.90,
     currency: "BRL",
   });
-  logTracking("Lead", { content_name: CONFIG.rdStation.conversionIdentifier });
+  logTracking("Lead", { content_name: CONFIG.conversionIdentifier });
 };
 
 /**
@@ -87,7 +87,7 @@ export const trackInitiateCheckout = (value: number = 29.90): void => {
   if (!isPixelAvailable()) return;
   
   window.fbq("track", "InitiateCheckout", {
-    content_name: CONFIG.rdStation.conversionIdentifier,
+    content_name: CONFIG.conversionIdentifier,
     content_category: "Imersão Cronograma 2.0",
     value: value,
     currency: "BRL",

@@ -23,7 +23,7 @@ const Header = () => {
         
         <button
           onClick={scrollToForm}
-          className="bg-green-600 text-white px-4 py-2 text-[9px] font-black uppercase tracking-widest hover:bg-green-700 transition-all border border-green-600 shadow-hard active:scale-95"
+          className="bg-green-600 text-white px-4 py-2 text-[9px] font-black uppercase tracking-widest hover:bg-green-700 transition-all duration-300 border border-green-600 shadow-premium hover:shadow-premium-gold hover:-translate-y-1 active:scale-95"
         >
           Inscrever-se
         </button>
