@@ -22,8 +22,8 @@ const AboutSection = () => {
           </div>
           
           <div className="space-y-6">
-            <span className="text-primary font-black text-[9px] uppercase tracking-[0.3em] block">DE ARQUITETA PARA ARQUITETA</span>
-            <h2 className="text-2xl md:text-3xl font-black tracking-tight leading-tight">
+            <span className="text-primary font-bold text-[9px] uppercase tracking-[0.3em] block">DE ARQUITETA PARA ARQUITETA</span>
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight leading-tight">
               Criamos o <span className="text-primary italic">Cronograma 2.0</span> como a <br className="hidden md:block"/> ponte prática que você precisa.
             </h2>
             <div className="space-y-4 text-xs md:text-sm text-muted-foreground font-medium leading-relaxed">
@@ -39,7 +39,7 @@ const AboutSection = () => {
             </div>
             <button 
               onClick={scrollToForm}
-              className="w-full md:w-auto bg-primary text-foreground px-6 py-4 text-[10px] md:text-[11px] font-black uppercase tracking-[0.2em] hover:bg-foreground hover:text-primary transition-all duration-300 border-2 border-foreground shadow-premium hover:shadow-premium-gold hover:-translate-y-1 flex items-center justify-center gap-2 group active:scale-95"
+              className="w-full md:w-auto bg-primary text-foreground px-6 py-4 text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-foreground hover:text-primary transition-all duration-300 border-2 border-foreground shadow-premium hover:shadow-premium-gold hover:-translate-y-1 flex items-center justify-center gap-2 group active:scale-95"
             >
               QUERO DOMINAR A EXECUÇÃO <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>

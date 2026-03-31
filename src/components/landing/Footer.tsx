@@ -32,7 +32,8 @@ const Footer = () => {
           <img 
             src={logoFooter} 
             alt="Cronograma 2.0: O Mapa da Obra" 
-            className="h-20 md:h-24 w-auto"
+            className="h-20 md:h-24 w-auto opacity-90 hover:opacity-100 transition-opacity duration-300"
+            loading="lazy"
           />
         </div>
 
@@ -73,11 +74,10 @@ const Footer = () => {
                 href="https://instagram.com/inovandonasuaobra" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="group relative border border-primary/30 hover:border-primary hover:bg-primary/10 p-3.5 rounded-md transition-all duration-300"
+                className="group flex items-center justify-center w-12 h-12 rounded-full bg-foreground text-background hover:bg-primary hover:text-foreground transition-all duration-300 shadow-sm hover:shadow-premium hover:-translate-y-1"
                 aria-label="Instagram"
               >
-                <Instagram className="w-5 h-5 text-primary group-hover:text-primary transition-colors duration-300" />
-                <div className="absolute inset-0 bg-primary/5 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <Instagram className="w-5 h-5" />
               </a>
             </div>
             

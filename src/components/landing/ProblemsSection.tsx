@@ -29,7 +29,7 @@ const ProblemsSection = () => {
     <section id="problems" className="py-20 bg-foreground text-background reveal">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="text-center md:text-left mb-12 space-y-4">
-          <span className="text-primary font-black text-[9px] uppercase tracking-[0.3em] block">PROJETOS INCRÍVEIS NÃO SOBREVIVEM A OBRA SEM MÉTODO.</span>
+          <span className="text-primary font-bold text-[9px] uppercase tracking-[0.3em] block">PROJETOS INCRÍVEIS NÃO SOBREVIVEM A OBRA SEM MÉTODO.</span>
           <h2 className="text-lg md:text-xl font-medium tracking-tight leading-relaxed text-background/80">
             Entenda por que dominar o cronograma e entender de obra é o que separa arquitetos profissionais dos amadores que vivem no prejuízo.
           </h2>
@@ -42,7 +42,7 @@ const ProblemsSection = () => {
               className="bg-foreground/50 border-l-2 border-primary p-6 hover:bg-foreground/80 transition-colors"
               style={{ backgroundColor: 'rgba(24, 24, 27, 0.5)' }}
             >
-              <h3 className="text-base md:text-lg font-black uppercase tracking-tight mb-3 text-background">{problem.title}</h3>
+              <h3 className="text-base md:text-lg font-bold uppercase tracking-tight mb-3 text-background">{problem.title}</h3>
               <p className="text-sm md:text-base font-medium text-background/60 leading-relaxed">{problem.description}</p>
             </div>
           ))}
@@ -51,7 +51,7 @@ const ProblemsSection = () => {
         <div className="flex justify-center">
           <button 
             onClick={scrollToForm}
-            className="bg-primary text-foreground px-6 py-4 text-[10px] md:text-[11px] font-black uppercase tracking-[0.2em] hover:bg-background hover:text-foreground transition-all duration-300 border-2 border-foreground shadow-premium hover:shadow-premium-gold hover:-translate-y-1 flex items-center justify-center gap-2 group active:scale-95"
+            className="bg-primary text-foreground px-6 py-4 text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-background hover:text-foreground transition-all duration-300 border-2 border-foreground shadow-premium hover:shadow-premium-gold hover:-translate-y-1 flex items-center justify-center gap-2 group active:scale-95"
           >
             QUERO DOMINAR O MEU CRONOGRAMA E ELIMINAR O CAOS <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </button>

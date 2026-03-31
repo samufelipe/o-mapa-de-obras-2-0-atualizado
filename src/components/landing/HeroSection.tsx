@@ -247,7 +247,7 @@ const HeroSection = () => {
           <div className="flex flex-col items-center justify-center min-h-[400px] animate-fade-up">
             <div className="bg-card border-2 border-foreground p-8 md:p-12 shadow-gold text-center max-w-md">
               <Loader2 className="w-12 h-12 text-primary animate-spin mx-auto mb-6" />
-              <h2 className="text-xl font-black uppercase tracking-tight mb-2">
+              <h2 className="text-xl font-bold uppercase tracking-tight mb-2">
                 {CONFIG.form.redirectMessage}
               </h2>
               <p className="text-sm text-muted-foreground">
@@ -272,14 +272,14 @@ const HeroSection = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div className="space-y-6 md:space-y-8 text-center lg:text-left animate-fade-up">
-            <div className="inline-flex items-center gap-2 bg-foreground px-3 py-1 border border-primary shadow-hard mx-auto lg:mx-0">
+            <div className="inline-flex items-center gap-2 bg-foreground px-3 py-1 border border-primary shadow-premium mx-auto lg:mx-0">
               <Clock className="w-3 h-3 text-primary" />
-              <span className="text-[9px] font-black text-background uppercase tracking-wider">
+              <span className="text-[9px] font-bold text-background uppercase tracking-wider">
                 O Lote 01 Expira em: <span className="text-primary tabular-nums">{timeLeft.h}h {timeLeft.m}m {timeLeft.s}s</span>
               </span>
             </div>
             
-            <h1 className="text-2xl md:text-4xl lg:text-5xl font-black tracking-tight leading-[1.1]">
+            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.1]">
               <span className="text-primary italic block animate-fade-in" style={{ animationDelay: '0.1s', animationFillMode: 'both' }}>Imersão Cronograma 2.0</span>
               <span className="text-primary italic block text-xl md:text-3xl lg:text-4xl animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'both' }}>O Mapa da Obra de Interiores</span>
             </h1>
@@ -301,7 +301,7 @@ const HeroSection = () => {
               <div className="flex items-center gap-1.5 px-3 py-1.5 bg-secondary border border-border text-[9px] font-bold uppercase tracking-wider text-muted-foreground">
                 <Trophy className="w-3 h-3 text-primary" /> +250 Obras Entregues
               </div>
-              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-foreground text-primary text-[9px] font-bold uppercase tracking-wider shadow-hard">
+              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-foreground text-primary text-[9px] font-bold uppercase tracking-wider shadow-premium">
                 <Video className="w-3 h-3" /> AO VIVO NO ZOOM
               </div>
             </div>
@@ -311,7 +311,7 @@ const HeroSection = () => {
           <div id="ingresso" className="scroll-mt-24 animate-fade-up">
             <div className="bg-card border-2 border-foreground p-6 md:p-8 shadow-premium max-w-md mx-auto">
               <div className="mb-6 text-center lg:text-left">
-                <h2 className="text-lg font-black uppercase tracking-tight">Vaga Exclusiva</h2>
+                <h2 className="text-lg font-bold uppercase tracking-tight">Vaga Exclusiva</h2>
                 <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Imersão Ao Vivo • Sábado 30/05</p>
               </div>
               
@@ -371,15 +371,15 @@ const HeroSection = () => {
                   <div className="flex justify-between items-end mb-4">
                     <div className="flex flex-col">
                       <span className="text-[10px] font-bold text-muted-foreground line-through uppercase">R$ 97,00</span>
-                      <span className="text-3xl font-black tracking-tighter animate-pulse-slow">R$ 39,90</span>
+                      <span className="text-3xl font-bold tracking-tighter animate-pulse-slow">R$ 39,90</span>
                     </div>
-                    <span className="text-[9px] font-black text-primary bg-foreground px-2 py-1 uppercase tracking-widest shadow-hard">LOTE 01</span>
+                    <span className="text-[9px] font-bold text-primary bg-foreground px-2 py-1 uppercase tracking-widest shadow-premium">LOTE 01</span>
                   </div>
                   
                   <button 
                     type="submit"
                     disabled={status === "loading" || status === "success"}
-                    className="w-full bg-green-600 text-white py-4 flex items-center justify-center gap-2 text-xs font-black tracking-widest hover:bg-green-700 transition-all duration-300 border-2 border-green-600 shadow-premium hover:shadow-premium-gold hover:-translate-y-1 uppercase group disabled:opacity-70 disabled:cursor-not-allowed"
+                    className="w-full bg-green-600 text-white py-4 flex items-center justify-center gap-2 text-xs font-bold tracking-widest hover:bg-green-700 transition-all duration-300 border-2 border-green-600 shadow-premium hover:shadow-premium-gold hover:-translate-y-1 uppercase group disabled:opacity-70 disabled:cursor-not-allowed"
                     data-track="submit_button"
                     data-track-location="hero_form"
                   >
@@ -416,13 +416,13 @@ const HeroSection = () => {
       <div className="mt-16 border-y border-border bg-secondary">
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 text-foreground">
-            <div className="flex items-center gap-2 font-black text-xs uppercase tracking-widest">
+            <div className="flex items-center gap-2 font-bold text-xs uppercase tracking-widest">
               <Users className="w-4 h-4" /> +1000 Arquitetas Impactadas
             </div>
-            <div className="flex items-center gap-2 font-black text-xs uppercase tracking-widest">
+            <div className="flex items-center gap-2 font-bold text-xs uppercase tracking-widest">
               <Star className="w-4 h-4 fill-current" /> Avaliação 4.9/5.0
             </div>
-            <div className="flex items-center gap-2 font-black text-xs uppercase tracking-widest">
+            <div className="flex items-center gap-2 font-bold text-xs uppercase tracking-widest">
               <ShieldCheck className="w-4 h-4" /> Método Validado
             </div>
           </div>

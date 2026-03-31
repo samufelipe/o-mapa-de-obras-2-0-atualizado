@@ -20,7 +20,7 @@ const TransformationSection = () => {
     <section id="transformation" className="py-20 md:py-28 bg-secondary">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-12 reveal">
-          <h2 className="text-xl md:text-2xl lg:text-3xl font-black uppercase tracking-tight leading-tight">
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold uppercase tracking-tight leading-tight">
             Vamos te mostrar o passo a passo de como sair
           </h2>
         </div>
@@ -35,11 +35,12 @@ const TransformationSection = () => {
                   src={cozinhaAntes} 
                   alt="Cozinha antes da reforma" 
                   className="w-full h-full object-contain grayscale hover:grayscale-0 transition-all duration-500"
+                  loading="lazy"
                 />
               </div>
             </div>
             <div className="mt-6 space-y-2">
-              <span className="text-2xl md:text-3xl font-black uppercase tracking-wider text-foreground">Disso...</span>
+              <span className="text-2xl md:text-3xl font-bold uppercase tracking-wider text-foreground">Disso...</span>
               <p className="text-sm md:text-base text-muted-foreground max-w-xs">
                 Obra sem planejamento, prazos estourados e cliente insatisfeito
               </p>
@@ -50,7 +51,7 @@ const TransformationSection = () => {
           <div className="flex flex-col items-center text-center">
             <div className="relative overflow-hidden rounded-xl border-2 border-primary shadow-premium-gold hover:-translate-y-1 transition-all duration-300 w-full bg-muted">
               {/* Badge */}
-              <div className="absolute top-0 left-0 right-0 bg-primary text-primary-foreground text-xs font-black uppercase tracking-widest py-2 text-center z-10">
+              <div className="absolute top-0 left-0 right-0 bg-primary text-primary-foreground text-xs font-bold uppercase tracking-widest py-2 text-center z-10">
                 Resultado Final
               </div>
               <div className="aspect-[3/4] flex items-center justify-center">
@@ -58,11 +59,12 @@ const TransformationSection = () => {
                   src={cozinhaDepois} 
                   alt="Cozinha depois da reforma" 
                   className="w-full h-full object-contain hover:scale-[1.02] transition-transform duration-500"
+                  loading="lazy"
                 />
               </div>
             </div>
             <div className="mt-6 space-y-2">
-              <span className="text-2xl md:text-3xl font-black uppercase tracking-wider text-primary">Para isso!</span>
+              <span className="text-2xl md:text-3xl font-bold uppercase tracking-wider text-primary">Para isso!</span>
               <p className="text-sm md:text-base text-muted-foreground max-w-xs">
                 Projeto executado com precisão, cliente encantada e resultado digno de portfólio
               </p>
@@ -75,9 +77,9 @@ const TransformationSection = () => {
           <ul className="space-y-4">
             {steps.map((step, index) => (
               <li key={index} className="flex items-start gap-3">
-                <span className="text-primary font-black text-lg">•</span>
+                <span className="text-primary font-bold text-lg">•</span>
                 <p className="text-sm md:text-base font-medium text-background">
-                  Vamos montar o <span className="font-black text-primary uppercase">{step.highlight}</span> {step.text}
+                  Vamos montar o <span className="font-bold text-primary uppercase">{step.highlight}</span> {step.text}
                 </p>
               </li>
             ))}

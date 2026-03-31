@@ -7,25 +7,25 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 0 0% 7%;
+    --foreground: 222 47% 11%; /* slate-900 */
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 7%;
+    --card-foreground: 222 47% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 7%;
+    --popover-foreground: 222 47% 11%;
 
     --primary: 45 100% 50%;
-    --primary-foreground: 0 0% 7%;
+    --primary-foreground: 222 47% 11%;
 
     --secondary: 0 0% 97%;
-    --secondary-foreground: 0 0% 7%;
+    --secondary-foreground: 222 47% 11%;
 
     --muted: 0 0% 96%;
     --muted-foreground: 0 0% 45%;
 
     --accent: 45 100% 50%;
-    --accent-foreground: 0 0% 7%;
+    --accent-foreground: 222 47% 11%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
@@ -40,7 +40,7 @@
     --gold-dark: 43 96% 40%;
     
     --brand-gold: 45 100% 50%;
-    --brand-black: 0 0% 7%;
+    --brand-black: 222 47% 11%;
   }
 
   .dark {
@@ -105,7 +105,7 @@
   }
 
   .section-spacing {
-    @apply py-16 md:py-24;
+    @apply py-20 md:py-32; /* Aumento de respiro (white space) */
   }
 
   .shadow-hard {
@@ -140,13 +140,15 @@
 
   .reveal {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transform: translateY(30px);
+    filter: blur(4px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   .reveal.active {
     opacity: 1;
     transform: translateY(0);
+    filter: blur(0);
   }
   /* Animations for Mentoria LP */
   .animate-fade-up {
@@ -173,11 +175,13 @@
 @keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
+    filter: blur(4px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
+    filter: blur(0);
   }
 }
 

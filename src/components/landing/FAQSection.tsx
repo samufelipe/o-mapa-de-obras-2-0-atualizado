@@ -15,7 +15,7 @@ const FAQSection = () => {
   return (
     <section id="faq" className="py-20 bg-background">
       <div className="container mx-auto px-4 max-w-2xl">
-        <h2 className="text-xl font-black text-center mb-4 uppercase tracking-widest">Dúvidas Frequentes</h2>
+        <h2 className="text-xl font-bold text-center mb-4 uppercase tracking-widest">Dúvidas Frequentes</h2>
         <div className="space-y-2 mt-8">
           {FAQ_ITEMS.map((faq, idx) => (
             <div key={idx} className="bg-card border border-border overflow-hidden shadow-sm">
