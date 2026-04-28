@@ -13,7 +13,12 @@ const Header = () => {
           <img
             src={logoIcon}
             alt="Cronograma 2.0"
-            className="h-20 md:h-20 w-auto"
+            className="hidden md:block h-20 w-auto"
+          />
+          <img
+            src="/logo-mobile.png"
+            alt="Cronograma 2.0"
+            className="block md:hidden h-16 w-auto object-contain"
           />
           <div className="hidden sm:flex flex-col">
             <span className="text-sm md:text-base font-bold text-foreground tracking-wide">Cronograma 2.0</span>
