@@ -368,13 +368,16 @@ const HeroSection = () => {
                 </div>
 
                 <div className="pt-4">
-                  <div className="flex justify-between items-end mb-4">
+                  <div className="flex justify-between items-end mb-1">
                     <div className="flex flex-col">
-                      <span className="text-sm font-bold text-muted-foreground line-through uppercase">R$ 97,00</span>
-                      <span className="text-3xl font-bold tracking-tighter animate-pulse-slow">R$ 39,90</span>
+                      <span className="text-sm font-bold text-muted-foreground line-through uppercase">R$ 39,90</span>
+                      <span className="text-3xl font-bold tracking-tighter animate-pulse-slow">R$ 29,90</span>
                     </div>
-                    <span className="text-xs font-bold text-primary bg-foreground px-2 py-1 uppercase tracking-widest shadow-premium">LOTE 01</span>
+                    <span className="text-xs font-bold text-primary bg-foreground px-2 py-1 uppercase tracking-widest shadow-premium">PRÉ-LANÇAMENTO</span>
                   </div>
+                  <p className="text-[11px] font-bold text-primary/80 uppercase tracking-widest mb-4">
+                    ⚡ Oferta válida até 04/05 — após sobe para R$ 39,90
+                  </p>
 
                   <button
                     type="submit"

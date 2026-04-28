@@ -65,6 +65,9 @@ const BonusSection = () => {
           </div>
 
           <div className="mb-8 text-center">
+            <div className="inline-block bg-primary text-foreground px-4 py-1 text-xs font-bold uppercase tracking-widest mb-4">
+              ⚡ PRÉ-LANÇAMENTO — Apenas até 04/05
+            </div>
             <p className="text-background/60 text-xs font-bold uppercase tracking-widest mb-1">
               Preço total se comprado separadamente: <span className="line-through text-background/40">R$ 583,90</span>
             </p>
@@ -72,8 +75,11 @@ const BonusSection = () => {
             <div className="mb-2">
               <span className="text-primary text-[13px] font-bold uppercase tracking-[0.3em] block mb-1">INVESTIMENTO ÚNICO</span>
               <h3 className="text-background text-4xl md:text-5xl font-bold tracking-tighter uppercase leading-tight animate-pulse-slow">
-                APENAS R$ 39,90
+                APENAS R$ 29,90
               </h3>
+              <p className="text-background/50 text-xs font-bold uppercase tracking-widest mt-2">
+                Após 04/05 o valor volta para <span className="line-through">R$ 39,90</span>
+              </p>
             </div>
           </div>
 
