@@ -114,16 +114,25 @@ const HeroSection = () => {
 
     // Add query params to pre-fill checkout
     // Hotmart uses: name, email, phoneac (DDD), phonenumber (número)
-    const phoneClean = formData.phone.replace(/\D/g, "");
+    const isInternational = formData.phone.startsWith('+');
+    const phoneClean = formData.phone.replace(/[^\+0-9]/g, "");
     const params = new URLSearchParams({
       name: formData.name,
       email: formData.email,
     });
 
     // Separar DDD e número para a Hotmart
-    if (phoneClean.length >= 10) {
-      params.set("phoneac", phoneClean.substring(0, 2));
-      params.set("phonenumber", phoneClean.substring(2));
+    if (isInternational) {
+      // Para números internacionais, enviamos o número completo no phonenumber e deixamos o phoneac vazio ou com o código do país
+      // A Hotmart lida melhor com números internacionais se passarmos o DDI no phoneac e o resto no phonenumber
+      // Mas como o formato varia muito, o mais seguro é passar tudo no phonenumber se começar com +
+      params.set("phonenumber", phoneClean);
+    } else {
+      const numbersOnly = phoneClean.replace(/\D/g, "");
+      if (numbersOnly.length >= 10) {
+        params.set("phoneac", numbersOnly.substring(0, 2));
+        params.set("phonenumber", numbersOnly.substring(2));
+      }
     }
 
     // Preserve UTM params
@@ -150,7 +159,7 @@ const HeroSection = () => {
     // Delay for transition screen
     setTimeout(() => {
       // Build CheckoutBridge URL with all parameters
-      const phoneClean = formData.phone.replace(/\D/g, "");
+      const phoneClean = formData.phone.replace(/[^\+0-9]/g, "");
       const params = new URLSearchParams({
         name: formData.name,
         email: formData.email,

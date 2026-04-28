@@ -29,8 +29,8 @@ export const leadFormSchema = z.object({
     .string()
     .min(1, "WhatsApp é obrigatório")
     .regex(
-      /^\(\d{2}\) \d{5}-\d{4}$/,
-      "WhatsApp deve estar no formato (99) 99999-9999"
+      /^\+?[0-9\s\-\(\)]{8,20}$/,
+      "Insira um número de WhatsApp válido (com DDD ou código do país)"
     ),
 });
 
@@ -73,13 +73,23 @@ export const validateLeadForm = (data: unknown): {
  * Formato: (99) 99999-9999
  */
 export const applyPhoneMask = (value: string): string => {
+  // Se começar com +, é internacional, não aplica máscara rígida, apenas permite números, espaços e hífens
+  if (value.startsWith('+')) {
+    return value.replace(/[^\+0-9\s\-]/g, '');
+  }
+
   // Remove tudo que não é número
   const numbers = value.replace(/\D/g, "");
   
-  // Limita a 11 dígitos
+  // Se tiver mais de 11 dígitos, provavelmente é internacional sem o +, não aplica máscara rígida
+  if (numbers.length > 11) {
+    return value.replace(/[^\+0-9\s\-]/g, '');
+  }
+  
+  // Limita a 11 dígitos para números brasileiros
   const limited = numbers.slice(0, 11);
   
-  // Aplica a máscara progressivamente
+  // Aplica a máscara progressivamente para números brasileiros
   if (limited.length <= 2) {
     return limited.length > 0 ? `(${limited}` : "";
   }
@@ -102,5 +112,6 @@ export const removePhoneMask = (value: string): string => {
  */
 export const isPhoneComplete = (value: string): boolean => {
   const numbers = removePhoneMask(value);
-  return numbers.length === 11;
+  // Aceita números brasileiros (10 ou 11 dígitos) ou internacionais (até 15 dígitos)
+  return numbers.length >= 10 && numbers.length <= 15;
 };
