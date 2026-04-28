@@ -255,7 +255,7 @@ const TestimonialsSection = () => {
                         <div className="w-full h-full rounded-full bg-white p-[2px]">
                           {!imgErrors.has(idx) ? (
                             <img
-                              src={`https://unavatar.io/instagram/${t.handle}`}
+                              src={`/avatars/${t.handle}.jpg`}
                               alt={t.name}
                               loading="lazy"
                               className="w-full h-full rounded-full object-cover"
