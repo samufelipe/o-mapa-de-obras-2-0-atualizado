@@ -25,7 +25,7 @@ interface FormErrors {
 
 const HeroSection = () => {
   const { toast } = useToast();
-  const [timeLeft, setTimeLeft] = useState({ h: 0, m: 0, s: 0 });
+  const [timeLeft, setTimeLeft] = useState({ d: 0, h: 0, m: 0, s: 0 });
   const formStarted = useRef(false);
 
   // Form state
@@ -41,11 +41,15 @@ const HeroSection = () => {
   useEffect(() => {
     const updateTimer = () => {
       const now = new Date();
-      const target = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
+      const target = new Date(2026, 4, 4, 23, 59, 59); // May 4th 2026
       const diff = target.getTime() - now.getTime();
-      if (diff <= 0) return;
+      if (diff <= 0) {
+        setTimeLeft({ d: 0, h: 0, m: 0, s: 0 });
+        return;
+      }
       setTimeLeft({
-        h: Math.floor(diff / (1000 * 60 * 60)),
+        d: Math.floor(diff / (1000 * 60 * 60 * 24)),
+        h: Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
         m: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)),
         s: Math.floor((diff % (1000 * 60)) / 1000)
       });
@@ -275,7 +279,7 @@ const HeroSection = () => {
             <div className="inline-flex items-center gap-2 bg-foreground px-3 py-1.5 border border-primary shadow-premium mx-auto lg:mx-0">
               <Clock className="w-3.5 h-3.5 text-primary" />
               <span className="text-xs font-bold text-background uppercase tracking-wider">
-                O Lote 01 Expira em: <span className="text-primary tabular-nums">{timeLeft.h}h {timeLeft.m}m {timeLeft.s}s</span>
+                Pré-lançamento expira em: <span className="text-primary tabular-nums">{timeLeft.d}d {timeLeft.h}h {timeLeft.m}m {timeLeft.s}s</span>
               </span>
             </div>
 

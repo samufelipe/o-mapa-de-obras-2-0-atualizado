@@ -85,7 +85,7 @@ const BonusSection = () => {
 
           <button
             onClick={scrollToForm}
-            className="w-full bg-primary text-foreground py-5 text-sm font-bold uppercase tracking-[0.2em] hover:bg-background transition-all duration-300 shadow-premium hover:shadow-premium-gold hover:-translate-y-1 active:scale-95 group flex items-center justify-center gap-2"
+            className="w-full bg-green-600 text-white py-5 text-sm font-bold uppercase tracking-[0.2em] hover:bg-green-700 transition-all duration-300 border-2 border-green-600 shadow-premium hover:shadow-premium-gold hover:-translate-y-1 active:scale-95 group flex items-center justify-center gap-2"
           >
             GARANTIR MINHA VAGA AGORA <ArrowRight className="inline w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
