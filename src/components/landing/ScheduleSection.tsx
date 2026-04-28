@@ -40,21 +40,6 @@ const ScheduleSection = () => {
                 ))}
               </ul>
 
-              {item.surprise && (
-                <div className="mt-6 pt-4 border-t border-primary/30">
-                  <div className="bg-primary/10 border border-primary/30 p-4 rounded-sm">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-base">💛</span>
-                      <span className="text-[13px] font-bold text-primary uppercase tracking-widest">
-                        {item.surprise.title}
-                      </span>
-                    </div>
-                    <p className="text-sm font-medium text-muted-foreground italic">
-                      {item.surprise.description}
-                    </p>
-                  </div>
-                </div>
-              )}
             </div>
           ))}
         </div>
