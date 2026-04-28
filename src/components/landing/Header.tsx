@@ -2,8 +2,8 @@ import logoIcon from "@/assets/logo-cronograma-icon.svg";
 
 const Header = () => {
   const scrollToForm = () => {
-    const heroSection = document.getElementById("hero");
-    heroSection?.scrollIntoView({ behavior: "smooth" });
+    const heroSection = document.getElementById("registration-form");
+    heroSection?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
   return (

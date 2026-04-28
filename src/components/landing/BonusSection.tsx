@@ -5,8 +5,8 @@ const bonusIcons = [PlayCircle, FileSpreadsheet, ClipboardList, FileText];
 
 const BonusSection = () => {
   const scrollToForm = () => {
-    const heroSection = document.getElementById("hero");
-    heroSection?.scrollIntoView({ behavior: "smooth" });
+    const heroSection = document.getElementById("registration-form");
+    heroSection?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
   return (

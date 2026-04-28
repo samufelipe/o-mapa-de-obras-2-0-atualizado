@@ -6,8 +6,8 @@ import { trackCTAClick } from "@/lib/gtm-tracking";
 const TransformationSection = () => {
   const scrollToForm = () => {
     trackCTAClick("transformation_cta", "transformation_section", "QUERO PARTICIPAR DA IMERSÃO");
-    const el = document.getElementById('hero');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    const el = document.getElementById('registration-form');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
   const steps = [

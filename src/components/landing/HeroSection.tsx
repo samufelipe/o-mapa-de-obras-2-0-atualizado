@@ -312,7 +312,7 @@ const HeroSection = () => {
           </div>
 
           {/* Right Form Card */}
-          <div id="ingresso" className="scroll-mt-24 animate-fade-up">
+          <div id="registration-form" className="scroll-mt-24 animate-fade-up">
             <div className="bg-card border-2 border-foreground p-6 md:p-8 shadow-premium max-w-md mx-auto">
               <div className="mb-6 text-center lg:text-left">
                 <div className="inline-block bg-foreground text-primary px-3 py-1 text-[11px] font-bold uppercase tracking-widest mb-2">

@@ -16,7 +16,7 @@ const footerLinks = [
 const Footer = () => {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
-    element?.scrollIntoView({ behavior: "smooth" });
+    element?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
   const scrollToTop = () => {

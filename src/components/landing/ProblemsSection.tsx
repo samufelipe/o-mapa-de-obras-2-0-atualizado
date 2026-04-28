@@ -21,8 +21,8 @@ const problems = [
 
 const ProblemsSection = () => {
   const scrollToForm = () => {
-    const heroSection = document.getElementById("hero");
-    heroSection?.scrollIntoView({ behavior: "smooth" });
+    const heroSection = document.getElementById("registration-form");
+    heroSection?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
   return (
