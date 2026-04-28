@@ -68,8 +68,8 @@ const Index = () => {
 
   const scrollToForm = () => {
     trackCTAClick("sticky_cta", "mobile_bottom", "QUERO MINHA VAGA AGORA");
-    const el = document.getElementById('hero');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    const el = document.getElementById('registration-form');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
   return (
