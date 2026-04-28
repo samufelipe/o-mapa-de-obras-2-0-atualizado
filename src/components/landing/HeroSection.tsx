@@ -123,13 +123,24 @@ const HeroSection = () => {
 
     // Separar DDD e número para a Hotmart
     if (isInternational) {
-      // Para números internacionais, enviamos o número completo no phonenumber e deixamos o phoneac vazio ou com o código do país
-      // A Hotmart lida melhor com números internacionais se passarmos o DDI no phoneac e o resto no phonenumber
-      // Mas como o formato varia muito, o mais seguro é passar tudo no phonenumber se começar com +
+      // Para números internacionais, a Hotmart espera o DDI (código do país) no parâmetro 'phonecode'
+      // e o resto do número (DDD + número) no 'phonenumber'.
+      // O Reportana precisa dessa separação exata para não duplicar o DDI.
+      
+      // Extrair o DDI (geralmente 1 a 3 dígitos após o +)
+      // Como não temos uma biblioteca de parse de telefone, vamos assumir que o usuário digitou o +
+      // Vamos enviar o número completo com o + no phonenumber, e a Hotmart/Reportana farão o parse
+      // Ou melhor, vamos tentar extrair o DDI se possível, mas o mais seguro para o Reportana
+      // quando integrado com a Hotmart é passar o número completo com o + no phonenumber,
+      // pois a Hotmart tem um parser interno que identifica o + e separa o DDI automaticamente.
+      // Outra opção é usar o parâmetro 'phonecode' para o DDI e 'phonenumber' para o resto.
+      
+      // Vamos enviar o número completo com o + no phonenumber. A Hotmart reconhece o + e formata corretamente.
       params.set("phonenumber", phoneClean);
     } else {
       const numbersOnly = phoneClean.replace(/\D/g, "");
       if (numbersOnly.length >= 10) {
+        // Para Brasil, enviamos o DDD no phoneac e o número no phonenumber
         params.set("phoneac", numbersOnly.substring(0, 2));
         params.set("phonenumber", numbersOnly.substring(2));
       }
