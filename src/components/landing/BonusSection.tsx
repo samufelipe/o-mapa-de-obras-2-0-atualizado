@@ -35,7 +35,7 @@ const BonusSection = () => {
                 </span>
                 <p className="text-sm text-muted-foreground mb-6 font-medium leading-relaxed text-center">{bonus.description}</p>
                 <div className="mt-auto pt-4 border-t border-border w-full">
-                  <span className={`text-[11px] font-bold uppercase tracking-widest flex items-center justify-center gap-1 ${isImmediate ? 'text-primary' : 'text-muted-foreground'}`}>
+                  <span className={`text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-1 ${isImmediate ? 'text-primary' : 'text-muted-foreground'}`}>
                     <Clock className="w-4 h-4" /> {bonus.release}
                   </span>
                 </div>

@@ -89,13 +89,13 @@ const Index = () => {
       <Footer />
 
       {/* Sticky Mobile CTA */}
-      <div className={`fixed bottom-0 left-0 w-full p-4 z-[100] md:hidden transition-all duration-500 transform ${showStickyCTA ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
-        <button 
+      <div className={`fixed bottom-0 left-0 w-full z-[100] md:hidden transition-all duration-500 transform bg-background/95 backdrop-blur-sm border-t border-border px-4 py-3 ${showStickyCTA ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
+        <button
           onClick={scrollToForm}
-          className="w-full bg-primary text-foreground py-4 px-6 text-[10px] font-black uppercase tracking-widest shadow-2xl border-2 border-foreground flex items-center justify-between group active:scale-95"
+          className="w-full bg-green-600 text-white py-4 px-6 text-sm font-black uppercase tracking-widest shadow-2xl border-2 border-green-600 flex items-center justify-between group active:scale-95 hover:bg-green-700 transition-colors duration-300"
         >
           <span>QUERO MINHA VAGA AGORA</span>
-          <ArrowRight className="w-4 h-4" />
+          <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
         </button>
       </div>
     </div>

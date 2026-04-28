@@ -30,7 +30,7 @@ const ScheduleSection = () => {
         <div className="grid md:grid-cols-2 gap-6 text-left mb-16">
           {(AGENDA as AgendaItem[]).map((item, i) => (
             <div key={i} className="bg-card p-8 border border-border shadow-sm hover:shadow-premium transition-all duration-300">
-              <span className="text-[11px] font-bold text-primary uppercase tracking-widest block mb-2">{item.date}</span>
+              <span className="text-xs font-bold text-primary uppercase tracking-widest block mb-2">{item.date}</span>
               <h3 className="text-lg font-bold uppercase mb-6 tracking-tight border-b border-border pb-2">{item.title}</h3>
               <ul className="space-y-4">
                 {item.topics.map((topic, j) => (
