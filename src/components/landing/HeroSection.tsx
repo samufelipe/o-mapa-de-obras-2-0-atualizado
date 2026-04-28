@@ -311,8 +311,11 @@ const HeroSection = () => {
           <div id="ingresso" className="scroll-mt-24 animate-fade-up">
             <div className="bg-card border-2 border-foreground p-6 md:p-8 shadow-premium max-w-md mx-auto">
               <div className="mb-6 text-center lg:text-left">
-                <h2 className="text-lg font-bold uppercase tracking-tight">Vaga Exclusiva</h2>
-                <p className="text-sm font-bold text-muted-foreground uppercase tracking-widest">Imersão Ao Vivo • Sábado 30/05</p>
+                <div className="inline-block bg-primary text-foreground px-3 py-1 text-[11px] font-bold uppercase tracking-widest mb-2">
+                  ⚡ PRÉ-LANÇAMENTO
+                </div>
+                <h2 className="text-lg font-bold uppercase tracking-tight leading-snug">Garanta o menor preço antes do lançamento</h2>
+                <p className="text-xs font-bold text-primary uppercase tracking-widest mt-1">Oferta encerra dia 04/05</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4" data-track="lead_form" data-track-location="hero">
@@ -376,7 +379,7 @@ const HeroSection = () => {
                     <span className="text-xs font-bold text-primary bg-foreground px-2 py-1 uppercase tracking-widest shadow-premium">PRÉ-LANÇAMENTO</span>
                   </div>
                   <p className="text-[11px] font-bold text-primary/80 uppercase tracking-widest mb-4">
-                    ⚡ Oferta válida até 04/05 — após sobe para R$ 39,90
+                    ⚡ Oferta válida até 04/05 · após sobe para R$ 39,90
                   </p>
 
                   <button
