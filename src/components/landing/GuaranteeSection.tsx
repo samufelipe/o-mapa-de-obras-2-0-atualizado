@@ -16,19 +16,19 @@ const GuaranteeSection = () => {
           </div>
           <div className="text-left space-y-3">
             <h2 className="text-xl md:text-2xl font-bold uppercase tracking-tight">Garantia Incondicional de 7 Dias</h2>
-            <p className="text-xs md:text-sm text-muted-foreground font-medium leading-relaxed">
+            <p className="text-sm md:text-base text-muted-foreground font-medium leading-relaxed">
               Inscreva-se com tranquilidade absoluta. Se você participar da imersão e sentir que o conteúdo não é para você, basta solicitar o reembolso total em até 7 dias. O risco é todo nosso.
             </p>
           </div>
         </div>
-        
+
         <div className="flex flex-col items-center gap-6">
           <h3 className="text-lg md:text-xl font-bold uppercase tracking-tight">Pronta para assumir o comando da sua obra?</h3>
-          <button 
+          <button
             onClick={scrollToForm}
-            className="w-full md:w-auto bg-primary text-foreground px-6 py-4 text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-foreground hover:text-primary transition-all duration-300 border-2 border-foreground shadow-premium hover:shadow-premium-gold hover:-translate-y-1 flex items-center justify-center gap-2 group active:scale-95"
+            className="w-full md:w-auto bg-primary text-foreground px-6 py-4 text-xs md:text-sm font-bold uppercase tracking-[0.2em] hover:bg-foreground hover:text-primary transition-all duration-300 border-2 border-foreground shadow-premium hover:shadow-premium-gold hover:-translate-y-1 flex items-center justify-center gap-2 group active:scale-95"
           >
-            SIM, QUERO O CRONOGRAMA 2.0 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            SIM, QUERO O CRONOGRAMA 2.0 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
       </div>

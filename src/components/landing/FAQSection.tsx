@@ -15,21 +15,21 @@ const FAQSection = () => {
   return (
     <section id="faq" className="py-20 bg-background">
       <div className="container mx-auto px-4 max-w-2xl">
-        <h2 className="text-xl font-bold text-center mb-4 uppercase tracking-widest">Dúvidas Frequentes</h2>
+        <h2 className="text-2xl font-bold text-center mb-4 uppercase tracking-widest">Dúvidas Frequentes</h2>
         <div className="space-y-2 mt-8">
           {FAQ_ITEMS.map((faq, idx) => (
             <div key={idx} className="bg-card border border-border overflow-hidden shadow-sm">
-              <button 
-                onClick={() => handleFaqClick(idx, faq.question)} 
+              <button
+                onClick={() => handleFaqClick(idx, faq.question)}
                 className="w-full flex justify-between items-center px-5 py-4 text-left group"
                 data-track="faq_item"
                 data-track-location="faq_section"
               >
-                <span className="font-bold text-[10px] md:text-[11px] uppercase tracking-wider group-hover:text-primary transition-colors">{faq.question}</span>
-                {openFaqIndex === idx ? <ChevronUp className="w-3.5 h-3.5 text-primary" /> : <ChevronDown className="w-3.5 h-3.5 text-muted-foreground" />}
+                <span className="font-bold text-[13px] md:text-sm uppercase tracking-wider group-hover:text-primary transition-colors">{faq.question}</span>
+                {openFaqIndex === idx ? <ChevronUp className="w-4 h-4 text-primary flex-shrink-0" /> : <ChevronDown className="w-4 h-4 text-muted-foreground flex-shrink-0" />}
               </button>
               {openFaqIndex === idx && (
-                <div className="px-5 pb-5 text-muted-foreground text-[11px] font-medium leading-relaxed border-t border-border pt-4">
+                <div className="px-5 pb-5 text-muted-foreground text-sm font-medium leading-relaxed border-t border-border pt-4">
                   {faq.answer}
                 </div>
               )}
