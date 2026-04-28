@@ -8,6 +8,7 @@ import QualificationSection from "@/components/landing/QualificationSection";
 import StepsSection from "@/components/landing/StepsSection";
 import ScheduleSection from "@/components/landing/ScheduleSection";
 import TransformationSection from "@/components/landing/TransformationSection";
+import TestimonialsSection from "@/components/landing/TestimonialsSection";
 import BonusSection from "@/components/landing/BonusSection";
 import GuaranteeSection from "@/components/landing/GuaranteeSection";
 import FAQSection from "@/components/landing/FAQSection";
@@ -81,6 +82,7 @@ const Index = () => {
       <StepsSection />
       <ScheduleSection />
       <TransformationSection />
+      <TestimonialsSection />
       <BonusSection />
       <GuaranteeSection />
       <FAQSection />
