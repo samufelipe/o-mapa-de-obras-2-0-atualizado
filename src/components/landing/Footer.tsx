@@ -29,15 +29,9 @@ const Footer = () => {
 
         <div className="flex flex-col items-center mb-8">
           <img
-            src={logoFooter}
-            alt="Cronograma 2.0: O Mapa da Obra"
-            className="hidden md:block h-24 w-auto opacity-90 hover:opacity-100 transition-opacity duration-300"
-            loading="lazy"
-          />
-          <img
             src="/logo-mobile.png"
             alt="Cronograma 2.0: O Mapa da Obra"
-            className="block md:hidden h-20 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-300"
+            className="h-20 md:h-24 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-300"
             loading="lazy"
           />
         </div>

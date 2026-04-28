@@ -11,19 +11,10 @@ const Header = () => {
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <img
-            src={logoIcon}
-            alt="Cronograma 2.0"
-            className="hidden md:block h-20 w-auto"
-          />
-          <img
             src="/logo-mobile.png"
             alt="Cronograma 2.0"
-            className="block md:hidden h-16 w-auto object-contain"
+            className="h-20 md:h-24 w-auto object-contain"
           />
-          <div className="hidden sm:flex flex-col">
-            <span className="text-sm md:text-base font-bold text-foreground tracking-wide">Cronograma 2.0</span>
-            <span className="text-xs md:text-sm text-primary font-medium">O Mapa da Obra de Interiores</span>
-          </div>
         </div>
 
         <button
