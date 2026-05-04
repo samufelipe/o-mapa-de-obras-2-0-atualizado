@@ -6,53 +6,19 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-hotmart-hottok",
 };
 
-// Token de segurança do webhook Hotmart
 const HOTMART_HOTTOK = Deno.env.get("HOTMART_HOTTOK");
-const RD_STATION_API_KEY = Deno.env.get("RD_STATION_API_KEY");
-
-// 🔧 MODO DEBUG: Quando ativo, aceita requisições sem validar token
 const DEBUG_MODE = Deno.env.get("HOTMART_DEBUG_MODE") === "true";
 
-// Identificadores de conversão para compra no RD Station
-const PURCHASE_CONVERSION_IDENTIFIERS: Record<string, string> = {
-  imersao: "imersao-cronograma-2.0-o-mapa-da-obra-compra-aprovada",
-  mentoria: "mentoria-inovando-na-sua-obra-compra-aprovada",
-};
-
-// Interface para o payload da Hotmart (múltiplos formatos)
 interface HotmartWebhookPayload {
-  // Formato padrão Hotmart v2
   event?: string;
   data?: {
-    buyer?: {
-      email?: string;
-      name?: string;
-      phone?: string;
-    };
-    product?: {
-      id?: number;
-      name?: string;
-    };
-    purchase?: {
-      status?: string;
-      transaction?: string;
-      order_date?: string;
-    };
+    buyer?: { email?: string; name?: string; phone?: string };
+    product?: { id?: number; name?: string };
+    purchase?: { status?: string; transaction?: string; order_date?: string };
   };
-  // Formato Hotmart v1 / alternativo
-  buyer?: {
-    email?: string;
-    name?: string;
-  };
-  product?: {
-    id?: number;
-    name?: string;
-  };
-  purchase?: {
-    status?: string;
-    transaction?: string;
-  };
-  // Formato flat (usado por alguns webhooks/Pluga)
+  buyer?: { email?: string; name?: string };
+  product?: { id?: number; name?: string };
+  purchase?: { status?: string; transaction?: string };
   buyer_email?: string;
   buyer_name?: string;
   product_name?: string;
@@ -65,11 +31,8 @@ serve(async (req: Request) => {
   const requestId = crypto.randomUUID().slice(0, 8);
   console.log(`\n========== [${requestId}] HOTMART WEBHOOK RECEBIDO ==========`);
   console.log(`📅 Timestamp: ${new Date().toISOString()}`);
-  console.log(`🔗 Method: ${req.method}`);
-  
-  // Handle CORS preflight
+
   if (req.method === "OPTIONS") {
-    console.log(`[${requestId}] ✅ CORS preflight handled`);
     return new Response(null, { headers: corsHeaders });
   }
 
@@ -78,97 +41,78 @@ serve(async (req: Request) => {
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-    // Log headers para debug
     const headers: Record<string, string> = {};
     req.headers.forEach((value, key) => {
       headers[key] = key.toLowerCase().includes("hottok") ? "***REDACTED***" : value;
     });
     console.log(`[${requestId}] 📋 Headers:`, JSON.stringify(headers, null, 2));
 
-    // Obter o body raw para debug
     const rawBody = await req.text();
     console.log(`[${requestId}] 📦 Raw body length: ${rawBody.length} chars`);
-    
+
     let body: HotmartWebhookPayload;
     try {
       body = JSON.parse(rawBody);
       console.log(`[${requestId}] 📥 Payload parsed:`, JSON.stringify(body, null, 2));
     } catch (parseError) {
       console.error(`[${requestId}] ❌ Erro ao parsear JSON:`, parseError);
-      console.error(`[${requestId}] 📄 Raw body:`, rawBody.slice(0, 500));
       return new Response(
         JSON.stringify({ error: "Invalid JSON payload" }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
-    // Validar token Hotmart - Verificar em múltiplos lugares
     const headerHottok = req.headers.get("x-hotmart-hottok");
     const bodyHottok = body.hottok;
     const receivedHottok = headerHottok || bodyHottok;
-    
-    console.log(`[${requestId}] 🔐 Token check:`, {
-      headerHottok: headerHottok ? "presente" : "ausente",
-      bodyHottok: bodyHottok ? "presente" : "ausente",
-      serverHottok: HOTMART_HOTTOK ? "configurado" : "NÃO CONFIGURADO",
-    });
 
-    // 🔧 MODO DEBUG - Loga TUDO e pula validação de token
     if (DEBUG_MODE) {
-      console.warn(`[${requestId}] ⚠️⚠️⚠️ DEBUG MODE ATIVO - ACEITANDO REQUISIÇÃO SEM VALIDAR TOKEN ⚠️⚠️⚠️`);
-      console.log(`[${requestId}] 🔍 DEBUG - Payload completo:`, JSON.stringify(body, null, 2));
-      console.log(`[${requestId}] 🔍 DEBUG - Headers completo:`, JSON.stringify(headers, null, 2));
+      console.warn(`[${requestId}] ⚠️ DEBUG MODE ATIVO - aceitando sem validar token`);
     } else {
-      // Verificar se o token está configurado no servidor
       if (!HOTMART_HOTTOK) {
-        console.error(`[${requestId}] ❌ HOTMART_HOTTOK não configurado no servidor`);
+        console.error(`[${requestId}] ❌ HOTMART_HOTTOK não configurado`);
         return new Response(
           JSON.stringify({ error: "Webhook não configurado corretamente" }),
           { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
         );
       }
-
-      // Validar token (aceita header ou body)
       if (!receivedHottok || receivedHottok !== HOTMART_HOTTOK) {
         console.warn(`[${requestId}] ⚠️ Token Hotmart inválido ou ausente`);
-        console.warn(`[${requestId}] Token recebido: ${receivedHottok ? "***PRESENT***" : "MISSING"}`);
         return new Response(
           JSON.stringify({ error: "Unauthorized - Invalid or missing Hotmart token" }),
           { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
         );
       }
-
       console.log(`[${requestId}] ✅ Token Hotmart válido`);
     }
 
-    // Extrair dados (suporta múltiplos formatos)
-    const email = 
-      body.data?.buyer?.email || 
-      body.buyer?.email || 
+    const email =
+      body.data?.buyer?.email ||
+      body.buyer?.email ||
       body.buyer_email;
-    
-    const buyerName = 
-      body.data?.buyer?.name || 
-      body.buyer?.name || 
+
+    const buyerName =
+      body.data?.buyer?.name ||
+      body.buyer?.name ||
       body.buyer_name;
-    
-    const productName = 
-      body.data?.product?.name || 
-      body.product?.name || 
+
+    const productName =
+      body.data?.product?.name ||
+      body.product?.name ||
       body.product_name;
-    
+
     const event = body.event || "PURCHASE_APPROVED";
-    
-    const status = 
-      body.data?.purchase?.status || 
-      body.purchase?.status || 
-      body.status || 
+
+    const status =
+      body.data?.purchase?.status ||
+      body.purchase?.status ||
+      body.status ||
       "approved";
-    
-    const transactionId = 
-      body.data?.purchase?.transaction || 
-      body.purchase?.transaction || 
-      body.transaction || 
+
+    const transactionId =
+      body.data?.purchase?.transaction ||
+      body.purchase?.transaction ||
+      body.transaction ||
       null;
 
     console.log(`[${requestId}] 📊 Dados extraídos:`, {
@@ -188,12 +132,11 @@ serve(async (req: Request) => {
       );
     }
 
-    // Verificar se é uma compra aprovada
     const approvedEvents = ["PURCHASE_APPROVED", "PURCHASE_COMPLETE", "PURCHASE_BILLET_PRINTED"];
     const approvedStatuses = ["approved", "complete", "completed", "paid"];
-    
-    const isApproved = 
-      approvedEvents.includes(event.toUpperCase()) || 
+
+    const isApproved =
+      approvedEvents.includes(event.toUpperCase()) ||
       approvedStatuses.includes(status.toLowerCase());
 
     if (!isApproved) {
@@ -206,7 +149,6 @@ serve(async (req: Request) => {
 
     console.log(`[${requestId}] ✅ Evento de compra aprovada identificado`);
 
-    // Determinar produto baseado no nome
     let product: "imersao" | "mentoria" = "imersao";
     if (productName) {
       const nameLower = productName.toLowerCase();
@@ -216,12 +158,8 @@ serve(async (req: Request) => {
     }
 
     const normalizedEmail = email.toLowerCase().trim();
-    console.log(`[${requestId}] 🔍 Buscando checkout intents para:`, {
-      email: normalizedEmail,
-      product,
-    });
+    console.log(`[${requestId}] 🔍 Buscando checkout intents para:`, { email: normalizedEmail, product });
 
-    // Buscar intents pendentes
     const { data: intents, error: selectError } = await supabase
       .from("checkout_intents")
       .select("*")
@@ -235,15 +173,14 @@ serve(async (req: Request) => {
 
     let updatedIntentIds: string[] = [];
     let intentFound = false;
-    
+
     if (intents && intents.length > 0) {
       intentFound = true;
       console.log(`[${requestId}] 📝 Encontrados ${intents.length} intents para marcar como purchased`);
-      
-      // Marcar como purchased com dados de auditoria
+
       const { data: updatedIntents, error: updateError } = await supabase
         .from("checkout_intents")
-        .update({ 
+        .update({
           status: "purchased",
           purchased_at: new Date().toISOString(),
           hotmart_transaction_id: transactionId,
@@ -257,13 +194,11 @@ serve(async (req: Request) => {
         console.error(`[${requestId}] ❌ Erro ao atualizar intents:`, updateError);
       } else {
         console.log(`[${requestId}] ✅ Intents marcados como purchased`);
-        updatedIntentIds = updatedIntents?.map(i => i.id) || [];
+        updatedIntentIds = updatedIntents?.map((i: { id: string }) => i.id) || [];
       }
     } else {
-      console.log(`[${requestId}] ⚠️ Nenhum intent pendente encontrado para ${normalizedEmail}/${product}`);
-      console.log(`[${requestId}] 📝 Criando registro de compra para auditoria...`);
-      
-      // Criar um registro de compra mesmo sem intent prévio (para auditoria)
+      console.log(`[${requestId}] ⚠️ Nenhum intent pendente — criando registro de auditoria`);
+
       const { data: newIntent, error: insertError } = await supabase
         .from("checkout_intents")
         .insert({
@@ -286,89 +221,18 @@ serve(async (req: Request) => {
       }
     }
 
-    // Enviar evento de compra para RD Station
-    let rdSuccess = false;
-    if (RD_STATION_API_KEY) {
-      const conversionIdentifier = PURCHASE_CONVERSION_IDENTIFIERS[product];
-      
-      const rdPayload = {
-        event_type: "CONVERSION",
-        event_family: "CDP",
-        payload: {
-          conversion_identifier: conversionIdentifier,
-          email: normalizedEmail,
-          name: buyerName || "",
-          cf_produto: product,
-          cf_status_carrinho: "comprado",
-          cf_data_compra: new Date().toISOString(),
-          cf_transacao_hotmart: transactionId || "",
-        },
-      };
-
-      console.log(`[${requestId}] 📤 Enviando evento de compra para RD Station:`, {
-        email: normalizedEmail,
-        conversion: conversionIdentifier,
-        product,
-      });
-
-      try {
-        const rdResponse = await fetch(
-          `https://api.rd.services/platform/conversions?api_key=${RD_STATION_API_KEY}`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Accept": "application/json",
-            },
-            body: JSON.stringify(rdPayload),
-          }
-        );
-
-        const rdResponseData = await rdResponse.json().catch(() => ({}));
-        
-        if (rdResponse.ok) {
-          console.log(`[${requestId}] ✅ Evento de compra enviado para RD Station:`, rdResponseData);
-          rdSuccess = true;
-        } else {
-          console.error(`[${requestId}] ❌ Erro RD Station:`, rdResponse.status, rdResponseData);
-        }
-      } catch (rdError) {
-        console.error(`[${requestId}] ❌ Erro na requisição ao RD Station:`, rdError);
-      }
-    } else {
-      console.warn(`[${requestId}] ⚠️ RD_STATION_API_KEY não configurada`);
-    }
-
-    // Registrar auditoria do envio ao RD Station
-    if (updatedIntentIds.length > 0) {
-      const { error: auditError } = await supabase
-        .from("checkout_intents")
-        .update({
-          purchase_sent_to_rd_at: RD_STATION_API_KEY ? new Date().toISOString() : null,
-          purchase_rd_success: rdSuccess,
-        })
-        .in("id", updatedIntentIds);
-
-      if (auditError) {
-        console.error(`[${requestId}] ❌ Erro ao registrar auditoria RD:`, auditError);
-      } else {
-        console.log(`[${requestId}] ✅ Auditoria RD registrada`);
-      }
-    }
-
-    const result = { 
-      success: true, 
+    const result = {
+      success: true,
       request_id: requestId,
       message: "Webhook processado com sucesso",
       email: normalizedEmail,
       product,
       intent_found: intentFound,
       intents_updated: updatedIntentIds.length,
-      rd_purchase_sent: rdSuccess,
       transaction_id: transactionId,
     };
 
-    console.log(`[${requestId}] ✅ WEBHOOK PROCESSADO COM SUCESSO:`, result);
+    console.log(`[${requestId}] ✅ WEBHOOK PROCESSADO:`, result);
     console.log(`========== [${requestId}] FIM ==========\n`);
 
     return new Response(
@@ -378,7 +242,6 @@ serve(async (req: Request) => {
 
   } catch (error) {
     console.error(`[${requestId}] ❌ Erro interno:`, error);
-    console.log(`========== [${requestId}] FIM COM ERRO ==========\n`);
     return new Response(
       JSON.stringify({ error: "Erro interno do servidor", request_id: requestId }),
       { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }

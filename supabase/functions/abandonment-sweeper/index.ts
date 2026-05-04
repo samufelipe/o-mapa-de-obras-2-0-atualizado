@@ -6,19 +6,9 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-// Configurações
-const ABANDONMENT_THRESHOLD_MINUTES = 10; // Considerar abandonado após 10 minutos
-const RD_STATION_API_KEY = Deno.env.get("RD_STATION_API_KEY");
-const MAX_RD_ATTEMPTS = 3;
-
-// Token secreto para autenticar chamadas do CRON
-const CRON_SECRET = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
-
-// Identificadores de conversão no RD Station (nomes exatos do Pluga)
-const CONVERSION_IDENTIFIERS = {
-  imersao: "imersao-cronograma-2.0-o-mapa-da-obra-carrinho-abandonado",
-  mentoria: "mentoria-inovando-na-sua-obra-carrinho-abandonado",
-};
+const ABANDONMENT_THRESHOLD_MINUTES = 10;
+const MAX_REPORTANA_ATTEMPTS = 3;
+const REPORTANA_WEBHOOK_URL = Deno.env.get("REPORTANA_WEBHOOK_URL");
 
 interface CheckoutIntent {
   id: string;
@@ -36,86 +26,79 @@ interface CheckoutIntent {
   rd_attempts: number;
 }
 
-async function sendToRDStation(intent: CheckoutIntent): Promise<{ success: boolean; response?: unknown; error?: string }> {
-  if (!RD_STATION_API_KEY) {
-    console.warn("⚠️ RD_STATION_API_KEY não configurada");
-    return { success: false, error: "API Key não configurada" };
+async function sendToReportana(intent: CheckoutIntent): Promise<{ success: boolean; response?: unknown; error?: string }> {
+  if (!REPORTANA_WEBHOOK_URL) {
+    console.warn("⚠️ REPORTANA_WEBHOOK_URL não configurada");
+    return { success: false, error: "URL do Reportana não configurada" };
   }
 
-  const conversionIdentifier = CONVERSION_IDENTIFIERS[intent.product];
-  
+  const productName = intent.product === "imersao"
+    ? "Imersão Cronograma 2.0 - O Mapa da Obra de Interiores"
+    : "Mentoria Inovando na Sua Obra";
+
   const payload = {
-    event_type: "CONVERSION",
-    event_family: "CDP",
-    payload: {
-      conversion_identifier: conversionIdentifier,
-      email: intent.email,
-      name: intent.name || "",
-      personal_phone: intent.phone || "",
-      mobile_phone: intent.phone || "",
-      cf_utm_source: intent.utm_source || "direct",
-      cf_utm_medium: intent.utm_medium || "",
-      cf_utm_campaign: intent.utm_campaign || "",
-      cf_utm_content: intent.utm_content || "",
-      cf_utm_term: intent.utm_term || "",
-      cf_produto: intent.product,
-      cf_status_carrinho: "abandonado",
-      cf_data_abandono: new Date().toISOString(),
+    event: "PURCHASE_ABANDONED",
+    data: {
+      buyer: {
+        email: intent.email,
+        name: intent.name || "",
+        phone: intent.phone || "",
+      },
+      product: {
+        name: productName,
+      },
+      purchase: {
+        status: "abandoned",
+      },
     },
   };
 
-  console.log("📤 Enviando para RD Station:", {
+  console.log("📤 Enviando para Reportana:", {
     email: intent.email,
-    conversion: conversionIdentifier,
     product: intent.product,
+    phone: intent.phone ? "presente" : "ausente",
   });
 
   try {
-    const response = await fetch(
-      `https://api.rd.services/platform/conversions?api_key=${RD_STATION_API_KEY}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-        },
-        body: JSON.stringify(payload),
-      }
-    );
+    const response = await fetch(REPORTANA_WEBHOOK_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
 
-    if (response.ok) {
-      const data = await response.json();
-      console.log("✅ Enviado para RD Station com sucesso");
-      return { success: true, response: data };
+    const responseText = await response.text();
+    let responseData: unknown;
+    try {
+      responseData = JSON.parse(responseText);
+    } catch {
+      responseData = { raw: responseText };
     }
 
-    const errorData = await response.json().catch(() => ({}));
-    console.error("❌ Erro da API RD Station:", response.status, errorData);
-    return { success: false, error: `Erro ${response.status}`, response: errorData };
+    if (response.ok) {
+      console.log("✅ Enviado para Reportana com sucesso");
+      return { success: true, response: responseData };
+    }
+
+    console.error("❌ Erro do Reportana:", response.status, responseData);
+    return { success: false, error: `Erro ${response.status}`, response: responseData };
 
   } catch (error) {
-    console.error("❌ Erro ao enviar para RD Station:", error);
+    console.error("❌ Erro ao enviar para Reportana:", error);
     return { success: false, error: error instanceof Error ? error.message : "Erro desconhecido" };
   }
 }
 
 serve(async (req: Request) => {
-  // Handle CORS preflight
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    // Validar autenticação - aceita Bearer token ou chamada interna do CRON
     const authHeader = req.headers.get("Authorization");
-    const isValidAuth = authHeader && (
-      // Aceita Bearer com service role key (usado pelo CRON)
-      authHeader === `Bearer ${CRON_SECRET}` ||
-      // Aceita anon key para chamadas via pg_net do CRON
-      authHeader.includes("Bearer ")
-    );
 
-    // Se não tem auth header válido, rejeitar
     if (!authHeader) {
       console.warn("⚠️ Requisição sem autenticação rejeitada");
       return new Response(
@@ -130,22 +113,17 @@ serve(async (req: Request) => {
 
     console.log("🔍 Iniciando varredura de abandonos...");
 
-    // Calcular threshold de tempo
     const thresholdTime = new Date();
     thresholdTime.setMinutes(thresholdTime.getMinutes() - ABANDONMENT_THRESHOLD_MINUTES);
 
-    // Buscar intents que:
-    // 1. Status = 'started'
-    // 2. Criados há mais de X minutos
-    // 3. Ainda não enviados ao RD ou com menos de MAX tentativas
     const { data: intents, error: selectError } = await supabase
       .from("checkout_intents")
       .select("*")
       .eq("status", "started")
       .lt("created_at", thresholdTime.toISOString())
-      .or(`sent_to_rd_at.is.null,rd_attempts.lt.${MAX_RD_ATTEMPTS}`)
+      .or(`sent_to_rd_at.is.null,rd_attempts.lt.${MAX_REPORTANA_ATTEMPTS}`)
       .order("created_at", { ascending: true })
-      .limit(50); // Processar em lotes
+      .limit(50);
 
     if (selectError) {
       console.error("❌ Erro ao buscar intents:", selectError);
@@ -172,7 +150,7 @@ serve(async (req: Request) => {
       console.log(`\n--- Processando intent ${intent.id} ---`);
       console.log(`Email: ${intent.email}, Produto: ${intent.product}, Tentativas: ${intent.rd_attempts}`);
 
-      // Verificar se já foi comprado (double-check)
+      // Double-check: pode ter comprado entre a query e agora
       const { data: currentIntent } = await supabase
         .from("checkout_intents")
         .select("status")
@@ -184,16 +162,14 @@ serve(async (req: Request) => {
         continue;
       }
 
-      // Enviar para RD Station
-      const rdResult = await sendToRDStation(intent);
+      const reportanaResult = await sendToReportana(intent);
 
-      // Atualizar registro
       const updateData: Record<string, unknown> = {
         rd_attempts: (intent.rd_attempts || 0) + 1,
-        rd_response: rdResult.response || { error: rdResult.error },
+        rd_response: reportanaResult.response || { error: reportanaResult.error },
       };
 
-      if (rdResult.success) {
+      if (reportanaResult.success) {
         updateData.status = "abandoned";
         updateData.sent_to_rd_at = new Date().toISOString();
         processed++;
@@ -214,12 +190,12 @@ serve(async (req: Request) => {
     console.log(`\n✅ Varredura concluída: ${processed} processados, ${errors} erros`);
 
     return new Response(
-      JSON.stringify({ 
-        success: true, 
+      JSON.stringify({
+        success: true,
         processed,
         errors,
         total: intents.length,
-        message: `Processados ${processed} abandonos com ${errors} erros` 
+        message: `Processados ${processed} abandonos com ${errors} erros`,
       }),
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
