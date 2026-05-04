@@ -25,7 +25,7 @@ interface FormErrors {
 
 const HeroSection = () => {
   const { toast } = useToast();
-  const [timeLeft, setTimeLeft] = useState({ d: 0, h: 0, m: 0, s: 0 });
+  const [timeLeft, setTimeLeft] = useState({ h: 0, m: 0, s: 0 });
   const formStarted = useRef(false);
 
   // Form state
@@ -41,15 +41,11 @@ const HeroSection = () => {
   useEffect(() => {
     const updateTimer = () => {
       const now = new Date();
-      const target = new Date(2026, 4, 4, 23, 59, 59); // May 4th 2026
+      const target = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
       const diff = target.getTime() - now.getTime();
-      if (diff <= 0) {
-        setTimeLeft({ d: 0, h: 0, m: 0, s: 0 });
-        return;
-      }
+      if (diff <= 0) return;
       setTimeLeft({
-        d: Math.floor(diff / (1000 * 60 * 60 * 24)),
-        h: Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+        h: Math.floor(diff / (1000 * 60 * 60)),
         m: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)),
         s: Math.floor((diff % (1000 * 60)) / 1000)
       });
@@ -299,7 +295,7 @@ const HeroSection = () => {
             <div className="inline-flex items-center gap-2 bg-foreground px-3 py-1.5 border border-primary shadow-premium mx-auto lg:mx-0">
               <Clock className="w-3.5 h-3.5 text-primary" />
               <span className="text-xs font-bold text-background uppercase tracking-wider">
-                Pré-lançamento expira em: <span className="text-primary tabular-nums">{timeLeft.d}d {timeLeft.h}h {timeLeft.m}m {timeLeft.s}s</span>
+                O Lote 01 Expira em: <span className="text-primary tabular-nums">{timeLeft.h}h {timeLeft.m}m {timeLeft.s}s</span>
               </span>
             </div>
 
@@ -335,11 +331,8 @@ const HeroSection = () => {
           <div id="registration-form" className="scroll-mt-24 animate-fade-up">
             <div className="bg-card border-2 border-foreground p-6 md:p-8 shadow-premium max-w-md mx-auto">
               <div className="mb-6 text-center lg:text-left">
-                <div className="inline-block bg-foreground text-primary px-3 py-1 text-[11px] font-bold uppercase tracking-widest mb-2">
-                  ⚡ PRÉ-LANÇAMENTO
-                </div>
-                <h2 className="text-lg font-bold uppercase tracking-tight leading-snug">Garanta o menor preço antes do lançamento</h2>
-                <p className="text-xs font-bold text-primary uppercase tracking-widest mt-1">Oferta encerra dia 04/05</p>
+                <h2 className="text-lg font-bold uppercase tracking-tight">Vaga Exclusiva</h2>
+                <p className="text-sm font-bold text-muted-foreground uppercase tracking-widest">Imersão Ao Vivo • Sábado 30/05</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4" data-track="lead_form" data-track-location="hero">
@@ -397,9 +390,10 @@ const HeroSection = () => {
                 <div className="pt-4">
                   <div className="flex justify-between items-end mb-4">
                     <div className="flex flex-col">
-                      <span className="text-sm font-bold text-muted-foreground line-through uppercase">R$ 39,90</span>
-                      <span className="text-3xl font-bold tracking-tighter animate-pulse-slow">R$ 29,90</span>
+                      <span className="text-sm font-bold text-muted-foreground line-through uppercase">R$ 97,00</span>
+                      <span className="text-3xl font-bold tracking-tighter animate-pulse-slow">R$ 39,90</span>
                     </div>
+                    <span className="text-xs font-bold text-primary bg-foreground px-2 py-1 uppercase tracking-widest shadow-premium">LOTE 01</span>
                   </div>
 
                   <button
