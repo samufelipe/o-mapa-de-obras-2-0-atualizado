@@ -22,19 +22,19 @@ const ScheduleSection = () => {
     <section id="schedule" className="py-20 bg-background reveal">
       <div className="container mx-auto px-4 max-w-4xl text-center">
         <div className="mb-16 space-y-4">
-          <h2 className="text-2xl md:text-3xl font-bold uppercase tracking-tight">Como Vai Ser a Imersão</h2>
-          <p className="text-sm font-bold text-muted-foreground uppercase tracking-widest">Um dia inteiro focado na sua transformação técnica</p>
+          <h2 className="text-3xl md:text-4xl font-bold uppercase tracking-tight">Como Vai Ser a Imersão</h2>
+          <p className="text-sm md:text-base font-bold text-muted-foreground uppercase tracking-widest">Um dia inteiro focado na sua transformação técnica</p>
           <div className="w-12 h-1 bg-primary mx-auto"></div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6 text-left mb-16">
           {(AGENDA as AgendaItem[]).map((item, i) => (
-            <div key={i} className="bg-card p-8 border border-border shadow-sm hover:shadow-premium transition-all duration-300">
+            <div key={i} className="bg-card p-8 md:p-10 border border-border shadow-sm hover:shadow-premium transition-all duration-300">
               <span className="text-xs font-bold text-primary uppercase tracking-widest block mb-2">{item.date}</span>
-              <h3 className="text-lg font-bold uppercase mb-6 tracking-tight border-b border-border pb-2">{item.title}</h3>
+              <h3 className="text-lg md:text-xl font-bold uppercase mb-6 tracking-tight border-b border-border pb-2">{item.title}</h3>
               <ul className="space-y-4">
                 {item.topics.map((topic, j) => (
-                  <li key={j} className="flex gap-3 text-sm font-bold text-muted-foreground">
+                  <li key={j} className="flex gap-3 text-sm md:text-base font-bold text-muted-foreground">
                     <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0" /> {topic}
                   </li>
                 ))}

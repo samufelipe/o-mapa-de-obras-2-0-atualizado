@@ -222,7 +222,7 @@ const TestimonialsSection = () => {
           <span className="text-primary font-bold text-xs uppercase tracking-[0.35em] block mb-3">
             QUEM JÁ PARTICIPOU, APROVOU
           </span>
-          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold uppercase tracking-tight leading-tight text-foreground">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold uppercase tracking-tight leading-tight text-foreground">
             O que dizem as arquitetas{" "}
             <span className="text-primary">da edição anterior</span>
           </h2>
@@ -244,7 +244,7 @@ const TestimonialsSection = () => {
                 <div className="bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 h-full flex flex-col">
 
                   {/* Header */}
-                  <div className="px-4 pt-4 pb-3 flex items-center justify-between gap-2">
+                  <div className="px-5 pt-5 pb-3 flex items-center justify-between gap-2">
                     <div className="flex items-center gap-3 min-w-0">
 
                       {/* Avatar with Instagram gradient ring */}
@@ -294,25 +294,25 @@ const TestimonialsSection = () => {
                   </div>
 
                   {/* Stars */}
-                  <div className="px-4 pb-2.5 flex gap-0.5">
+                  <div className="px-5 pb-2.5 flex gap-0.5">
                     {Array.from({ length: 5 }).map((_, i) => (
                       <StarIcon key={i} />
                     ))}
                   </div>
 
                   {/* Comment text */}
-                  <div className="px-4 pb-3 flex-1">
-                    <p className="text-sm text-gray-700 leading-relaxed">
+                  <div className="px-5 pb-4 flex-1">
+                    <p className="text-sm md:text-base text-gray-700 leading-relaxed">
                       <span className="font-semibold text-gray-900">@{t.handle} </span>
                       {t.text}
                     </p>
                   </div>
 
                   {/* Divider */}
-                  <div className="mx-4 border-t border-gray-100" />
+                  <div className="mx-5 border-t border-gray-100" />
 
                   {/* Footer */}
-                  <div className="px-4 py-3 flex items-center justify-between">
+                  <div className="px-5 py-3 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <button
                         onClick={() => toggleLike(idx)}

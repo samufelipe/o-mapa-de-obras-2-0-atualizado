@@ -329,10 +329,10 @@ const HeroSection = () => {
 
           {/* Right Form Card */}
           <div id="registration-form" className="scroll-mt-24 animate-fade-up">
-            <div className="bg-card border-2 border-foreground p-6 md:p-8 shadow-premium max-w-md mx-auto">
+            <div className="bg-card border-2 border-foreground p-8 md:p-10 shadow-premium max-w-md mx-auto">
               <div className="mb-6 text-center lg:text-left">
-                <h2 className="text-lg font-bold uppercase tracking-tight">Vaga Exclusiva</h2>
-                <p className="text-sm font-bold text-muted-foreground uppercase tracking-widest">Imersão Ao Vivo • Sábado 30/05</p>
+                <h2 className="text-xl font-bold uppercase tracking-tight">Vaga Exclusiva</h2>
+                <p className="text-sm md:text-base font-bold text-muted-foreground uppercase tracking-widest">Imersão Ao Vivo • Sábado 30/05</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4" data-track="lead_form" data-track-location="hero">
@@ -434,16 +434,16 @@ const HeroSection = () => {
 
       {/* Trust Bar */}
       <div className="mt-16 border-y border-border bg-secondary">
-        <div className="container mx-auto px-4 py-6">
+        <div className="container mx-auto px-4 py-8">
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 text-foreground">
-            <div className="flex items-center gap-2 font-bold text-sm uppercase tracking-widest">
-              <Users className="w-5 h-5" /> +1000 Arquitetas Impactadas
+            <div className="flex items-center gap-2 font-bold text-sm md:text-base uppercase tracking-widest">
+              <Users className="w-5 h-5 md:w-6 md:h-6" /> +1000 Arquitetas Impactadas
             </div>
-            <div className="flex items-center gap-2 font-bold text-sm uppercase tracking-widest">
-              <Star className="w-5 h-5 fill-current" /> Avaliação 4.9/5.0
+            <div className="flex items-center gap-2 font-bold text-sm md:text-base uppercase tracking-widest">
+              <Star className="w-5 h-5 md:w-6 md:h-6 fill-current" /> Avaliação 4.9/5.0
             </div>
-            <div className="flex items-center gap-2 font-bold text-sm uppercase tracking-widest">
-              <ShieldCheck className="w-5 h-5" /> Método Validado
+            <div className="flex items-center gap-2 font-bold text-sm md:text-base uppercase tracking-widest">
+              <ShieldCheck className="w-5 h-5 md:w-6 md:h-6" /> Método Validado
             </div>
           </div>
         </div>

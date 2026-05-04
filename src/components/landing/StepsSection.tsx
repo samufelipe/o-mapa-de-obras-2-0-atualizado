@@ -35,7 +35,7 @@ const StepsSection = () => {
         <div className="mb-16 space-y-4">
           <span className="text-primary font-bold text-xs uppercase tracking-[0.4em] block">CLAREZA ABSOLUTA</span>
           <h2 className="text-3xl md:text-4xl font-bold uppercase tracking-tight">O Caminho da sua Transformação</h2>
-          <p className="text-sm font-bold text-muted-foreground uppercase tracking-widest">Veja o que acontece no minuto seguinte à sua inscrição</p>
+          <p className="text-sm md:text-base font-bold text-muted-foreground uppercase tracking-widest">Veja o que acontece no minuto seguinte à sua inscrição</p>
           <div className="w-12 h-1 bg-primary mx-auto"></div>
         </div>
 

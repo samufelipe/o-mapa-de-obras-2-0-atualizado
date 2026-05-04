@@ -24,7 +24,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-secondary text-foreground py-12 border-t border-border">
+    <footer className="bg-secondary text-foreground py-16 border-t border-border">
       <div className="container mx-auto px-4 max-w-6xl">
 
         <div className="flex flex-col items-center mb-8">
@@ -43,7 +43,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-2 gap-10 mb-10">
 
           <div className="text-center md:text-left">
-            <h4 className="text-sm font-bold uppercase tracking-[0.2em] mb-6 text-primary">
+            <h4 className="text-sm md:text-base font-bold uppercase tracking-[0.2em] mb-6 text-primary">
               Navegação
             </h4>
             <nav className="grid grid-cols-3 gap-x-4 gap-y-3">
@@ -60,7 +60,7 @@ const Footer = () => {
           </div>
 
           <div className="text-center md:text-right">
-            <h4 className="text-sm font-bold uppercase tracking-[0.2em] mb-6 text-primary">
+            <h4 className="text-sm md:text-base font-bold uppercase tracking-[0.2em] mb-6 text-primary">
               Siga-nos
             </h4>
 

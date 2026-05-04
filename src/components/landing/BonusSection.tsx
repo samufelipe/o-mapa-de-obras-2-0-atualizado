@@ -12,8 +12,8 @@ const BonusSection = () => {
   return (
     <section id="bonus" className="py-20 bg-background border-t border-border reveal">
       <div className="container mx-auto px-4 max-w-5xl text-center">
-        <h2 className="text-2xl md:text-3xl font-bold uppercase tracking-tight mb-2">Seu Pacote de Ferramentas</h2>
-        <p className="text-sm font-bold text-muted-foreground uppercase tracking-widest mb-12">Tudo o que você precisa para aplicar o método imediatamente</p>
+        <h2 className="text-3xl md:text-4xl font-bold uppercase tracking-tight mb-2">Seu Pacote de Ferramentas</h2>
+        <p className="text-sm md:text-base font-bold text-muted-foreground uppercase tracking-widest mb-12">Tudo o que você precisa para aplicar o método imediatamente</p>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 relative">
           {BONUSES.map((bonus, idx) => {
@@ -29,11 +29,11 @@ const BonusSection = () => {
                 <div className="mb-4 text-primary group-hover:scale-110 transition-transform">
                   <Icon className="w-6 h-6" />
                 </div>
-                <h3 className="text-[13px] font-bold uppercase mb-1 tracking-widest text-center">{bonus.title}</h3>
+                <h3 className="text-sm font-bold uppercase mb-1 tracking-widest text-center">{bonus.title}</h3>
                 <span className="text-sm font-bold bg-primary/10 px-3 py-1 uppercase tracking-tighter mb-4">
                   Valor: {bonus.value}
                 </span>
-                <p className="text-sm text-muted-foreground mb-6 font-medium leading-relaxed text-center">{bonus.description}</p>
+                <p className="text-sm md:text-base text-muted-foreground mb-6 font-medium leading-relaxed text-center">{bonus.description}</p>
                 <div className="mt-auto pt-4 border-t border-border w-full">
                   <span className={`text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-1 ${isImmediate ? 'text-primary' : 'text-muted-foreground'}`}>
                     <Clock className="w-4 h-4" /> {bonus.release}
@@ -52,7 +52,7 @@ const BonusSection = () => {
 
           <div className="space-y-3 mb-8 text-left border-b border-background/20 pb-8">
             {PRICING_ITEMS.map((item, index) => (
-              <div key={index} className="flex justify-between items-center text-background/60 text-sm font-bold uppercase tracking-wider">
+              <div key={index} className="flex justify-between items-center text-background/60 text-sm md:text-base font-bold uppercase tracking-wider">
                 <span className="flex items-center gap-1">
                   {index > 0 && <Plus className="inline w-4 h-4 mr-1" />}
                   {item.name}
@@ -70,7 +70,7 @@ const BonusSection = () => {
             </p>
 
             <div className="mb-2">
-              <span className="text-primary text-[13px] font-bold uppercase tracking-[0.3em] block mb-1">INVESTIMENTO ÚNICO</span>
+              <span className="text-primary text-sm md:text-base font-bold uppercase tracking-[0.3em] block mb-1">INVESTIMENTO ÚNICO</span>
               <h3 className="text-background text-4xl md:text-5xl font-bold tracking-tighter uppercase leading-tight animate-pulse-slow">
                 APENAS R$ 39,90
               </h3>

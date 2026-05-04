@@ -15,7 +15,7 @@ const GuaranteeSection = () => {
             <div className="absolute inset-0 flex items-center justify-center font-bold text-xl pt-1">7</div>
           </div>
           <div className="text-left space-y-3">
-            <h2 className="text-xl md:text-2xl font-bold uppercase tracking-tight">Garantia Incondicional de 7 Dias</h2>
+            <h2 className="text-2xl md:text-3xl font-bold uppercase tracking-tight">Garantia Incondicional de 7 Dias</h2>
             <p className="text-sm md:text-base text-muted-foreground font-medium leading-relaxed">
               Inscreva-se com tranquilidade absoluta. Se você participar da imersão e sentir que o conteúdo não é para você, basta solicitar o reembolso total em até 7 dias. O risco é todo nosso.
             </p>
@@ -23,7 +23,7 @@ const GuaranteeSection = () => {
         </div>
 
         <div className="flex flex-col items-center gap-6">
-          <h3 className="text-lg md:text-xl font-bold uppercase tracking-tight">Pronta para assumir o comando da sua obra?</h3>
+          <h3 className="text-xl md:text-2xl font-bold uppercase tracking-tight">Pronta para assumir o comando da sua obra?</h3>
           <button
             onClick={scrollToForm}
             className="w-full md:w-auto bg-green-600 text-white px-6 py-4 text-xs md:text-sm font-bold uppercase tracking-[0.2em] hover:bg-green-700 transition-all duration-300 border-2 border-green-600 shadow-premium hover:shadow-premium-gold hover:-translate-y-1 flex items-center justify-center gap-2 group active:scale-95"

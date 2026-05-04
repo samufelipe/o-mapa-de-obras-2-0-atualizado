@@ -15,21 +15,21 @@ const FAQSection = () => {
   return (
     <section id="faq" className="py-20 bg-background">
       <div className="container mx-auto px-4 max-w-2xl">
-        <h2 className="text-2xl font-bold text-center mb-4 uppercase tracking-widest">Dúvidas Frequentes</h2>
-        <div className="space-y-2 mt-8">
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-4 uppercase tracking-widest">Dúvidas Frequentes</h2>
+        <div className="space-y-3 mt-8">
           {FAQ_ITEMS.map((faq, idx) => (
             <div key={idx} className="bg-card border border-border overflow-hidden shadow-sm">
               <button
                 onClick={() => handleFaqClick(idx, faq.question)}
-                className="w-full flex justify-between items-center px-5 py-4 text-left group"
+                className="w-full flex justify-between items-center px-6 py-5 text-left group"
                 data-track="faq_item"
                 data-track-location="faq_section"
               >
-                <span className="font-bold text-[13px] md:text-sm uppercase tracking-wider group-hover:text-primary transition-colors">{faq.question}</span>
+                <span className="font-bold text-sm md:text-base uppercase tracking-wider group-hover:text-primary transition-colors">{faq.question}</span>
                 {openFaqIndex === idx ? <ChevronUp className="w-4 h-4 text-primary flex-shrink-0" /> : <ChevronDown className="w-4 h-4 text-muted-foreground flex-shrink-0" />}
               </button>
               {openFaqIndex === idx && (
-                <div className="px-5 pb-5 text-muted-foreground text-sm font-medium leading-relaxed border-t border-border pt-4">
+                <div className="px-6 pb-6 text-muted-foreground text-sm md:text-base font-medium leading-relaxed border-t border-border pt-4">
                   {faq.answer}
                 </div>
               )}

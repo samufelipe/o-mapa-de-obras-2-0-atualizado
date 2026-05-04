@@ -21,9 +21,9 @@ const AboutSection = () => {
             />
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-6 md:space-y-8">
             <span className="text-primary font-bold text-xs uppercase tracking-[0.3em] block">DE ARQUITETA PARA ARQUITETA</span>
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight leading-tight">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight leading-tight">
               Criamos o <span className="text-primary italic">Cronograma 2.0</span> como a <br className="hidden md:block" /> ponte prática que você precisa.
             </h2>
             <div className="space-y-4 text-sm md:text-base text-muted-foreground font-medium leading-relaxed">
