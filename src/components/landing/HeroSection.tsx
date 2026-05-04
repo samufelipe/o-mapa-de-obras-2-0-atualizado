@@ -310,7 +310,7 @@ const HeroSection = () => {
 
             <div className="text-sm md:text-base text-muted-foreground max-w-lg mx-auto lg:mx-0 font-medium leading-relaxed space-y-3">
               <p>
-                A virada de chave que toda arquiteta precisa para começar 2026 com <strong className="text-foreground">mais autoridade, previsibilidade e valorização.</strong>
+                A virada de chave que toda arquiteta precisa para dominar suas obras com <strong className="text-foreground">mais autoridade, previsibilidade e valorização.</strong>
               </p>
               <p className="text-primary font-bold">
                 + 8 aulas preparatórias com acesso imediato para você chegar pronta.
