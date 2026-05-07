@@ -6,7 +6,7 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-const ABANDONMENT_THRESHOLD_MINUTES = 10;
+const ABANDONMENT_THRESHOLD_MINUTES = 5;
 const MAX_REPORTANA_ATTEMPTS = 3;
 const REPORTANA_WEBHOOK_URL = Deno.env.get("REPORTANA_WEBHOOK_URL");
 

@@ -1,7 +1,7 @@
 -- Cron job: abandonment-sweeper a cada 10 minutos
 SELECT cron.schedule(
-  'abandonment-sweeper-every-10min',
-  '*/10 * * * *',
+  'abandonment-sweeper-every-5min',
+  '*/5 * * * *',
   $$
   SELECT net.http_post(
     url := 'https://zfelkpnzdfficpenspmb.supabase.co/functions/v1/abandonment-sweeper',
