@@ -30,7 +30,7 @@ interface FormErrors {
 const DEADLINE = new Date("2026-05-30T23:59:59-03:00");
 
 const valueItems = [
-  "Imersão Ao Vivo — Sábado 30/05",
+  "Imersão Ao Vivo · Sábado 30/05",
   "8 Aulas Preparatórias (acesso imediato)",
   "Planilha Cronograma Completa",
   "Roteiro de Serviços",
