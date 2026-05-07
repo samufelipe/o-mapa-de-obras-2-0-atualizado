@@ -170,7 +170,7 @@ export const trackLeadGenerated = (source: string): void => {
     event: "generate_lead",
     lead_source: source,
     currency: "BRL",
-    value: 29.90,
+    value: 39.90,
   });
 };
 
@@ -181,11 +181,11 @@ export const trackBeginCheckout = (): void => {
   pushToDataLayer({
     event: "begin_checkout",
     currency: "BRL",
-    value: 29.90,
+    value: 39.90,
     items: [{
       item_name: "Cronograma O Mapa de Obras 2.0",
       item_category: "Workshop",
-      price: 29.90,
+      price: 39.90,
       quantity: 1,
     }],
   });

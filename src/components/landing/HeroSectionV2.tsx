@@ -157,7 +157,10 @@ const HeroSectionV2 = () => {
     setErrors({});
 
     try {
-      trackFormSubmit({ name: formData.name, email: "", phone: formData.phone });
+      const phoneClean = formData.phone.replace(/\D/g, "");
+      const syntheticEmail = `${phoneClean}@wpp.registro.co`;
+      trackLead({ name: formData.name, email: syntheticEmail, phone: formData.phone });
+      trackFormSubmit({ name: formData.name, email: syntheticEmail, phone: formData.phone });
       trackLeadGenerated("landing_page_form_v2");
       setStatus("success");
       toast({ title: "Dados registrados!", description: "Redirecionando para o pagamento..." });
