@@ -10,6 +10,7 @@ import AdminEmails from "./pages/AdminEmails";
 import CheckoutBridge from "./pages/CheckoutBridge";
 import BackgroundRemover from "./pages/BackgroundRemover";
 import MentoriaLanding from "./pages/MentoriaLanding";
+import Relatorio from "./pages/Relatorio";
 import MaintenancePage from "./components/MaintenancePage";
 
 const queryClient = new QueryClient();
@@ -36,6 +37,7 @@ const App = () => {
           <Route path="/admin/emails" element={<AdminEmails />} />
           <Route path="/checkout/:product" element={<CheckoutBridge />} />
           <Route path="/tools/background-remover" element={<BackgroundRemover />} />
+          <Route path="/relatorio" element={<Relatorio />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
