@@ -113,7 +113,8 @@ export default function CheckoutBridge() {
         
         // Adicionar dados para pré-preenchimento se configurado
         if (CONFIG.hotmart.preFillCheckout) {
-          if (email) checkoutUrl.searchParams.set("email", email);
+          const isSyntheticEmail = email?.endsWith("@wpp.registro.co");
+          if (email && !isSyntheticEmail) checkoutUrl.searchParams.set("email", email);
           if (name) checkoutUrl.searchParams.set("name", name);
           if (phone) {
             const cleanPhone = phone.replace(/\D/g, "");
