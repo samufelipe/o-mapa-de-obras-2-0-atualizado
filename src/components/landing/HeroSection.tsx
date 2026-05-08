@@ -1,9 +1,9 @@
-import { Trophy, Video, Lock, Clock, Users, Star, ShieldCheck, ArrowRight, Loader2, CheckCircle } from "lucide-react";
+import { Trophy, Video, Lock, Clock, Users, Star, ShieldCheck, ArrowRight, Loader2, CheckCircle, Check } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { CONFIG } from "@/lib/config";
 import { trackLead, trackInitiateCheckout } from "@/lib/tracking";
-import { validateLeadForm, applyPhoneMask, type LeadFormData } from "@/lib/validations";
+import { applyPhoneMask } from "@/lib/validations";
 import {
   trackFormStart,
   trackFormFieldFocus,
@@ -12,28 +12,36 @@ import {
   trackFormError,
   trackBeginCheckout,
   trackLeadGenerated,
-  trackCTAClick
 } from "@/lib/gtm-tracking";
 
 type FormStatus = "idle" | "loading" | "success" | "redirecting";
 
+interface FormData {
+  name: string;
+  phone: string;
+}
+
 interface FormErrors {
   name?: string;
-  email?: string;
   phone?: string;
 }
 
+const DEADLINE = new Date("2026-05-30T23:59:59-03:00");
+
+const valueItems = [
+  "Imersão Ao Vivo · Sábado 30/05",
+  "8 Aulas Preparatórias (acesso imediato)",
+  "Planilha Cronograma Completa",
+  "Roteiro de Serviços",
+  "Guia de Fornecedores",
+];
+
 const HeroSection = () => {
   const { toast } = useToast();
-  const [timeLeft, setTimeLeft] = useState({ h: 0, m: 0, s: 0 });
   const formStarted = useRef(false);
 
-  // Form state
-  const [formData, setFormData] = useState<LeadFormData>({
-    name: "",
-    email: "",
-    phone: "",
-  });
+  const [timeLeft, setTimeLeft] = useState({ d: 0, h: 0, m: 0, s: 0 });
+  const [formData, setFormData] = useState<FormData>({ name: "", phone: "" });
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<FormStatus>("idle");
   const [touched, setTouched] = useState<Record<string, boolean>>({});
@@ -41,22 +49,39 @@ const HeroSection = () => {
   useEffect(() => {
     const updateTimer = () => {
       const now = new Date();
-      const target = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
-      const diff = target.getTime() - now.getTime();
-      if (diff <= 0) return;
+      const diff = DEADLINE.getTime() - now.getTime();
+
+      if (diff <= 0) {
+        setTimeLeft({ d: 0, h: 0, m: 0, s: 0 });
+        return;
+      }
+
       setTimeLeft({
-        h: Math.floor(diff / (1000 * 60 * 60)),
+        d: Math.floor(diff / (1000 * 60 * 60 * 24)),
+        h: Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
         m: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)),
-        s: Math.floor((diff % (1000 * 60)) / 1000)
+        s: Math.floor((diff % (1000 * 60)) / 1000),
       });
     };
+
     const timer = setInterval(updateTimer, 1000);
     updateTimer();
     return () => clearInterval(timer);
   }, []);
 
-  // Handle focus - track form start and field focus
-  const handleFocus = (field: keyof LeadFormData) => {
+  const validateForm = (): { valid: boolean; errors: FormErrors } => {
+    const errs: FormErrors = {};
+    if (!formData.name || formData.name.trim().length < 3) {
+      errs.name = "Nome deve ter ao menos 3 caracteres";
+    }
+    const phoneDigits = formData.phone.replace(/\D/g, "");
+    if (!phoneDigits || phoneDigits.length < 10) {
+      errs.phone = "WhatsApp inválido";
+    }
+    return { valid: Object.keys(errs).length === 0, errors: errs };
+  };
+
+  const handleFocus = (field: keyof FormData) => {
     if (!formStarted.current) {
       formStarted.current = true;
       trackFormStart();
@@ -64,142 +89,59 @@ const HeroSection = () => {
     trackFormFieldFocus(field);
   };
 
-  // Handle input changes
-  const handleChange = (field: keyof LeadFormData, value: string) => {
-    let processedValue = value;
-
-    // Apply phone mask
-    if (field === "phone") {
-      processedValue = applyPhoneMask(value);
-    }
-
-    setFormData((prev) => ({ ...prev, [field]: processedValue }));
-
-    // Clear error when user starts typing
-    if (errors[field]) {
-      setErrors((prev) => ({ ...prev, [field]: undefined }));
-    }
+  const handleChange = (field: keyof FormData, value: string) => {
+    const processed = field === "phone" ? applyPhoneMask(value) : value;
+    setFormData((prev) => ({ ...prev, [field]: processed }));
+    if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }));
   };
 
-  // Handle blur for validation + track field complete
-  const handleBlur = (field: keyof LeadFormData) => {
+  const handleBlur = (field: keyof FormData) => {
     setTouched((prev) => ({ ...prev, [field]: true }));
-
-    // Track field completion if has value
-    if (formData[field]) {
-      trackFormFieldComplete(field);
-    }
-
-    // Validate single field
-    const result = validateLeadForm(formData);
-    if (!result.success && result.errors) {
-      const fieldError = result.errors[field];
-      if (fieldError) {
-        setErrors((prev) => ({ ...prev, [field]: fieldError }));
-      }
-    }
+    if (formData[field]) trackFormFieldComplete(field);
+    const { errors: errs } = validateForm();
+    if (errs[field]) setErrors((prev) => ({ ...prev, [field]: errs[field] }));
   };
 
-  // Build Hotmart URL with pre-filled data
-  const buildHotmartUrl = (): string => {
-    const baseUrl: string = CONFIG.hotmart.checkoutUrl;
-
-    if (!CONFIG.hotmart.preFillCheckout || baseUrl === "PREENCHER_LINK_HOTMART") {
-      return baseUrl;
-    }
-
-    // Add query params to pre-fill checkout
-    // Hotmart uses: name, email, phoneac (DDD), phonenumber (número)
-    const isInternational = formData.phone.startsWith('+');
-    const phoneClean = formData.phone.replace(/[^\+0-9]/g, "");
-    const params = new URLSearchParams({
-      name: formData.name,
-      email: formData.email,
-    });
-
-    // Separar DDD e número para a Hotmart
-    if (isInternational) {
-      // Para números internacionais, a Hotmart espera o DDI (código do país) no parâmetro 'phonecode'
-      // e o resto do número (DDD + número) no 'phonenumber'.
-      // O Reportana precisa dessa separação exata para não duplicar o DDI.
-      
-      // Extrair o DDI (geralmente 1 a 3 dígitos após o +)
-      // Como não temos uma biblioteca de parse de telefone, vamos assumir que o usuário digitou o +
-      // Vamos enviar o número completo com o + no phonenumber, e a Hotmart/Reportana farão o parse
-      // Ou melhor, vamos tentar extrair o DDI se possível, mas o mais seguro para o Reportana
-      // quando integrado com a Hotmart é passar o número completo com o + no phonenumber,
-      // pois a Hotmart tem um parser interno que identifica o + e separa o DDI automaticamente.
-      // Outra opção é usar o parâmetro 'phonecode' para o DDI e 'phonenumber' para o resto.
-      
-      // Vamos enviar o número completo com o + no phonenumber. A Hotmart reconhece o + e formata corretamente.
-      params.set("phonenumber", phoneClean);
-    } else {
-      const numbersOnly = phoneClean.replace(/\D/g, "");
-      if (numbersOnly.length >= 10) {
-        // Para Brasil, enviamos o DDD no phoneac e o número no phonenumber
-        params.set("phoneac", numbersOnly.substring(0, 2));
-        params.set("phonenumber", numbersOnly.substring(2));
-      }
-    }
-
-    // Preserve UTM params
-    const currentParams = new URLSearchParams(window.location.search);
-    const utmParams = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
-    utmParams.forEach((utm) => {
-      const value = currentParams.get(utm);
-      if (value) params.set(utm, value);
-    });
-
-    const hasQueryString = baseUrl.includes("?");
-    const separator = hasQueryString ? "&" : "?";
-    return `${baseUrl}${separator}${params.toString()}`;
+  const getInputClass = (field: keyof FormData) => {
+    const base = "w-full bg-secondary border-b py-3 px-1 text-sm font-medium outline-none transition-colors";
+    if (errors[field] && touched[field]) return `${base} border-destructive text-destructive`;
+    if (touched[field] && formData[field] && !errors[field]) return `${base} border-primary`;
+    return `${base} border-border focus:border-primary`;
   };
 
-  // Redirect via CheckoutBridge (registers intent before going to Hotmart)
   const redirectToHotmart = () => {
     setStatus("redirecting");
-
-    // Track checkout initiation (Meta Pixel + GTM)
     trackInitiateCheckout(39.90);
     trackBeginCheckout();
 
-    // Delay for transition screen
     setTimeout(() => {
-      // Build CheckoutBridge URL with all parameters
-      const phoneClean = formData.phone.replace(/[^\+0-9]/g, "");
+      const phoneClean = formData.phone.replace(/\D/g, "");
+      const syntheticEmail = `${phoneClean}@wpp.registro.co`;
+
       const params = new URLSearchParams({
         name: formData.name,
-        email: formData.email,
+        email: syntheticEmail,
         phone: phoneClean,
       });
 
-      // Capture UTMs from current URL
       const currentParams = new URLSearchParams(window.location.search);
-      const utmParams = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
-      utmParams.forEach((utm) => {
-        const value = currentParams.get(utm);
-        if (value) params.set(utm, value);
+      ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"].forEach((utm) => {
+        const val = currentParams.get(utm);
+        if (val) params.set(utm, val);
       });
 
-      // Redirect via CheckoutBridge (logs intent to database)
       window.location.href = `/checkout/imersao?${params.toString()}`;
     }, CONFIG.form.redirectDelay);
   };
 
-  // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const { valid, errors: errs } = validateForm();
 
-    // Validate all fields
-    const result = validateLeadForm(formData);
-
-    if (!result.success && result.errors) {
-      setErrors(result.errors);
-      setTouched({ name: true, email: true, phone: true });
-
-      // Track form errors
-      trackFormError(result.errors);
-
+    if (!valid) {
+      setErrors(errs);
+      setTouched({ name: true, phone: true });
+      trackFormError(errs);
       toast({
         title: "Campos inválidos",
         description: "Por favor, corrija os campos destacados.",
@@ -212,28 +154,16 @@ const HeroSection = () => {
     setErrors({});
 
     try {
-      // Track lead event (Meta Pixel + GTM) - non-blocking
-      trackLead(result.data!);
-      trackFormSubmit(result.data!);
+      const phoneClean = formData.phone.replace(/\D/g, "");
+      const syntheticEmail = `${phoneClean}@wpp.registro.co`;
+      trackLead({ name: formData.name, email: syntheticEmail, phone: formData.phone });
+      trackFormSubmit({ name: formData.name, email: syntheticEmail, phone: formData.phone });
       trackLeadGenerated("landing_page_form");
-
       setStatus("success");
-
-      toast({
-        title: "Dados registrados!",
-        description: "Redirecionando para o pagamento...",
-      });
-
-      // Redirect immediately after brief visual feedback
-      setTimeout(() => {
-        redirectToHotmart();
-      }, 300);
-
-    } catch (error) {
-      console.error("Form submission error:", error);
-
+      toast({ title: "Dados registrados!", description: "Redirecionando para o pagamento..." });
+      setTimeout(redirectToHotmart, 300);
+    } catch {
       setStatus("idle");
-
       toast({
         title: "Erro ao processar",
         description: "Tente novamente em alguns segundos.",
@@ -242,40 +172,19 @@ const HeroSection = () => {
     }
   };
 
-  // Get input class based on state
-  const getInputClass = (field: keyof LeadFormData) => {
-    const baseClass = "w-full bg-secondary border-b py-3 px-1 text-sm font-medium outline-none transition-colors";
-
-    if (errors[field] && touched[field]) {
-      return `${baseClass} border-destructive text-destructive`;
-    }
-
-    if (touched[field] && formData[field] && !errors[field]) {
-      return `${baseClass} border-primary`;
-    }
-
-    return `${baseClass} border-border focus:border-primary`;
-  };
-
-  // Render redirecting state
   if (status === "redirecting") {
     return (
       <section id="hero" className="relative pt-28 pb-16 md:pt-40 md:pb-24 bg-background overflow-hidden">
         <div className="bg-grid-overlay"></div>
-      <div className="bg-grain absolute inset-0 pointer-events-none"></div>
+        <div className="bg-grain absolute inset-0 pointer-events-none"></div>
         <div className="container mx-auto px-4 md:px-6 relative z-10">
           <div className="flex flex-col items-center justify-center min-h-[400px] animate-fade-up">
             <div className="bg-card border-2 border-foreground p-8 md:p-12 shadow-gold text-center max-w-md">
               <Loader2 className="w-12 h-12 text-primary animate-spin mx-auto mb-6" />
-              <h2 className="text-xl font-bold uppercase tracking-tight mb-2">
-                {CONFIG.form.redirectMessage}
-              </h2>
-              <p className="text-sm text-muted-foreground">
-                Complete o pagamento para confirmar sua inscrição.
-              </p>
+              <h2 className="text-xl font-bold uppercase tracking-tight mb-2">{CONFIG.form.redirectMessage}</h2>
+              <p className="text-sm text-muted-foreground">Complete o pagamento para confirmar sua inscrição.</p>
               <div className="mt-6 flex items-center justify-center gap-2 text-xs font-bold text-muted-foreground uppercase tracking-widest">
-                <Lock className="w-3.5 h-3.5" />
-                Ambiente 100% Seguro
+                <Lock className="w-3.5 h-3.5" /> Ambiente 100% Seguro
               </div>
             </div>
           </div>
@@ -290,27 +199,45 @@ const HeroSection = () => {
       <div className="bg-grain absolute inset-0 pointer-events-none"></div>
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
+
           {/* Left Content */}
           <div className="space-y-6 md:space-y-8 text-center lg:text-left animate-fade-up">
             <div className="inline-flex items-center gap-2 bg-foreground px-3 py-1.5 border border-primary shadow-premium mx-auto lg:mx-0">
               <Clock className="w-3.5 h-3.5 text-primary" />
               <span className="text-xs font-bold text-background uppercase tracking-wider">
-                O Lote 01 Expira em: <span className="text-primary tabular-nums">{timeLeft.h}h {timeLeft.m}m {timeLeft.s}s</span>
+                Encerra em:{" "}
+                <span className="text-primary tabular-nums">
+                  {timeLeft.d}d {timeLeft.h}h {timeLeft.m}m {timeLeft.s}s
+                </span>
               </span>
             </div>
 
             <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.1]">
-              <span className="text-primary italic block animate-fade-in" style={{ animationDelay: '0.1s', animationFillMode: 'both' }}>Imersão Cronograma 2.0</span>
-              <span className="text-primary italic block text-xl md:text-3xl lg:text-4xl animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'both' }}>O Mapa da Obra de Interiores</span>
+              <span
+                className="text-primary italic block animate-fade-in"
+                style={{ animationDelay: "0.1s", animationFillMode: "both" }}
+              >
+                Imersão Cronograma 2.0
+              </span>
+              <span
+                className="text-primary italic block text-xl md:text-3xl lg:text-4xl animate-fade-in"
+                style={{ animationDelay: "0.3s", animationFillMode: "both" }}
+              >
+                O Mapa da Obra de Interiores
+              </span>
             </h1>
 
-            <h2 className="text-lg md:text-2xl lg:text-3xl font-bold tracking-tight text-muted-foreground animate-fade-in" style={{ animationDelay: '0.5s', animationFillMode: 'both' }}>
+            <h2
+              className="text-lg md:text-2xl lg:text-3xl font-bold tracking-tight text-muted-foreground animate-fade-in"
+              style={{ animationDelay: "0.5s", animationFillMode: "both" }}
+            >
               Domine a sequência exata de uma reforma de interiores em apenas um dia.
             </h2>
 
             <div className="text-sm md:text-base text-muted-foreground max-w-lg mx-auto lg:mx-0 font-medium leading-relaxed space-y-3">
               <p>
-                A virada de chave que toda arquiteta precisa para dominar suas obras com <strong className="text-foreground">mais autoridade, previsibilidade e valorização.</strong>
+                A virada de chave que toda arquiteta precisa para dominar suas obras com{" "}
+                <strong className="text-foreground">mais autoridade, previsibilidade e valorização.</strong>
               </p>
               <p className="text-primary font-bold">
                 + 8 aulas preparatórias com acesso imediato para você chegar pronta.
@@ -332,7 +259,22 @@ const HeroSection = () => {
             <div className="bg-card border-2 border-foreground p-8 md:p-10 shadow-premium max-w-md mx-auto">
               <div className="mb-6 text-center lg:text-left">
                 <h2 className="text-xl font-bold uppercase tracking-tight">Vaga Exclusiva</h2>
-                <p className="text-sm md:text-base font-bold text-muted-foreground uppercase tracking-widest">Imersão Ao Vivo • Sábado 30/05</p>
+                <p className="text-sm md:text-base font-bold text-muted-foreground uppercase tracking-widest">
+                  Imersão Ao Vivo • Sábado 30/05
+                </p>
+              </div>
+
+              {/* Value stack */}
+              <div className="mb-5 bg-secondary border border-border p-4 space-y-1.5">
+                <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2">
+                  Incluso na sua vaga:
+                </p>
+                {valueItems.map((item) => (
+                  <div key={item} className="flex items-start gap-2">
+                    <Check className="w-3.5 h-3.5 text-primary mt-0.5 flex-shrink-0" />
+                    <span className="text-xs font-medium text-foreground">{item}</span>
+                  </div>
+                ))}
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4" data-track="lead_form" data-track-location="hero">
@@ -355,23 +297,6 @@ const HeroSection = () => {
 
                 <div>
                   <input
-                    type="email"
-                    placeholder="E-mail Profissional"
-                    value={formData.email}
-                    onChange={(e) => handleChange("email", e.target.value)}
-                    onFocus={() => handleFocus("email")}
-                    onBlur={() => handleBlur("email")}
-                    disabled={status === "loading" || status === "success"}
-                    className={getInputClass("email")}
-                    data-track="form_field_email"
-                  />
-                  {errors.email && touched.email && (
-                    <p className="text-xs text-destructive mt-1 font-medium">{errors.email}</p>
-                  )}
-                </div>
-
-                <div>
-                  <input
                     type="tel"
                     placeholder="WhatsApp (99) 99999-9999"
                     value={formData.phone}
@@ -385,15 +310,28 @@ const HeroSection = () => {
                   {errors.phone && touched.phone && (
                     <p className="text-xs text-destructive mt-1 font-medium">{errors.phone}</p>
                   )}
+                  <p className="text-xs text-muted-foreground mt-1.5">
+                    Usamos apenas para confirmar sua vaga por WhatsApp.
+                  </p>
                 </div>
 
-                <div className="pt-4">
+                <div className="pt-3">
                   <div className="flex justify-between items-end mb-4">
                     <div className="flex flex-col">
-                      <span className="text-sm font-bold text-muted-foreground line-through uppercase">R$ 97,00</span>
+                      <span className="text-xs text-muted-foreground font-medium">
+                        Valor total:{" "}
+                        <span className="line-through">R$ 583,90</span>
+                      </span>
                       <span className="text-3xl font-bold tracking-tighter animate-pulse-slow">R$ 39,90</span>
                     </div>
-                    <span className="text-xs font-bold text-primary bg-foreground px-2 py-1 uppercase tracking-widest shadow-premium">LOTE 01</span>
+                    <div className="flex flex-col items-end gap-1">
+                      <span className="text-xs font-bold text-primary bg-foreground px-2 py-1 uppercase tracking-widest shadow-premium">
+                        ENCERRA 30/05
+                      </span>
+                      <span className="text-xs text-muted-foreground font-medium">
+                        Faltam {timeLeft.d} dias
+                      </span>
+                    </div>
                   </div>
 
                   <button
@@ -404,21 +342,13 @@ const HeroSection = () => {
                     data-track-location="hero_form"
                   >
                     {status === "loading" && (
-                      <>
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                        PROCESSANDO...
-                      </>
+                      <><Loader2 className="w-4 h-4 animate-spin" /> PROCESSANDO...</>
                     )}
                     {status === "success" && (
-                      <>
-                        <CheckCircle className="w-4 h-4" />
-                        REDIRECIONANDO...
-                      </>
+                      <><CheckCircle className="w-4 h-4" /> REDIRECIONANDO...</>
                     )}
                     {status === "idle" && (
-                      <>
-                        RESERVAR MEU LUGAR <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                      </>
+                      <>RESERVAR MEU LUGAR <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" /></>
                     )}
                   </button>
                 </div>
