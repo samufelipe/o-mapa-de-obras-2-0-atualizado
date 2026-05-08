@@ -82,10 +82,10 @@ const IndexV2 = () => {
       <div className={`fixed bottom-0 left-0 w-full z-[100] md:hidden transition-all duration-500 transform bg-background/95 backdrop-blur-sm border-t border-border px-4 py-3 ${showStickyCTA ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0"}`}>
         <button
           onClick={scrollToForm}
-          className="w-full bg-green-600 text-white py-4 px-6 text-sm font-black uppercase tracking-widest shadow-2xl border-2 border-green-600 flex items-center justify-between group active:scale-95 hover:bg-green-700 transition-colors duration-300"
+          className="w-full bg-green-600 text-white py-4 px-4 text-xs sm:text-sm font-black uppercase tracking-wide shadow-2xl border-2 border-green-600 flex items-center justify-between group active:scale-95 hover:bg-green-700 transition-colors duration-300"
         >
           <span>QUERO MINHA VAGA AGORA</span>
-          <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          <ArrowRight className="w-5 h-5 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
         </button>
       </div>
     </div>

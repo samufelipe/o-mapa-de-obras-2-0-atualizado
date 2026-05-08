@@ -115,7 +115,7 @@ const HeroSectionV2 = () => {
 
           {/* Right CTA Card */}
           <div id="registration-form" className="scroll-mt-24 animate-fade-up">
-            <div className="bg-card border-2 border-foreground p-8 md:p-10 shadow-premium max-w-md mx-auto">
+            <div className="bg-card border-2 border-foreground p-5 sm:p-8 md:p-10 shadow-premium max-w-md mx-auto">
               <div className="mb-6 text-center lg:text-left">
                 <h2 className="text-xl font-bold uppercase tracking-tight">Vaga Exclusiva</h2>
                 <p className="text-sm md:text-base font-bold text-muted-foreground uppercase tracking-widest">
@@ -158,12 +158,12 @@ const HeroSectionV2 = () => {
 
                 <button
                   onClick={handleCTAClick}
-                  className="w-full bg-green-600 text-white py-4 flex items-center justify-center gap-2 text-sm font-bold tracking-widest hover:bg-green-700 transition-all duration-300 border-2 border-green-600 shadow-premium hover:shadow-premium-gold hover:-translate-y-1 uppercase group active:scale-95"
+                  className="w-full bg-green-600 text-white py-4 flex items-center justify-center gap-2 text-xs sm:text-sm font-bold tracking-wide hover:bg-green-700 transition-all duration-300 border-2 border-green-600 shadow-premium hover:shadow-premium-gold hover:-translate-y-1 uppercase group active:scale-95"
                   data-track="cta_button_v2"
                   data-track-location="hero_card_v2"
                 >
                   QUERO MINHA VAGA · R$ 39,90
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-4 h-4 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
                 </button>
 
                 <p className="text-center text-xs text-muted-foreground font-medium">
@@ -182,15 +182,15 @@ const HeroSectionV2 = () => {
       {/* Trust Bar */}
       <div className="mt-16 border-y border-border bg-secondary">
         <div className="container mx-auto px-4 py-8">
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 text-foreground">
-            <div className="flex items-center gap-2 font-bold text-sm md:text-base uppercase tracking-widest">
-              <Users className="w-5 h-5 md:w-6 md:h-6" /> +1000 Arquitetas Impactadas
+          <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-8 md:gap-14 text-foreground">
+            <div className="flex items-center gap-1.5 font-bold text-xs sm:text-sm md:text-base uppercase tracking-wide">
+              <Users className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 flex-shrink-0" /> +1000 Arquitetas Impactadas
             </div>
-            <div className="flex items-center gap-2 font-bold text-sm md:text-base uppercase tracking-widest">
-              <Star className="w-5 h-5 md:w-6 md:h-6 fill-current" /> Avaliação 4.9/5.0
+            <div className="flex items-center gap-1.5 font-bold text-xs sm:text-sm md:text-base uppercase tracking-wide">
+              <Star className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 flex-shrink-0 fill-current" /> Avaliação 4.9/5.0
             </div>
-            <div className="flex items-center gap-2 font-bold text-sm md:text-base uppercase tracking-widest">
-              <ShieldCheck className="w-5 h-5 md:w-6 md:h-6" /> Método Validado
+            <div className="flex items-center gap-1.5 font-bold text-xs sm:text-sm md:text-base uppercase tracking-wide">
+              <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 flex-shrink-0" /> Método Validado
             </div>
           </div>
         </div>
