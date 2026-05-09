@@ -1,4 +1,5 @@
 import { Zap, MessageCircle, Calendar, Gift, ArrowRight } from "lucide-react";
+import { useCTA } from "@/lib/cta-context";
 
 const steps = [
   {
@@ -24,10 +25,7 @@ const steps = [
 ];
 
 const StepsSection = () => {
-  const scrollToForm = () => {
-    const heroSection = document.getElementById("registration-form");
-    heroSection?.scrollIntoView({ behavior: "smooth", block: "center" });
-  };
+  const handleCTA = useCTA();
 
   return (
     <section id="steps" className="py-24 bg-secondary border-y border-border overflow-hidden reveal">
@@ -56,7 +54,7 @@ const StepsSection = () => {
 
         <div className="flex flex-col items-center gap-4">
           <button
-            onClick={scrollToForm}
+            onClick={handleCTA}
             className="bg-green-600 text-white px-6 py-4 text-xs md:text-sm font-bold uppercase tracking-[0.2em] hover:bg-green-700 transition-all duration-300 border-2 border-green-600 shadow-premium hover:shadow-premium-gold hover:-translate-y-1 flex items-center justify-center gap-2 group active:scale-95"
           >
             QUERO MEU ACESSO IMEDIATO <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

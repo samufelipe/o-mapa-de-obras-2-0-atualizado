@@ -13,7 +13,10 @@ import BonusSection from "@/components/landing/BonusSection";
 import GuaranteeSection from "@/components/landing/GuaranteeSection";
 import FAQSection from "@/components/landing/FAQSection";
 import Footer from "@/components/landing/Footer";
-import { initAllTracking, trackCTAClick, trackSectionView } from "@/lib/gtm-tracking";
+import { initAllTracking, trackCTAClick, trackSectionView, trackBeginCheckout } from "@/lib/gtm-tracking";
+import { trackInitiateCheckout } from "@/lib/tracking";
+import { CTAProvider } from "@/lib/cta-context";
+import { CONFIG } from "@/lib/config";
 
 const IndexV2 = () => {
   const [showStickyCTA, setShowStickyCTA] = useState(false);
@@ -57,12 +60,25 @@ const IndexV2 = () => {
     return () => { revealObserver.disconnect(); sectionObserver.disconnect(); };
   }, []);
 
+  const handleCTA = () => {
+    trackInitiateCheckout(39.90);
+    trackBeginCheckout();
+    const url = new URL(CONFIG.hotmart.checkoutUrl);
+    const currentParams = new URLSearchParams(window.location.search);
+    ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"].forEach((utm) => {
+      const val = currentParams.get(utm);
+      if (val) url.searchParams.set(utm, val);
+    });
+    window.location.href = url.toString();
+  };
+
   const scrollToForm = () => {
     trackCTAClick("sticky_cta", "mobile_bottom_v2", "QUERO MINHA VAGA AGORA");
-    document.getElementById("registration-form")?.scrollIntoView({ behavior: "smooth", block: "center" });
+    handleCTA();
   };
 
   return (
+    <CTAProvider value={handleCTA}>
     <div className="min-h-screen bg-background text-foreground">
       <Header />
       <HeroSectionV2 />
@@ -89,6 +105,7 @@ const IndexV2 = () => {
         </button>
       </div>
     </div>
+    </CTAProvider>
   );
 };
 

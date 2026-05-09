@@ -1,5 +1,6 @@
 import { CheckCircle2, ArrowRight } from "lucide-react";
 import { AGENDA } from "@/lib/constants";
+import { useCTA } from "@/lib/cta-context";
 
 interface AgendaItem {
   day: string;
@@ -13,10 +14,7 @@ interface AgendaItem {
 }
 
 const ScheduleSection = () => {
-  const scrollToForm = () => {
-    const heroSection = document.getElementById("registration-form");
-    heroSection?.scrollIntoView({ behavior: "smooth", block: "center" });
-  };
+  const handleCTA = useCTA();
 
   return (
     <section id="schedule" className="py-20 bg-background reveal">
@@ -46,7 +44,7 @@ const ScheduleSection = () => {
 
         <div className="flex flex-col items-center gap-4">
           <button
-            onClick={scrollToForm}
+            onClick={handleCTA}
             className="bg-green-600 text-white px-6 py-4 text-xs md:text-sm font-bold uppercase tracking-[0.2em] hover:bg-green-700 transition-all duration-300 border-2 border-green-600 shadow-premium hover:shadow-premium-gold hover:-translate-y-1 flex items-center justify-center gap-2 group active:scale-95"
           >
             QUERO GARANTIR MINHA VAGA NO ZOOM <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

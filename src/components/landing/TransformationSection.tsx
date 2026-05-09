@@ -2,12 +2,13 @@ import { ArrowRight } from "lucide-react";
 import cozinhaAntes from "@/assets/cozinha-antes.jpg";
 import cozinhaDepois from "@/assets/cozinha-depois.jpg";
 import { trackCTAClick } from "@/lib/gtm-tracking";
+import { useCTA } from "@/lib/cta-context";
 
 const TransformationSection = () => {
-  const scrollToForm = () => {
+  const handleCTA = useCTA();
+  const onCTAClick = () => {
     trackCTAClick("transformation_cta", "transformation_section", "QUERO PARTICIPAR DA IMERSÃO");
-    const el = document.getElementById('registration-form');
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    handleCTA();
   };
 
   const steps = [
@@ -88,8 +89,8 @@ const TransformationSection = () => {
 
         {/* CTA */}
         <div className="text-center reveal">
-          <button 
-            onClick={scrollToForm}
+          <button
+            onClick={onCTAClick}
             className="main-cta group flex items-center gap-3 mx-auto"
           >
             <span>QUERO PARTICIPAR DA IMERSÃO</span>

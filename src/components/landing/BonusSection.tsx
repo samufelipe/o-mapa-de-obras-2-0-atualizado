@@ -1,13 +1,11 @@
 import { FileSpreadsheet, ClipboardList, FileText, Clock, Plus, ArrowRight, PlayCircle } from "lucide-react";
 import { BONUSES, PRICING_ITEMS } from "@/lib/constants";
+import { useCTA } from "@/lib/cta-context";
 
 const bonusIcons = [PlayCircle, FileSpreadsheet, ClipboardList, FileText];
 
 const BonusSection = () => {
-  const scrollToForm = () => {
-    const heroSection = document.getElementById("registration-form");
-    heroSection?.scrollIntoView({ behavior: "smooth", block: "center" });
-  };
+  const handleCTA = useCTA();
 
   return (
     <section id="bonus" className="py-20 bg-background border-t border-border reveal">
@@ -78,7 +76,7 @@ const BonusSection = () => {
           </div>
 
           <button
-            onClick={scrollToForm}
+            onClick={handleCTA}
             className="w-full bg-green-600 text-white py-5 text-sm font-bold uppercase tracking-[0.2em] hover:bg-green-700 transition-all duration-300 border-2 border-green-600 shadow-premium hover:shadow-premium-gold hover:-translate-y-1 active:scale-95 group flex items-center justify-center gap-2"
           >
             GARANTIR MINHA VAGA AGORA <ArrowRight className="inline w-5 h-5 group-hover:translate-x-1 transition-transform" />

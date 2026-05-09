@@ -1,10 +1,8 @@
 import logoIcon from "@/assets/logo-cronograma-icon.svg";
+import { useCTA } from "@/lib/cta-context";
 
 const Header = () => {
-  const scrollToForm = () => {
-    const heroSection = document.getElementById("registration-form");
-    heroSection?.scrollIntoView({ behavior: "smooth", block: "center" });
-  };
+  const handleCTA = useCTA();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 border-b border-border py-2" style={{ backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}>
@@ -18,7 +16,7 @@ const Header = () => {
         </div>
 
         <button
-          onClick={scrollToForm}
+          onClick={handleCTA}
           className="bg-green-600 text-white px-5 py-2.5 text-xs font-bold uppercase tracking-widest hover:bg-green-700 transition-all duration-300 border border-green-600 shadow-premium hover:shadow-premium-gold hover:-translate-y-1 active:scale-95"
         >
           Inscrever-se
