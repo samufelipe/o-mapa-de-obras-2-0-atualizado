@@ -44,9 +44,9 @@ const HeroSectionV2 = () => {
 
     const url = new URL(CONFIG.hotmart.checkoutUrl);
     const currentParams = new URLSearchParams(window.location.search);
-    ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"].forEach((utm) => {
-      const val = currentParams.get(utm);
-      if (val) url.searchParams.set(utm, val);
+    ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid"].forEach((param) => {
+      const val = currentParams.get(param);
+      if (val) url.searchParams.set(param, val);
     });
 
     window.location.href = url.toString();

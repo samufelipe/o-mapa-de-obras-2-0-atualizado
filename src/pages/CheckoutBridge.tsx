@@ -56,13 +56,14 @@ export default function CheckoutBridge() {
         return;
       }
 
-      // Capturar UTMs
+      // Capturar UTMs + fbclid para atribuição Meta
       const utmData = {
         utm_source: searchParams.get("utm_source") || "direct",
         utm_medium: searchParams.get("utm_medium") || "",
         utm_campaign: searchParams.get("utm_campaign") || "",
         utm_content: searchParams.get("utm_content") || "",
         utm_term: searchParams.get("utm_term") || "",
+        fbclid: searchParams.get("fbclid") || "",
       };
 
       try {
@@ -127,12 +128,13 @@ export default function CheckoutBridge() {
           }
         }
 
-        // Passar UTMs para o checkout
+        // Passar UTMs + fbclid para o checkout (atribuição Meta)
         if (utmData.utm_source) checkoutUrl.searchParams.set("utm_source", utmData.utm_source);
         if (utmData.utm_medium) checkoutUrl.searchParams.set("utm_medium", utmData.utm_medium);
         if (utmData.utm_campaign) checkoutUrl.searchParams.set("utm_campaign", utmData.utm_campaign);
         if (utmData.utm_content) checkoutUrl.searchParams.set("utm_content", utmData.utm_content);
         if (utmData.utm_term) checkoutUrl.searchParams.set("utm_term", utmData.utm_term);
+        if (utmData.fbclid) checkoutUrl.searchParams.set("fbclid", utmData.fbclid);
 
         setStatus("redirecting");
 

@@ -125,9 +125,9 @@ const HeroSection = () => {
       });
 
       const currentParams = new URLSearchParams(window.location.search);
-      ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"].forEach((utm) => {
-        const val = currentParams.get(utm);
-        if (val) params.set(utm, val);
+      ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid"].forEach((param) => {
+        const val = currentParams.get(param);
+        if (val) params.set(param, val);
       });
 
       window.location.href = `/checkout/imersao?${params.toString()}`;
@@ -141,7 +141,7 @@ const HeroSection = () => {
     if (!valid) {
       setErrors(errs);
       setTouched({ name: true, phone: true });
-      trackFormError(errs);
+      trackFormError(errs as Record<string, string>);
       toast({
         title: "Campos inválidos",
         description: "Por favor, corrija os campos destacados.",
