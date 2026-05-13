@@ -83,6 +83,7 @@ export default function CheckoutBridge() {
             phone: phone?.replace(/\D/g, "") || null,
             ...utmData,
             page_url: window.location.href,
+            fbclid: searchParams.get("fbclid") || undefined,
           },
         });
 

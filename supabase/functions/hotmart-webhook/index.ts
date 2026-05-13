@@ -27,6 +27,105 @@ interface HotmartWebhookPayload {
   hottok?: string;
 }
 
+// ─── Meta CAPI helpers ────────────────────────────────────────────────────────
+
+async function sha256(input: string): Promise<string> {
+  const data = new TextEncoder().encode(input.toLowerCase().trim());
+  const hash = await crypto.subtle.digest("SHA-256", data);
+  return Array.from(new Uint8Array(hash))
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+async function sendMetaCAPIEvent(params: {
+  requestId: string;
+  email: string;
+  phone?: string | null;
+  fbclid?: string | null;
+  transactionId?: string | null;
+  eventTime: number;
+}): Promise<void> {
+  const pixelId = Deno.env.get("META_PIXEL_ID");
+  const accessToken = Deno.env.get("META_CAPI_ACCESS_TOKEN");
+  const testEventCode = Deno.env.get("META_CAPI_TEST_CODE");
+
+  if (!pixelId || !accessToken) {
+    console.warn(`[${params.requestId}] ⚠️ [CAPI] META_PIXEL_ID ou META_CAPI_ACCESS_TOKEN não configurado — pulando`);
+    return;
+  }
+
+  const hashedEmail = await sha256(params.email);
+
+  const userData: Record<string, unknown> = {
+    em: [hashedEmail],
+  };
+
+  if (params.phone) {
+    const phoneClean = params.phone.replace(/\D/g, "");
+    if (phoneClean.length >= 10) {
+      userData.ph = [await sha256(phoneClean)];
+    }
+  }
+
+  // fbc = fb.1.{timestamp_ms}.{fbclid}
+  if (params.fbclid) {
+    userData.fbc = `fb.1.${params.eventTime * 1000}.${params.fbclid}`;
+  }
+
+  const eventData: Record<string, unknown> = {
+    event_name: "Purchase",
+    event_time: params.eventTime,
+    action_source: "website",
+    event_source_url: "https://inscricao.imersao.inovandonasuaobra.com.br",
+    user_data: userData,
+    custom_data: {
+      currency: "BRL",
+      value: 39.90,
+      content_name: "Imersão Cronograma 2.0",
+      content_type: "product",
+      num_items: 1,
+    },
+  };
+
+  // event_id para deduplicação com o pixel do browser
+  if (params.transactionId) {
+    eventData.event_id = params.transactionId;
+    (eventData.custom_data as Record<string, unknown>).order_id = params.transactionId;
+  }
+
+  const payload: Record<string, unknown> = {
+    data: [eventData],
+    access_token: accessToken,
+  };
+
+  if (testEventCode) {
+    payload.test_event_code = testEventCode;
+  }
+
+  try {
+    const response = await fetch(
+      `https://graph.facebook.com/v21.0/${pixelId}/events`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      }
+    );
+
+    const result = await response.json();
+
+    if (response.ok) {
+      console.log(`[${params.requestId}] ✅ [CAPI] Purchase enviado ao Meta. events_received: ${result.events_received}`);
+    } else {
+      console.error(`[${params.requestId}] ❌ [CAPI] Erro Meta:`, JSON.stringify(result));
+    }
+  } catch (err) {
+    console.error(`[${params.requestId}] ❌ [CAPI] Falha na chamada:`, err);
+  }
+}
+
+// ─── Webhook handler ──────────────────────────────────────────────────────────
+
 serve(async (req: Request) => {
   const requestId = crypto.randomUUID().slice(0, 8);
   console.log(`\n========== [${requestId}] HOTMART WEBHOOK RECEBIDO ==========`);
@@ -96,6 +195,10 @@ serve(async (req: Request) => {
       body.buyer?.name ||
       body.buyer_name;
 
+    const buyerPhone =
+      body.data?.buyer?.phone ||
+      null;
+
     const productName =
       body.data?.product?.name ||
       body.product?.name ||
@@ -162,7 +265,7 @@ serve(async (req: Request) => {
 
     const { data: intents, error: selectError } = await supabase
       .from("checkout_intents")
-      .select("*")
+      .select("id, phone, fbclid")
       .eq("email", normalizedEmail)
       .eq("product", product)
       .eq("status", "started");
@@ -173,10 +276,15 @@ serve(async (req: Request) => {
 
     let updatedIntentIds: string[] = [];
     let intentFound = false;
+    let fbclid: string | null = null;
+    let intentPhone: string | null = buyerPhone;
 
     if (intents && intents.length > 0) {
       intentFound = true;
-      console.log(`[${requestId}] 📝 Encontrados ${intents.length} intents para marcar como purchased`);
+      // Pegar fbclid e phone do primeiro intent encontrado
+      fbclid = intents[0].fbclid || null;
+      intentPhone = intents[0].phone || intentPhone;
+      console.log(`[${requestId}] 📝 Encontrados ${intents.length} intents — fbclid: ${fbclid ? "presente" : "ausente"}`);
 
       const { data: updatedIntents, error: updateError } = await supabase
         .from("checkout_intents")
@@ -221,6 +329,18 @@ serve(async (req: Request) => {
       }
     }
 
+    // ─── Meta CAPI: enviar evento de Purchase ────────────────────────────────
+    const eventTime = Math.floor(Date.now() / 1000);
+    await sendMetaCAPIEvent({
+      requestId,
+      email: normalizedEmail,
+      phone: intentPhone,
+      fbclid,
+      transactionId,
+      eventTime,
+    });
+    // ─────────────────────────────────────────────────────────────────────────
+
     const result = {
       success: true,
       request_id: requestId,
@@ -230,6 +350,7 @@ serve(async (req: Request) => {
       intent_found: intentFound,
       intents_updated: updatedIntentIds.length,
       transaction_id: transactionId,
+      capi_sent: true,
     };
 
     console.log(`[${requestId}] ✅ WEBHOOK PROCESSADO:`, result);

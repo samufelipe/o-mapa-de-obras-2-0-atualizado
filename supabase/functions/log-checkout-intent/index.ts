@@ -16,6 +16,7 @@ interface CheckoutIntentRequest {
   utm_campaign?: string;
   utm_content?: string;
   utm_term?: string;
+  fbclid?: string;
   page_url?: string;
 }
 
@@ -66,6 +67,7 @@ serve(async (req: Request) => {
           utm_campaign: body.utm_campaign || null,
           utm_content: body.utm_content || null,
           utm_term: body.utm_term || null,
+          fbclid: body.fbclid || null,
           page_url: body.page_url || null,
           intent_date: today,
           status: "started",
