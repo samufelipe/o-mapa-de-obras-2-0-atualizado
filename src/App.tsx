@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import IndexV2 from "./pages/IndexV2";
+import IndexV3 from "./pages/IndexV3";
 import NotFound from "./pages/NotFound";
 import AdminEmails from "./pages/AdminEmails";
 import CheckoutBridge from "./pages/CheckoutBridge";
@@ -16,7 +17,7 @@ import MaintenancePage from "./components/MaintenancePage";
 const queryClient = new QueryClient();
 
 // Verificar se o modo manutenção está ativado
-const isMaintenanceMode = false; // import.meta.env.VITE_MAINTENANCE_MODE === 'true';
+const isMaintenanceMode = true; // import.meta.env.VITE_MAINTENANCE_MODE === 'true';
 
 const App = () => {
   // Se modo manutenção estiver ativado, mostrar apenas a página de manutenção
@@ -33,6 +34,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/v2" element={<IndexV2 />} />
+          <Route path="/v3" element={<IndexV3 />} />
           <Route path="/mentoria" element={<MentoriaLanding />} />
           <Route path="/admin/emails" element={<AdminEmails />} />
           <Route path="/checkout/:product" element={<CheckoutBridge />} />
