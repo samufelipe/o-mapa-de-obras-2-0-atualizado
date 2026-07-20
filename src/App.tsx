@@ -17,7 +17,7 @@ import MaintenancePage from "./components/MaintenancePage";
 const queryClient = new QueryClient();
 
 // Verificar se o modo manutenção está ativado
-const isMaintenanceMode = true; // import.meta.env.VITE_MAINTENANCE_MODE === 'true';
+const isMaintenanceMode = false; // import.meta.env.VITE_MAINTENANCE_MODE === 'true';
 
 const App = () => {
   // Se modo manutenção estiver ativado, mostrar apenas a página de manutenção
