@@ -78,15 +78,11 @@ const HeroSectionNatal = () => {
               <span className="text-primary italic block mt-1">O cronograma decide se isso é possível.</span>
             </h1>
 
-            <p className="hidden md:block text-base md:text-xl text-muted-foreground max-w-lg mx-auto lg:mx-0 font-medium leading-relaxed">
-              Na Imersão Cronograma Especial de Natal, para arquitetas e designers de interiores (recém-formadas ou
-              já atuando no mercado), você planeja os próximos meses da obra, define prioridades, escolhe
-              fornecedores e conduz o cliente com segurança, sem aceitar prazos impossíveis nem perder
-              credibilidade. Tudo isso ao vivo, com a Ingrid Zarza e a Fernanda Bradaschia, no dia 08/08.
-            </p>
-            <p className="md:hidden text-base text-muted-foreground max-w-lg mx-auto font-medium leading-relaxed">
-              Para arquitetas e designers de interiores: monte seu cronograma ao vivo com a Ingrid e a Fernanda, sem
-              aceitar prazo impossível.
+            <p className="text-base md:text-xl text-muted-foreground max-w-lg mx-auto lg:mx-0 font-medium leading-relaxed">
+              A Imersão Cronograma Especial de Natal é para arquitetas e designers de interiores, recém-formadas ou
+              já atuando no mercado. Você planeja os próximos meses da obra, escolhe fornecedores e conduz o cliente
+              com segurança, sem aceitar prazos impossíveis. Tudo isso ao vivo, com a Ingrid Zarza e a Fernanda
+              Bradaschia, no dia 08/08.
             </p>
           </div>
 
