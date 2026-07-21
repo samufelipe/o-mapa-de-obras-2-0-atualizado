@@ -6,6 +6,11 @@
       "destination": "/natal.html"
     },
     {
+      "source": "/probe-natal-rewrite-host-v1",
+      "has": [{ "type": "header", "key": "host", "value": "cronogramadenatal.inovandonasuaobra.com.br" }],
+      "destination": "/natal.html"
+    },
+    {
       "source": "/",
       "has": [{ "type": "header", "key": "host", "value": "cronogramadenatal.inovandonasuaobra.com.br" }],
       "destination": "/natal.html"
