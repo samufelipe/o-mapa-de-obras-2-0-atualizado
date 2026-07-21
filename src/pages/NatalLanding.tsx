@@ -18,20 +18,21 @@ import {
   NATAL_FOOTER_LINKS,
 } from "@/lib/natal-constants";
 
-const NATAL_FAVICONS: Array<{ rel: string; sizes?: string; href: string }> = [
-  { rel: "icon", sizes: "16x16", href: "/brand-natal/favicon-16.png" },
-  { rel: "icon", sizes: "32x32", href: "/brand-natal/favicon-32.png" },
-  { rel: "icon", sizes: "48x48", href: "/brand-natal/favicon-48.png" },
-  { rel: "icon", sizes: "64x64", href: "/brand-natal/favicon-64.png" },
+const NATAL_FAVICONS: Array<{ rel: string; sizes?: string; type?: string; href: string }> = [
+  { rel: "icon", type: "image/svg+xml", href: "/brand-natal/favicon.svg" },
+  { rel: "icon", sizes: "16x16", type: "image/png", href: "/brand-natal/favicon-16.png" },
+  { rel: "icon", sizes: "32x32", type: "image/png", href: "/brand-natal/favicon-32.png" },
+  { rel: "icon", sizes: "48x48", type: "image/png", href: "/brand-natal/favicon-48.png" },
+  { rel: "icon", sizes: "64x64", type: "image/png", href: "/brand-natal/favicon-64.png" },
   { rel: "apple-touch-icon", sizes: "180x180", href: "/brand-natal/apple-touch-icon-180.png" },
 ];
 
 const NatalLogo = () => (
-  <div className="flex items-center gap-2.5">
-    <img src="/brand-natal/simbolo.png" alt="" className="h-10 md:h-12 w-auto object-contain" />
-    <span className="font-display font-bold normal-case leading-none text-foreground text-sm md:text-base tracking-tight">
+  <div className="flex items-center gap-3">
+    <img src="/brand-natal/simbolo.png" alt="" className="h-14 md:h-16 w-auto object-contain" />
+    <span className="font-display font-bold normal-case leading-none text-foreground text-base md:text-lg tracking-tight">
       Cronograma
-      <span className="block text-[0.65em] font-bold tracking-[0.15em] uppercase text-muted-foreground">
+      <span className="block text-[0.6em] font-bold tracking-[0.15em] uppercase text-muted-foreground">
         Obra Pronta pro Natal
       </span>
     </span>
@@ -50,15 +51,19 @@ const NatalLanding = () => {
     const originalTitle = document.title;
     const createdOrChanged: Array<{ el: HTMLLinkElement; prevHref: string | null; created: boolean }> = [];
 
-    NATAL_FAVICONS.forEach(({ rel, sizes, href }) => {
-      let el = document.querySelector<HTMLLinkElement>(
-        sizes ? `link[rel="${rel}"][sizes="${sizes}"]` : `link[rel="${rel}"]`
-      );
+    NATAL_FAVICONS.forEach(({ rel, sizes, type, href }) => {
+      const selector = sizes
+        ? `link[rel="${rel}"][sizes="${sizes}"]`
+        : type
+        ? `link[rel="${rel}"][type="${type}"]`
+        : `link[rel="${rel}"]`;
+      let el = document.querySelector<HTMLLinkElement>(selector);
       let created = false;
       if (!el) {
         el = document.createElement("link");
         el.rel = rel;
         if (sizes) el.setAttribute("sizes", sizes);
+        if (type) el.type = type;
         document.head.appendChild(el);
         created = true;
       }

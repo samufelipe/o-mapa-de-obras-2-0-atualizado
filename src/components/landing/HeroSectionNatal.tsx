@@ -69,17 +69,17 @@ const HeroSectionNatal = () => {
               </span>
             </div>
 
-            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.15]">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.15]">
               A obra precisa ficar pronta até o Natal.
               <span className="text-primary italic block mt-1">O cronograma decide se isso é possível.</span>
             </h1>
 
-            <p className="hidden md:block text-sm md:text-lg text-muted-foreground max-w-lg mx-auto lg:mx-0 font-medium leading-relaxed">
+            <p className="hidden md:block text-base md:text-xl text-muted-foreground max-w-lg mx-auto lg:mx-0 font-medium leading-relaxed">
               Na Imersão Cronograma Especial de Natal você planeja os próximos meses da obra, define prioridades,
               escolhe fornecedores e conduz o cliente com segurança, sem aceitar prazos impossíveis nem perder
               credibilidade.
             </p>
-            <p className="md:hidden text-sm text-muted-foreground max-w-lg mx-auto font-medium leading-relaxed">
+            <p className="md:hidden text-base text-muted-foreground max-w-lg mx-auto font-medium leading-relaxed">
               Planeje os próximos meses, escolha fornecedores certos e conduza o cliente sem aceitar prazo impossível.
             </p>
           </div>
@@ -88,8 +88,8 @@ const HeroSectionNatal = () => {
           <div id="registration-form" className="scroll-mt-24 animate-fade-up">
             <div className="bg-card border-2 border-foreground p-4 sm:p-8 md:p-10 shadow-premium max-w-md mx-auto">
               <div className="mb-4 text-center lg:text-left">
-                <h2 className="text-lg md:text-xl font-bold uppercase tracking-tight">Vaga para a Imersão de Natal</h2>
-                <p className="text-sm md:text-base font-bold text-muted-foreground uppercase tracking-widest">
+                <h2 className="text-xl md:text-2xl font-bold uppercase tracking-tight">Vaga para a Imersão de Natal</h2>
+                <p className="text-base md:text-lg font-bold text-muted-foreground uppercase tracking-widest">
                   Ao Vivo · {NATAL_EVENT_DATE_LABEL}
                 </p>
               </div>
@@ -97,28 +97,23 @@ const HeroSectionNatal = () => {
               <div className="mb-4 bg-secondary border border-border p-3 space-y-1.5">
                 {valueItems.map((item) => (
                   <div key={item} className="flex items-start gap-2">
-                    <Check className="w-3.5 h-3.5 text-primary mt-0.5 flex-shrink-0" />
-                    <span className="text-xs font-medium text-foreground">{item}</span>
+                    <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                    <span className="text-sm font-medium text-foreground">{item}</span>
                   </div>
                 ))}
               </div>
 
               <div className="space-y-3">
-                <div className="flex justify-between items-end">
-                  <div className="flex flex-col">
-                    <span className="text-xs text-muted-foreground font-medium">Investimento único:</span>
-                    <span className="text-3xl font-bold tracking-tighter animate-pulse-slow">
-                      R$ {NATAL_PRICE.toFixed(2).replace(".", ",")}
-                    </span>
-                  </div>
-                  <span className="text-xs font-bold text-primary bg-foreground px-2 py-1 uppercase tracking-widest shadow-premium">
-                    TURMA REDUZIDA
+                <div className="flex flex-col">
+                  <span className="text-sm text-muted-foreground font-medium">Investimento único:</span>
+                  <span className="text-4xl font-bold tracking-tighter animate-pulse-slow">
+                    R$ {NATAL_PRICE.toFixed(2).replace(".", ",")}
                   </span>
                 </div>
 
                 <button
                   onClick={handleCTAClick}
-                  className="w-full bg-green-600 text-white py-4 flex items-center justify-center gap-2 text-xs sm:text-sm font-bold tracking-wide hover:bg-green-700 transition-all duration-300 border-2 border-green-600 shadow-premium hover:shadow-premium-gold hover:-translate-y-1 uppercase group active:scale-95"
+                  className="w-full bg-green-600 text-white py-4 flex items-center justify-center gap-2 text-sm sm:text-base font-bold tracking-wide hover:bg-green-700 transition-all duration-300 border-2 border-green-600 shadow-premium hover:shadow-premium-gold hover:-translate-y-1 uppercase group active:scale-95"
                   data-track="cta_button_natal"
                   data-track-location="hero_card_natal"
                 >
@@ -126,8 +121,8 @@ const HeroSectionNatal = () => {
                   <ArrowRight className="w-4 h-4 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
                 </button>
 
-                <p className="text-center text-xs text-muted-foreground font-medium flex items-center justify-center gap-1">
-                  <Lock className="w-3 h-3" /> Pagamento seguro via Hotmart · Vaga confirmada na hora
+                <p className="text-center text-sm text-muted-foreground font-medium flex items-center justify-center gap-1">
+                  <Lock className="w-3.5 h-3.5" /> Pagamento seguro via Hotmart · Vaga confirmada na hora
                 </p>
               </div>
             </div>
