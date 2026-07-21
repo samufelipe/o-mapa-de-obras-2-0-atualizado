@@ -24,11 +24,19 @@ const PainMechanismSection = () => {
             muda o jogo não é trabalhar mais rápido. É saber montar o cronograma certo e conduzir o cliente dentro
             dele.
           </p>
+          <p>
+            Tentar resolver isso sozinha numa planilha, ou perguntar pra colega no grupo do WhatsApp, funciona até um
+            ponto. O que muda de verdade é ter alguém que já entregou dezenas de obras te guiando ao vivo, na sua
+            obra específica, no seu prazo real.
+          </p>
         </div>
 
         <div className="mb-10 text-center">
+          <p className="text-sm md:text-base font-bold uppercase tracking-widest text-primary mb-3">
+            Para arquitetas e designers que gerenciam obra de interiores e reforma
+          </p>
           <h2 className="text-3xl md:text-4xl font-bold uppercase tracking-tight">
-            Na Imersão, você abre o calendário com a gente e sai sabendo:
+            Num dia inteiro ao vivo, você abre o calendário com a gente e sai sabendo:
           </h2>
           <div className="w-12 h-1 bg-primary mx-auto mt-4"></div>
         </div>

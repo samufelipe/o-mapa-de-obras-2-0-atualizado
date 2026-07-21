@@ -35,6 +35,11 @@ export const NATAL_FAQ = [
       "É o valor real, sem pegadinha. A imersão acontece ao vivo, no dia 08/08, e o acesso é confirmado assim que o pagamento é aprovado.",
   },
   {
+    question: "Recebo algum material pronto ou é só a live?",
+    answer:
+      "É uma imersão 100% ao vivo. Você constrói o cronograma da sua própria obra durante o dia, com orientação direta, em vez de receber um material genérico pronto.",
+  },
+  {
     question: "Como eu entro na live do Zoom no dia?",
     answer:
       "Depois da confirmação do pagamento, você recebe o link de acesso com antecedência. No dia 08/08, é só clicar no link e entrar.",
@@ -42,12 +47,12 @@ export const NATAL_FAQ = [
   {
     question: "E se eu não conseguir participar ao vivo?",
     answer:
-      "A imersão acontece ao vivo, no dia 08/08. Reserve esse dia para você: é nele que você monta o cronograma junto com a gente e tira dúvidas em tempo real.",
+      "A imersão acontece ao vivo, no dia 08/08, das 9h às 17h. Reserve o dia inteiro para você: é nele que você monta o cronograma junto com a gente e tira dúvidas em tempo real.",
   },
   {
     question: "Tem garantia?",
     answer:
-      "Sim. Você tem 7 dias para pedir reembolso total, sem burocracia, caso sinta que não é para você.",
+      "Sim. Garantia de 7 dias prevista em lei (Código de Defesa do Consumidor): você pode pedir reembolso total, sem burocracia, caso sinta que não é para você.",
   },
 ];
 

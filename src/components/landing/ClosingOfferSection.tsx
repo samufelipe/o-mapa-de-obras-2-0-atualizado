@@ -14,12 +14,12 @@ const ClosingOfferSection = () => {
           </span>
 
           <h2 className="text-background text-3xl md:text-4xl font-bold uppercase tracking-tight mb-6">
-            Seu cronograma até o Natal
+            Sua obra pronta até o Natal começa aqui
           </h2>
 
           <div className="flex justify-center gap-4 mb-8">
             <div className="flex items-center gap-1.5 text-background/70 text-sm font-bold uppercase tracking-wider">
-              <Video className="w-4 h-4 text-primary" /> Ao Vivo no Zoom
+              <Video className="w-4 h-4 text-primary" /> Ao Vivo · Dia Inteiro
             </div>
             <div className="flex items-center gap-1.5 text-background/70 text-sm font-bold uppercase tracking-wider">
               <Calendar className="w-4 h-4 text-primary" /> {NATAL_EVENT_DATE_LABEL}
@@ -35,6 +35,9 @@ const ClosingOfferSection = () => {
             </h3>
           </div>
 
+          <p className="text-background/50 text-sm font-medium mb-2">
+            Um dia inteiro ao vivo comigo por menos do que custa uma única visita técnica.
+          </p>
           <p className="text-background/50 text-sm font-medium mb-8">
             Menos do que o custo de uma obra atrasada em confiança e indicação.
           </p>
@@ -49,7 +52,7 @@ const ClosingOfferSection = () => {
           <div className="flex items-center justify-center gap-2 text-background/70">
             <ShieldCheck className="w-5 h-5 text-primary flex-shrink-0" />
             <p className="text-sm md:text-base font-medium text-left">
-              Garantia de {NATAL_GUARANTEE_DAYS} dias: se não for para você, o reembolso é integral e sem burocracia.
+              Garantia de {NATAL_GUARANTEE_DAYS} dias prevista em lei: se não for para você, o reembolso é integral e sem burocracia.
             </p>
           </div>
         </div>

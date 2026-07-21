@@ -10,7 +10,11 @@ import {
   NATAL_EVENT_DATE_LABEL,
 } from "@/lib/natal-constants";
 
-const valueItems = ["Ao vivo no Zoom · 08/08", "Cronograma completo até o Natal"];
+const valueItems = [
+  "Ao vivo no Zoom · 08/08",
+  "Imersão de um dia · 09h às 17h",
+  "Você monta seu cronograma, ao vivo, comigo",
+];
 
 const HeroSectionNatal = () => {
   const [timeLeft, setTimeLeft] = useState({ d: 0, h: 0, m: 0, s: 0 });
@@ -77,10 +81,11 @@ const HeroSectionNatal = () => {
             <p className="hidden md:block text-base md:text-xl text-muted-foreground max-w-lg mx-auto lg:mx-0 font-medium leading-relaxed">
               Na Imersão Cronograma Especial de Natal você planeja os próximos meses da obra, define prioridades,
               escolhe fornecedores e conduz o cliente com segurança, sem aceitar prazos impossíveis nem perder
-              credibilidade.
+              credibilidade. Tudo isso ao vivo, comigo, no dia 08/08.
             </p>
             <p className="md:hidden text-base text-muted-foreground max-w-lg mx-auto font-medium leading-relaxed">
               Planeje os próximos meses, escolha fornecedores certos e conduza o cliente sem aceitar prazo impossível.
+              Ao vivo, comigo, no dia 08/08.
             </p>
           </div>
 
@@ -135,10 +140,10 @@ const HeroSectionNatal = () => {
         <div className="container mx-auto px-4 py-5 md:py-8">
           <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-8 md:gap-14 text-foreground">
             <div className="flex items-center gap-1.5 font-bold text-xs sm:text-sm md:text-base uppercase tracking-wide">
-              <Users className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 flex-shrink-0" /> +1000 Arquitetas Impactadas
+              <Users className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 flex-shrink-0" /> +1000 Arquitetas na Comunidade Inovando
             </div>
             <div className="flex items-center gap-1.5 font-bold text-xs sm:text-sm md:text-base uppercase tracking-wide">
-              <Star className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 flex-shrink-0 fill-current" /> Avaliação 4.9/5.0
+              <Star className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 flex-shrink-0 fill-current" /> Avaliação 4.9/5.0 nas Imersões
             </div>
           </div>
         </div>
