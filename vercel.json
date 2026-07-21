@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/",
-      "has": [{ "type": "host", "value": "cronogramadenatal.inovandonasuaobra.com.br" }],
+      "has": [{ "type": "header", "key": "host", "value": "cronogramadenatal.inovandonasuaobra.com.br" }],
       "destination": "/natal.html"
     },
     { "source": "/(.*)", "destination": "/index.html" }
