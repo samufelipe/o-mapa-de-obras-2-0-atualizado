@@ -1,17 +1,7 @@
 {
   "rewrites": [
     {
-      "source": "/probe-natal-rewrite-v3",
-      "has": [{ "type": "header", "key": "x-natal-test", "value": "1" }],
-      "destination": "/natal.html"
-    },
-    {
-      "source": "/probe-natal-rewrite-host-v1",
-      "has": [{ "type": "header", "key": "host", "value": "cronogramadenatal.inovandonasuaobra.com.br" }],
-      "destination": "/natal.html"
-    },
-    {
-      "source": "/",
+      "source": "/(.*)",
       "has": [{ "type": "header", "key": "host", "value": "cronogramadenatal.inovandonasuaobra.com.br" }],
       "destination": "/natal.html"
     },
