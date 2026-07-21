@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import logoFooter from "@/assets/logo-footer.svg";
 import { Instagram, ArrowUp } from "lucide-react";
 
@@ -21,9 +22,18 @@ interface FooterLink {
 interface FooterProps {
   links?: FooterLink[];
   productLabel?: string;
+  logoSrc?: string;
+  logoAlt?: string;
+  logoNode?: ReactNode;
 }
 
-const Footer = ({ links = footerLinks, productLabel = "Imersão Cronograma 2.0" }: FooterProps) => {
+const Footer = ({
+  links = footerLinks,
+  productLabel = "Imersão Cronograma 2.0",
+  logoSrc = "/logo-mobile.png",
+  logoAlt = "Cronograma 2.0: O Mapa da Obra",
+  logoNode,
+}: FooterProps) => {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     element?.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -38,12 +48,14 @@ const Footer = ({ links = footerLinks, productLabel = "Imersão Cronograma 2.0" 
       <div className="container mx-auto px-4 max-w-6xl">
 
         <div className="flex flex-col items-center mb-8">
-          <img
-            src="/logo-mobile.png"
-            alt="Cronograma 2.0: O Mapa da Obra"
-            className="h-20 md:h-24 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-300"
-            loading="lazy"
-          />
+          {logoNode ?? (
+            <img
+              src={logoSrc}
+              alt={logoAlt}
+              className="h-20 md:h-24 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-300"
+              loading="lazy"
+            />
+          )}
         </div>
 
         <div className="flex justify-center mb-8">

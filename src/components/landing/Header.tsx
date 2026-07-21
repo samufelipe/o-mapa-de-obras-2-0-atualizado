@@ -1,18 +1,27 @@
+import { ReactNode } from "react";
 import logoIcon from "@/assets/logo-cronograma-icon.svg";
 import { useCTA } from "@/lib/cta-context";
 
-const Header = () => {
+interface HeaderProps {
+  logoSrc?: string;
+  logoAlt?: string;
+  logoNode?: ReactNode;
+}
+
+const Header = ({ logoSrc = "/logo-mobile.png", logoAlt = "Cronograma 2.0", logoNode }: HeaderProps) => {
   const handleCTA = useCTA();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 border-b border-border py-2" style={{ backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}>
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <img
-            src="/logo-mobile.png"
-            alt="Cronograma 2.0"
-            className="h-20 md:h-24 w-auto object-contain"
-          />
+          {logoNode ?? (
+            <img
+              src={logoSrc}
+              alt={logoAlt}
+              className="h-20 md:h-24 w-auto object-contain"
+            />
+          )}
         </div>
 
         <button

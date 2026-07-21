@@ -18,11 +18,66 @@ import {
   NATAL_FOOTER_LINKS,
 } from "@/lib/natal-constants";
 
+const NATAL_FAVICONS: Array<{ rel: string; sizes?: string; href: string }> = [
+  { rel: "icon", sizes: "16x16", href: "/brand-natal/favicon-16.png" },
+  { rel: "icon", sizes: "32x32", href: "/brand-natal/favicon-32.png" },
+  { rel: "icon", sizes: "48x48", href: "/brand-natal/favicon-48.png" },
+  { rel: "icon", sizes: "64x64", href: "/brand-natal/favicon-64.png" },
+  { rel: "apple-touch-icon", sizes: "180x180", href: "/brand-natal/apple-touch-icon-180.png" },
+];
+
+const NatalLogo = () => (
+  <div className="flex items-center gap-2.5">
+    <img src="/brand-natal/simbolo.png" alt="" className="h-10 md:h-12 w-auto object-contain" />
+    <span className="font-display font-bold normal-case leading-none text-foreground text-sm md:text-base tracking-tight">
+      Cronograma
+      <span className="block text-[0.65em] font-bold tracking-[0.15em] uppercase text-muted-foreground">
+        Obra Pronta pro Natal
+      </span>
+    </span>
+  </div>
+);
+
 const NatalLanding = () => {
   const [showStickyCTA, setShowStickyCTA] = useState(false);
 
   useEffect(() => {
     initAllTracking();
+  }, []);
+
+  // Troca favicon/apple-touch-icon so pra essa LP, restaurando ao sair (SPA navigation)
+  useEffect(() => {
+    const originalTitle = document.title;
+    const createdOrChanged: Array<{ el: HTMLLinkElement; prevHref: string | null; created: boolean }> = [];
+
+    NATAL_FAVICONS.forEach(({ rel, sizes, href }) => {
+      let el = document.querySelector<HTMLLinkElement>(
+        sizes ? `link[rel="${rel}"][sizes="${sizes}"]` : `link[rel="${rel}"]`
+      );
+      let created = false;
+      if (!el) {
+        el = document.createElement("link");
+        el.rel = rel;
+        if (sizes) el.setAttribute("sizes", sizes);
+        document.head.appendChild(el);
+        created = true;
+      }
+      createdOrChanged.push({ el, prevHref: created ? null : el.href, created });
+      el.href = href;
+    });
+
+    document.title = "Imersão Cronograma Especial de Natal | Inovando na Sua Obra";
+
+    return () => {
+      document.title = originalTitle;
+      createdOrChanged.forEach(({ el, prevHref, created }) => {
+        if (created) {
+          el.remove();
+        } else if (prevHref) {
+          el.href = prevHref;
+        }
+      });
+    };
   }, []);
 
   useEffect(() => {
@@ -79,14 +134,14 @@ const NatalLanding = () => {
 
   return (
     <CTAProvider value={handleCTA}>
-    <div className="min-h-screen bg-background text-foreground">
-      <Header />
+    <div className="natal-theme min-h-screen bg-background text-foreground">
+      <Header logoNode={<NatalLogo />} />
       <HeroSectionNatal />
       <TestimonialsSection />
       <PainMechanismSection />
       <ClosingOfferSection />
       <FAQSection items={NATAL_FAQ} title="Dúvidas Sobre a Imersão de Natal" />
-      <Footer links={NATAL_FOOTER_LINKS} productLabel={NATAL_PRODUCT_NAME} />
+      <Footer links={NATAL_FOOTER_LINKS} productLabel={NATAL_PRODUCT_NAME} logoNode={<NatalLogo />} />
 
       {/* Sticky Mobile CTA */}
       <div className={`fixed bottom-0 left-0 w-full z-[100] md:hidden transition-all duration-500 transform bg-background/95 backdrop-blur-sm border-t border-border px-4 py-3 ${showStickyCTA ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0"}`}>

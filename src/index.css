@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@700;800;900&family=Nunito+Sans:wght@400;600;700&display=swap');
 
 @layer base {
   :root {
@@ -202,4 +202,60 @@
   .main-cta:active {
     @apply scale-95;
   }
+}
+
+/*
+ * Kit de marca "Cronograma: Obra Pronta pro Natal" (2026-07-21).
+ * Escopado propositalmente em .natal-theme para nao afetar nenhuma outra
+ * pagina do site (Index, IndexV2, IndexV3, MentoriaLanding etc.) que
+ * compartilham este mesmo arquivo de tema.
+ */
+.natal-theme {
+  --background: 40 38% 97%;   /* Papel */
+  --foreground: 157.5 37% 17%; /* Verde pinheiro */
+
+  --card: 0 0% 100%;
+  --card-foreground: 157.5 37% 17%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 157.5 37% 17%;
+
+  --primary: 40 55% 52%;      /* Dourado */
+  --primary-foreground: 157.5 40% 12%; /* Verde escuro */
+
+  --secondary: 150 15% 94%;
+  --secondary-foreground: 157.5 37% 17%;
+
+  --muted: 150 12% 92%;
+  --muted-foreground: 159 15% 35%; /* Tinta, aclarada */
+
+  --accent: 40 55% 52%;
+  --accent-foreground: 157.5 40% 12%;
+
+  --border: 157 15% 85%;
+  --input: 157 15% 85%;
+  --ring: 40 55% 52%;
+
+  --gold: 40 55% 52%;
+  --gold-dark: 40 55% 40%;
+  --brand-gold: 40 55% 52%;
+  --brand-black: 157.5 37% 17%;
+
+  /* Vermelho natal: cor de CTA, fora do sistema --primary (que aqui vira dourado) */
+  --cta: 357 68% 45%;
+  --cta-hover: 357 71% 39%;
+
+  font-family: 'Nunito Sans', Arial, sans-serif;
+}
+
+.natal-theme .bg-green-600 {
+  background-color: hsl(var(--cta));
+}
+
+.natal-theme .hover\:bg-green-700:hover {
+  background-color: hsl(var(--cta-hover));
+}
+
+.natal-theme .border-green-600 {
+  border-color: hsl(var(--cta));
 }
