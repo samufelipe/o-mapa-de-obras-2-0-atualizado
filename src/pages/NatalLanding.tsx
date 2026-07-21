@@ -28,15 +28,11 @@ const NATAL_FAVICONS: Array<{ rel: string; sizes?: string; type?: string; href: 
 ];
 
 const NatalLogo = () => (
-  <div className="flex items-center gap-3">
-    <img src="/brand-natal/simbolo.png" alt="" className="h-14 md:h-16 w-auto object-contain" />
-    <span className="font-display font-bold normal-case leading-none text-foreground text-base md:text-lg tracking-tight">
-      Cronograma
-      <span className="block text-[0.6em] font-bold tracking-[0.15em] uppercase text-muted-foreground">
-        Obra Pronta pro Natal
-      </span>
-    </span>
-  </div>
+  <img
+    src="/brand-natal/logo-horizontal.png"
+    alt="Cronograma: Obra Pronta até o Natal"
+    className="h-14 md:h-16 w-auto object-contain"
+  />
 );
 
 const NatalLanding = () => {
