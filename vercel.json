@@ -1,7 +1,7 @@
 {
   "rewrites": [
     {
-      "source": "/",
+      "source": "/probe-natal-rewrite-v3",
       "has": [{ "type": "header", "key": "x-natal-test", "value": "1" }],
       "destination": "/natal.html"
     },
