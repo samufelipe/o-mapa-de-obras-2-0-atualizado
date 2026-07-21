@@ -24,8 +24,9 @@ export const NATAL_MECHANISM_POINTS = [
   "Como conduzir o cliente para aprovar orçamentos rápido, sem depender da sorte",
 ];
 
-// GARANTIA: placeholder de 7 dias, mesmo padrão da imersão anterior.
-// PENDENTE DE CONFIRMAÇÃO COM O SAMUEL antes de ir ao ar.
+// GARANTIA: 7 dias corridos, confirmado com o Samuel (2026-07-21). Não é uma
+// escolha comercial: é o mínimo exigido pelo CDC art. 49 (direito de
+// arrependimento em compra online), mesmo passando da data do evento (08/08).
 export const NATAL_GUARANTEE_DAYS = 7;
 
 export const NATAL_FAQ = [
@@ -37,7 +38,7 @@ export const NATAL_FAQ = [
   {
     question: "Recebo algum material pronto ou é só a live?",
     answer:
-      "É uma imersão 100% ao vivo. Você constrói o cronograma da sua própria obra durante o dia, com orientação direta, em vez de receber um material genérico pronto.",
+      "É uma imersão 100% ao vivo. Você constrói o cronograma da sua própria obra durante o dia, com orientação direta da Ingrid Zarza e da Fernanda Bradaschia, em vez de receber um material genérico pronto.",
   },
   {
     question: "Como eu entro na live do Zoom no dia?",
@@ -47,7 +48,7 @@ export const NATAL_FAQ = [
   {
     question: "E se eu não conseguir participar ao vivo?",
     answer:
-      "A imersão acontece ao vivo, no dia 08/08, das 9h às 17h. Reserve o dia inteiro para você: é nele que você monta o cronograma junto com a gente e tira dúvidas em tempo real.",
+      "A imersão acontece ao vivo, no dia 08/08, das 9h às 17h. Reserve o dia inteiro para você: é nele que você monta o cronograma junto com a Ingrid e a Fernanda e tira dúvidas em tempo real.",
   },
   {
     question: "Tem garantia?",

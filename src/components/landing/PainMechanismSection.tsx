@@ -26,17 +26,18 @@ const PainMechanismSection = () => {
           </p>
           <p>
             Tentar resolver isso sozinha numa planilha, ou perguntar pra colega no grupo do WhatsApp, funciona até um
-            ponto. O que muda de verdade é ter alguém que já entregou dezenas de obras te guiando ao vivo, na sua
-            obra específica, no seu prazo real.
+            ponto. O que muda de verdade é ter a Ingrid Zarza e a Fernanda Bradaschia, que já entregaram mais de 250
+            obras, te guiando ao vivo, na sua obra específica, no seu prazo real.
           </p>
         </div>
 
         <div className="mb-10 text-center">
           <p className="text-sm md:text-base font-bold uppercase tracking-widest text-primary mb-3">
-            Para arquitetas e designers que gerenciam obra de interiores e reforma
+            Para arquitetas e designers de interiores, recém-formadas ou já atuando no mercado, que gerenciam obra de
+            reforma
           </p>
           <h2 className="text-3xl md:text-4xl font-bold uppercase tracking-tight">
-            Num dia inteiro ao vivo, você abre o calendário com a gente e sai sabendo:
+            Num dia inteiro ao vivo, você abre o calendário com a Ingrid e a Fernanda e sai sabendo:
           </h2>
           <div className="w-12 h-1 bg-primary mx-auto mt-4"></div>
         </div>

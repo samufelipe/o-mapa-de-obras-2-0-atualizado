@@ -13,7 +13,7 @@ import {
 const valueItems = [
   "Ao vivo no Zoom · 08/08",
   "Imersão de um dia · 09h às 17h",
-  "Você monta seu cronograma, ao vivo, comigo",
+  "Você monta seu cronograma ao vivo com a Ingrid e a Fernanda",
 ];
 
 const HeroSectionNatal = () => {
@@ -79,13 +79,14 @@ const HeroSectionNatal = () => {
             </h1>
 
             <p className="hidden md:block text-base md:text-xl text-muted-foreground max-w-lg mx-auto lg:mx-0 font-medium leading-relaxed">
-              Na Imersão Cronograma Especial de Natal você planeja os próximos meses da obra, define prioridades,
-              escolhe fornecedores e conduz o cliente com segurança, sem aceitar prazos impossíveis nem perder
-              credibilidade. Tudo isso ao vivo, comigo, no dia 08/08.
+              Na Imersão Cronograma Especial de Natal, para arquitetas e designers de interiores (recém-formadas ou
+              já atuando no mercado), você planeja os próximos meses da obra, define prioridades, escolhe
+              fornecedores e conduz o cliente com segurança, sem aceitar prazos impossíveis nem perder
+              credibilidade. Tudo isso ao vivo, com a Ingrid Zarza e a Fernanda Bradaschia, no dia 08/08.
             </p>
             <p className="md:hidden text-base text-muted-foreground max-w-lg mx-auto font-medium leading-relaxed">
-              Planeje os próximos meses, escolha fornecedores certos e conduza o cliente sem aceitar prazo impossível.
-              Ao vivo, comigo, no dia 08/08.
+              Para arquitetas e designers de interiores: monte seu cronograma ao vivo com a Ingrid e a Fernanda, sem
+              aceitar prazo impossível.
             </p>
           </div>
 
