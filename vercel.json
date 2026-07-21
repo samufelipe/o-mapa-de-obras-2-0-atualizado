@@ -2,6 +2,11 @@
   "rewrites": [
     {
       "source": "/",
+      "has": [{ "type": "header", "key": "x-natal-test", "value": "1" }],
+      "destination": "/natal.html"
+    },
+    {
+      "source": "/",
       "has": [{ "type": "header", "key": "host", "value": "cronogramadenatal.inovandonasuaobra.com.br" }],
       "destination": "/natal.html"
     },
