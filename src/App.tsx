@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import IndexV2 from "./pages/IndexV2";
 import IndexV3 from "./pages/IndexV3";
+import NatalLanding from "./pages/NatalLanding";
 import NotFound from "./pages/NotFound";
 import AdminEmails from "./pages/AdminEmails";
 import CheckoutBridge from "./pages/CheckoutBridge";
@@ -18,6 +19,17 @@ const queryClient = new QueryClient();
 
 // Verificar se o modo manutenção está ativado
 const isMaintenanceMode = false; // import.meta.env.VITE_MAINTENANCE_MODE === 'true';
+
+// Domínio dedicado da campanha de Natal: mostra a NatalLanding na raiz "/",
+// mantendo todos os outros hosts (imersão, previews *.vercel.app) com o comportamento normal.
+const NATAL_HOSTNAME = "cronogramadenatal.inovandonasuaobra.com.br";
+
+const RootRoute = () => {
+  if (typeof window !== "undefined" && window.location.hostname === NATAL_HOSTNAME) {
+    return <NatalLanding />;
+  }
+  return <Index />;
+};
 
 const App = () => {
   // Se modo manutenção estiver ativado, mostrar apenas a página de manutenção
@@ -32,9 +44,10 @@ const App = () => {
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
+          <Route path="/" element={<RootRoute />} />
           <Route path="/v2" element={<IndexV2 />} />
           <Route path="/v3" element={<IndexV3 />} />
+          <Route path="/natal" element={<NatalLanding />} />
           <Route path="/mentoria" element={<MentoriaLanding />} />
           <Route path="/admin/emails" element={<AdminEmails />} />
           <Route path="/checkout/:product" element={<CheckoutBridge />} />

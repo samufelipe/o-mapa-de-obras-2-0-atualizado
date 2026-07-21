@@ -3,7 +3,17 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import { FAQ_ITEMS } from "@/lib/constants";
 import { trackFAQClick } from "@/lib/gtm-tracking";
 
-const FAQSection = () => {
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface FAQSectionProps {
+  items?: FAQItem[];
+  title?: string;
+}
+
+const FAQSection = ({ items = FAQ_ITEMS, title = "Dúvidas Frequentes" }: FAQSectionProps) => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
   const handleFaqClick = (idx: number, question: string) => {
@@ -15,9 +25,9 @@ const FAQSection = () => {
   return (
     <section id="faq" className="py-20 bg-background">
       <div className="container mx-auto px-4 max-w-2xl">
-        <h2 className="text-2xl md:text-3xl font-bold text-center mb-4 uppercase tracking-widest">Dúvidas Frequentes</h2>
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-4 uppercase tracking-widest">{title}</h2>
         <div className="space-y-3 mt-8">
-          {FAQ_ITEMS.map((faq, idx) => (
+          {items.map((faq, idx) => (
             <div key={idx} className="bg-card border border-border overflow-hidden shadow-sm">
               <button
                 onClick={() => handleFaqClick(idx, faq.question)}

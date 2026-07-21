@@ -83,12 +83,16 @@ export const trackLead = (data: {
  * Dispara evento de início de checkout
  * Use quando o usuário for redirecionado para o Hotmart
  */
-export const trackInitiateCheckout = (value: number = 29.90): void => {
+export const trackInitiateCheckout = (
+  value: number = 29.90,
+  contentName: string = CONFIG.conversionIdentifier,
+  contentCategory: string = "Imersão Cronograma 2.0"
+): void => {
   if (!isPixelAvailable()) return;
-  
+
   window.fbq("track", "InitiateCheckout", {
-    content_name: CONFIG.conversionIdentifier,
-    content_category: "Imersão Cronograma 2.0",
+    content_name: contentName,
+    content_category: contentCategory,
     value: value,
     currency: "BRL",
     num_items: 1,

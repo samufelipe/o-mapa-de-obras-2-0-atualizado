@@ -13,7 +13,17 @@ const footerLinks = [
   { label: "Dúvidas", sectionId: "faq" },
 ];
 
-const Footer = () => {
+interface FooterLink {
+  label: string;
+  sectionId: string;
+}
+
+interface FooterProps {
+  links?: FooterLink[];
+  productLabel?: string;
+}
+
+const Footer = ({ links = footerLinks, productLabel = "Imersão Cronograma 2.0" }: FooterProps) => {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     element?.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -47,7 +57,7 @@ const Footer = () => {
               Navegação
             </h4>
             <nav className="grid grid-cols-3 gap-x-4 gap-y-3">
-              {footerLinks.map((link) => (
+              {links.map((link) => (
                 <button
                   key={link.sectionId}
                   onClick={() => scrollToSection(link.sectionId)}
@@ -86,7 +96,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
 
             <p className="text-sm font-medium uppercase tracking-[0.15em] text-foreground/60 text-center md:text-left">
-              Imersão Cronograma 2.0 © {new Date().getFullYear()} • Todos os direitos reservados
+              {productLabel} © {new Date().getFullYear()} • Todos os direitos reservados
             </p>
 
             <button

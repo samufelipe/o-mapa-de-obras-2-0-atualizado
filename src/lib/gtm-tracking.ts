@@ -177,15 +177,18 @@ export const trackLeadGenerated = (source: string): void => {
 /**
  * Evento de início de checkout
  */
-export const trackBeginCheckout = (): void => {
+export const trackBeginCheckout = (
+  value: number = 39.90,
+  itemName: string = "Cronograma O Mapa de Obras 2.0"
+): void => {
   pushToDataLayer({
     event: "begin_checkout",
     currency: "BRL",
-    value: 39.90,
+    value,
     items: [{
-      item_name: "Cronograma O Mapa de Obras 2.0",
+      item_name: itemName,
       item_category: "Workshop",
-      price: 39.90,
+      price: value,
       quantity: 1,
     }],
   });
