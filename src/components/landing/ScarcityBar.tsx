@@ -1,16 +1,21 @@
-import { Flame } from "lucide-react";
-
 const ScarcityBar = () => {
   return (
-    <div className="mb-4">
-      <div className="flex items-center gap-2 mb-2">
-        <Flame className="w-4 h-4 text-[hsl(var(--cta))] flex-shrink-0" />
-        <span className="text-xs font-bold uppercase tracking-widest text-[hsl(var(--cta))]">
-          Vagas se esgotando
+    <div className="bg-background border border-border rounded-lg px-4 py-3 md:px-5 md:py-4 mb-4 md:mb-6 shadow-sm">
+      <span className="inline-block bg-[hsl(var(--cta))] text-background text-[10px] md:text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-3">
+        Vagas se esgotando
+      </span>
+
+      <div className="flex items-center justify-between mb-1.5">
+        <span className="text-xs md:text-sm font-bold uppercase tracking-wide text-foreground">
+          Turma Nova
+        </span>
+        <span className="text-xs md:text-sm font-bold uppercase tracking-wide text-[hsl(var(--cta))]">
+          Quase Lotando
         </span>
       </div>
-      <div className="h-2 w-full bg-secondary rounded-full overflow-hidden">
-        <div className="h-full w-[84%] rounded-full bg-gradient-to-r from-primary to-[hsl(var(--cta))]" />
+
+      <div className="h-2.5 md:h-3 w-full bg-secondary rounded-full overflow-hidden">
+        <div className="h-full w-[88%] rounded-full bg-gradient-to-r from-primary to-[hsl(var(--cta))]" />
       </div>
     </div>
   );

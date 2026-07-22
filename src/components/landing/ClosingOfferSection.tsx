@@ -9,11 +9,9 @@ const ClosingOfferSection = () => {
   return (
     <section id="offer" className="py-20 bg-background reveal">
       <div className="container mx-auto px-4 max-w-xl">
-        <div className="bg-foreground border-2 border-primary p-8 md:p-12 shadow-premium relative text-center">
-          <div className="text-left mb-6">
-            <ScarcityBar />
-          </div>
+        <ScarcityBar />
 
+        <div className="bg-foreground border-2 border-primary p-8 md:p-12 shadow-premium relative text-center">
           <h2 className="text-background text-3xl md:text-4xl font-bold uppercase tracking-tight mb-6">
             Sua obra pronta até o Natal começa aqui
           </h2>
@@ -37,11 +35,8 @@ const ClosingOfferSection = () => {
             </h3>
           </div>
 
-          <p className="text-background/50 text-sm font-medium mb-2">
-            Um dia inteiro ao vivo por menos do que custa uma única visita técnica.
-          </p>
-          <p className="text-background/50 text-sm font-medium mb-8">
-            Menos do que o custo de uma obra atrasada em confiança e indicação.
+          <p className="text-background/60 text-sm md:text-base font-medium mb-8">
+            Um dia inteiro ao vivo com a Ingrid e a Fernanda por menos que um combo do McDonald's.
           </p>
 
           <button
