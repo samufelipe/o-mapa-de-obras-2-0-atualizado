@@ -7,7 +7,7 @@ const PainMechanismSection = () => {
       <div className="container mx-auto px-4 max-w-3xl">
         <div className="space-y-4 text-base md:text-lg text-muted-foreground font-medium leading-relaxed mb-12">
           <p className="text-xl md:text-3xl font-bold text-foreground leading-tight">
-            Falta um mês para virar agosto. E o Natal não espera.
+            Agosto tá aí e o Natal não espera!
           </p>
           <p>
             Se a obra atrasar, quem carrega a culpa é você. Não importa se o fornecedor furou o prazo, se o cliente
@@ -33,11 +33,10 @@ const PainMechanismSection = () => {
 
         <div className="mb-10 text-center">
           <p className="text-sm md:text-base font-bold uppercase tracking-widest text-primary mb-3">
-            Para arquitetas e designers de interiores, recém-formadas ou já atuando no mercado, que gerenciam obra de
-            reforma
+            Para arquitetas, engenheiras e designers de interiores.
           </p>
           <h2 className="text-3xl md:text-4xl font-bold uppercase tracking-tight">
-            Num dia inteiro ao vivo, você abre o calendário e sai sabendo:
+            Um dia inteiro ao vivo com tudo o que você precisa saber para entregar sua obra até o Natal
           </h2>
           <div className="w-12 h-1 bg-primary mx-auto mt-4"></div>
         </div>
