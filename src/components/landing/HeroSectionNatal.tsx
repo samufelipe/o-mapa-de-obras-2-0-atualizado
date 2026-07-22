@@ -73,9 +73,21 @@ const HeroSectionNatal = () => {
               </span>
             </div>
 
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.15]">
-              A obra precisa ficar pronta até o Natal.
-              <span className="text-primary italic block mt-1">O cronograma decide se isso é possível.</span>
+            <h1 className="leading-[1.05]">
+              <span className="block text-lg md:text-2xl font-bold tracking-[0.2em] uppercase text-foreground">
+                Imersão Cronograma:
+              </span>
+              <span className="block text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight uppercase text-foreground mt-1">
+                Obra Pronta
+              </span>
+              <span className="flex items-center gap-3 justify-center lg:justify-start my-2 md:my-3">
+                <span className="h-px w-8 md:w-12 bg-primary"></span>
+                <span className="text-sm md:text-base font-bold tracking-[0.3em] uppercase text-primary">Até o</span>
+                <span className="h-px w-8 md:w-12 bg-primary"></span>
+              </span>
+              <span className="block text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight uppercase text-[hsl(var(--cta))]">
+                Natal
+              </span>
             </h1>
 
             <p className="text-base md:text-xl text-muted-foreground max-w-lg mx-auto lg:mx-0 font-medium leading-relaxed">

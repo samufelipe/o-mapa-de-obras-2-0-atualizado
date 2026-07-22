@@ -27,7 +27,15 @@ const NATAL_FAVICONS: Array<{ rel: string; sizes?: string; type?: string; href: 
   { rel: "apple-touch-icon", sizes: "180x180", href: "/brand-natal/apple-touch-icon-180.png" },
 ];
 
-const NatalLogo = () => (
+const NatalHeaderLogo = () => (
+  <img
+    src="/brand-natal/simbolo.png"
+    alt="Cronograma: Obra Pronta até o Natal"
+    className="h-14 md:h-16 w-auto object-contain"
+  />
+);
+
+const NatalFooterLogo = () => (
   <img
     src="/brand-natal/logo-horizontal.png"
     alt="Cronograma: Obra Pronta até o Natal"
@@ -136,13 +144,13 @@ const NatalLanding = () => {
   return (
     <CTAProvider value={handleCTA}>
     <div className="natal-theme min-h-screen bg-background text-foreground">
-      <Header logoNode={<NatalLogo />} />
+      <Header logoNode={<NatalHeaderLogo />} />
       <HeroSectionNatal />
       <TestimonialsSection />
       <PainMechanismSection />
       <ClosingOfferSection />
       <FAQSection items={NATAL_FAQ} title="Dúvidas Sobre a Imersão de Natal" />
-      <Footer links={NATAL_FOOTER_LINKS} productLabel={NATAL_PRODUCT_NAME} logoNode={<NatalLogo />} />
+      <Footer links={NATAL_FOOTER_LINKS} productLabel={NATAL_PRODUCT_NAME} logoNode={<NatalFooterLogo />} />
 
       {/* Sticky Mobile CTA */}
       <div className={`fixed bottom-0 left-0 w-full z-[100] md:hidden transition-all duration-500 transform bg-background/95 backdrop-blur-sm border-t border-border px-4 py-3 ${showStickyCTA ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0"}`}>
