@@ -1,4 +1,4 @@
-import { Lock, Clock, Users, Star, ArrowRight, Check } from "lucide-react";
+import { Lock, Clock, Users, Star, Check } from "lucide-react";
 import { useState, useEffect } from "react";
 import { trackInitiateCheckout } from "@/lib/tracking";
 import { trackBeginCheckout, trackCTAClick } from "@/lib/gtm-tracking";
@@ -104,13 +104,13 @@ const HeroSectionNatal = () => {
             </div>
             <div className="bg-card border-2 border-foreground p-4 sm:p-8 md:p-10 shadow-premium max-w-md mx-auto">
               <div className="mb-4 text-center lg:text-left">
-                <h2 className="text-xl md:text-2xl font-bold uppercase tracking-tight">Vaga para a Imersão de Natal</h2>
+                <h2 className="text-xl md:text-2xl font-bold uppercase tracking-tight">Inscrição Imersão de Natal</h2>
                 <p className="text-base md:text-lg font-bold text-muted-foreground uppercase tracking-widest">
                   Ao Vivo · {NATAL_EVENT_DATE_LABEL}
                 </p>
               </div>
 
-              <div className="mb-4 bg-secondary border border-border p-3 space-y-1.5">
+              <div className="mb-4 space-y-1.5">
                 {valueItems.map((item) => (
                   <div key={item} className="flex items-start gap-2">
                     <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
@@ -134,11 +134,10 @@ const HeroSectionNatal = () => {
                   data-track-location="hero_card_natal"
                 >
                   GARANTIR MINHA VAGA · R$ {NATAL_PRICE.toFixed(2).replace(".", ",")}
-                  <ArrowRight className="w-4 h-4 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
                 </button>
 
                 <p className="text-center text-sm text-muted-foreground font-medium flex items-center justify-center gap-1">
-                  <Lock className="w-3.5 h-3.5" /> Pagamento seguro via Hotmart · Vaga confirmada na hora
+                  <Lock className="w-3.5 h-3.5" /> Pagamento seguro via Hotmart · Acesso liberado na hora
                 </p>
               </div>
             </div>

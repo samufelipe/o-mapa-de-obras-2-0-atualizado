@@ -1,6 +1,6 @@
 const ScarcityBar = () => {
   return (
-    <div className="bg-background border border-border rounded-lg px-4 py-3 md:px-5 md:py-4 mb-4 md:mb-6 shadow-sm">
+    <div className="mb-4 md:mb-6">
       <span className="inline-block bg-[hsl(var(--cta))] text-background text-[10px] md:text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-3">
         Vagas se esgotando
       </span>

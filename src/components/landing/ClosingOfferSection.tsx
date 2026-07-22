@@ -1,4 +1,4 @@
-import { ShieldCheck, ArrowRight, Video, Calendar } from "lucide-react";
+import { ShieldCheck, Video, Calendar } from "lucide-react";
 import { useCTA } from "@/lib/cta-context";
 import { NATAL_PRICE, NATAL_EVENT_DATE_LABEL, NATAL_GUARANTEE_DAYS } from "@/lib/natal-constants";
 import ScarcityBar from "./ScarcityBar";
@@ -43,7 +43,7 @@ const ClosingOfferSection = () => {
             onClick={handleCTA}
             className="w-full bg-green-600 text-white py-5 text-base font-bold uppercase tracking-[0.2em] hover:bg-green-700 transition-all duration-300 border-2 border-green-600 shadow-premium hover:shadow-premium-gold hover:-translate-y-1 active:scale-95 group flex items-center justify-center gap-2 mb-6"
           >
-            GARANTIR MINHA VAGA AGORA <ArrowRight className="inline w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            GARANTIR MINHA VAGA AGORA
           </button>
 
           <div className="flex items-center justify-center gap-2 text-background/70">
