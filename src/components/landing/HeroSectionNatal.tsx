@@ -149,10 +149,10 @@ const HeroSectionNatal = () => {
       <div className="mt-8 md:mt-16 border-y border-border bg-secondary">
         <div className="container mx-auto px-4 py-5 md:py-8">
           <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-8 md:gap-14 text-foreground">
-            <div className="flex items-center gap-1.5 font-bold text-xs sm:text-sm md:text-base uppercase tracking-wide">
+            <div className="flex items-center gap-1.5 font-bold text-sm md:text-base uppercase tracking-wide">
               <Users className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 flex-shrink-0" /> +1000 Arquitetas na Comunidade Inovando
             </div>
-            <div className="flex items-center gap-1.5 font-bold text-xs sm:text-sm md:text-base uppercase tracking-wide">
+            <div className="flex items-center gap-1.5 font-bold text-sm md:text-base uppercase tracking-wide">
               <Star className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 flex-shrink-0 fill-current" /> Avaliação 4.9/5.0 nas Imersões
             </div>
           </div>

@@ -16,7 +16,7 @@ const ClosingOfferSection = () => {
             Sua obra pronta até o Natal começa aqui
           </h2>
 
-          <div className="flex justify-center gap-4 mb-8">
+          <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-8">
             <div className="flex items-center gap-1.5 text-background/70 text-sm font-bold uppercase tracking-wider">
               <Video className="w-4 h-4 text-primary" /> Ao Vivo · Dia Inteiro
             </div>

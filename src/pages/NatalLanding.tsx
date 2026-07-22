@@ -145,7 +145,7 @@ const NatalLanding = () => {
     <div className="natal-theme min-h-screen bg-background text-foreground">
       <Header logoNode={<NatalHeaderLogo />} />
       <HeroSectionNatal />
-      <TestimonialsSection />
+      <TestimonialsSection eyebrowClassName="text-primary font-bold text-sm md:text-base uppercase tracking-[0.25em] md:tracking-[0.35em] block mb-3" />
       <PainMechanismSection />
       <ClosingOfferSection />
       <FAQSection items={NATAL_FAQ} title="Dúvidas Sobre a Imersão de Natal" />

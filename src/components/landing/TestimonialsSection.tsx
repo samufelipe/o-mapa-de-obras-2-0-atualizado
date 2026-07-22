@@ -129,7 +129,13 @@ const VerifiedBadge = () => (
   </div>
 );
 
-const TestimonialsSection = () => {
+interface TestimonialsSectionProps {
+  eyebrowClassName?: string;
+}
+
+const TestimonialsSection = ({
+  eyebrowClassName = "text-primary font-bold text-xs uppercase tracking-[0.35em] block mb-3",
+}: TestimonialsSectionProps = {}) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     align: "start",
@@ -219,7 +225,7 @@ const TestimonialsSection = () => {
 
         {/* Header */}
         <div className="text-center mb-12">
-          <span className="text-primary font-bold text-xs uppercase tracking-[0.35em] block mb-3">
+          <span className={eyebrowClassName}>
             QUEM JÁ PARTICIPOU, APROVOU
           </span>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold uppercase tracking-tight leading-tight text-foreground">

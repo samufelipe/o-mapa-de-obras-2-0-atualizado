@@ -14,8 +14,8 @@ const ScarcityBar = () => {
         </span>
       </div>
 
-      <div className="h-2.5 md:h-3 w-full bg-secondary rounded-full overflow-hidden">
-        <div className="h-full w-[88%] rounded-full bg-gradient-to-r from-primary to-[hsl(var(--cta))]" />
+      <div className="h-2.5 md:h-3 w-full bg-border rounded-full overflow-hidden">
+        <div className="h-full w-[80%] rounded-full bg-gradient-to-r from-primary to-[hsl(var(--cta))]" />
       </div>
     </div>
   );
