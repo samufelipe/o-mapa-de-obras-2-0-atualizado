@@ -5,7 +5,7 @@ import TestimonialsSection from "@/components/landing/TestimonialsSection";
 import PainMechanismSection from "@/components/landing/PainMechanismSection";
 import ClosingOfferSection from "@/components/landing/ClosingOfferSection";
 import FAQSection from "@/components/landing/FAQSection";
-import Footer from "@/components/landing/Footer";
+import FooterNatal from "@/components/landing/FooterNatal";
 import { initAllTracking, trackCTAClick, trackSectionView, trackBeginCheckout } from "@/lib/gtm-tracking";
 import { trackInitiateCheckout } from "@/lib/tracking";
 import { CTAProvider } from "@/lib/cta-context";
@@ -149,7 +149,7 @@ const NatalLanding = () => {
       <PainMechanismSection />
       <ClosingOfferSection />
       <FAQSection items={NATAL_FAQ} title="Dúvidas Sobre a Imersão de Natal" />
-      <Footer links={NATAL_FOOTER_LINKS} productLabel={NATAL_PRODUCT_NAME} logoNode={<NatalFooterLogo />} />
+      <FooterNatal links={NATAL_FOOTER_LINKS} productLabel={NATAL_PRODUCT_NAME} logoNode={<NatalFooterLogo />} />
 
       {/* Sticky Mobile CTA */}
       <div className={`fixed bottom-0 left-0 w-full z-[100] md:hidden transition-all duration-500 transform bg-background/95 backdrop-blur-sm border-t border-border px-4 py-3 ${showStickyCTA ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0"}`}>
