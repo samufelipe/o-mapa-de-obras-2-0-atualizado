@@ -38,7 +38,7 @@ export const NATAL_FAQ = [
   {
     question: "Recebo algum material pronto ou é só a live?",
     answer:
-      "É uma imersão 100% ao vivo. Você constrói o cronograma da sua própria obra ao vivo, com a Ingrid e a Fernanda te orientando direto, em vez de receber um material genérico pronto.",
+      "É uma imersão 100% ao vivo. Você constrói o cronograma da sua própria obra ao vivo, com orientação direta, em vez de receber um material genérico pronto.",
   },
   {
     question: "Como eu entro na live do Zoom no dia?",
@@ -48,7 +48,7 @@ export const NATAL_FAQ = [
   {
     question: "E se eu não conseguir participar ao vivo?",
     answer:
-      "A imersão acontece ao vivo, no dia 08/08, das 9h às 17h. Reserve o dia inteiro para você: é nele que você monta o cronograma com a Ingrid e a Fernanda, tirando dúvidas em tempo real.",
+      "A imersão acontece ao vivo, no dia 08/08, das 9h às 16h. Reserve o dia inteiro para você: é nele que você monta o cronograma e tira dúvidas em tempo real.",
   },
   {
     question: "Tem garantia?",

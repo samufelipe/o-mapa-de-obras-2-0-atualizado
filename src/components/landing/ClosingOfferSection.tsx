@@ -36,7 +36,7 @@ const ClosingOfferSection = () => {
           </div>
 
           <p className="text-background/50 text-sm font-medium mb-2">
-            Um dia inteiro ao vivo com a Ingrid e a Fernanda por menos do que custa uma única visita técnica.
+            Um dia inteiro ao vivo por menos do que custa uma única visita técnica.
           </p>
           <p className="text-background/50 text-sm font-medium mb-8">
             Menos do que o custo de uma obra atrasada em confiança e indicação.

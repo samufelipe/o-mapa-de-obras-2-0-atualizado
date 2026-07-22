@@ -11,9 +11,8 @@ import {
 } from "@/lib/natal-constants";
 
 const valueItems = [
-  "Ao vivo no Zoom · 08/08",
-  "Imersão de um dia · 09h às 17h",
-  "Você monta seu cronograma ao vivo com a Ingrid e a Fernanda",
+  "Sábado dia 08/08",
+  "Imersão de um dia · 09h às 16h",
 ];
 
 const HeroSectionNatal = () => {
@@ -74,11 +73,11 @@ const HeroSectionNatal = () => {
             </div>
 
             <h1 className="leading-[1.05]">
-              <span className="block text-lg md:text-2xl font-bold tracking-[0.2em] uppercase text-foreground">
-                Imersão Cronograma:
+              <span className="block text-base md:text-lg font-bold tracking-[0.25em] uppercase text-foreground">
+                Imersão
               </span>
-              <span className="block text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight uppercase text-foreground mt-1">
-                Obra Pronta
+              <span className="block text-2xl md:text-4xl lg:text-5xl font-bold tracking-tight uppercase text-foreground mt-1">
+                Cronograma Obra Pronta
               </span>
               <span className="flex items-center gap-3 justify-center lg:justify-start my-2 md:my-3">
                 <span className="h-px w-8 md:w-12 bg-primary"></span>
@@ -91,10 +90,9 @@ const HeroSectionNatal = () => {
             </h1>
 
             <p className="text-base md:text-xl text-muted-foreground max-w-lg mx-auto lg:mx-0 font-medium leading-relaxed">
-              A Imersão Cronograma Especial de Natal é para arquitetas e designers de interiores, recém-formadas ou
-              já atuando no mercado. Você planeja os próximos meses da obra, escolhe fornecedores e conduz o cliente
-              com segurança, sem aceitar prazos impossíveis. Tudo isso ao vivo, com a Ingrid Zarza e a Fernanda
-              Bradaschia, no dia 08/08.
+              A Imersão Cronograma Especial de Natal é para arquitetas, engenheiras e designers de interiores. Você
+              planeja os próximos meses da obra, escolhe fornecedores e conduz o cliente com segurança, sem aceitar
+              prazos impossíveis. Tudo isso de forma prática e ao vivo, no dia 08/08.
             </p>
           </div>
 
