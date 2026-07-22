@@ -137,7 +137,7 @@ const HeroSectionNatal = () => {
                 </button>
 
                 <p className="text-center text-sm text-muted-foreground font-medium flex items-center justify-center gap-1">
-                  <Lock className="w-3.5 h-3.5" /> Pagamento seguro via Hotmart · Acesso liberado na hora
+                  <Lock className="w-3.5 h-3.5" /> Pagamento seguro via Hotmart
                 </p>
               </div>
             </div>
