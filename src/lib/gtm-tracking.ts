@@ -306,9 +306,9 @@ export const initTimeTracking = (): void => {
 /**
  * Inicializar todos os rastreamentos automáticos
  */
-export const initAllTracking = (): void => {
+export const initAllTracking = (pageName: string = "Landing Page - Mapa de Obras"): void => {
   initClickTracking();
   initScrollTracking();
   initTimeTracking();
-  trackPageView("Landing Page - Mapa de Obras");
+  trackPageView(pageName);
 };

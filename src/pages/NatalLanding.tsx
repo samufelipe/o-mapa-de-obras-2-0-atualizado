@@ -47,7 +47,7 @@ const NatalLanding = () => {
   const [showStickyCTA, setShowStickyCTA] = useState(false);
 
   useEffect(() => {
-    initAllTracking();
+    initAllTracking("Landing Page - Imersão de Natal");
   }, []);
 
   // Troca favicon/apple-touch-icon so pra essa LP, restaurando ao sair (SPA navigation)
