@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Header from "@/components/landing/Header";
 import HeroSectionNatal from "@/components/landing/HeroSectionNatal";
 import TestimonialsSection from "@/components/landing/TestimonialsSection";
+import MidCTASection from "@/components/landing/MidCTASection";
 import PainMechanismSection from "@/components/landing/PainMechanismSection";
 import ClosingOfferSection from "@/components/landing/ClosingOfferSection";
 import FAQSection from "@/components/landing/FAQSection";
@@ -146,6 +147,7 @@ const NatalLanding = () => {
       <Header logoNode={<NatalHeaderLogo />} />
       <HeroSectionNatal />
       <TestimonialsSection eyebrowClassName="text-primary font-bold text-sm md:text-base uppercase tracking-[0.25em] md:tracking-[0.35em] block mb-3" />
+      <MidCTASection />
       <PainMechanismSection />
       <ClosingOfferSection />
       <FAQSection items={NATAL_FAQ} title="Dúvidas Sobre a Imersão de Natal" />
