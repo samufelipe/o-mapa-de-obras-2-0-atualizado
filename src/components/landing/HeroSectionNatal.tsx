@@ -65,7 +65,7 @@ const HeroSectionNatal = () => {
           <div className="space-y-3 md:space-y-6 text-center lg:text-left animate-fade-up">
             <div className="inline-flex items-center gap-2 bg-foreground px-3 py-1.5 border border-primary shadow-premium mx-auto lg:mx-0">
               <Clock className="w-3.5 h-3.5 text-primary" />
-              <span className="text-xs font-bold text-background uppercase tracking-wider">
+              <span className="text-xs sm:text-sm font-bold text-background uppercase tracking-wider">
                 Faltam para a imersão:{" "}
                 <span className="text-primary tabular-nums">
                   {timeLeft.d}d {timeLeft.h}h {timeLeft.m}m {timeLeft.s}s
@@ -114,7 +114,7 @@ const HeroSectionNatal = () => {
                 {valueItems.map((item) => (
                   <div key={item} className="flex items-start gap-2">
                     <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                    <span className="text-sm font-medium text-foreground">{item}</span>
+                    <span className="text-sm sm:text-base font-medium text-foreground">{item}</span>
                   </div>
                 ))}
               </div>
@@ -129,7 +129,7 @@ const HeroSectionNatal = () => {
 
                 <button
                   onClick={handleCTAClick}
-                  className="w-full bg-green-600 text-white py-4 flex items-center justify-center gap-2 text-sm sm:text-base font-bold tracking-wide hover:bg-green-700 transition-all duration-300 border-2 border-green-600 shadow-premium hover:shadow-premium-gold hover:-translate-y-1 uppercase group active:scale-95"
+                  className="w-full bg-green-600 text-white py-4 flex items-center justify-center gap-2 text-base sm:text-lg font-bold tracking-wide hover:bg-green-700 transition-all duration-300 border-2 border-green-600 shadow-premium hover:shadow-premium-gold hover:-translate-y-1 uppercase group active:scale-95"
                   data-track="cta_button_natal"
                   data-track-location="hero_card_natal"
                 >

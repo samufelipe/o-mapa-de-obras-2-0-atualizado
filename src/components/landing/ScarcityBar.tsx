@@ -1,15 +1,15 @@
 const ScarcityBar = () => {
   return (
     <div className="mb-4 md:mb-6">
-      <span className="inline-block bg-[hsl(var(--cta))] text-background text-[10px] md:text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-3">
+      <span className="inline-block bg-[hsl(var(--cta))] text-background text-xs md:text-sm font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-3">
         Vagas se esgotando
       </span>
 
       <div className="flex items-center justify-between mb-1.5">
-        <span className="text-xs md:text-sm font-bold uppercase tracking-wide text-foreground">
+        <span className="text-sm md:text-base font-bold uppercase tracking-wide text-foreground">
           Turma Nova
         </span>
-        <span className="text-xs md:text-sm font-bold uppercase tracking-wide text-[hsl(var(--cta))]">
+        <span className="text-sm md:text-base font-bold uppercase tracking-wide text-[hsl(var(--cta))]">
           Quase Lotando
         </span>
       </div>

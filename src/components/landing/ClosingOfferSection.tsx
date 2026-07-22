@@ -17,10 +17,10 @@ const ClosingOfferSection = () => {
           </h2>
 
           <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-8">
-            <div className="flex items-center gap-1.5 text-background/70 text-sm font-bold uppercase tracking-wider">
+            <div className="flex items-center gap-1.5 text-background/70 text-sm sm:text-base font-bold uppercase tracking-wider">
               <Video className="w-4 h-4 text-primary" /> Ao Vivo · Dia Inteiro
             </div>
-            <div className="flex items-center gap-1.5 text-background/70 text-sm font-bold uppercase tracking-wider">
+            <div className="flex items-center gap-1.5 text-background/70 text-sm sm:text-base font-bold uppercase tracking-wider">
               <Calendar className="w-4 h-4 text-primary" /> {NATAL_EVENT_DATE_LABEL}
             </div>
           </div>
@@ -41,7 +41,7 @@ const ClosingOfferSection = () => {
 
           <button
             onClick={handleCTA}
-            className="w-full bg-green-600 text-white py-5 text-base font-bold uppercase tracking-[0.2em] hover:bg-green-700 transition-all duration-300 border-2 border-green-600 shadow-premium hover:shadow-premium-gold hover:-translate-y-1 active:scale-95 group flex items-center justify-center gap-2 mb-6"
+            className="w-full bg-green-600 text-white py-5 text-base sm:text-lg font-bold uppercase tracking-[0.2em] hover:bg-green-700 transition-all duration-300 border-2 border-green-600 shadow-premium hover:shadow-premium-gold hover:-translate-y-1 active:scale-95 group flex items-center justify-center gap-2 mb-6"
           >
             GARANTIR MINHA VAGA AGORA
           </button>
