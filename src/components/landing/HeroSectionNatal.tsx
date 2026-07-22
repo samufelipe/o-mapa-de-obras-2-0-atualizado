@@ -9,6 +9,7 @@ import {
   NATAL_EVENT_DATE,
   NATAL_EVENT_DATE_LABEL,
 } from "@/lib/natal-constants";
+import ScarcityBar from "./ScarcityBar";
 
 const valueItems = [
   "Sábado dia 08/08",
@@ -99,6 +100,7 @@ const HeroSectionNatal = () => {
           {/* Right CTA Card */}
           <div id="registration-form" className="scroll-mt-24 animate-fade-up">
             <div className="bg-card border-2 border-foreground p-4 sm:p-8 md:p-10 shadow-premium max-w-md mx-auto">
+              <ScarcityBar />
               <div className="mb-4 text-center lg:text-left">
                 <h2 className="text-xl md:text-2xl font-bold uppercase tracking-tight">Vaga para a Imersão de Natal</h2>
                 <p className="text-base md:text-lg font-bold text-muted-foreground uppercase tracking-widest">

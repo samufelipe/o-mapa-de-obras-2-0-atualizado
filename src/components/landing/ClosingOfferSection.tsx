@@ -1,6 +1,7 @@
 import { ShieldCheck, ArrowRight, Video, Calendar } from "lucide-react";
 import { useCTA } from "@/lib/cta-context";
 import { NATAL_PRICE, NATAL_EVENT_DATE_LABEL, NATAL_GUARANTEE_DAYS } from "@/lib/natal-constants";
+import ScarcityBar from "./ScarcityBar";
 
 const ClosingOfferSection = () => {
   const handleCTA = useCTA();
@@ -9,9 +10,9 @@ const ClosingOfferSection = () => {
     <section id="offer" className="py-20 bg-background reveal">
       <div className="container mx-auto px-4 max-w-xl">
         <div className="bg-foreground border-2 border-primary p-8 md:p-12 shadow-premium relative text-center">
-          <span className="inline-block bg-primary text-foreground px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-sm mb-6">
-            Vagas Abertas
-          </span>
+          <div className="text-left mb-6">
+            <ScarcityBar />
+          </div>
 
           <h2 className="text-background text-3xl md:text-4xl font-bold uppercase tracking-tight mb-6">
             Sua obra pronta até o Natal começa aqui
@@ -31,7 +32,8 @@ const ClosingOfferSection = () => {
               INVESTIMENTO ÚNICO
             </span>
             <h3 className="text-background text-5xl md:text-6xl font-bold tracking-tighter uppercase leading-tight animate-pulse-slow">
-              APENAS R$ {NATAL_PRICE.toFixed(2).replace(".", ",")}
+              <span className="block">APENAS</span>
+              <span className="block">R$ {NATAL_PRICE.toFixed(2).replace(".", ",")}</span>
             </h3>
           </div>
 
