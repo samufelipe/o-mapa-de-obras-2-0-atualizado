@@ -79,12 +79,12 @@ const HeroSectionNatal = () => {
               <span className="block text-2xl md:text-4xl lg:text-5xl font-bold tracking-tight uppercase text-foreground mt-1">
                 Cronograma Obra Pronta
               </span>
-              <span className="flex items-center gap-3 justify-center lg:justify-start my-2 md:my-3">
+              <span className="flex items-center gap-3 justify-center my-2 md:my-3">
                 <span className="h-px w-8 md:w-12 bg-primary"></span>
                 <span className="text-sm md:text-base font-bold tracking-[0.3em] uppercase text-primary">Até o</span>
                 <span className="h-px w-8 md:w-12 bg-primary"></span>
               </span>
-              <span className="block text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight uppercase text-[hsl(var(--cta))]">
+              <span className="block text-center text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight uppercase text-[hsl(var(--cta))]">
                 Natal
               </span>
             </h1>
