@@ -13,7 +13,7 @@ import ScarcityBar from "./ScarcityBar";
 
 const valueItems = [
   "Sábado dia 08/08",
-  "Imersão de um dia · 09h às 16h",
+  "Imersão de um dia · 09h às 17h",
 ];
 
 const HeroSectionNatal = () => {
