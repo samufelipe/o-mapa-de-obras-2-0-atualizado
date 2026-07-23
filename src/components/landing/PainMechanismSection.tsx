@@ -26,8 +26,8 @@ const PainMechanismSection = () => {
           </p>
           <p>
             Tentar resolver isso sozinha numa planilha, ou perguntar pra colega no grupo do WhatsApp, funciona até um
-            ponto. O que muda de verdade é ter quem te guie ao vivo, na sua obra específica, no seu prazo real: um
-            método já aplicado em mais de 250 obras entregues.
+            ponto. O que muda de verdade é ter quem te guie ao vivo, com um método já aplicado em mais de 250 obras
+            entregues.
           </p>
         </div>
 

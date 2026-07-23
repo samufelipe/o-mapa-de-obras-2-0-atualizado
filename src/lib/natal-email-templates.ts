@@ -106,7 +106,7 @@ export const natalWelcomeEmail1 = ({ buyerName }: NatalEmailParams) => {
   const content = `
     <p style="margin: 0 0 16px; font-size: 18px; font-weight: bold;">${greeting}</p>
     <p style="margin: 0 0 16px;">Sua vaga na <strong>Imersão Cronograma Especial de Natal</strong> está confirmada. Agosto tá aí e o Natal não espera, mas agora você não vai precisar aceitar prazo impossível nem entregar a obra correndo.</p>
-    <p style="margin: 0 0 16px;">Anota na agenda: a imersão é <strong>ao vivo, sábado dia 08/08, das 9h às 17h</strong>, com a Ingrid Zarza e a Fernanda Bradaschia. Reserve o dia inteiro, é nele que você monta o cronograma da sua obra com orientação direta.</p>
+    <p style="margin: 0 0 16px;">Anota na agenda: a imersão é <strong>ao vivo, sábado dia 08/08, das 9h às 16h</strong>, com a Ingrid Zarza e a Fernanda Bradaschia. Reserve o dia inteiro, é nele que você aprende tudo o que precisa saber para entregar sua obra no prazo.</p>
     <p style="margin: 0 0 16px;"><strong>Próximo passo, o mais importante:</strong> entre agora no grupo do WhatsApp da turma. É lá que vamos passar todas as informações da Imersão (horário de entrada, avisos, lembretes e tudo mais).</p>
     ${createNatalButton("Entrar no grupo do WhatsApp", NATAL_EMAIL_CONFIG.whatsappGroupUrl)}
     <p style="margin: 16px 0 0; font-size: 14px; color: ${NATAL_EMAIL_CONFIG.colors.mutedForeground};">Sua compra tem garantia de 7 dias prevista em lei: se não for para você, o reembolso é integral e sem burocracia.</p>
@@ -124,7 +124,7 @@ export const natalWelcomeEmail2 = ({ buyerName }: NatalEmailParams) => {
 
   const content = `
     <p style="margin: 0 0 16px; font-size: 18px; font-weight: bold;">${greeting}</p>
-    <p style="margin: 0 0 16px;">Faltam poucos dias pra Imersão Cronograma Especial de Natal. Reserve o sábado 08/08 inteiro (das 9h às 17h) pra você: é nele que você vai sair sabendo:</p>
+    <p style="margin: 0 0 16px;">Faltam poucos dias pra Imersão Cronograma Especial de Natal. Reserve o sábado 08/08 inteiro (das 9h às 16h) pra você: é nele que você vai sair sabendo:</p>
     <ul style="margin: 0 0 16px; padding-left: 20px;">
       <li style="margin-bottom: 8px;">Quantas semanas úteis você realmente tem até o Natal, e como distribuir os serviços dentro desse prazo</li>
       <li style="margin-bottom: 8px;">Qual ordem seguir quando marcenaria e marmoraria disputam o cronograma</li>
@@ -146,7 +146,7 @@ export const natalWelcomeEmail3 = ({ buyerName }: NatalEmailParams) => {
 
   const content = `
     <p style="margin: 0 0 16px; font-size: 18px; font-weight: bold;">${greeting}</p>
-    <p style="margin: 0 0 16px;">Amanhã, sábado 08/08, das 9h às 17h, acontece a Imersão Cronograma Especial de Natal, ao vivo com a Ingrid Zarza e a Fernanda Bradaschia. Separe o dia inteiro: é nele que você monta o cronograma da sua obra com orientação direta, sem depender de curso gravado.</p>
+    <p style="margin: 0 0 16px;">Amanhã, sábado 08/08, das 9h às 16h, acontece a Imersão Cronograma Especial de Natal, ao vivo com a Ingrid Zarza e a Fernanda Bradaschia. Separe o dia inteiro: é nele que você aprende tudo o que precisa saber para entregar sua obra no prazo, sem depender de curso gravado.</p>
     <p style="margin: 0 0 16px;"><strong>O acesso à live e todos os avisos de última hora são combinados no grupo do WhatsApp da turma.</strong> Se você ainda não entrou, entra agora pra não perder nada:</p>
     ${createNatalButton("Entrar no grupo do WhatsApp", NATAL_EMAIL_CONFIG.whatsappGroupUrl)}
     <p style="margin: 16px 0 0; font-size: 14px; color: ${NATAL_EMAIL_CONFIG.colors.mutedForeground};">Até amanhã!</p>

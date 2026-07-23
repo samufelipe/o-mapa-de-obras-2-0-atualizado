@@ -16,7 +16,7 @@ const valueItems = [
   "Imersão de um dia · 09h às 16h",
 ];
 
-const HeroSectionNatal = () => {
+const HeroSectionNatalV2 = () => {
   const [timeLeft, setTimeLeft] = useState({ d: 0, h: 0, m: 0, s: 0 });
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const HeroSectionNatal = () => {
   }, []);
 
   const handleCTAClick = () => {
-    trackCTAClick("hero_cta_natal", "hero_card_natal", "GARANTIR MINHA VAGA");
+    trackCTAClick("hero_cta_natal_v2", "hero_card_natal_v2", "GARANTIR MINHA VAGA");
     trackInitiateCheckout(NATAL_PRICE, "inscricao-cronograma-natal", NATAL_PRODUCT_NAME);
     trackBeginCheckout(NATAL_PRICE, NATAL_PRODUCT_NAME);
 
@@ -55,14 +55,60 @@ const HeroSectionNatal = () => {
   };
 
   return (
-    <section id="hero" className="relative pt-24 pb-12 md:pt-40 md:pb-24 bg-background overflow-hidden">
+    <section id="hero" className="relative pt-8 pb-12 md:pt-40 md:pb-24 bg-background overflow-hidden">
       <div className="bg-grid-overlay"></div>
       <div className="bg-grain absolute inset-0 pointer-events-none"></div>
       <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
 
-          {/* Left Content */}
-          <div className="space-y-3 md:space-y-6 text-center lg:text-left animate-fade-up">
+          {/* Right CTA Card: primeiro no mobile (order-1), volta pra direita no desktop (lg:order-2) */}
+          <div id="registration-form" className="order-1 lg:order-2 scroll-mt-24 animate-fade-up">
+            <div className="max-w-md mx-auto">
+              <ScarcityBar />
+            </div>
+            <div className="bg-card border-2 border-foreground p-4 sm:p-8 md:p-10 shadow-premium max-w-md mx-auto">
+              <div className="mb-4 text-center lg:text-left">
+                <h2 className="text-xl md:text-2xl font-bold uppercase tracking-tight">Inscrição Imersão de Natal</h2>
+                <p className="text-base md:text-lg font-bold text-muted-foreground uppercase tracking-widest">
+                  Ao Vivo · {NATAL_EVENT_DATE_LABEL}
+                </p>
+              </div>
+
+              <div className="mb-4 space-y-1.5">
+                {valueItems.map((item) => (
+                  <div key={item} className="flex items-start gap-2">
+                    <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                    <span className="text-sm sm:text-base font-medium text-foreground">{item}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="space-y-3">
+                <div className="flex flex-col">
+                  <span className="text-sm text-muted-foreground font-medium">Investimento único:</span>
+                  <span className="text-4xl font-bold tracking-tighter animate-pulse-slow">
+                    R$ {NATAL_PRICE.toFixed(2).replace(".", ",")}
+                  </span>
+                </div>
+
+                <button
+                  onClick={handleCTAClick}
+                  className="w-full bg-green-600 text-white py-4 flex items-center justify-center gap-2 text-base sm:text-lg font-bold tracking-wide hover:bg-green-700 transition-all duration-300 border-2 border-green-600 shadow-premium hover:shadow-premium-gold hover:-translate-y-1 uppercase group active:scale-95"
+                  data-track="cta_button_natal_v2"
+                  data-track-location="hero_card_natal_v2"
+                >
+                  GARANTIR MINHA VAGA · R$ {NATAL_PRICE.toFixed(2).replace(".", ",")}
+                </button>
+
+                <p className="text-center text-sm text-muted-foreground font-medium flex items-center justify-center gap-1">
+                  <Lock className="w-3.5 h-3.5" /> Pagamento seguro via Hotmart
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Left Content: segundo no mobile (order-2), volta pra esquerda no desktop (lg:order-1) */}
+          <div className="order-2 lg:order-1 space-y-3 md:space-y-6 text-center lg:text-left animate-fade-up">
             <div className="inline-flex items-center gap-2 bg-foreground px-3 py-1.5 border border-primary shadow-premium mx-auto lg:mx-0">
               <Clock className="w-3.5 h-3.5 text-primary" />
               <span className="text-xs sm:text-sm font-bold text-background uppercase tracking-wider">
@@ -96,52 +142,6 @@ const HeroSectionNatal = () => {
               cliente, sem aceitar prazos impossíveis. Tudo isso de forma prática e ao vivo, no dia 08/08.
             </p>
           </div>
-
-          {/* Right CTA Card */}
-          <div id="registration-form" className="scroll-mt-24 animate-fade-up">
-            <div className="max-w-md mx-auto">
-              <ScarcityBar />
-            </div>
-            <div className="bg-card border-2 border-foreground p-4 sm:p-8 md:p-10 shadow-premium max-w-md mx-auto">
-              <div className="mb-4 text-center lg:text-left">
-                <h2 className="text-xl md:text-2xl font-bold uppercase tracking-tight">Inscrição Imersão de Natal</h2>
-                <p className="text-base md:text-lg font-bold text-muted-foreground uppercase tracking-widest">
-                  Ao Vivo · {NATAL_EVENT_DATE_LABEL}
-                </p>
-              </div>
-
-              <div className="mb-4 space-y-1.5">
-                {valueItems.map((item) => (
-                  <div key={item} className="flex items-start gap-2">
-                    <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                    <span className="text-sm sm:text-base font-medium text-foreground">{item}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="space-y-3">
-                <div className="flex flex-col">
-                  <span className="text-sm text-muted-foreground font-medium">Investimento único:</span>
-                  <span className="text-4xl font-bold tracking-tighter animate-pulse-slow">
-                    R$ {NATAL_PRICE.toFixed(2).replace(".", ",")}
-                  </span>
-                </div>
-
-                <button
-                  onClick={handleCTAClick}
-                  className="w-full bg-green-600 text-white py-4 flex items-center justify-center gap-2 text-base sm:text-lg font-bold tracking-wide hover:bg-green-700 transition-all duration-300 border-2 border-green-600 shadow-premium hover:shadow-premium-gold hover:-translate-y-1 uppercase group active:scale-95"
-                  data-track="cta_button_natal"
-                  data-track-location="hero_card_natal"
-                >
-                  GARANTIR MINHA VAGA · R$ {NATAL_PRICE.toFixed(2).replace(".", ",")}
-                </button>
-
-                <p className="text-center text-sm text-muted-foreground font-medium flex items-center justify-center gap-1">
-                  <Lock className="w-3.5 h-3.5" /> Pagamento seguro via Hotmart
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -164,4 +164,4 @@ const HeroSectionNatal = () => {
   );
 };
 
-export default HeroSectionNatal;
+export default HeroSectionNatalV2;
