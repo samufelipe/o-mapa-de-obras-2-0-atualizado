@@ -56,6 +56,7 @@ const App = () => {
           <Route path="/natal-v2/pergunta-2" element={<NatalLandingV2 />} />
           <Route path="/natal-v2/perfil" element={<NatalLandingV2 />} />
           <Route path="/natal-v2/video" element={<NatalLandingV2 />} />
+          <Route path="/natal-v2/depoimentos" element={<NatalLandingV2 />} />
           <Route path="/mentoria" element={<MentoriaLanding />} />
           <Route path="/admin/emails" element={<AdminEmails />} />
           <Route path="/checkout/:product" element={<CheckoutBridge />} />

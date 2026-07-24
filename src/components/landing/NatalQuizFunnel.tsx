@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Loader2, Lock, ShieldCheck, Check } from "lucide-react";
+import { Loader2, Lock, ShieldCheck, Check, Quote } from "lucide-react";
 import { useCTA } from "@/lib/cta-context";
 import { trackPageView as trackMetaPageView } from "@/lib/tracking";
 import {
@@ -14,6 +14,7 @@ import { NATAL_GUARANTEE_DAYS, NATAL_EVENT_DATE_LABEL } from "@/lib/natal-consta
 import {
   QUIZ_QUESTION_1,
   QUIZ_QUESTION_2,
+  QUIZ_TESTIMONIALS,
   getProfileAnalysis,
   type QuizAnswers,
   type QuizQuestion,
@@ -29,9 +30,10 @@ const STEP_PATHS: Record<QuizStepId, string> = {
   "question-2": "/natal-v2/pergunta-2",
   profile: "/natal-v2/perfil",
   video: "/natal-v2/video",
+  "social-proof": "/natal-v2/depoimentos",
 };
 
-const STEP_ORDER: QuizStepId[] = ["intro", "question-1", "question-2", "profile", "video"];
+const STEP_ORDER: QuizStepId[] = ["intro", "question-1", "question-2", "profile", "video", "social-proof"];
 
 const STEP_PAGE_NAMES: Record<QuizStepId, string> = {
   intro: "Quiz Natal - Abertura",
@@ -39,6 +41,7 @@ const STEP_PAGE_NAMES: Record<QuizStepId, string> = {
   "question-2": "Quiz Natal - Pergunta 2",
   profile: "Quiz Natal - Perfil",
   video: "Quiz Natal - Video",
+  "social-proof": "Quiz Natal - Depoimentos",
 };
 
 const stepFromPath = (pathname: string): QuizStepId => {
@@ -48,10 +51,11 @@ const stepFromPath = (pathname: string): QuizStepId => {
 
 const STEP_PROGRESS: Record<QuizStepId, number> = {
   intro: 0,
-  "question-1": 33,
-  "question-2": 66,
-  profile: 90,
-  video: 100,
+  "question-1": 20,
+  "question-2": 40,
+  profile: 60,
+  video: 80,
+  "social-proof": 100,
 };
 
 const SELECTION_DELAY_MS = 350;
@@ -134,7 +138,8 @@ const NatalQuizFunnel = () => {
         {currentStep === "question-1" && "Pergunta 1 de 2"}
         {currentStep === "question-2" && "Pergunta 2 de 2"}
         {currentStep === "profile" && "Seu perfil está pronto"}
-        {currentStep === "video" && "Assista o vídeo e garanta sua vaga"}
+        {currentStep === "video" && "Assista o vídeo"}
+        {currentStep === "social-proof" && "Veja os depoimentos e garanta sua vaga"}
       </div>
 
       <main key={currentStep} className="flex-1 flex items-center justify-center px-4 py-10 animate-fade-up">
@@ -165,7 +170,13 @@ const NatalQuizFunnel = () => {
             <ProfileScreen headingRef={headingRef} answers={answers} onContinue={() => goTo("video")} />
           )}
 
-          {currentStep === "video" && <VideoScreen headingRef={headingRef} onFinalCTA={handleFinalCTA} />}
+          {currentStep === "video" && (
+            <VideoScreen headingRef={headingRef} onContinue={() => goTo("social-proof")} />
+          )}
+
+          {currentStep === "social-proof" && (
+            <SocialProofScreen headingRef={headingRef} onFinalCTA={handleFinalCTA} />
+          )}
         </div>
       </main>
     </div>
@@ -301,10 +312,10 @@ const ProfileScreen = ({
 
 const VideoScreen = ({
   headingRef,
-  onFinalCTA,
+  onContinue,
 }: {
   headingRef: React.RefObject<HTMLHeadingElement>;
-  onFinalCTA: () => void;
+  onContinue: () => void;
 }) => (
   <div className="text-center">
     <h1 ref={headingRef} tabIndex={-1} className="text-xl md:text-2xl font-bold uppercase mb-3 outline-none leading-snug">
@@ -331,12 +342,48 @@ const VideoScreen = ({
     </div>
 
     <button
+      onClick={onContinue}
+      className="w-full bg-green-600 text-white py-4 text-base font-bold uppercase tracking-wide hover:bg-green-700 transition-all duration-300 border-2 border-green-600 shadow-premium hover:shadow-premium-gold hover:-translate-y-1 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+    >
+      Continuar
+    </button>
+  </div>
+);
+
+const SocialProofScreen = ({
+  headingRef,
+  onFinalCTA,
+}: {
+  headingRef: React.RefObject<HTMLHeadingElement>;
+  onFinalCTA: () => void;
+}) => (
+  <div>
+    <p className="text-sm font-bold uppercase tracking-widest text-primary mb-3 text-center">
+      Quem já participou, aprovou
+    </p>
+    <h1 ref={headingRef} tabIndex={-1} className="text-xl md:text-2xl font-bold mb-6 outline-none leading-snug text-center">
+      Arquitetas, engenheiras e designers de interiores que já aplicaram o método
+    </h1>
+
+    <div className="space-y-4 mb-8">
+      {QUIZ_TESTIMONIALS.map((testimonial) => (
+        <div key={testimonial.handle} className="border-2 border-border bg-card p-4">
+          <Quote className="w-5 h-5 text-primary mb-2" />
+          <p className="text-sm font-medium leading-relaxed mb-3">{testimonial.text}</p>
+          <p className="text-sm font-bold">
+            {testimonial.name} <span className="font-normal text-muted-foreground">{testimonial.handle}</span>
+          </p>
+        </div>
+      ))}
+    </div>
+
+    <button
       onClick={onFinalCTA}
       className="w-full bg-green-600 text-white py-4 flex items-center justify-center gap-2 text-base sm:text-lg font-bold tracking-wide hover:bg-green-700 transition-all duration-300 border-2 border-green-600 shadow-premium hover:shadow-premium-gold hover:-translate-y-1 uppercase active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
     >
       Garantir minha vaga
     </button>
-    <p className="text-sm font-bold uppercase tracking-wide text-[hsl(var(--cta))] mt-3">
+    <p className="text-sm font-bold uppercase tracking-wide text-[hsl(var(--cta))] mt-3 text-center">
       Vagas limitadas pra essa turma
     </p>
 

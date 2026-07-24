@@ -4,7 +4,7 @@
 // Nenhum score ou porcentagem calculada: é reconhecimento real da
 // resposta da pessoa, não um resultado fictício.
 
-export type QuizStepId = "intro" | "question-1" | "question-2" | "profile" | "video";
+export type QuizStepId = "intro" | "question-1" | "question-2" | "profile" | "video" | "social-proof";
 
 export interface QuizOption {
   id: string;
@@ -87,3 +87,40 @@ export function getProfileAnalysis(answers: QuizAnswers): ProfileContent {
     body: content.body.replace("{profissao}", professionLabel),
   };
 }
+
+// Depoimentos reais, os mesmos já aprovados e usados em TestimonialsSection.tsx
+// (edição anterior da imersão) — selecionados os 5 com relato mais substancial
+// pra tela de prova social do quiz.
+export interface QuizTestimonial {
+  name: string;
+  handle: string;
+  text: string;
+}
+
+export const QUIZ_TESTIMONIALS: QuizTestimonial[] = [
+  {
+    name: "Lura Arquitetura",
+    handle: "@luraarquitetura",
+    text: "Essa imersão deixa muito claro que projeto e obra não podem caminhar separados. Cronograma, processos e tomada de decisão fazem parte da materialização do projeto.",
+  },
+  {
+    name: "Yasmin Barros",
+    handle: "@yasminbarros.arq",
+    text: "Quanto conteúdo valiosooooo! O principal insight: não existe projeto executivo até a obra se iniciar. Saiu um peso das minhas costas sobre alterações que acontecem após a demolição.",
+  },
+  {
+    name: "Sara Ferreira",
+    handle: "@saraferreirah",
+    text: "Adorei muito a imersão. Meu insight foi perceber o quanto é importante realizar o cronograma para evitar problemas futuros. Proporciona uma experiência tranquila para todos os envolvidos: cliente, fornecedores e arquiteto! Todos ganham.",
+  },
+  {
+    name: "Studio Antun 3D",
+    handle: "@studioantun.3d",
+    text: "O maior aprendizado foi entender os processos e que sem isso você não consegue ser assertivo na resolução dos problemas quando eles aparecerem. Adorei demaaaais!",
+  },
+  {
+    name: "VS Belga",
+    handle: "@vsbelga",
+    text: "A imersão me ajudou a enxergar como destrinchar as etapas do projeto torna o cronograma mais realista e facilita o entendimento do cliente sobre demandas e prazos.",
+  },
+];
