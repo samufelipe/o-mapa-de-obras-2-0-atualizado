@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Loader2, Lock, ShieldCheck, Check } from "lucide-react";
+import useEmblaCarousel from "embla-carousel-react";
+import { Loader2, Lock, ShieldCheck, Check, ChevronLeft, ChevronRight } from "lucide-react";
 import TestimonialCard from "@/components/landing/TestimonialCard";
 import { useCTA } from "@/lib/cta-context";
 import { trackPageView as trackMetaPageView } from "@/lib/tracking";
@@ -351,13 +352,56 @@ const VideoScreen = ({
   </div>
 );
 
+const CAROUSEL_AUTOPLAY_DELAY = 4500;
+
 const SocialProofScreen = ({
   headingRef,
   onFinalCTA,
 }: {
   headingRef: React.RefObject<HTMLHeadingElement>;
   onFinalCTA: () => void;
-}) => (
+}) => {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" });
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const autoplayRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const stopAutoplay = useCallback(() => {
+    if (autoplayRef.current) clearInterval(autoplayRef.current);
+  }, []);
+
+  const startAutoplay = useCallback(() => {
+    stopAutoplay();
+    autoplayRef.current = setInterval(() => emblaApi?.scrollNext(), CAROUSEL_AUTOPLAY_DELAY);
+  }, [emblaApi, stopAutoplay]);
+
+  const scrollPrev = useCallback(() => {
+    emblaApi?.scrollPrev();
+    startAutoplay();
+  }, [emblaApi, startAutoplay]);
+
+  const scrollNext = useCallback(() => {
+    emblaApi?.scrollNext();
+    startAutoplay();
+  }, [emblaApi, startAutoplay]);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    emblaApi.on("select", onSelect);
+    onSelect();
+    return () => { emblaApi.off("select", onSelect); };
+  }, [emblaApi, onSelect]);
+
+  useEffect(() => {
+    startAutoplay();
+    return stopAutoplay;
+  }, [startAutoplay, stopAutoplay]);
+
+  return (
   <div>
     <p className="text-sm font-bold uppercase tracking-widest text-primary mb-3 text-center">
       Quem já participou, aprovou
@@ -366,10 +410,41 @@ const SocialProofScreen = ({
       Arquitetas, engenheiras e designers de interiores que já aplicaram o método
     </h1>
 
-    <div className="space-y-4 mb-8">
-      {QUIZ_TESTIMONIALS.map((testimonial) => (
-        <TestimonialCard key={testimonial.handle} testimonial={testimonial} />
-      ))}
+    <div className="mb-4 overflow-hidden" ref={emblaRef} onMouseEnter={stopAutoplay} onMouseLeave={startAutoplay}>
+      <div className="flex">
+        {QUIZ_TESTIMONIALS.map((testimonial) => (
+          <div key={testimonial.handle} className="flex-[0_0_100%] min-w-0 px-1">
+            <TestimonialCard testimonial={testimonial} />
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div className="flex items-center justify-center gap-4 mb-8">
+      <button
+        onClick={scrollPrev}
+        aria-label="Depoimento anterior"
+        className="w-9 h-9 border border-border hover:border-primary text-muted-foreground hover:text-primary flex items-center justify-center transition-all duration-200 active:scale-95 rounded-full"
+      >
+        <ChevronLeft className="w-4 h-4" />
+      </button>
+      <div className="flex items-center gap-1.5">
+        {QUIZ_TESTIMONIALS.map((testimonial, idx) => (
+          <span
+            key={testimonial.handle}
+            className={`rounded-full transition-all duration-300 ${
+              idx === selectedIndex ? "w-4 h-1.5 bg-primary" : "w-1.5 h-1.5 bg-border"
+            }`}
+          />
+        ))}
+      </div>
+      <button
+        onClick={scrollNext}
+        aria-label="Próximo depoimento"
+        className="w-9 h-9 border border-border hover:border-primary text-muted-foreground hover:text-primary flex items-center justify-center transition-all duration-200 active:scale-95 rounded-full"
+      >
+        <ChevronRight className="w-4 h-4" />
+      </button>
     </div>
 
     <button
@@ -393,6 +468,7 @@ const SocialProofScreen = ({
       </p>
     </div>
   </div>
-);
+  );
+};
 
 export default NatalQuizFunnel;
