@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Loader2, Lock, ShieldCheck, Check, Quote } from "lucide-react";
+import { Loader2, Lock, ShieldCheck, Check } from "lucide-react";
+import TestimonialCard from "@/components/landing/TestimonialCard";
 import { useCTA } from "@/lib/cta-context";
 import { trackPageView as trackMetaPageView } from "@/lib/tracking";
 import {
@@ -367,13 +368,7 @@ const SocialProofScreen = ({
 
     <div className="space-y-4 mb-8">
       {QUIZ_TESTIMONIALS.map((testimonial) => (
-        <div key={testimonial.handle} className="border-2 border-border bg-card p-4">
-          <Quote className="w-5 h-5 text-primary mb-2" />
-          <p className="text-sm font-medium leading-relaxed mb-3">{testimonial.text}</p>
-          <p className="text-sm font-bold">
-            {testimonial.name} <span className="font-normal text-muted-foreground">{testimonial.handle}</span>
-          </p>
-        </div>
+        <TestimonialCard key={testimonial.handle} testimonial={testimonial} />
       ))}
     </div>
 

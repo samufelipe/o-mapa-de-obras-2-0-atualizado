@@ -90,37 +90,55 @@ export function getProfileAnalysis(answers: QuizAnswers): ProfileContent {
 
 // Depoimentos reais, os mesmos já aprovados e usados em TestimonialsSection.tsx
 // (edição anterior da imersão) — selecionados os 5 com relato mais substancial
-// pra tela de prova social do quiz.
-export interface QuizTestimonial {
-  name: string;
-  handle: string;
-  text: string;
-}
+// pra tela de prova social do quiz. Mesmo shape de dado do TestimonialCard,
+// pra reaproveitar o modelo visual exato (avatar, anel gradiente, curtidas).
+export type { Testimonial as QuizTestimonial } from "@/components/landing/TestimonialCard";
+import type { Testimonial } from "@/components/landing/TestimonialCard";
 
-export const QUIZ_TESTIMONIALS: QuizTestimonial[] = [
+export const QUIZ_TESTIMONIALS: Testimonial[] = [
   {
+    handle: "luraarquitetura",
     name: "Lura Arquitetura",
-    handle: "@luraarquitetura",
+    initials: "LA",
+    ringA: "#833ab4", ringB: "#fd1d1d",
+    avatarA: "#833ab4", avatarB: "#c13584",
+    likes: 127, timeAgo: "12 sem.", verified: false,
     text: "Essa imersão deixa muito claro que projeto e obra não podem caminhar separados. Cronograma, processos e tomada de decisão fazem parte da materialização do projeto.",
   },
   {
+    handle: "yasminbarros.arq",
     name: "Yasmin Barros",
-    handle: "@yasminbarros.arq",
-    text: "Quanto conteúdo valiosooooo! O principal insight: não existe projeto executivo até a obra se iniciar. Saiu um peso das minhas costas sobre alterações que acontecem após a demolição.",
+    initials: "YB",
+    ringA: "#f09433", ringB: "#e6683c",
+    avatarA: "#f9a825", avatarB: "#f06292",
+    likes: 89, timeAgo: "12 sem.", verified: false,
+    text: "Quanto conteúdo váliosooooo! O principal insight: não existe projeto executivo até a obra se iniciar. Saiu um peso das minhas costas sobre alterações que acontecem após a demolição.",
   },
   {
+    handle: "saraferreirah",
     name: "Sara Ferreira",
-    handle: "@saraferreirah",
+    initials: "SF",
+    ringA: "#fd1d1d", ringB: "#833ab4",
+    avatarA: "#e91e63", avatarB: "#ff5722",
+    likes: 203, timeAgo: "12 sem.", verified: false,
     text: "Adorei muito a imersão. Meu insight foi perceber o quanto é importante realizar o cronograma para evitar problemas futuros. Proporciona uma experiência tranquila para todos os envolvidos: cliente, fornecedores e arquiteto! Todos ganham.",
   },
   {
+    handle: "studioantun.3d",
     name: "Studio Antun 3D",
-    handle: "@studioantun.3d",
+    initials: "SA",
+    ringA: "#4776E6", ringB: "#8E54E9",
+    avatarA: "#1565c0", avatarB: "#7b1fa2",
+    likes: 94, timeAgo: "12 sem.", verified: false,
     text: "O maior aprendizado foi entender os processos e que sem isso você não consegue ser assertivo na resolução dos problemas quando eles aparecerem. Adorei demaaaais!",
   },
   {
+    handle: "vsbelga",
     name: "VS Belga",
-    handle: "@vsbelga",
+    initials: "VB",
+    ringA: "#667eea", ringB: "#764ba2",
+    avatarA: "#667eea", avatarB: "#764ba2",
+    likes: 83, timeAgo: "12 sem.", verified: false,
     text: "A imersão me ajudou a enxergar como destrinchar as etapas do projeto torna o cronograma mais realista e facilita o entendimento do cliente sobre demandas e prazos.",
   },
 ];
