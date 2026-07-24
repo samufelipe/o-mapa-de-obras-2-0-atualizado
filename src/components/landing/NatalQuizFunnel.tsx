@@ -4,7 +4,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { Loader2, Lock, ShieldCheck, Check, ChevronLeft, ChevronRight } from "lucide-react";
 import TestimonialCard from "@/components/landing/TestimonialCard";
 import { useCTA } from "@/lib/cta-context";
-import { trackPageView as trackMetaPageView } from "@/lib/tracking";
+import { trackPageView as trackMetaPageView, trackViewContent } from "@/lib/tracking";
 import {
   trackPageView as trackGtmPageView,
   trackQuizStepView,
@@ -90,6 +90,7 @@ const NatalQuizFunnel = () => {
 
   useEffect(() => {
     trackMetaPageView();
+    trackViewContent(STEP_PAGE_NAMES[currentStep]);
     trackGtmPageView(STEP_PAGE_NAMES[currentStep]);
     trackQuizStepView(currentStep, stepIndex);
     setSelectedOptionId(null);
