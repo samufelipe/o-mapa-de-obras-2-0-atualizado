@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import IndexV2 from "./pages/IndexV2";
 import IndexV3 from "./pages/IndexV3";
 import NatalLanding from "./pages/NatalLanding";
+import NatalRedirect from "./pages/NatalRedirect";
 import NatalLandingV1 from "./pages/NatalLandingV1";
 import NatalLandingV2 from "./pages/NatalLandingV2";
 import NotFound from "./pages/NotFound";
@@ -50,6 +51,7 @@ const App = () => {
           <Route path="/v2" element={<IndexV2 />} />
           <Route path="/v3" element={<IndexV3 />} />
           <Route path="/natal" element={<NatalLanding />} />
+          <Route path="/natal/redirecionando" element={<NatalRedirect />} />
           <Route path="/natal-v1" element={<NatalLandingV1 />} />
           <Route path="/natal-v2" element={<NatalLandingV2 />} />
           <Route path="/natal-v2/pergunta-1" element={<NatalLandingV2 />} />

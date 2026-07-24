@@ -63,20 +63,26 @@ export const trackViewContent = (contentName: string): void => {
  * Use quando o formulário for submetido com sucesso
  */
 export const trackLead = (data: {
-  name: string;
-  email: string;
-  phone: string;
+  name?: string;
+  email?: string;
+  phone?: string;
+  value?: number;
+  contentName?: string;
+  contentCategory?: string;
 }): void => {
   if (!isPixelAvailable()) return;
-  
+
+  const contentName = data.contentName ?? CONFIG.conversionIdentifier;
+  const contentCategory = data.contentCategory ?? "Imersão Cronograma 2.0";
+  const value = data.value ?? 29.90;
+
   window.fbq("track", "Lead", {
-    content_name: CONFIG.conversionIdentifier,
-    content_category: "Imersão Cronograma 2.0",
-    // Dados hasheados para melhor match rate
-    value: 29.90,
+    content_name: contentName,
+    content_category: contentCategory,
+    value,
     currency: "BRL",
   });
-  logTracking("Lead", { content_name: CONFIG.conversionIdentifier });
+  logTracking("Lead", { content_name: contentName });
 };
 
 /**

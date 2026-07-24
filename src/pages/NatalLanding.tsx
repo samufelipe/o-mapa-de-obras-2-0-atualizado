@@ -11,7 +11,6 @@ import { initAllTracking, trackCTAClick, trackSectionView, trackBeginCheckout } 
 import { trackInitiateCheckout } from "@/lib/tracking";
 import { CTAProvider } from "@/lib/cta-context";
 import {
-  NATAL_CHECKOUT_URL,
   NATAL_PRICE,
   NATAL_PRODUCT_NAME,
   NATAL_FAQ,
@@ -127,7 +126,9 @@ const NatalLanding = () => {
   const handleCTA = () => {
     trackInitiateCheckout(NATAL_PRICE, "inscricao-cronograma-natal", NATAL_PRODUCT_NAME);
     trackBeginCheckout(NATAL_PRICE, NATAL_PRODUCT_NAME);
-    const url = new URL(NATAL_CHECKOUT_URL);
+    // Passa por uma pagina de transicao rapida (natal/redirecionando) antes
+    // do checkout, so pra disparar o evento Lead do Pixel do Meta.
+    const url = new URL("/natal/redirecionando", window.location.origin);
     const currentParams = new URLSearchParams(window.location.search);
     ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid"].forEach((param) => {
       const val = currentParams.get(param);

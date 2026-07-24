@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { trackInitiateCheckout } from "@/lib/tracking";
 import { trackBeginCheckout, trackCTAClick } from "@/lib/gtm-tracking";
 import {
-  NATAL_CHECKOUT_URL,
   NATAL_PRICE,
   NATAL_PRODUCT_NAME,
   NATAL_EVENT_DATE,
@@ -44,7 +43,9 @@ const HeroSectionNatal = () => {
     trackInitiateCheckout(NATAL_PRICE, "inscricao-cronograma-natal", NATAL_PRODUCT_NAME);
     trackBeginCheckout(NATAL_PRICE, NATAL_PRODUCT_NAME);
 
-    const url = new URL(NATAL_CHECKOUT_URL);
+    // Passa por uma pagina de transicao rapida antes do checkout, so pra
+    // disparar o evento Lead do Pixel do Meta.
+    const url = new URL("/natal/redirecionando", window.location.origin);
     const currentParams = new URLSearchParams(window.location.search);
     ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid"].forEach((param) => {
       const val = currentParams.get(param);
