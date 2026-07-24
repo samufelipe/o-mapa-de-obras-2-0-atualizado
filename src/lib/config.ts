@@ -21,7 +21,7 @@ export const CONFIG = {
   metaPixel: {
     // ID do Pixel
     // Obter em: Meta Business Suite → Gerenciador de Eventos → Origens de Dados → Pixel
-    pixelId: "PREENCHER_PIXEL_ID",
+    pixelId: "1256994949274673",
     
     // Habilitar tracking (desativar em desenvolvimento se necessário)
     enabled: true,
