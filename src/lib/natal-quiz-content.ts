@@ -1,12 +1,10 @@
 // Conteúdo do quiz de qualificação da variação /natal-v2.
-// Perguntas e reconhecimento de resposta usam só fatos já aprovados
-// (mesmo público-alvo e mesma dor de PainMechanismSection/natal-constants.ts).
-// Nenhum score ou porcentagem calculada: é reconhecimento da resposta, não
-// um resultado fictício.
+// Perguntas e análise de perfil usam só fatos já aprovados (mesmo
+// público-alvo e mesma dor de PainMechanismSection/natal-constants.ts).
+// Nenhum score ou porcentagem calculada: é reconhecimento real da
+// resposta da pessoa, não um resultado fictício.
 
-export type QuizStepId = "intro" | "question-1" | "question-2" | "transition" | "result";
-
-export const QUIZ_STEPS: QuizStepId[] = ["intro", "question-1", "question-2", "transition", "result"];
+export type QuizStepId = "intro" | "question-1" | "question-2" | "profile" | "video";
 
 export interface QuizOption {
   id: string;
@@ -23,17 +21,18 @@ export type QuizAnswers = Partial<Record<"question-1" | "question-2", string>>;
 
 export const QUIZ_QUESTION_1: QuizQuestion = {
   id: "question-1",
-  prompt: "Qual desses papéis é o seu?",
+  prompt: "Qual é a sua profissão?",
   options: [
     { id: "arquiteta", label: "Arquiteta" },
     { id: "engenheira", label: "Engenheira" },
     { id: "designer-interiores", label: "Designer de interiores" },
+    { id: "outra", label: "Outra" },
   ],
 };
 
 export const QUIZ_QUESTION_2: QuizQuestion = {
   id: "question-2",
-  prompt: "O que mais aperta no seu momento até o Natal?",
+  prompt: "O que mais pesa no seu gerenciamento de obra agora, com o Natal chegando?",
   options: [
     { id: "prazo-impossivel", label: "Medo de aceitar um prazo impossível" },
     { id: "precificar-fim-de-ano", label: "Não sei precificar o gerenciamento até o fim do ano" },
@@ -41,22 +40,45 @@ export const QUIZ_QUESTION_2: QuizQuestion = {
   ],
 };
 
-const RESULT_ACKNOWLEDGEMENTS: Record<string, string> = {
-  "prazo-impossivel":
-    "Você não está sozinha: aprender a defender o prazo com segurança na frente do cliente é um dos pontos centrais da Imersão Cronograma Especial de Natal.",
-  "precificar-fim-de-ano":
-    "Saber quantas semanas úteis você realmente tem até o Natal, e como distribuir os serviços dentro desse prazo, é exatamente um dos pontos que a Imersão ensina.",
-  "fornecedor-atrasa":
-    "Qualificar fornecedor pelo critério que importa nessa época do ano (prazo de entrega) é um dos pontos centrais da Imersão Cronograma Especial de Natal.",
+const PROFESSION_LABELS: Record<string, string> = {
+  arquiteta: "arquiteta",
+  engenheira: "engenheira",
+  "designer-interiores": "designer de interiores",
+  outra: "profissional de arquitetura e interiores",
 };
 
-const DEFAULT_ACKNOWLEDGEMENT =
-  "É exatamente isso que a Imersão Cronograma Especial de Natal resolve, ao vivo, com a Ingrid e a Fernanda.";
+interface ProfileContent {
+  headline: string;
+  body: string;
+}
 
-export function getResultAcknowledgement(answers: QuizAnswers): string {
-  const answer = answers["question-2"];
-  if (answer && RESULT_ACKNOWLEDGEMENTS[answer]) {
-    return RESULT_ACKNOWLEDGEMENTS[answer];
-  }
-  return DEFAULT_ACKNOWLEDGEMENT;
+const PROFILE_BY_PAIN: Record<string, ProfileContent> = {
+  "prazo-impossivel": {
+    headline: "Seu maior risco agora: aceitar um prazo que você já sabe que não vai cumprir",
+    body: "Aceitar o prazo que o cliente impõe por medo de decepcionar é uma das dores mais comuns entre {profissao}. O problema não é trabalhar mais rápido, é não saber defender o prazo certo com segurança na frente do cliente. É exatamente isso que a Imersão Cronograma Especial de Natal ensina, ao vivo, com a Ingrid e a Fernanda.",
+  },
+  "precificar-fim-de-ano": {
+    headline: "Seu maior risco agora: não saber quanto tempo real você tem até o Natal",
+    body: "Não saber quantas semanas úteis realmente sobram até o Natal, e como distribuir os serviços dentro desse prazo, é o erro mais comum na correria de fim de ano entre {profissao}. É exatamente isso que a Imersão Cronograma Especial de Natal ensina, ao vivo, com a Ingrid e a Fernanda.",
+  },
+  "fornecedor-atrasa": {
+    headline: "Seu maior risco agora: a culpa do atraso do fornecedor cair em você",
+    body: "Fornecedor atrasando e a culpa caindo em você é uma dor real de quem gerencia obra nessa época do ano. Saber qualificar fornecedor pelo critério que importa agora (prazo de entrega) é um dos pontos centrais da Imersão Cronograma Especial de Natal, ao vivo, com a Ingrid e a Fernanda.",
+  },
+};
+
+const DEFAULT_PROFILE: ProfileContent = {
+  headline: "A obra até o Natal não precisa ser correria",
+  body: "Atraso na obra pesa pra {profissao}, mesmo quando a culpa é do fornecedor ou do cliente que demorou pra aprovar orçamento. É exatamente isso que a Imersão Cronograma Especial de Natal resolve, ao vivo, com a Ingrid e a Fernanda.",
+};
+
+export function getProfileAnalysis(answers: QuizAnswers): ProfileContent {
+  const professionLabel = PROFESSION_LABELS[answers["question-1"] ?? ""] ?? "arquitetas, engenheiras e designers de interiores";
+  const painAnswer = answers["question-2"];
+  const content = (painAnswer && PROFILE_BY_PAIN[painAnswer]) || DEFAULT_PROFILE;
+
+  return {
+    headline: content.headline,
+    body: content.body.replace("{profissao}", professionLabel),
+  };
 }

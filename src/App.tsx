@@ -52,6 +52,10 @@ const App = () => {
           <Route path="/natal" element={<NatalLanding />} />
           <Route path="/natal-v1" element={<NatalLandingV1 />} />
           <Route path="/natal-v2" element={<NatalLandingV2 />} />
+          <Route path="/natal-v2/pergunta-1" element={<NatalLandingV2 />} />
+          <Route path="/natal-v2/pergunta-2" element={<NatalLandingV2 />} />
+          <Route path="/natal-v2/perfil" element={<NatalLandingV2 />} />
+          <Route path="/natal-v2/video" element={<NatalLandingV2 />} />
           <Route path="/mentoria" element={<MentoriaLanding />} />
           <Route path="/admin/emails" element={<AdminEmails />} />
           <Route path="/checkout/:product" element={<CheckoutBridge />} />
