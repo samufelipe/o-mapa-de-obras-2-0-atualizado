@@ -10,7 +10,7 @@ import {
   trackCTAClick,
   trackVideoInteraction,
 } from "@/lib/gtm-tracking";
-import { NATAL_PRICE, NATAL_GUARANTEE_DAYS, NATAL_EVENT_DATE_LABEL } from "@/lib/natal-constants";
+import { NATAL_GUARANTEE_DAYS, NATAL_EVENT_DATE_LABEL } from "@/lib/natal-constants";
 import {
   QUIZ_QUESTION_1,
   QUIZ_QUESTION_2,
@@ -193,7 +193,7 @@ const IntroScreen = ({
       Entregue a obra até o Natal, sem aceitar prazo impossível
     </h1>
     <p className="text-muted-foreground font-medium mb-8">
-      Responda 2 perguntas rápidas e veja como a Imersão Cronograma Especial de Natal, ao vivo em{" "}
+      Responda algumas perguntas rápidas e veja como a Imersão Cronograma Especial de Natal, ao vivo em{" "}
       {NATAL_EVENT_DATE_LABEL}, pode te ajudar. Vagas limitadas pra essa turma.
     </p>
     <button
@@ -203,7 +203,7 @@ const IntroScreen = ({
       Começar
     </button>
     <p className="text-sm text-muted-foreground font-medium mt-4">
-      Ao vivo · {NATAL_EVENT_DATE_LABEL} · R$ {NATAL_PRICE.toFixed(2).replace(".", ",")}
+      Ao vivo · {NATAL_EVENT_DATE_LABEL}
     </p>
   </div>
 );
@@ -307,12 +307,12 @@ const VideoScreen = ({
   onFinalCTA: () => void;
 }) => (
   <div className="text-center">
-    <h1 ref={headingRef} tabIndex={-1} className="text-xl md:text-2xl font-bold mb-3 outline-none leading-snug">
-      Assista: como a Imersão vai te ajudar
+    <h1 ref={headingRef} tabIndex={-1} className="text-xl md:text-2xl font-bold uppercase mb-3 outline-none leading-snug">
+      Assista o vídeo e veja como a Imersão vai te ajudar
     </h1>
     <p className="text-muted-foreground font-medium mb-6">
-      30 segundos direto da Ingrid e da Fernanda mostrando como a Imersão Cronograma Especial de Natal te ajuda a
-      entregar sua obra até o Natal.
+      Esse vídeo de apenas 30 segundos, direto e reto, te mostra como a Imersão Cronograma Especial de Natal vai te
+      ajudar a entregar sua obra até o Natal.
     </p>
 
     <div className="mb-6 border-2 border-foreground shadow-premium overflow-hidden">
@@ -334,7 +334,7 @@ const VideoScreen = ({
       onClick={onFinalCTA}
       className="w-full bg-green-600 text-white py-4 flex items-center justify-center gap-2 text-base sm:text-lg font-bold tracking-wide hover:bg-green-700 transition-all duration-300 border-2 border-green-600 shadow-premium hover:shadow-premium-gold hover:-translate-y-1 uppercase active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
     >
-      Garantir minha vaga · R$ {NATAL_PRICE.toFixed(2).replace(".", ",")}
+      Garantir minha vaga
     </button>
     <p className="text-sm font-bold uppercase tracking-wide text-[hsl(var(--cta))] mt-3">
       Vagas limitadas pra essa turma

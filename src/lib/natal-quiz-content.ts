@@ -36,6 +36,7 @@ export const QUIZ_QUESTION_2: QuizQuestion = {
   options: [
     { id: "prazo-impossivel", label: "Medo de aceitar um prazo impossível" },
     { id: "precificar-fim-de-ano", label: "Não sei precificar o gerenciamento até o fim do ano" },
+    { id: "cronograma-desorganizado", label: "Não sei montar um cronograma até o fim do ano de forma organizada" },
     { id: "fornecedor-atrasa", label: "Fornecedor atrasa e a culpa cai em mim" },
   ],
 };
@@ -60,6 +61,10 @@ const PROFILE_BY_PAIN: Record<string, ProfileContent> = {
   "precificar-fim-de-ano": {
     headline: "Seu maior risco agora: não saber quanto tempo real você tem até o Natal",
     body: "Não saber quantas semanas úteis realmente sobram até o Natal, e como distribuir os serviços dentro desse prazo, é o erro mais comum na correria de fim de ano entre {profissao}. É exatamente isso que a Imersão Cronograma Especial de Natal ensina, ao vivo, com a Ingrid e a Fernanda.",
+  },
+  "cronograma-desorganizado": {
+    headline: "Seu maior risco agora: chegar no fim do ano sem um cronograma organizado",
+    body: "Não saber montar um cronograma organizado até o fim do ano é a raiz da maioria dos atrasos entre {profissao}. É exatamente isso que a Imersão Cronograma Especial de Natal ensina, ao vivo, com a Ingrid e a Fernanda.",
   },
   "fornecedor-atrasa": {
     headline: "Seu maior risco agora: a culpa do atraso do fornecedor cair em você",
