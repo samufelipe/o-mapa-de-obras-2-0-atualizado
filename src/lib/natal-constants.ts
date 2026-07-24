@@ -2,7 +2,7 @@
 // Separado de constants.ts de propósito: não é a mesma oferta da Imersão Cronograma 2.0.
 
 export const NATAL_CHECKOUT_URL =
-  "https://pay.hotmart.com/T106814287G?off=b5og3zzg&bid=1784598771309";
+  "https://pay.hotmart.com/T106814287G?checkoutMode=10";
 
 export const NATAL_PRICE = 29.9;
 
