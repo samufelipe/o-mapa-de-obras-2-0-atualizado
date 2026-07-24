@@ -1,22 +1,9 @@
-import { useState, useEffect } from "react";
-import Header from "@/components/landing/Header";
-import HeroSectionNatalV2 from "@/components/landing/HeroSectionNatalV2";
-import TestimonialsSection from "@/components/landing/TestimonialsSection";
-import MidCTASection from "@/components/landing/MidCTASection";
-import PainMechanismSection from "@/components/landing/PainMechanismSection";
-import ClosingOfferSection from "@/components/landing/ClosingOfferSection";
-import FAQSection from "@/components/landing/FAQSection";
-import FooterNatal from "@/components/landing/FooterNatal";
-import { initAllTracking, trackCTAClick, trackSectionView, trackBeginCheckout } from "@/lib/gtm-tracking";
+import { useEffect } from "react";
+import NatalQuizFunnel from "@/components/landing/NatalQuizFunnel";
+import { initAllTracking, trackBeginCheckout } from "@/lib/gtm-tracking";
 import { trackInitiateCheckout } from "@/lib/tracking";
 import { CTAProvider } from "@/lib/cta-context";
-import {
-  NATAL_CHECKOUT_URL,
-  NATAL_PRICE,
-  NATAL_PRODUCT_NAME,
-  NATAL_FAQ,
-  NATAL_FOOTER_LINKS,
-} from "@/lib/natal-constants";
+import { NATAL_CHECKOUT_URL, NATAL_PRICE, NATAL_PRODUCT_NAME } from "@/lib/natal-constants";
 
 const NATAL_FAVICONS: Array<{ rel: string; sizes?: string; type?: string; href: string }> = [
   { rel: "icon", type: "image/svg+xml", href: "/brand-natal/favicon.svg" },
@@ -27,29 +14,11 @@ const NATAL_FAVICONS: Array<{ rel: string; sizes?: string; type?: string; href: 
   { rel: "apple-touch-icon", sizes: "180x180", href: "/brand-natal/apple-touch-icon-180.png" },
 ];
 
-const NatalHeaderLogo = () => (
-  <img
-    src="/brand-natal/simbolo.png"
-    alt="Cronograma: Obra Pronta até o Natal"
-    className="h-14 md:h-16 w-auto object-contain"
-  />
-);
-
-const NatalFooterLogo = () => (
-  <img
-    src="/brand-natal/logo-horizontal.png"
-    alt="Cronograma: Obra Pronta até o Natal"
-    className="h-20 md:h-24 w-auto object-contain"
-  />
-);
-
-// V2: Hero reordenado (HeroSectionNatalV2) pra deixar preco e CTA
-// visiveis no mobile sem precisar rolar, antes da headline estilizada.
+// V2: variação em formato de quiz de qualificação (mini-funil de tela
+// única, sem rolagem longa) — ver NatalQuizFunnel.tsx pra estrutura.
 const NatalLandingV2 = () => {
-  const [showStickyCTA, setShowStickyCTA] = useState(false);
-
   useEffect(() => {
-    initAllTracking("Landing Page - Imersão de Natal V2");
+    initAllTracking("Landing Page - Imersão de Natal V2 Quiz");
   }, []);
 
   useEffect(() => {
@@ -90,41 +59,6 @@ const NatalLandingV2 = () => {
     };
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => setShowStickyCTA(window.scrollY > 800);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const revealElements = document.querySelectorAll(".reveal");
-    const sections = document.querySelectorAll("section[id]");
-    const trackedSections = new Set<string>();
-
-    const revealObserver = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("active"); }),
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
-    );
-
-    const sectionObserver = new IntersectionObserver(
-      (entries) => entries.forEach((e) => {
-        if (e.isIntersecting) {
-          const id = e.target.id;
-          if (id && !trackedSections.has(id)) {
-            trackedSections.add(id);
-            trackSectionView(id);
-          }
-        }
-      }),
-      { threshold: 0.3 }
-    );
-
-    revealElements.forEach((el) => revealObserver.observe(el));
-    sections.forEach((el) => sectionObserver.observe(el));
-
-    return () => { revealObserver.disconnect(); sectionObserver.disconnect(); };
-  }, []);
-
   const handleCTA = () => {
     trackInitiateCheckout(NATAL_PRICE, "inscricao-cronograma-natal", NATAL_PRODUCT_NAME);
     trackBeginCheckout(NATAL_PRICE, NATAL_PRODUCT_NAME);
@@ -137,33 +71,9 @@ const NatalLandingV2 = () => {
     window.location.href = url.toString();
   };
 
-  const scrollToForm = () => {
-    trackCTAClick("sticky_cta", "mobile_bottom_natal_v2", "GARANTIR MINHA VAGA");
-    handleCTA();
-  };
-
   return (
     <CTAProvider value={handleCTA}>
-    <div className="natal-theme min-h-screen bg-background text-foreground">
-      <Header logoNode={<NatalHeaderLogo />} />
-      <HeroSectionNatalV2 />
-      <TestimonialsSection eyebrowClassName="text-primary font-bold text-sm md:text-base uppercase tracking-[0.25em] md:tracking-[0.35em] block mb-3" />
-      <MidCTASection />
-      <PainMechanismSection />
-      <ClosingOfferSection />
-      <FAQSection items={NATAL_FAQ} title="Dúvidas Sobre a Imersão de Natal" />
-      <FooterNatal links={NATAL_FOOTER_LINKS} productLabel={NATAL_PRODUCT_NAME} logoNode={<NatalFooterLogo />} />
-
-      {/* Sticky Mobile CTA */}
-      <div className={`fixed bottom-0 left-0 w-full z-[100] md:hidden transition-all duration-500 transform bg-background/95 backdrop-blur-sm border-t border-border px-4 py-3 ${showStickyCTA ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0"}`}>
-        <button
-          onClick={scrollToForm}
-          className="w-full bg-green-600 text-white py-4 px-4 text-base sm:text-lg font-black uppercase tracking-wide shadow-2xl border-2 border-green-600 flex items-center justify-center active:scale-95 hover:bg-green-700 transition-colors duration-300"
-        >
-          GARANTIR MINHA VAGA
-        </button>
-      </div>
-    </div>
+      <NatalQuizFunnel />
     </CTAProvider>
   );
 };

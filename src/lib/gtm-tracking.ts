@@ -237,6 +237,33 @@ export const trackVideoInteraction = (
 };
 
 // ============================================
+// EVENTOS DO QUIZ (variação /natal-v2)
+// ============================================
+
+/**
+ * Evento disparado quando uma tela do quiz é exibida
+ */
+export const trackQuizStepView = (stepId: string, stepIndex: number): void => {
+  pushToDataLayer({
+    event: "quiz_step_view",
+    quiz_step_id: stepId,
+    quiz_step_index: stepIndex,
+  });
+};
+
+/**
+ * Evento disparado quando o usuário clica numa opção de resposta do quiz
+ */
+export const trackQuizAnswer = (questionId: string, optionId: string, optionLabel: string): void => {
+  pushToDataLayer({
+    event: "quiz_answer",
+    quiz_question_id: questionId,
+    quiz_option_id: optionId,
+    quiz_option_label: optionLabel,
+  });
+};
+
+// ============================================
 // UTILITÁRIOS
 // ============================================
 
