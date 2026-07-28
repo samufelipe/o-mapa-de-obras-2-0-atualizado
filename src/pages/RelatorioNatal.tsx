@@ -14,10 +14,12 @@ import {
   DollarSign,
   ShoppingBag,
   Target,
+  MousePointerClick,
   ExternalLink,
   CheckCircle2,
   Sparkles,
   ArrowUpRight,
+  Info,
 } from "lucide-react";
 
 // ============================================================
@@ -28,6 +30,7 @@ const REPORT = {
   invested: 1511.03,
   revenue: 1055.33,
   totalSales: 45,
+  ctr: 2.59,
   dailySales: [
     { day: "22/07", vendas: 8 },
     { day: "23/07", vendas: 1 },
@@ -62,6 +65,13 @@ const REPORT = {
     "Otimização do checkout da Hotmart",
     "Criação de uma nova LP em formato de quiz",
     "Implementação de novos criativos",
+    "Revisão do trackeamento do Pixel do Meta no funil",
+    "Otimização da velocidade das duas LPs em uso",
+  ],
+  importantNotes: [
+    "O volume do Meta não está como no início do ano, isso já vimos na imersão passada.",
+    "O volume não será como antes no Meta, a não ser que dobremos o investimento atual, algo que ainda não aconselho.",
+    "O botão \"Saiba mais\" dos anúncios é padronizado pelo Meta e não pode ser customizado. Sem selecionar esse botão, o Meta não permite nem subir os anúncios.",
   ],
   quizUrl: "https://cronogramadenatal.inovandonasuaobra.com.br/natal-v2",
   checkoutCpa: 16.68,
@@ -228,7 +238,7 @@ const RelatorioNatal = () => {
         </Section>
 
         {/* KPIs principais */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 mb-14">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 md:gap-5 mb-14">
           <StatTile
             icon={<DollarSign className="w-4 h-4" />}
             label="Valor investido"
@@ -263,6 +273,14 @@ const RelatorioNatal = () => {
             accent={roas >= 1 ? "gold" : "cta"}
             caption={roas >= 1 ? "Acima do ponto de equilíbrio (1,00x)" : "Abaixo do ponto de equilíbrio (1,00x)"}
             delay={240}
+          />
+          <StatTile
+            icon={<MousePointerClick className="w-4 h-4" />}
+            label="CTR geral da conta"
+            value={REPORT.ctr}
+            decimals={2}
+            suffix="%"
+            delay={320}
           />
         </div>
 
@@ -336,6 +354,21 @@ const RelatorioNatal = () => {
                 <li key={item} className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                   <span className="font-medium">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Section>
+
+        {/* Detalhes importantes */}
+        <Section className="mb-14">
+          <h2 className="text-lg md:text-xl font-bold uppercase tracking-tight mb-6">Detalhes importantes</h2>
+          <div className="bg-foreground text-background border-2 border-primary shadow-premium p-6 md:p-8">
+            <ul className="space-y-4">
+              {REPORT.importantNotes.map((note) => (
+                <li key={note} className="flex items-start gap-3">
+                  <Info className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="font-medium text-background/90 leading-relaxed">{note}</span>
                 </li>
               ))}
             </ul>
