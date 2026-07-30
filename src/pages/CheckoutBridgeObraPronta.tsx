@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Loader2, Lock } from "lucide-react";
 import { OBRA_PRONTA_CHECKOUT_URL } from "@/lib/constants-obra-pronta";
+import { trackLead } from "@/lib/tracking";
+import { trackLeadGenerated } from "@/lib/gtm-tracking";
 
 // Delay curto so pra garantir que os disparos de tracking feitos no clique
 // do CTA (trackInitiateCheckout/trackBeginCheckout, em Index.tsx) terminem
@@ -9,6 +11,14 @@ const REDIRECT_DELAY = 800;
 
 const CheckoutBridgeObraPronta = () => {
   const [status, setStatus] = useState<"loading" | "redirecting">("loading");
+
+  // Sem formulario de nome/telefone, esse e o unico ponto por onde todo
+  // visitante que vai pro checkout obrigatoriamente passa. Mapeia o evento
+  // de Lead aqui (Meta Pixel + GTM), sem dados pessoais.
+  useEffect(() => {
+    trackLead({ value: 29.90, contentCategory: "Imersão Cronograma Obra Pronta" });
+    trackLeadGenerated("checkout_redirect_obra_pronta");
+  }, []);
 
   useEffect(() => {
     const originalTitle = document.title;
