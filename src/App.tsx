@@ -14,6 +14,7 @@ import NatalLandingV2 from "./pages/NatalLandingV2";
 import NotFound from "./pages/NotFound";
 import AdminEmails from "./pages/AdminEmails";
 import CheckoutBridge from "./pages/CheckoutBridge";
+import CheckoutBridgeObraPronta from "./pages/CheckoutBridgeObraPronta";
 import BackgroundRemover from "./pages/BackgroundRemover";
 import MentoriaLanding from "./pages/MentoriaLanding";
 import Relatorio from "./pages/Relatorio";
@@ -64,6 +65,7 @@ const App = () => {
           <Route path="/mentoria" element={<MentoriaLanding />} />
           <Route path="/admin/emails" element={<AdminEmails />} />
           <Route path="/checkout/:product" element={<CheckoutBridge />} />
+          <Route path="/redirecionando" element={<CheckoutBridgeObraPronta />} />
           <Route path="/tools/background-remover" element={<BackgroundRemover />} />
           <Route path="/relatorio" element={<Relatorio />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

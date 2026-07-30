@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import Header from "@/components/landing/Header";
 import HeroSection from "@/components/landing/HeroSection";
@@ -15,7 +16,7 @@ import Footer from "@/components/landing/Footer";
 import { initAllTracking, trackCTAClick, trackSectionView, trackBeginCheckout } from "@/lib/gtm-tracking";
 import { trackInitiateCheckout } from "@/lib/tracking";
 import { CTAProvider } from "@/lib/cta-context";
-import { FAQ_ITEMS_OBRA_PRONTA, OBRA_PRONTA_CHECKOUT_URL } from "@/lib/constants-obra-pronta";
+import { FAQ_ITEMS_OBRA_PRONTA } from "@/lib/constants-obra-pronta";
 
 // Lockup de texto temporário (sem imagem de logo): a logo oficial da Natal
 // tem "ATÉ O NATAL" escrito na própria imagem, incompatível com o novo nome
@@ -39,6 +40,7 @@ const FooterTextLogo = () => (
 
 const Index = () => {
   const [showStickyCTA, setShowStickyCTA] = useState(false);
+  const navigate = useNavigate();
 
   // Initialize GTM tracking on mount
   useEffect(() => {
@@ -98,19 +100,16 @@ const Index = () => {
     };
   }, []);
 
-  // CTA unico da pagina: sem formulario de nome/telefone, todo clique vai
-  // direto para o checkout do Hotmart, preservando UTMs/fbclid da URL atual
-  // para nao perder atribuicao de campanha.
+  // CTA unico da pagina: sem formulario de nome/telefone, todo clique dispara
+  // o tracking de conversao e navega (client-side, mesma origem) para a
+  // pagina intermediaria de redirecionamento, que so entao manda pro
+  // checkout externo do Hotmart. Isso garante que os eventos de tracking
+  // terminem de sair antes da navegacao externa cortar a conexao.
   const handleCTA = () => {
     trackInitiateCheckout(29.90);
     trackBeginCheckout(29.90, "Imersão Cronograma Obra Pronta");
-    const url = new URL(OBRA_PRONTA_CHECKOUT_URL);
     const currentParams = new URLSearchParams(window.location.search);
-    ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid"].forEach((param) => {
-      const val = currentParams.get(param);
-      if (val) url.searchParams.set(param, val);
-    });
-    window.location.href = url.toString();
+    navigate(`/redirecionando?${currentParams.toString()}`);
   };
 
   const handleStickyCTA = () => {
