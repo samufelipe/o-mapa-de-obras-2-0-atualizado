@@ -259,3 +259,21 @@
 .natal-theme .border-green-600 {
   border-color: hsl(var(--cta));
 }
+
+/*
+ * Excecao pontual pra LP oficial (Index.tsx, inscricao.imersao...): mantem
+ * os CTAs no verde original em vez do vermelho Natal, sem afetar as paginas
+ * da Natal (que continuam usando a regra acima). Precisa das duas classes
+ * juntas na raiz (natal-theme + cta-green), so aplicado no Index.tsx.
+ */
+.natal-theme.cta-green .bg-green-600 {
+  background-color: #16a34a;
+}
+
+.natal-theme.cta-green .hover\:bg-green-700:hover {
+  background-color: #15803d;
+}
+
+.natal-theme.cta-green .border-green-600 {
+  border-color: #16a34a;
+}

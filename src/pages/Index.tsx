@@ -103,7 +103,7 @@ const Index = () => {
   };
 
   return (
-    <div className="natal-theme min-h-screen bg-background text-foreground">
+    <div className="natal-theme cta-green min-h-screen bg-background text-foreground">
       <Header logoNode={<HeaderTextLogo />} />
       <HeroSection />
       <TestimonialsSection />
