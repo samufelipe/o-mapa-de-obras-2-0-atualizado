@@ -109,8 +109,6 @@ const HeroSection = () => {
               features={heroFeatures}
               priceOriginal="R$ 503,90"
               priceFinal="R$ 29,90"
-              urgencyLabel="ENCERRA 08/08"
-              daysLeft={timeLeft.d}
               ctaLabel="Reservar Meu Lugar"
               ctaTrackingName="hero_pricing_card"
               ctaTrackingLocation="hero_form"
