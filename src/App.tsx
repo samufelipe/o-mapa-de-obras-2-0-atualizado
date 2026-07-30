@@ -15,6 +15,7 @@ import NotFound from "./pages/NotFound";
 import AdminEmails from "./pages/AdminEmails";
 import CheckoutBridge from "./pages/CheckoutBridge";
 import CheckoutBridgeObraPronta from "./pages/CheckoutBridgeObraPronta";
+import ObraProntaQuizLanding from "./pages/ObraProntaQuizLanding";
 import BackgroundRemover from "./pages/BackgroundRemover";
 import MentoriaLanding from "./pages/MentoriaLanding";
 import Relatorio from "./pages/Relatorio";
@@ -66,6 +67,12 @@ const App = () => {
           <Route path="/admin/emails" element={<AdminEmails />} />
           <Route path="/checkout/:product" element={<CheckoutBridge />} />
           <Route path="/redirecionando" element={<CheckoutBridgeObraPronta />} />
+          <Route path="/quiz" element={<ObraProntaQuizLanding />} />
+          <Route path="/quiz/pergunta-1" element={<ObraProntaQuizLanding />} />
+          <Route path="/quiz/pergunta-2" element={<ObraProntaQuizLanding />} />
+          <Route path="/quiz/perfil" element={<ObraProntaQuizLanding />} />
+          <Route path="/quiz/video" element={<ObraProntaQuizLanding />} />
+          <Route path="/quiz/depoimentos" element={<ObraProntaQuizLanding />} />
           <Route path="/tools/background-remover" element={<BackgroundRemover />} />
           <Route path="/relatorio" element={<Relatorio />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
