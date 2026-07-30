@@ -15,12 +15,42 @@ import FAQSection from "@/components/landing/FAQSection";
 import Footer from "@/components/landing/Footer";
 import { initAllTracking, trackCTAClick, trackSectionView } from "@/lib/gtm-tracking";
 
+// Lockup de texto temporário (sem imagem de logo): a logo oficial da Natal
+// tem "ATÉ O NATAL" escrito na própria imagem, incompatível com o novo nome
+// "Imersão Cronograma Obra Pronta". Troca por uma logo de verdade quando
+// existir uma sem elementos natalinos.
+const HeaderTextLogo = () => (
+  <span className="flex flex-col items-start leading-none">
+    <span className="text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase text-foreground">Imersão</span>
+    <span className="text-lg md:text-2xl font-bold tracking-tight uppercase text-primary">Cronograma</span>
+    <span className="text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase text-foreground">Obra Pronta</span>
+  </span>
+);
+
+const FooterTextLogo = () => (
+  <div className="text-center">
+    <span className="block text-xs font-bold tracking-[0.3em] uppercase text-foreground/70">Imersão</span>
+    <span className="block text-3xl md:text-4xl font-bold tracking-tight uppercase text-primary">Cronograma</span>
+    <span className="block text-xs font-bold tracking-[0.3em] uppercase text-foreground/70">Obra Pronta</span>
+  </div>
+);
+
 const Index = () => {
   const [showStickyCTA, setShowStickyCTA] = useState(false);
 
   // Initialize GTM tracking on mount
   useEffect(() => {
     initAllTracking();
+  }, []);
+
+  // Título da aba: novo nome, sem menção a Natal. Favicon fica intocado de
+  // propósito (mantém o que já existe em inscricao.imersao...).
+  useEffect(() => {
+    const originalTitle = document.title;
+    document.title = "Imersão Cronograma Obra Pronta | Inovando na Sua Obra";
+    return () => {
+      document.title = originalTitle;
+    };
   }, []);
 
   useEffect(() => {
@@ -73,8 +103,8 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <Header />
+    <div className="natal-theme min-h-screen bg-background text-foreground">
+      <Header logoNode={<HeaderTextLogo />} />
       <HeroSection />
       <TestimonialsSection />
       <ProblemsSection />
@@ -86,7 +116,7 @@ const Index = () => {
       <BonusSection />
       <GuaranteeSection />
       <FAQSection />
-      <Footer />
+      <Footer productLabel="Imersão Cronograma Obra Pronta" logoNode={<FooterTextLogo />} />
 
       {/* Sticky Mobile CTA */}
       <div className={`fixed bottom-0 left-0 w-full z-[100] md:hidden transition-all duration-500 transform bg-background/95 backdrop-blur-sm border-t border-border px-4 py-3 ${showStickyCTA ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
