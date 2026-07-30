@@ -65,29 +65,29 @@ export const PRICING_ITEMS_OBRA_PRONTA = [
   { name: "Acesso ao Grupo VIP", price: "Incluso" },
 ];
 
+// Identico ao FAQ da LP de Natal (NATAL_FAQ, em natal-constants.ts) por pedido
+// da cliente, exceto a resposta de "E se eu não conseguir participar ao vivo?",
+// atualizada com a regra de gravação disponível por 48h. Mantido como copia
+// (em vez de importar de natal-constants.ts) pra nao acoplar as duas ofertas.
 export const FAQ_ITEMS_OBRA_PRONTA = [
   {
-    question: "Como faço para participar da imersão ao vivo?",
-    answer: "A imersão acontecerá AO VIVO pelo Zoom no dia 08/08. Para participar, basta baixar o aplicativo Zoom gratuitamente: no celular, acesse a App Store (iPhone) ou Google Play (Android) e busque por 'Zoom'. No computador, acesse zoom.us/download e instale o 'Zoom Desktop Client'. No dia do evento, você receberá o link de acesso no Grupo VIP do WhatsApp, é só clicar e entrar!"
+    question: "R$ 29,90 é o valor real? Tem pegadinha?",
+    answer: "É o valor real, sem pegadinha. A imersão acontece ao vivo, no dia 08/08, e o acesso é confirmado assim que o pagamento é aprovado."
   },
   {
-    question: "Quando receberei os bônus e materiais?",
-    answer: "As Aulas Preparatórias para Construir seu Cronograma de Obras de Forma Completa são liberadas imediatamente após a confirmação do pagamento. O Modelo de Cronograma e o Guia de 7 Prompts de IA para Obras serão liberados logo após o encerramento da imersão no dia 08/08, garantindo que você saiba exatamente como aplicá-los."
+    question: "Recebo algum material pronto ou é só a live?",
+    answer: "É uma imersão 100% ao vivo. Você aprende tudo o que precisa saber para entregar sua obra no prazo, com a Ingrid e a Fernanda ensinando ao vivo, em vez de receber um material genérico pronto."
   },
   {
-    question: "Como funciona o Grupo VIP de WhatsApp?",
-    answer: "É o nosso canal oficial de avisos. Assim que o pagamento for aprovado, você recebe o link. Lá você receberá todos os comunicados importantes, lembretes e o link direto para a nossa sala de ZOOM no dia do evento."
+    question: "Como eu entro na live do Zoom no dia?",
+    answer: "Depois da confirmação do pagamento, você recebe o link de acesso com antecedência. No dia 08/08, é só clicar no link e entrar."
   },
   {
-    question: "O valor de R$ 29,90 é real? Tem pegadinha?",
-    answer: "É real e sem pegadinhas. Este valor é simbólico para o 1º Lote, criado para reunir arquitetas comprometidas em elevar o nível técnico do mercado. O objetivo é que você conheça nosso método e tenha resultados imediatos na sua próxima obra."
+    question: "E se eu não conseguir participar ao vivo?",
+    answer: "A gravação ficará disponível apenas por 48h. Mas aconselhamos você a reservar o dia inteiro. É ao vivo que você aprende tudo o que precisa saber para entregar sua obra no prazo, tirando dúvidas em tempo real."
   },
   {
-    question: "A imersão será cansativa por ser o dia todo?",
-    answer: "De forma alguma! Nossa dinâmica é focada em blocos curtos de conteúdo denso seguidos de interação e intervalos. Foi projetada para ser o sábado mais produtivo da sua carreira, não uma palestra monótona."
-  },
-  {
-    question: "Como funcionam as aulas preparatórias para construir seu cronograma de obras de forma completa?",
-    answer: "São aulas em vídeo liberadas imediatamente após a confirmação do pagamento. Incluem desde o tutorial de como usar o Zoom até conteúdos sobre o mercado atual, método Inovando, oportunidades para 2026 e quebra de objeções. Foram criadas para você construir a base necessária e chegar no dia 08/08 pronta para absorver o conteúdo avançado da imersão."
+    question: "Tem garantia?",
+    answer: "Sim. Garantia de 7 dias prevista em lei (Código de Defesa do Consumidor): você pode pedir reembolso total, sem burocracia, caso sinta que não é para você."
   }
 ];
