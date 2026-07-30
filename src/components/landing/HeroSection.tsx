@@ -1,50 +1,19 @@
-import { Trophy, Video, Lock, Clock, Users, Star, ShieldCheck, ArrowRight, Loader2, CheckCircle, Check } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
-import { useToast } from "@/hooks/use-toast";
-import { CONFIG } from "@/lib/config";
-import { trackLead, trackInitiateCheckout } from "@/lib/tracking";
-import { applyPhoneMask } from "@/lib/validations";
-import {
-  trackFormStart,
-  trackFormFieldFocus,
-  trackFormFieldComplete,
-  trackFormSubmit,
-  trackFormError,
-  trackBeginCheckout,
-  trackLeadGenerated,
-} from "@/lib/gtm-tracking";
-
-type FormStatus = "idle" | "loading" | "success" | "redirecting";
-
-interface FormData {
-  name: string;
-  phone: string;
-}
-
-interface FormErrors {
-  name?: string;
-  phone?: string;
-}
+import { Trophy, Video, Clock, Users, Star, ShieldCheck } from "lucide-react";
+import { useState, useEffect } from "react";
+import PricingCardObraPronta from "./PricingCardObraPronta";
 
 const DEADLINE = new Date("2026-08-08T23:59:59-03:00");
 
-const valueItems = [
+const heroFeatures = [
   "Imersão Ao Vivo · Sábado 08/08",
   "Aulas Preparatórias para Construir seu Cronograma de Obras de Forma Completa (acesso imediato)",
-  "Planilha Cronograma Completa",
-  "Roteiro de Serviços",
-  "Guia de Fornecedores",
+  "Modelo de Cronograma",
+  "Guia de 7 Prompts de IA para Obras",
+  "Acesso ao Grupo VIP",
 ];
 
 const HeroSection = () => {
-  const { toast } = useToast();
-  const formStarted = useRef(false);
-
   const [timeLeft, setTimeLeft] = useState({ d: 0, h: 0, m: 0, s: 0 });
-  const [formData, setFormData] = useState<FormData>({ name: "", phone: "" });
-  const [errors, setErrors] = useState<FormErrors>({});
-  const [status, setStatus] = useState<FormStatus>("idle");
-  const [touched, setTouched] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     const updateTimer = () => {
@@ -68,130 +37,6 @@ const HeroSection = () => {
     updateTimer();
     return () => clearInterval(timer);
   }, []);
-
-  const validateForm = (): { valid: boolean; errors: FormErrors } => {
-    const errs: FormErrors = {};
-    if (!formData.name || formData.name.trim().length < 3) {
-      errs.name = "Nome deve ter ao menos 3 caracteres";
-    }
-    const phoneDigits = formData.phone.replace(/\D/g, "");
-    if (!phoneDigits || phoneDigits.length < 10) {
-      errs.phone = "WhatsApp inválido";
-    }
-    return { valid: Object.keys(errs).length === 0, errors: errs };
-  };
-
-  const handleFocus = (field: keyof FormData) => {
-    if (!formStarted.current) {
-      formStarted.current = true;
-      trackFormStart();
-    }
-    trackFormFieldFocus(field);
-  };
-
-  const handleChange = (field: keyof FormData, value: string) => {
-    const processed = field === "phone" ? applyPhoneMask(value) : value;
-    setFormData((prev) => ({ ...prev, [field]: processed }));
-    if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }));
-  };
-
-  const handleBlur = (field: keyof FormData) => {
-    setTouched((prev) => ({ ...prev, [field]: true }));
-    if (formData[field]) trackFormFieldComplete(field);
-    const { errors: errs } = validateForm();
-    if (errs[field]) setErrors((prev) => ({ ...prev, [field]: errs[field] }));
-  };
-
-  const getInputClass = (field: keyof FormData) => {
-    const base = "w-full bg-secondary border-b py-3 px-1 text-sm font-medium outline-none transition-colors";
-    if (errors[field] && touched[field]) return `${base} border-destructive text-destructive`;
-    if (touched[field] && formData[field] && !errors[field]) return `${base} border-primary`;
-    return `${base} border-border focus:border-primary`;
-  };
-
-  const redirectToHotmart = () => {
-    setStatus("redirecting");
-    trackInitiateCheckout(29.90);
-    trackBeginCheckout();
-
-    setTimeout(() => {
-      const phoneClean = formData.phone.replace(/\D/g, "");
-      const syntheticEmail = `${phoneClean}@wpp.registro.co`;
-
-      const params = new URLSearchParams({
-        name: formData.name,
-        email: syntheticEmail,
-        phone: phoneClean,
-      });
-
-      const currentParams = new URLSearchParams(window.location.search);
-      ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid"].forEach((param) => {
-        const val = currentParams.get(param);
-        if (val) params.set(param, val);
-      });
-
-      window.location.href = `/checkout/imersao?${params.toString()}`;
-    }, CONFIG.form.redirectDelay);
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const { valid, errors: errs } = validateForm();
-
-    if (!valid) {
-      setErrors(errs);
-      setTouched({ name: true, phone: true });
-      trackFormError(errs as Record<string, string>);
-      toast({
-        title: "Campos inválidos",
-        description: "Por favor, corrija os campos destacados.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setStatus("loading");
-    setErrors({});
-
-    try {
-      const phoneClean = formData.phone.replace(/\D/g, "");
-      const syntheticEmail = `${phoneClean}@wpp.registro.co`;
-      trackLead({ name: formData.name, email: syntheticEmail, phone: formData.phone });
-      trackFormSubmit({ name: formData.name, email: syntheticEmail, phone: formData.phone });
-      trackLeadGenerated("landing_page_form");
-      setStatus("success");
-      toast({ title: "Dados registrados!", description: "Redirecionando para o pagamento..." });
-      setTimeout(redirectToHotmart, 300);
-    } catch {
-      setStatus("idle");
-      toast({
-        title: "Erro ao processar",
-        description: "Tente novamente em alguns segundos.",
-        variant: "destructive",
-      });
-    }
-  };
-
-  if (status === "redirecting") {
-    return (
-      <section id="hero" className="relative pt-28 pb-16 md:pt-40 md:pb-24 bg-background overflow-hidden">
-        <div className="bg-grid-overlay"></div>
-        <div className="bg-grain absolute inset-0 pointer-events-none"></div>
-        <div className="container mx-auto px-4 md:px-6 relative z-10">
-          <div className="flex flex-col items-center justify-center min-h-[400px] animate-fade-up">
-            <div className="bg-card border-2 border-foreground p-8 md:p-12 shadow-gold text-center max-w-md">
-              <Loader2 className="w-12 h-12 text-primary animate-spin mx-auto mb-6" />
-              <h2 className="text-xl font-bold uppercase tracking-tight mb-2">{CONFIG.form.redirectMessage}</h2>
-              <p className="text-sm text-muted-foreground">Complete o pagamento para confirmar sua inscrição.</p>
-              <div className="mt-6 flex items-center justify-center gap-2 text-xs font-bold text-muted-foreground uppercase tracking-widest">
-                <Lock className="w-3.5 h-3.5" /> Ambiente 100% Seguro
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section id="hero" className="relative pt-28 pb-16 md:pt-40 md:pb-24 bg-background overflow-hidden">
@@ -254,110 +99,22 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Right Form Card */}
-          <div id="registration-form" className="scroll-mt-24 animate-fade-up">
-            <div className="bg-card border-2 border-foreground p-8 md:p-10 shadow-premium max-w-md mx-auto">
-              <div className="mb-6 text-center lg:text-left">
-                <h2 className="text-xl font-bold uppercase tracking-tight">Vaga Exclusiva</h2>
-                <p className="text-sm md:text-base font-bold text-muted-foreground uppercase tracking-widest">
-                  Imersão Ao Vivo • Sábado 08/08
-                </p>
-              </div>
-
-              {/* Value stack */}
-              <div className="mb-5 bg-secondary border border-border p-4 space-y-1.5">
-                <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2">
-                  Incluso na sua vaga:
-                </p>
-                {valueItems.map((item) => (
-                  <div key={item} className="flex items-start gap-2">
-                    <Check className="w-3.5 h-3.5 text-primary mt-0.5 flex-shrink-0" />
-                    <span className="text-xs font-medium text-foreground">{item}</span>
-                  </div>
-                ))}
-              </div>
-
-              <form onSubmit={handleSubmit} className="space-y-4" data-track="lead_form" data-track-location="hero">
-                <div>
-                  <input
-                    type="text"
-                    placeholder="Nome Completo"
-                    value={formData.name}
-                    onChange={(e) => handleChange("name", e.target.value)}
-                    onFocus={() => handleFocus("name")}
-                    onBlur={() => handleBlur("name")}
-                    disabled={status === "loading" || status === "success"}
-                    className={getInputClass("name")}
-                    data-track="form_field_name"
-                  />
-                  {errors.name && touched.name && (
-                    <p className="text-xs text-destructive mt-1 font-medium">{errors.name}</p>
-                  )}
-                </div>
-
-                <div>
-                  <input
-                    type="tel"
-                    placeholder="WhatsApp (99) 99999-9999"
-                    value={formData.phone}
-                    onChange={(e) => handleChange("phone", e.target.value)}
-                    onFocus={() => handleFocus("phone")}
-                    onBlur={() => handleBlur("phone")}
-                    disabled={status === "loading" || status === "success"}
-                    className={getInputClass("phone")}
-                    data-track="form_field_phone"
-                  />
-                  {errors.phone && touched.phone && (
-                    <p className="text-xs text-destructive mt-1 font-medium">{errors.phone}</p>
-                  )}
-                  <p className="text-xs text-muted-foreground mt-1.5">
-                    Usamos apenas para confirmar sua vaga por WhatsApp.
-                  </p>
-                </div>
-
-                <div className="pt-3">
-                  <div className="flex justify-between items-end mb-4">
-                    <div className="flex flex-col">
-                      <span className="text-xs text-muted-foreground font-medium">
-                        Valor total:{" "}
-                        <span className="line-through">R$ 503,90</span>
-                      </span>
-                      <span className="text-3xl font-bold tracking-tighter animate-pulse-slow">R$ 29,90</span>
-                    </div>
-                    <div className="flex flex-col items-end gap-1">
-                      <span className="text-xs font-bold text-primary bg-foreground px-2 py-1 uppercase tracking-widest shadow-premium">
-                        ENCERRA 08/08
-                      </span>
-                      <span className="text-xs text-muted-foreground font-medium">
-                        Faltam {timeLeft.d} dias
-                      </span>
-                    </div>
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={status === "loading" || status === "success"}
-                    className="w-full bg-green-600 text-white py-4 flex items-center justify-center gap-2 text-sm font-bold tracking-widest hover:bg-green-700 transition-all duration-300 border-2 border-green-600 shadow-premium hover:shadow-premium-gold hover:-translate-y-1 uppercase group disabled:opacity-70 disabled:cursor-not-allowed"
-                    data-track="submit_button"
-                    data-track-location="hero_form"
-                  >
-                    {status === "loading" && (
-                      <><Loader2 className="w-4 h-4 animate-spin" /> PROCESSANDO...</>
-                    )}
-                    {status === "success" && (
-                      <><CheckCircle className="w-4 h-4" /> REDIRECIONANDO...</>
-                    )}
-                    {status === "idle" && (
-                      <>RESERVAR MEU LUGAR <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" /></>
-                    )}
-                  </button>
-                </div>
-              </form>
-
-              <p className="mt-4 text-center text-xs font-bold text-muted-foreground uppercase tracking-widest flex items-center justify-center gap-1">
-                <Lock className="w-3 h-3" /> Pagamento 100% Seguro via Hotmart
-              </p>
-            </div>
+          {/* Right Pricing Card */}
+          <div className="animate-fade-up">
+            <PricingCardObraPronta
+              variant="light"
+              className="max-w-md mx-auto"
+              eyebrow="Vaga Exclusiva"
+              title="Imersão Ao Vivo · Sábado 08/08"
+              features={heroFeatures}
+              priceOriginal="R$ 503,90"
+              priceFinal="R$ 29,90"
+              urgencyLabel="ENCERRA 08/08"
+              daysLeft={timeLeft.d}
+              ctaLabel="Reservar Meu Lugar"
+              ctaTrackingName="hero_pricing_card"
+              ctaTrackingLocation="hero_form"
+            />
           </div>
         </div>
       </div>

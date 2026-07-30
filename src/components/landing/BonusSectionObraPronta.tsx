@@ -1,12 +1,10 @@
-import { FileSpreadsheet, ClipboardList, FileText, Clock, Plus, ArrowRight, PlayCircle } from "lucide-react";
+import { ClipboardList, FileText, Clock, PlayCircle } from "lucide-react";
 import { BONUSES_OBRA_PRONTA, PRICING_ITEMS_OBRA_PRONTA } from "@/lib/constants-obra-pronta";
-import { useCTA } from "@/lib/cta-context";
+import PricingCardObraPronta from "./PricingCardObraPronta";
 
 const bonusIcons = [PlayCircle, ClipboardList, FileText];
 
 const BonusSectionObraPronta = () => {
-  const handleCTA = useCTA();
-
   return (
     <section id="bonus" className="py-20 bg-background border-t border-border reveal">
       <div className="container mx-auto px-4 max-w-5xl text-center">
@@ -43,45 +41,19 @@ const BonusSectionObraPronta = () => {
         </div>
 
         {/* Pricing Stack */}
-        <div className="max-w-xl mx-auto bg-foreground border-2 border-primary p-8 md:p-12 shadow-premium relative overflow-hidden">
-          <div className="absolute top-0 right-0 bg-primary text-foreground px-4 py-1 text-xs font-bold uppercase tracking-widest transform rotate-45 translate-x-8 translate-y-4">
-            OFERTA ATIVA
-          </div>
-
-          <div className="space-y-3 mb-8 text-left border-b border-background/20 pb-8">
-            {PRICING_ITEMS_OBRA_PRONTA.map((item, index) => (
-              <div key={index} className="flex justify-between items-center text-background/60 text-sm md:text-base font-bold uppercase tracking-wider">
-                <span className="flex items-center gap-1">
-                  {index > 0 && <Plus className="inline w-4 h-4 mr-1" />}
-                  {item.name}
-                </span>
-                <span className={item.price === "Incluso" ? "text-primary bg-primary/10 px-2 py-0.5" : "text-background/40"}>
-                  {item.price}
-                </span>
-              </div>
-            ))}
-          </div>
-
-          <div className="mb-8 text-center">
-            <p className="text-background/60 text-xs font-bold uppercase tracking-widest mb-1">
-              Preço total se comprado separadamente: <span className="line-through text-background/40">R$ 503,90</span>
-            </p>
-
-            <div className="mb-2">
-              <span className="text-primary text-sm md:text-base font-bold uppercase tracking-[0.3em] block mb-1">INVESTIMENTO ÚNICO</span>
-              <h3 className="text-background text-4xl md:text-5xl font-bold tracking-tighter uppercase leading-tight animate-pulse-slow">
-                APENAS R$ 29,90
-              </h3>
-            </div>
-          </div>
-
-          <button
-            onClick={handleCTA}
-            className="w-full bg-green-600 text-white py-5 text-sm font-bold uppercase tracking-[0.2em] hover:bg-green-700 transition-all duration-300 border-2 border-green-600 shadow-premium hover:shadow-premium-gold hover:-translate-y-1 active:scale-95 group flex items-center justify-center gap-2"
-          >
-            GARANTIR MINHA VAGA AGORA <ArrowRight className="inline w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </button>
-        </div>
+        <PricingCardObraPronta
+          variant="dark"
+          className="max-w-xl mx-auto text-left"
+          badgeLabel="Oferta Ativa"
+          title="Investimento Único"
+          description="Tudo o que você precisa para aplicar o método imediatamente"
+          features={PRICING_ITEMS_OBRA_PRONTA.map((item) => ({ label: item.name, price: item.price }))}
+          priceOriginal="R$ 503,90"
+          priceFinal="R$ 29,90"
+          ctaLabel="Garantir Minha Vaga Agora"
+          ctaTrackingName="bonus_pricing_card"
+          ctaTrackingLocation="bonus_section"
+        />
       </div>
     </section>
   );

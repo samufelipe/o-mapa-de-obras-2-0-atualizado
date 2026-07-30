@@ -12,8 +12,10 @@ import BonusSection from "@/components/landing/BonusSectionObraPronta";
 import GuaranteeSection from "@/components/landing/GuaranteeSectionObraPronta";
 import FAQSection from "@/components/landing/FAQSection";
 import Footer from "@/components/landing/Footer";
-import { initAllTracking, trackCTAClick, trackSectionView } from "@/lib/gtm-tracking";
-import { FAQ_ITEMS_OBRA_PRONTA } from "@/lib/constants-obra-pronta";
+import { initAllTracking, trackCTAClick, trackSectionView, trackBeginCheckout } from "@/lib/gtm-tracking";
+import { trackInitiateCheckout } from "@/lib/tracking";
+import { CTAProvider } from "@/lib/cta-context";
+import { FAQ_ITEMS_OBRA_PRONTA, OBRA_PRONTA_CHECKOUT_URL } from "@/lib/constants-obra-pronta";
 
 // Lockup de texto temporário (sem imagem de logo): a logo oficial da Natal
 // tem "ATÉ O NATAL" escrito na própria imagem, incompatível com o novo nome
@@ -96,13 +98,28 @@ const Index = () => {
     };
   }, []);
 
-  const scrollToForm = () => {
+  // CTA unico da pagina: sem formulario de nome/telefone, todo clique vai
+  // direto para o checkout do Hotmart, preservando UTMs/fbclid da URL atual
+  // para nao perder atribuicao de campanha.
+  const handleCTA = () => {
+    trackInitiateCheckout(29.90);
+    trackBeginCheckout(29.90, "Imersão Cronograma Obra Pronta");
+    const url = new URL(OBRA_PRONTA_CHECKOUT_URL);
+    const currentParams = new URLSearchParams(window.location.search);
+    ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid"].forEach((param) => {
+      const val = currentParams.get(param);
+      if (val) url.searchParams.set(param, val);
+    });
+    window.location.href = url.toString();
+  };
+
+  const handleStickyCTA = () => {
     trackCTAClick("sticky_cta", "mobile_bottom", "QUERO MINHA VAGA AGORA");
-    const el = document.getElementById('registration-form');
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    handleCTA();
   };
 
   return (
+    <CTAProvider value={handleCTA}>
     <div className="natal-theme cta-green min-h-screen bg-background text-foreground">
       <Header logoNode={<HeaderTextLogo />} />
       <HeroSection />
@@ -120,7 +137,7 @@ const Index = () => {
       {/* Sticky Mobile CTA */}
       <div className={`fixed bottom-0 left-0 w-full z-[100] md:hidden transition-all duration-500 transform bg-background/95 backdrop-blur-sm border-t border-border px-4 py-3 ${showStickyCTA ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
         <button
-          onClick={scrollToForm}
+          onClick={handleStickyCTA}
           className="w-full bg-green-600 text-white py-4 px-6 text-sm font-black uppercase tracking-widest shadow-2xl border-2 border-green-600 flex items-center justify-between group active:scale-95 hover:bg-green-700 transition-colors duration-300"
         >
           <span>QUERO MINHA VAGA AGORA</span>
@@ -128,6 +145,7 @@ const Index = () => {
         </button>
       </div>
     </div>
+    </CTAProvider>
   );
 };
 

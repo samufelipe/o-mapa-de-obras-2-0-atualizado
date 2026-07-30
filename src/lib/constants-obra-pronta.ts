@@ -2,6 +2,11 @@
 // Separado de constants.ts de proposito: /v2 e /v3 continuam usando a oferta antiga
 // (nome, preco e data anteriores) sem qualquer alteracao.
 
+// Checkout direto (sem formulario de nome/telefone): todos os CTAs da pagina
+// oficial vao direto para esse link, exclusivo dessa oferta.
+export const OBRA_PRONTA_CHECKOUT_URL =
+  "https://pay.hotmart.com/T106814287G?checkoutMode=10&bid=1785439547163";
+
 export const AGENDA_OBRA_PRONTA = [
   {
     day: "MÓDULO MANHÃ",
@@ -45,7 +50,7 @@ export const BONUSES_OBRA_PRONTA = [
     release: "LIBERADO PÓS-LIVE (08/08)"
   },
   {
-    title: "Guia de Prompts de IA para Obras",
+    title: "Guia de 7 Prompts de IA para Obras",
     value: "R$ 50,00",
     description: "Ferramenta de organização para garantir que nenhum detalhe passe despercebido no levantamento e planejamento da obra.",
     release: "LIBERADO PÓS-LIVE (08/08)"
@@ -56,7 +61,7 @@ export const PRICING_ITEMS_OBRA_PRONTA = [
   { name: "Imersão Cronograma Obra Pronta (Ao Vivo)", price: "R$ 197,00" },
   { name: "Aulas Preparatórias para Construir seu Cronograma de Obras de Forma Completa (Acesso Imediato)", price: "R$ 197,00" },
   { name: "Modelo de Cronograma", price: "R$ 59,90" },
-  { name: "Guia de Prompts de IA para Obras", price: "R$ 50,00" },
+  { name: "Guia de 7 Prompts de IA para Obras", price: "R$ 50,00" },
   { name: "Acesso ao Grupo VIP", price: "Incluso" },
 ];
 
@@ -67,7 +72,7 @@ export const FAQ_ITEMS_OBRA_PRONTA = [
   },
   {
     question: "Quando receberei os bônus e materiais?",
-    answer: "As Aulas Preparatórias para Construir seu Cronograma de Obras de Forma Completa são liberadas imediatamente após a confirmação do pagamento. O Modelo de Cronograma e o Guia de Prompts de IA para Obras serão liberados logo após o encerramento da imersão no dia 08/08, garantindo que você saiba exatamente como aplicá-los."
+    answer: "As Aulas Preparatórias para Construir seu Cronograma de Obras de Forma Completa são liberadas imediatamente após a confirmação do pagamento. O Modelo de Cronograma e o Guia de 7 Prompts de IA para Obras serão liberados logo após o encerramento da imersão no dia 08/08, garantindo que você saiba exatamente como aplicá-los."
   },
   {
     question: "Como funciona o Grupo VIP de WhatsApp?",
