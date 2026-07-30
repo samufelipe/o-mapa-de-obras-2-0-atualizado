@@ -21,9 +21,9 @@ import { FAQ_ITEMS_OBRA_PRONTA } from "@/lib/constants-obra-pronta";
 // existir uma sem elementos natalinos.
 const HeaderTextLogo = () => (
   <span className="flex flex-col items-start leading-none">
-    <span className="text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase text-foreground">Imersão</span>
-    <span className="text-lg md:text-2xl font-bold tracking-tight uppercase text-primary">Cronograma</span>
-    <span className="text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase text-foreground">Obra Pronta</span>
+    <span className="block text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-foreground/70">Imersão</span>
+    <span className="block text-lg md:text-2xl font-bold tracking-tight uppercase text-primary">Cronograma</span>
+    <span className="block text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-foreground/70">Obra Pronta</span>
   </span>
 );
 
