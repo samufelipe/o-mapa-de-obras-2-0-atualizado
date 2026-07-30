@@ -82,10 +82,10 @@ const HeroSection = () => {
             <div className="text-sm md:text-base text-muted-foreground max-w-lg mx-auto lg:mx-0 font-medium leading-relaxed space-y-3">
               <p>
                 A virada de chave que toda arquiteta precisa para dominar suas obras com{" "}
-                <strong className="text-foreground">mais autoridade, previsibilidade e valorização.</strong>
+                <strong className="text-foreground">mais autoridade, previsibilidade e valorização no 2º semestre de 2026.</strong>
               </p>
               <p className="text-primary font-bold">
-                + aulas preparatórias para construir seu cronograma de obras de forma completa, com acesso imediato para você chegar pronta.
+                Estratégias para você entregar suas obras com a sequência correta até o fim do ano.
               </p>
             </div>
 
