@@ -33,7 +33,7 @@ const StepsSectionObraPronta = () => {
         <div className="mb-16 space-y-4">
           <span className="text-primary font-bold text-xs uppercase tracking-[0.4em] block">CLAREZA ABSOLUTA</span>
           <h2 className="text-3xl md:text-4xl font-bold uppercase tracking-tight">O Caminho da sua Transformação</h2>
-          <p className="text-sm md:text-base font-bold text-muted-foreground uppercase tracking-widest">Veja o que acontece no minuto seguinte à sua inscrição</p>
+          <p className="text-base md:text-lg font-bold text-muted-foreground uppercase tracking-widest">Veja o que acontece no minuto seguinte à sua inscrição</p>
           <div className="w-12 h-1 bg-primary mx-auto"></div>
         </div>
 
@@ -47,7 +47,7 @@ const StepsSectionObraPronta = () => {
                 <step.icon className="w-7 h-7" />
               </div>
               <h4 className="text-sm font-bold uppercase tracking-widest mb-3">{step.title}</h4>
-              <p className="text-sm text-muted-foreground font-medium leading-relaxed">{step.desc}</p>
+              <p className="text-sm sm:text-base text-muted-foreground font-medium leading-relaxed">{step.desc}</p>
             </div>
           ))}
         </div>
@@ -59,7 +59,7 @@ const StepsSectionObraPronta = () => {
           >
             QUERO MEU ACESSO IMEDIATO <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
-          <p className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest">Inscrição confirmada via Hotmart</p>
+          <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Inscrição confirmada via Hotmart</p>
         </div>
       </div>
     </section>

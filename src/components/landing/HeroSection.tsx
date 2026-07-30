@@ -79,7 +79,7 @@ const HeroSection = () => {
               Domine a sequência exata de uma reforma de interiores em apenas um dia.
             </h2>
 
-            <div className="text-sm md:text-base text-muted-foreground max-w-lg mx-auto lg:mx-0 font-medium leading-relaxed space-y-3">
+            <div className="text-base md:text-lg text-muted-foreground max-w-lg mx-auto lg:mx-0 font-medium leading-relaxed space-y-3">
               <p>
                 A virada de chave que toda arquiteta precisa para dominar suas obras com{" "}
                 <strong className="text-foreground">mais autoridade, previsibilidade e valorização no 2º semestre de 2026.</strong>

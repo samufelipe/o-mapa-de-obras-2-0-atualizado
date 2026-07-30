@@ -22,9 +22,9 @@ const AboutSectionObraPronta = () => {
           <div className="space-y-6 md:space-y-8">
             <span className="text-primary font-bold text-xs uppercase tracking-[0.3em] block">DE ARQUITETA PARA ARQUITETA</span>
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight leading-tight">
-              Criamos o <span className="text-primary italic">Cronograma Obra Pronta</span> como a <br className="hidden md:block" /> ponte prática que você precisa.
+              Todo Arquiteto deve saber de obra para ser valorizado
             </h2>
-            <div className="space-y-4 text-sm md:text-base text-muted-foreground font-medium leading-relaxed">
+            <div className="space-y-4 text-base md:text-lg text-muted-foreground font-medium leading-relaxed">
               <p>
                 Somos <span className="text-foreground font-bold">Ingrid Zarza e Fernanda Bradaschia</span>. Com mais de <span className="text-foreground font-bold">250 execuções entregues</span>, descobrimos que a chave do sucesso na obra não é o improviso, mas o <strong>conhecimento estratégico do fluxo de serviços</strong>.
               </p>

@@ -14,7 +14,7 @@ const GuaranteeSectionObraPronta = () => {
           </div>
           <div className="text-left space-y-3">
             <h2 className="text-2xl md:text-3xl font-bold uppercase tracking-tight">Garantia Incondicional de 7 Dias</h2>
-            <p className="text-sm md:text-base text-muted-foreground font-medium leading-relaxed">
+            <p className="text-base md:text-lg text-muted-foreground font-medium leading-relaxed">
               Inscreva-se com tranquilidade absoluta. Se você participar da imersão e sentir que o conteúdo não é para você, basta solicitar o reembolso total em até 7 dias. O risco é todo nosso.
             </p>
           </div>

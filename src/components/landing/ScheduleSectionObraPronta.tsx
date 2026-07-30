@@ -21,7 +21,7 @@ const ScheduleSectionObraPronta = () => {
       <div className="container mx-auto px-4 max-w-4xl text-center">
         <div className="mb-16 space-y-4">
           <h2 className="text-3xl md:text-4xl font-bold uppercase tracking-tight">Como Vai Ser a Imersão</h2>
-          <p className="text-sm md:text-base font-bold text-muted-foreground uppercase tracking-widest">Um dia inteiro focado na sua transformação técnica</p>
+          <p className="text-base md:text-lg font-bold text-muted-foreground uppercase tracking-widest">Um dia inteiro focado na sua transformação técnica</p>
           <div className="w-12 h-1 bg-primary mx-auto"></div>
         </div>
 
@@ -49,7 +49,7 @@ const ScheduleSectionObraPronta = () => {
           >
             QUERO GARANTIR MINHA VAGA NO ZOOM <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
-          <span className="text-[11px] font-bold bg-primary/20 px-3 py-1 uppercase tracking-widest">Vagas Limitadas pela capacidade da sala</span>
+          <span className="text-xs font-bold bg-primary/20 px-3 py-1 uppercase tracking-widest">Vagas Limitadas pela capacidade da sala</span>
         </div>
       </div>
     </section>
