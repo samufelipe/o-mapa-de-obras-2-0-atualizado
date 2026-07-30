@@ -22,7 +22,7 @@ import { FAQ_ITEMS_OBRA_PRONTA } from "@/lib/constants-obra-pronta";
 const HeaderTextLogo = () => (
   <span className="flex flex-col items-start leading-none">
     <span className="block text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-foreground/70">Imersão</span>
-    <span className="block text-lg md:text-2xl font-bold tracking-tight uppercase text-primary">Cronograma</span>
+    <span className="block -ml-0.5 md:-ml-1 text-lg md:text-2xl font-bold tracking-tight uppercase text-primary">Cronograma</span>
     <span className="block text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-foreground/70">Obra Pronta</span>
   </span>
 );
