@@ -3,17 +3,17 @@ import { ArrowRight } from "lucide-react";
 import Header from "@/components/landing/Header";
 import HeroSection from "@/components/landing/HeroSection";
 import ProblemsSection from "@/components/landing/ProblemsSection";
-import AboutSection from "@/components/landing/AboutSection";
+import AboutSection from "@/components/landing/AboutSectionObraPronta";
 import QualificationSection from "@/components/landing/QualificationSection";
-import StepsSection from "@/components/landing/StepsSection";
-import ScheduleSection from "@/components/landing/ScheduleSection";
-import TransformationSection from "@/components/landing/TransformationSection";
+import StepsSection from "@/components/landing/StepsSectionObraPronta";
+import ScheduleSection from "@/components/landing/ScheduleSectionObraPronta";
 import TestimonialsSection from "@/components/landing/TestimonialsSection";
-import BonusSection from "@/components/landing/BonusSection";
-import GuaranteeSection from "@/components/landing/GuaranteeSection";
+import BonusSection from "@/components/landing/BonusSectionObraPronta";
+import GuaranteeSection from "@/components/landing/GuaranteeSectionObraPronta";
 import FAQSection from "@/components/landing/FAQSection";
 import Footer from "@/components/landing/Footer";
 import { initAllTracking, trackCTAClick, trackSectionView } from "@/lib/gtm-tracking";
+import { FAQ_ITEMS_OBRA_PRONTA } from "@/lib/constants-obra-pronta";
 
 // Lockup de texto temporário (sem imagem de logo): a logo oficial da Natal
 // tem "ATÉ O NATAL" escrito na própria imagem, incompatível com o novo nome
@@ -112,10 +112,9 @@ const Index = () => {
       <QualificationSection />
       <StepsSection />
       <ScheduleSection />
-      <TransformationSection />
       <BonusSection />
       <GuaranteeSection />
-      <FAQSection />
+      <FAQSection items={FAQ_ITEMS_OBRA_PRONTA} />
       <Footer productLabel="Imersão Cronograma Obra Pronta" logoNode={<FooterTextLogo />} />
 
       {/* Sticky Mobile CTA */}

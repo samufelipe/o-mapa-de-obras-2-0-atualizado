@@ -26,11 +26,11 @@ interface FormErrors {
   phone?: string;
 }
 
-const DEADLINE = new Date("2026-05-30T23:59:59-03:00");
+const DEADLINE = new Date("2026-08-08T23:59:59-03:00");
 
 const valueItems = [
-  "Imersão Ao Vivo · Sábado 30/05",
-  "8 Aulas Preparatórias (acesso imediato)",
+  "Imersão Ao Vivo · Sábado 08/08",
+  "Aulas Preparatórias para Construir seu Cronograma de Obras de Forma Completa (acesso imediato)",
   "Planilha Cronograma Completa",
   "Roteiro de Serviços",
   "Guia de Fornecedores",
@@ -111,7 +111,7 @@ const HeroSection = () => {
 
   const redirectToHotmart = () => {
     setStatus("redirecting");
-    trackInitiateCheckout(39.90);
+    trackInitiateCheckout(29.90);
     trackBeginCheckout();
 
     setTimeout(() => {
@@ -217,13 +217,13 @@ const HeroSection = () => {
                 className="text-primary italic block animate-fade-in"
                 style={{ animationDelay: "0.1s", animationFillMode: "both" }}
               >
-                Imersão Cronograma 2.0
+                Imersão Cronograma
               </span>
               <span
                 className="text-primary italic block text-xl md:text-3xl lg:text-4xl animate-fade-in"
                 style={{ animationDelay: "0.3s", animationFillMode: "both" }}
               >
-                O Mapa da Obra de Interiores
+                Obra Pronta
               </span>
             </h1>
 
@@ -240,7 +240,7 @@ const HeroSection = () => {
                 <strong className="text-foreground">mais autoridade, previsibilidade e valorização.</strong>
               </p>
               <p className="text-primary font-bold">
-                + 8 aulas preparatórias com acesso imediato para você chegar pronta.
+                + aulas preparatórias para construir seu cronograma de obras de forma completa, com acesso imediato para você chegar pronta.
               </p>
             </div>
 
@@ -260,7 +260,7 @@ const HeroSection = () => {
               <div className="mb-6 text-center lg:text-left">
                 <h2 className="text-xl font-bold uppercase tracking-tight">Vaga Exclusiva</h2>
                 <p className="text-sm md:text-base font-bold text-muted-foreground uppercase tracking-widest">
-                  Imersão Ao Vivo • Sábado 30/05
+                  Imersão Ao Vivo • Sábado 08/08
                 </p>
               </div>
 
@@ -320,13 +320,13 @@ const HeroSection = () => {
                     <div className="flex flex-col">
                       <span className="text-xs text-muted-foreground font-medium">
                         Valor total:{" "}
-                        <span className="line-through">R$ 583,90</span>
+                        <span className="line-through">R$ 503,90</span>
                       </span>
-                      <span className="text-3xl font-bold tracking-tighter animate-pulse-slow">R$ 39,90</span>
+                      <span className="text-3xl font-bold tracking-tighter animate-pulse-slow">R$ 29,90</span>
                     </div>
                     <div className="flex flex-col items-end gap-1">
                       <span className="text-xs font-bold text-primary bg-foreground px-2 py-1 uppercase tracking-widest shadow-premium">
-                        ENCERRA 30/05
+                        ENCERRA 08/08
                       </span>
                       <span className="text-xs text-muted-foreground font-medium">
                         Faltam {timeLeft.d} dias
