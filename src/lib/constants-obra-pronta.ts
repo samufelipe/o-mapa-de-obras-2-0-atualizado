@@ -11,22 +11,22 @@ export const AGENDA_OBRA_PRONTA = [
   {
     day: "MÓDULO MANHÃ",
     date: "SÁBADO 08/08 • 09h às 12h",
-    title: "Fundamentos da Execução Inteligente",
+    title: "De Manhã",
     topics: [
       "Por que profissionais que dominam obra ganham até 3x mais",
       "Planejamento da Obra: O passo-a-passo que elimina 80% dos problemas antes de começar a obra",
-      "Escopo de Obra: Como criar escopos profissionais usando IA",
-      "Sequência de Serviços: Monte a ordem perfeita que evita retrabalho"
+      "Cronograma de Obra em 8 Passos: O método validado para nunca mais errar prazos"
     ]
   },
   {
     day: "MÓDULO TARDE",
     date: "SÁBADO 08/08 • 13h às 16h",
-    title: "Cronograma, Lucro e Próximos Passos",
+    title: "Após Almoço",
     topics: [
-      "Cronograma de Obra em 8 Passos: O método validado para nunca mais errar prazos",
-      "Cronograma de Obra: Como estruturar um cronograma pronto para aplicar na sua obra",
-      "Como Ganhar Mais: Estratégias para cobrar honorários premium pelo gerenciamento",
+      "Estratégias para entregar a obra até o Natal desse ano.",
+      "Como usar a IA para facilitar o planejamento de obra",
+      "Como o cronograma te ajuda a precificar melhor o seu trabalho",
+      "Tipos de serviço que você pode prestar",
       "Planejando faturar mais: conheça o seu próximo passo e como se tornar uma profissional da gestão de obra com a Mentoria Inovando na Sua Obra"
     ],
     surprise: {
