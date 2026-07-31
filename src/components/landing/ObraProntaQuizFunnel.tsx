@@ -337,12 +337,12 @@ const VideoScreen = ({
         controls
         playsInline
         preload="metadata"
-        poster="/videos/imersao-natal-cuidado-poster.jpg"
+        poster="/videos/obra-pronta-quiz-poster.jpg"
         onPlay={() => trackVideoInteraction("play", "quiz_result_video")}
         onPause={(e) => trackVideoInteraction("pause", "quiz_result_video", e.currentTarget.currentTime)}
         onEnded={() => trackVideoInteraction("complete", "quiz_result_video")}
       >
-        <source src="/videos/imersao-natal-cuidado.mp4" type="video/mp4" />
+        <source src="/videos/obra-pronta-quiz.mp4" type="video/mp4" />
       </video>
     </div>
 
