@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import ObraProntaQuizFunnel from "@/components/landing/ObraProntaQuizFunnel";
 import { initAllTracking, trackBeginCheckout } from "@/lib/gtm-tracking";
 import { trackInitiateCheckout } from "@/lib/tracking";
+import { trackInitiateCheckout as trackInitiateCheckoutTikTok } from "@/lib/tiktok-tracking";
 import { CTAProvider } from "@/lib/cta-context";
 
 // Quiz de qualificação da LP oficial (Index.tsx). Mesma mecânica do quiz
@@ -30,6 +31,7 @@ const ObraProntaQuizLanding = () => {
   // UTMs/fbclid.
   const handleCTA = () => {
     trackInitiateCheckout(29.90);
+    trackInitiateCheckoutTikTok(29.90, "Imersão Cronograma Obra Pronta");
     trackBeginCheckout(29.90, "Imersão Cronograma Obra Pronta");
     const currentParams = new URLSearchParams(window.location.search);
     navigate(`/redirecionando?${currentParams.toString()}`);

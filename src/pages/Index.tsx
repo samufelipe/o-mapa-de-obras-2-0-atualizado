@@ -15,6 +15,7 @@ import FAQSection from "@/components/landing/FAQSection";
 import Footer from "@/components/landing/Footer";
 import { initAllTracking, trackCTAClick, trackSectionView, trackBeginCheckout } from "@/lib/gtm-tracking";
 import { trackInitiateCheckout } from "@/lib/tracking";
+import { trackInitiateCheckout as trackInitiateCheckoutTikTok } from "@/lib/tiktok-tracking";
 import { CTAProvider } from "@/lib/cta-context";
 import { FAQ_ITEMS_OBRA_PRONTA } from "@/lib/constants-obra-pronta";
 
@@ -107,6 +108,7 @@ const Index = () => {
   // terminem de sair antes da navegacao externa cortar a conexao.
   const handleCTA = () => {
     trackInitiateCheckout(29.90);
+    trackInitiateCheckoutTikTok(29.90, "Imersão Cronograma Obra Pronta");
     trackBeginCheckout(29.90, "Imersão Cronograma Obra Pronta");
     const currentParams = new URLSearchParams(window.location.search);
     navigate(`/redirecionando?${currentParams.toString()}`);

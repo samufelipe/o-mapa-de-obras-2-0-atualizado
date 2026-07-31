@@ -6,6 +6,10 @@ import TestimonialCard from "@/components/landing/TestimonialCard";
 import { useCTA } from "@/lib/cta-context";
 import { trackPageView as trackMetaPageView, trackViewContent } from "@/lib/tracking";
 import {
+  trackPageView as trackTikTokPageView,
+  trackViewContent as trackViewContentTikTok,
+} from "@/lib/tiktok-tracking";
+import {
   trackPageView as trackGtmPageView,
   trackQuizStepView,
   trackQuizAnswer,
@@ -93,6 +97,8 @@ const ObraProntaQuizFunnel = () => {
   useEffect(() => {
     trackMetaPageView();
     trackViewContent(STEP_PAGE_NAMES[currentStep]);
+    trackTikTokPageView();
+    trackViewContentTikTok(STEP_PAGE_NAMES[currentStep]);
     trackGtmPageView(STEP_PAGE_NAMES[currentStep]);
     trackQuizStepView(currentStep, stepIndex);
     setSelectedOptionId(null);

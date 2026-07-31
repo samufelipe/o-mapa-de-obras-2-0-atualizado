@@ -2,6 +2,11 @@ import { useEffect, useState } from "react";
 import { Loader2, Lock } from "lucide-react";
 import { OBRA_PRONTA_CHECKOUT_URL } from "@/lib/constants-obra-pronta";
 import { trackLead, trackPageView as trackMetaPageView, trackViewContent } from "@/lib/tracking";
+import {
+  trackLead as trackLeadTikTok,
+  trackPageView as trackTikTokPageView,
+  trackViewContent as trackViewContentTikTok,
+} from "@/lib/tiktok-tracking";
 import { trackPageView as trackGtmPageView, trackLeadGenerated } from "@/lib/gtm-tracking";
 
 // Delay curto so pra garantir que os disparos de tracking feitos no clique
@@ -21,14 +26,17 @@ const CheckoutBridgeObraPronta = () => {
   useEffect(() => {
     trackMetaPageView();
     trackViewContent(BRIDGE_PAGE_NAME);
+    trackTikTokPageView();
+    trackViewContentTikTok(BRIDGE_PAGE_NAME);
     trackGtmPageView(BRIDGE_PAGE_NAME);
   }, []);
 
   // Sem formulario de nome/telefone, esse e o unico ponto por onde todo
   // visitante que vai pro checkout obrigatoriamente passa. Mapeia o evento
-  // de Lead aqui (Meta Pixel + GTM), sem dados pessoais.
+  // de Lead aqui (Meta Pixel + GTM + TikTok), sem dados pessoais.
   useEffect(() => {
     trackLead({ value: 29.90, contentCategory: "Imersão Cronograma Obra Pronta" });
+    trackLeadTikTok({ value: 29.90, contentCategory: "Imersão Cronograma Obra Pronta" });
     trackLeadGenerated("checkout_redirect_obra_pronta");
   }, []);
 
@@ -41,7 +49,7 @@ const CheckoutBridgeObraPronta = () => {
 
       const url = new URL(OBRA_PRONTA_CHECKOUT_URL);
       const currentParams = new URLSearchParams(window.location.search);
-      ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid"].forEach((param) => {
+      ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid", "ttclid"].forEach((param) => {
         const val = currentParams.get(param);
         if (val) url.searchParams.set(param, val);
       });
