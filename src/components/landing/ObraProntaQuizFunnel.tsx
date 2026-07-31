@@ -101,6 +101,24 @@ const ObraProntaQuizFunnel = () => {
 
   const goTo = (step: QuizStepId) => navigate(STEP_PATHS[step]);
 
+  // Cada transição entre etapas dispara seu próprio cta_click (nome, etapa de
+  // origem e texto real do botão), pra reconstruir o funil completo de
+  // abandono clique a clique, não só por PageView de etapa.
+  const handleIntroStart = () => {
+    trackCTAClick("quiz_start", "quiz_intro", "Começar");
+    goTo("question-1");
+  };
+
+  const handleProfileContinue = () => {
+    trackCTAClick("quiz_continue", "quiz_profile", "Continuar");
+    goTo("video");
+  };
+
+  const handleVideoContinue = () => {
+    trackCTAClick("quiz_continue", "quiz_video", "Continuar");
+    goTo("social-proof");
+  };
+
   const answerQuestion = (question: QuizQuestion, optionId: string, optionLabel: string, nextStep: QuizStepId) => {
     setSelectedOptionId(optionId);
     trackQuizAnswer(question.id, optionId, optionLabel);
@@ -117,7 +135,7 @@ const ObraProntaQuizFunnel = () => {
   };
 
   const handleFinalCTA = () => {
-    trackCTAClick("quiz_final_cta", "quiz_video", "GARANTIR MINHA VAGA");
+    trackCTAClick("quiz_final_cta", "quiz_social_proof", "QUERO MINHA VAGA POR R$ 29,90");
     handleCTA();
   };
 
@@ -150,7 +168,7 @@ const ObraProntaQuizFunnel = () => {
       <main key={currentStep} className="flex-1 flex items-center justify-center px-4 py-10 animate-fade-up">
         <div className="w-full max-w-md mx-auto">
           {currentStep === "intro" && (
-            <IntroScreen headingRef={headingRef} onStart={() => goTo("question-1")} />
+            <IntroScreen headingRef={headingRef} onStart={handleIntroStart} />
           )}
 
           {currentStep === "question-1" && (
@@ -172,11 +190,11 @@ const ObraProntaQuizFunnel = () => {
           )}
 
           {currentStep === "profile" && (
-            <ProfileScreen headingRef={headingRef} answers={answers} onContinue={() => goTo("video")} />
+            <ProfileScreen headingRef={headingRef} answers={answers} onContinue={handleProfileContinue} />
           )}
 
           {currentStep === "video" && (
-            <VideoScreen headingRef={headingRef} onContinue={() => goTo("social-proof")} />
+            <VideoScreen headingRef={headingRef} onContinue={handleVideoContinue} />
           )}
 
           {currentStep === "social-proof" && (

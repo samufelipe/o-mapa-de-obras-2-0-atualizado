@@ -1,16 +1,28 @@
 import { useEffect, useState } from "react";
 import { Loader2, Lock } from "lucide-react";
 import { OBRA_PRONTA_CHECKOUT_URL } from "@/lib/constants-obra-pronta";
-import { trackLead } from "@/lib/tracking";
-import { trackLeadGenerated } from "@/lib/gtm-tracking";
+import { trackLead, trackPageView as trackMetaPageView, trackViewContent } from "@/lib/tracking";
+import { trackPageView as trackGtmPageView, trackLeadGenerated } from "@/lib/gtm-tracking";
 
 // Delay curto so pra garantir que os disparos de tracking feitos no clique
 // do CTA (trackInitiateCheckout/trackBeginCheckout, em Index.tsx) terminem
 // de sair antes da navegacao externa pro Hotmart cortar a conexao.
 const REDIRECT_DELAY = 800;
 
+const BRIDGE_PAGE_NAME = "Quiz Obra Pronta - Redirecionando";
+
 const CheckoutBridgeObraPronta = () => {
   const [status, setStatus] = useState<"loading" | "redirecting">("loading");
+
+  // Chega aqui sempre via navegacao client-side (nunca um carregamento de
+  // pagina novo), entao o PageView automatico do script do Pixel no
+  // index.html nao dispara de novo pra essa rota — disparado manualmente
+  // aqui, no mesmo padrao usado em cada etapa do quiz.
+  useEffect(() => {
+    trackMetaPageView();
+    trackViewContent(BRIDGE_PAGE_NAME);
+    trackGtmPageView(BRIDGE_PAGE_NAME);
+  }, []);
 
   // Sem formulario de nome/telefone, esse e o unico ponto por onde todo
   // visitante que vai pro checkout obrigatoriamente passa. Mapeia o evento
