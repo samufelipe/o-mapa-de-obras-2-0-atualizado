@@ -225,6 +225,9 @@ const IntroScreen = ({
       <span className="block text-2xl font-bold tracking-tight uppercase text-primary">Cronograma</span>
       <span className="block text-[10px] font-bold tracking-[0.3em] uppercase text-foreground/70">Obra Pronta</span>
     </span>
+    <span className="block text-primary font-bold text-xs md:text-sm uppercase tracking-widest mb-3">
+      Toda arquiteta deve saber de obra para ser valorizada
+    </span>
     <h1
       ref={headingRef}
       tabIndex={-1}
@@ -326,7 +329,10 @@ const ProfileScreen = ({
       <h1 ref={headingRef} tabIndex={-1} className="text-xl md:text-2xl font-bold mb-4 outline-none leading-snug text-center">
         {analysis.headline}
       </h1>
-      <p className="text-muted-foreground font-medium leading-relaxed mb-8 text-center">{analysis.body}</p>
+      <p className="text-muted-foreground font-medium leading-relaxed mb-4 text-center">{analysis.body}</p>
+      <p className="text-foreground font-bold leading-snug mb-8 text-center">
+        Você não fatura bem se não entender de fato sobre obras.
+      </p>
       <button
         onClick={onContinue}
         className="w-full bg-green-600 text-white py-4 text-base font-bold uppercase tracking-wide hover:bg-green-700 transition-all duration-300 border-2 border-green-600 shadow-premium hover:shadow-premium-gold hover:-translate-y-1 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
