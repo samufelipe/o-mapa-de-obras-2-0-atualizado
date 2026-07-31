@@ -206,11 +206,12 @@ const IntroScreen = ({
       tabIndex={-1}
       className="text-2xl md:text-3xl font-bold uppercase tracking-tight mb-3 outline-none"
     >
-      Pare de aceitar prazo impossível na sua obra
+      Projetos incríveis não sobrevivem a obra sem método
     </h1>
     <p className="text-muted-foreground font-medium mb-8">
-      Responda algumas perguntas rápidas e veja como a Imersão Cronograma Obra Pronta, ao vivo em{" "}
-      {EVENT_DATE_LABEL}, pode te ajudar. Vagas limitadas pra essa turma.
+      Responda 2 perguntas rápidas e descubra qual erro está custando dinheiro e autoridade na sua obra agora, e
+      como a Imersão Cronograma Obra Pronta, ao vivo em {EVENT_DATE_LABEL}, resolve exatamente isso. Vagas
+      limitadas pra essa turma.
     </p>
     <button
       onClick={onStart}
@@ -324,11 +325,11 @@ const VideoScreen = ({
 }) => (
   <div className="text-center">
     <h1 ref={headingRef} tabIndex={-1} className="text-xl md:text-2xl font-bold uppercase mb-3 outline-none leading-snug">
-      Assista o vídeo e veja como a Imersão vai te ajudar
+      Antes de continuar, veja isso na prática
     </h1>
     <p className="text-muted-foreground font-medium mb-6">
-      Esse vídeo rápido, direto e reto, te mostra como a Imersão Cronograma Obra Pronta vai te ajudar a entregar sua
-      obra no prazo.
+      Esse vídeo mostra um pedaço real do método que separa quem domina a sequência da obra de quem só corre atrás
+      dela. É o mesmo método que você vai aplicar na Imersão Cronograma Obra Pronta.
     </p>
 
     <div className="mb-6 border-2 border-foreground shadow-premium overflow-hidden">
@@ -407,7 +408,7 @@ const SocialProofScreen = ({
   return (
   <div>
     <p className="text-sm font-bold uppercase tracking-widest text-primary mb-3 text-center">
-      Quem já participou, aprovou
+      Não é papo, é resultado de quem aplicou
     </p>
     <h1 ref={headingRef} tabIndex={-1} className="text-xl md:text-2xl font-bold mb-6 outline-none leading-snug text-center">
       Arquitetas, engenheiras e designers de interiores que já aplicaram o método
@@ -454,10 +455,10 @@ const SocialProofScreen = ({
       onClick={onFinalCTA}
       className="w-full bg-green-600 text-white py-4 flex items-center justify-center gap-2 text-base sm:text-lg font-bold tracking-wide hover:bg-green-700 transition-all duration-300 border-2 border-green-600 shadow-premium hover:shadow-premium-gold hover:-translate-y-1 uppercase active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
     >
-      Garantir minha vaga
+      Quero minha vaga por R$ 29,90
     </button>
     <p className="text-sm font-bold uppercase tracking-wide text-[hsl(var(--cta))] mt-3 text-center">
-      Vagas limitadas pra essa turma
+      Vagas limitadas pra turma de {EVENT_DATE_LABEL}
     </p>
 
     <p className="text-center text-sm text-muted-foreground font-medium flex items-center justify-center gap-1 mt-3">

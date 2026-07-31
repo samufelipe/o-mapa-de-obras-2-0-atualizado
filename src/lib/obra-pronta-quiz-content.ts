@@ -30,14 +30,18 @@ export const QUIZ_QUESTION_1: QuizQuestion = {
   ],
 };
 
+// As 4 opções mapeiam 1:1 nos 4 pilares de dor já validados em
+// ProblemsSection.tsx (Maior Faturamento, Fim do Retrabalho, Autoridade e
+// Segurança, Gestão Inteligente), reescritas em primeira pessoa pra gerar
+// identificação imediata ("é, essa dor é minha") em vez de categoria abstrata.
 export const QUIZ_QUESTION_2: QuizQuestion = {
   id: "question-2",
-  prompt: "O que mais pesa no seu gerenciamento de obra agora?",
+  prompt: "Qual dessas situações te descreve melhor hoje?",
   options: [
-    { id: "prazo-impossivel", label: "Medo de aceitar um prazo impossível" },
-    { id: "precificar-gestao", label: "Não sei precificar minha gestão de obra" },
-    { id: "cronograma-desorganizado", label: "Não sei montar um cronograma organizado" },
-    { id: "fornecedor-atrasa", label: "Fornecedor atrasa e a culpa cai em mim" },
+    { id: "precificar-gestao", label: "Cobro pouco porque não sei precificar gestão de obra" },
+    { id: "retrabalho", label: "Já perdi dinheiro com retrabalho por não prever a sequência certa" },
+    { id: "frio-na-barriga", label: "Sinto um frio na barriga quando a equipe de obra me questiona" },
+    { id: "apaga-incendio", label: "Vivo apagando incêndio em vez de planejar com antecedência" },
   ],
 };
 
@@ -54,27 +58,27 @@ interface ProfileContent {
 }
 
 const PROFILE_BY_PAIN: Record<string, ProfileContent> = {
-  "prazo-impossivel": {
-    headline: "Seu maior risco agora: aceitar um prazo que você já sabe que não vai cumprir",
-    body: "Aceitar o prazo que o cliente impõe por medo de decepcionar é uma das dores mais comuns entre {profissao}. O problema não é trabalhar mais rápido, é não saber defender o prazo certo com segurança na frente do cliente. É exatamente isso que a Imersão Cronograma Obra Pronta ensina, ao vivo em 08/08, com a Ingrid e a Fernanda.",
-  },
   "precificar-gestao": {
-    headline: "Seu maior risco agora: não saber precificar sua gestão de obra",
-    body: "Não saber cobrar pelo que realmente vale o seu trabalho de gerenciamento é um dos erros mais comuns entre {profissao}. É exatamente isso que a Imersão Cronograma Obra Pronta ensina, ao vivo em 08/08, com a Ingrid e a Fernanda.",
+    headline: "Você está deixando dinheiro na mesa em toda obra que gerencia",
+    body: "Quem não sabe precificar gestão de obra cobra como amador e entrega como profissional, o prejuízo é seu. Na Imersão Cronograma Obra Pronta, {profissao} aprende como o domínio do cronograma vira argumento pra cobrar mais caro pelo mesmo trabalho, ao vivo em 08/08, com a Ingrid e a Fernanda.",
   },
-  "cronograma-desorganizado": {
-    headline: "Seu maior risco agora: seguir sem um cronograma organizado",
-    body: "Não saber montar um cronograma organizado é a raiz da maioria dos atrasos entre {profissao}. É exatamente isso que a Imersão Cronograma Obra Pronta ensina, ao vivo em 08/08, com a Ingrid e a Fernanda.",
+  retrabalho: {
+    headline: "O retrabalho que já te custou dinheiro vai se repetir na próxima obra",
+    body: "Sem a sequência certa de execução, um fornecedor chega antes da hora, material recém-instalado é danificado, e o prejuízo cai no seu colo. É exatamente esse erro que a Imersão Cronograma Obra Pronta elimina em {profissao}, ao vivo em 08/08, com a Ingrid e a Fernanda.",
   },
-  "fornecedor-atrasa": {
-    headline: "Seu maior risco agora: a culpa do atraso do fornecedor cair em você",
-    body: "Fornecedor atrasando e a culpa caindo em você é uma dor real de quem gerencia obra. Saber qualificar fornecedor pelo critério que realmente importa, o prazo de entrega, é um dos pontos centrais da Imersão Cronograma Obra Pronta, ao vivo em 08/08, com a Ingrid e a Fernanda.",
+  "frio-na-barriga": {
+    headline: "Enquanto você não domina a sequência técnica, a obra desconfia de você",
+    body: "Esse frio na barriga na hora de responder a equipe não é falta de talento, é falta de método. Quem domina a sequência técnica responde com precisão e conquista respeito na hora. É isso que a Imersão Cronograma Obra Pronta constrói em {profissao}, ao vivo em 08/08, com a Ingrid e a Fernanda.",
+  },
+  "apaga-incendio": {
+    headline: "Apagar incêndio todos os dias tem um preço: seu tempo e sua margem",
+    body: "Cada obra sem planejamento é uma nova rodada de correria. A Imersão Cronograma Obra Pronta ensina {profissao} a usar cronograma e IA pra prever o problema antes dele acontecer, e trocar a exaustão diária por uma rotina previsível, ao vivo em 08/08, com a Ingrid e a Fernanda.",
   },
 };
 
 const DEFAULT_PROFILE: ProfileContent = {
-  headline: "Sua obra não precisa ser correria",
-  body: "Atraso na obra pesa pra {profissao}, mesmo quando a culpa é do fornecedor ou do cliente que demorou pra aprovar orçamento. É exatamente isso que a Imersão Cronograma Obra Pronta resolve, ao vivo em 08/08, com a Ingrid e a Fernanda.",
+  headline: "Projetos incríveis não sobrevivem a obra sem método",
+  body: "É o domínio da sequência de serviços e do cronograma que separa {profissao} que fatura mais dos amadores que vivem no prejuízo. É exatamente isso que a Imersão Cronograma Obra Pronta ensina, ao vivo em 08/08, com a Ingrid e a Fernanda.",
 };
 
 export function getProfileAnalysis(answers: QuizAnswers): ProfileContent {
