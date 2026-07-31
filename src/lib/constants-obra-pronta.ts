@@ -59,10 +59,8 @@ export const BONUSES_OBRA_PRONTA = [
 
 export const PRICING_ITEMS_OBRA_PRONTA = [
   { name: "Imersão Cronograma Obra Pronta (Ao Vivo)", price: "R$ 197,00" },
-  { name: "Aulas Preparatórias para Construir seu Cronograma de Obras de Forma Completa (Acesso Imediato)", price: "R$ 197,00" },
   { name: "Modelo de Cronograma", price: "R$ 59,90" },
   { name: "Guia de 7 Prompts de IA para Obras", price: "R$ 50,00" },
-  { name: "Acesso ao Grupo VIP", price: "Incluso" },
 ];
 
 // Identico ao FAQ da LP de Natal (NATAL_FAQ, em natal-constants.ts) por pedido

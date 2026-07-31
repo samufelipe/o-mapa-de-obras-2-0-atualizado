@@ -6,10 +6,8 @@ const DEADLINE = new Date("2026-08-08T23:59:59-03:00");
 
 const heroFeatures = [
   "Imersão Ao Vivo · Sábado 08/08",
-  "Aulas Preparatórias para Construir seu Cronograma de Obras de Forma Completa (acesso imediato)",
   "Modelo de Cronograma",
   "Guia de 7 Prompts de IA para Obras",
-  "Acesso ao Grupo VIP",
 ];
 
 const HeroSection = () => {
