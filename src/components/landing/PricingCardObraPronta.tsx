@@ -13,7 +13,6 @@ interface PricingCardObraProntaProps {
   badgeLabel?: string;
   title: string;
   description?: string;
-  priceOriginal: string;
   priceFinal: string;
   features: PricingFeature[];
   ctaLabel: string;
@@ -28,7 +27,6 @@ const PricingCardObraPronta = ({
   badgeLabel,
   title,
   description,
-  priceOriginal,
   priceFinal,
   features,
   ctaLabel,
@@ -82,10 +80,6 @@ const PricingCardObraPronta = ({
       </div>
 
       <div className="mb-6">
-        <span className={cn("block text-xs sm:text-sm font-medium mb-1", isDark ? "text-background/70" : "text-muted-foreground")}>
-          Valor total se comprado separadamente:{" "}
-          <span className="line-through">{priceOriginal}</span>
-        </span>
         <span className={cn("block text-3xl sm:text-4xl font-bold tracking-tighter animate-pulse-slow", isDark ? "text-background" : "text-foreground")}>
           {priceFinal}
         </span>

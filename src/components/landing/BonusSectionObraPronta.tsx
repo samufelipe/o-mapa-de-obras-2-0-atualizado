@@ -48,7 +48,6 @@ const BonusSectionObraPronta = () => {
           title="Investimento Único"
           description="Tudo o que você precisa para aplicar o método imediatamente"
           features={PRICING_ITEMS_OBRA_PRONTA.map((item) => ({ label: item.name, price: item.price }))}
-          priceOriginal="R$ 503,90"
           priceFinal="R$ 29,90"
           ctaLabel="Garantir Minha Vaga Agora"
           ctaTrackingName="bonus_pricing_card"

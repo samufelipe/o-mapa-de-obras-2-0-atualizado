@@ -107,7 +107,6 @@ const HeroSection = () => {
               eyebrow="Vaga Exclusiva"
               title="Imersão Ao Vivo · Sábado 08/08"
               features={heroFeatures}
-              priceOriginal="R$ 503,90"
               priceFinal="R$ 29,90"
               ctaLabel="Reservar Meu Lugar"
               ctaTrackingName="hero_pricing_card"
