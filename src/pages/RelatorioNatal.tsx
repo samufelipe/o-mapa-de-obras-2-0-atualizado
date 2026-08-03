@@ -186,20 +186,20 @@ const StatTile = ({ icon, label, value, prefix = "", suffix = "", decimals = 0, 
     <div
       ref={ref}
       style={{ transitionDelay: `${delay}ms` }}
-      className={`bg-card border border-border shadow-sm p-6 md:p-8 transition-all duration-700 ease-out ${
+      className={`flex flex-col bg-card border border-border shadow-sm p-5 md:p-8 transition-all duration-700 ease-out ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
       }`}
     >
-      <div className="flex items-center gap-2 mb-4 text-muted-foreground">
-        {icon}
-        <span className="text-xs font-bold uppercase tracking-widest">{label}</span>
+      <div className="flex items-center gap-1.5 mb-3 text-muted-foreground min-h-[2rem] md:min-h-[1.5rem]">
+        <span className="flex-shrink-0">{icon}</span>
+        <span className="text-[10px] md:text-xs font-bold uppercase tracking-wide leading-tight">{label}</span>
       </div>
-      <div className={`text-3xl md:text-4xl font-bold tracking-tight ${accentClass}`}>
+      <div className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight whitespace-nowrap ${accentClass}`}>
         {prefix}
         {display}
         {suffix}
       </div>
-      {caption && <p className="text-xs text-muted-foreground font-medium mt-2">{caption}</p>}
+      {caption && <p className="text-xs text-muted-foreground font-medium mt-2 leading-snug">{caption}</p>}
     </div>
   );
 };
@@ -302,7 +302,7 @@ const RelatorioNatal = () => {
         </Section>
 
         {/* KPIs principais */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-5 mb-14">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-5 mb-14">
           <StatTile
             icon={<DollarSign className="w-4 h-4" />}
             label="Valor investido"
