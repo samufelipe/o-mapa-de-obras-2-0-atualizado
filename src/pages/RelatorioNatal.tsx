@@ -18,7 +18,6 @@ import {
   ExternalLink,
   CheckCircle2,
   Sparkles,
-  Info,
   Percent,
 } from "lucide-react";
 
@@ -93,11 +92,6 @@ const REPORT = {
     "Priorização dos melhores criativos nas campanhas",
     "Aumento de verba na campanha de remarketing com melhor CPA geral",
     "Início de teste de campanha no TikTok Ads (interrompido pela suspensão da conta de anúncios)",
-  ],
-  importantNotes: [
-    "O volume do Meta não está como no início do ano, isso já vimos na imersão passada.",
-    "O volume não será como antes no Meta, a não ser que dobremos o investimento atual, algo que ainda não aconselho.",
-    "O botão \"Saiba mais\" dos anúncios é padronizado pelo Meta e não pode ser customizado. Sem selecionar esse botão, o Meta não permite nem subir os anúncios.",
   ],
 };
 
@@ -468,21 +462,6 @@ const RelatorioNatal = () => {
                 <li key={item} className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                   <span className="font-medium">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </Section>
-
-        {/* Detalhes importantes */}
-        <Section className="mb-14">
-          <h2 className="text-lg md:text-xl font-bold uppercase tracking-tight mb-6">Detalhes importantes</h2>
-          <div className="bg-foreground text-background border-2 border-primary shadow-premium p-6 md:p-8">
-            <ul className="space-y-4">
-              {REPORT.importantNotes.map((note) => (
-                <li key={note} className="flex items-start gap-3">
-                  <Info className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                  <span className="font-medium text-background/90 leading-relaxed">{note}</span>
                 </li>
               ))}
             </ul>
