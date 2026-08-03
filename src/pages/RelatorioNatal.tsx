@@ -18,65 +18,87 @@ import {
   ExternalLink,
   CheckCircle2,
   Sparkles,
-  ArrowUpRight,
   Info,
+  Percent,
 } from "lucide-react";
-import { OBRA_PRONTA_CHECKOUT_URL } from "@/lib/constants-obra-pronta";
 
 // ============================================================
 // Dados do relatório — atualizar manualmente a cada novo período
 // ============================================================
 const REPORT = {
-  period: "22/07 a 28/07/2026",
-  invested: 1511.03,
-  revenue: 1055.33,
-  totalSales: 45,
-  ctr: 2.59,
+  period: "22/07 a 03/08/2026",
+  invested: 2866.57,
+  revenue: 2157.48,
+  totalSales: 93,
+  ctr: 1.83,
+  cpa: 30.82,
   dailySales: [
     { day: "22/07", vendas: 8 },
-    { day: "23/07", vendas: 1 },
+    { day: "23/07", vendas: 2 },
     { day: "24/07", vendas: 10 },
     { day: "25/07", vendas: 8 },
     { day: "26/07", vendas: 8 },
-    { day: "27/07", vendas: 9 },
-    { day: "28/07", vendas: 1 },
+    { day: "27/07", vendas: 10 },
+    { day: "28/07", vendas: 7 },
+    { day: "29/07", vendas: 4 },
+    { day: "30/07", vendas: 4 },
+    { day: "31/07", vendas: 13 },
+    { day: "01/08", vendas: 10 },
+    { day: "02/08", vendas: 5 },
+    { day: "03/08", vendas: 4 },
   ],
-  topCreatives: [
-    {
-      name: "video-sequencia-de-servicos-novo",
-      link: "https://www.instagram.com/p/DbQaoo_AAG5/#advertiser",
-      sales: 23,
+  // Recortes dos últimos 7 dias (não do período inteiro) — criativo e públicos
+  // com melhor performance recente, cada um com suas próprias vendas/CPA/CTR.
+  topCreative: {
+    name: "ad - sequencia-de-servicos-novo",
+    sales: 57,
+    cpa: 22.08,
+    ctr: 2.63,
+  },
+  topAudience: {
+    name: "cargos arquitetas 24/05",
+    sales: 44,
+    cpa: 22.29,
+    ctr: 2.7,
+  },
+  warmAudience: {
+    sales: 19,
+    cpa: 17.86,
+    ctr: 2.37,
+  },
+  // Teste A/B entre as duas LPs: ambas começaram com a comunicação "Até o
+  // Natal" e foram trocadas pra comunicação atual no meio do período, então
+  // os números não refletem um teste limpo do início ao fim.
+  abTest: {
+    quiz: {
+      label: "LP Quiz",
+      url: "https://inscricao.imersao.inovandonasuaobra.com.br/quiz",
+      sales: 25,
+      cpa: 21.83,
+      ctr: 1.61,
     },
-    {
-      name: "video-Rogério-post",
-      link: "https://www.instagram.com/p/DbL7J2QAKif/#advertiser",
-      sales: 6,
+    lp: {
+      label: "LP Oficial",
+      url: "https://inscricao.imersao.inovandonasuaobra.com.br/",
+      sales: 19,
+      cpa: 26.26,
+      ctr: 1.66,
     },
-    {
-      name: "video-Não-Sei-Fazer-Cronograma",
-      link: "https://www.instagram.com/p/DbJpPclgp9D/#advertiser",
-      sales: 5,
-    },
-  ],
+  },
   optimizations: [
-    "Desativação de anúncios com baixo ou nenhum desempenho",
-    "Otimização da verba direcionando para campanhas com melhores resultados",
-    "Criação e testes de novos públicos",
-    "Otimização do funil da LP inicial",
-    "Otimização do checkout da Hotmart",
-    "Criação de uma nova LP em formato de quiz",
-    "Implementação de novos criativos",
-    "Revisão do trackeamento do Pixel do Meta no funil",
-    "Otimização da velocidade das duas LPs em uso",
+    "Testes de público",
+    "Direcionamento e aumento de verba para público e criativos com melhores resultados",
+    "Mudança na comunicação geral da estratégia",
+    "Ativação do Pix no checkout",
+    "Priorização dos melhores criativos nas campanhas",
+    "Aumento de verba na campanha de remarketing com melhor CPA geral",
+    "Início de teste de campanha no TikTok Ads (interrompido pela suspensão da conta de anúncios)",
   ],
   importantNotes: [
     "O volume do Meta não está como no início do ano, isso já vimos na imersão passada.",
     "O volume não será como antes no Meta, a não ser que dobremos o investimento atual, algo que ainda não aconselho.",
     "O botão \"Saiba mais\" dos anúncios é padronizado pelo Meta e não pode ser customizado. Sem selecionar esse botão, o Meta não permite nem subir os anúncios.",
   ],
-  quizUrl: "https://inscricao.imersao.inovandonasuaobra.com.br/quiz",
-  checkoutCpa: 16.68,
-  checkoutUrl: OBRA_PRONTA_CHECKOUT_URL,
 };
 
 const roas = REPORT.revenue / REPORT.invested;
@@ -182,6 +204,43 @@ const StatTile = ({ icon, label, value, prefix = "", suffix = "", decimals = 0, 
   );
 };
 
+interface SegmentCardProps {
+  eyebrow: string;
+  name?: string;
+  sales: number;
+  cpa: number;
+  ctr: number;
+}
+
+const SegmentCard = ({ eyebrow, name, sales, cpa, ctr }: SegmentCardProps) => {
+  const { ref, visible } = useReveal();
+  return (
+    <div
+      ref={ref}
+      className={`bg-card border border-border shadow-sm p-6 transition-all duration-700 ease-out ${
+        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+      }`}
+    >
+      <span className="text-xs font-bold uppercase tracking-widest text-primary block mb-2">{eyebrow}</span>
+      <p className="font-bold mb-5 min-h-[1.5em] truncate">{name || "Segmento de remarketing"}</p>
+      <div className="grid grid-cols-3 gap-2 text-center border-t border-border pt-4">
+        <div>
+          <p className="text-lg md:text-xl font-bold">{sales}</p>
+          <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-wide">Vendas</p>
+        </div>
+        <div>
+          <p className="text-lg md:text-xl font-bold">R$ {formatBRL(cpa)}</p>
+          <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-wide">CPA</p>
+        </div>
+        <div>
+          <p className="text-lg md:text-xl font-bold">{ctr.toFixed(2)}%</p>
+          <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-wide">CTR</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ChartTooltip = ({ active, payload, label }: { active?: boolean; payload?: Array<{ value: number }>; label?: string }) => {
   if (!active || !payload || !payload.length) return null;
   return (
@@ -243,7 +302,7 @@ const RelatorioNatal = () => {
         </Section>
 
         {/* KPIs principais */}
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 md:gap-5 mb-14">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-5 mb-14">
           <StatTile
             icon={<DollarSign className="w-4 h-4" />}
             label="Valor investido"
@@ -287,6 +346,15 @@ const RelatorioNatal = () => {
             suffix="%"
             delay={320}
           />
+          <StatTile
+            icon={<Percent className="w-4 h-4" />}
+            label="CPA geral da conta"
+            value={REPORT.cpa}
+            prefix="R$ "
+            decimals={2}
+            accent="cta"
+            delay={400}
+          />
         </div>
 
         {/* Gráfico de vendas por dia */}
@@ -323,28 +391,69 @@ const RelatorioNatal = () => {
           </div>
         </Section>
 
-        {/* Criativos campeões */}
+        {/* Criativo e público campeões */}
         <Section className="mb-14">
-          <h2 className="text-lg md:text-xl font-bold uppercase tracking-tight mb-6">Criativos campeões até o momento</h2>
-          <div className="space-y-3">
-            {REPORT.topCreatives.map((creative, i) => (
+          <h2 className="text-lg md:text-xl font-bold uppercase tracking-tight mb-1">Criativo e público campeões</h2>
+          <p className="text-sm text-muted-foreground font-medium mb-6">Recorte dos últimos 7 dias</p>
+          <div className="grid md:grid-cols-3 gap-4">
+            <SegmentCard
+              eyebrow="Criativo campeão"
+              name={REPORT.topCreative.name}
+              sales={REPORT.topCreative.sales}
+              cpa={REPORT.topCreative.cpa}
+              ctr={REPORT.topCreative.ctr}
+            />
+            <SegmentCard
+              eyebrow="Público campeão"
+              name={REPORT.topAudience.name}
+              sales={REPORT.topAudience.sales}
+              cpa={REPORT.topAudience.cpa}
+              ctr={REPORT.topAudience.ctr}
+            />
+            <SegmentCard
+              eyebrow="Público quente (remarketing)"
+              sales={REPORT.warmAudience.sales}
+              cpa={REPORT.warmAudience.cpa}
+              ctr={REPORT.warmAudience.ctr}
+            />
+          </div>
+        </Section>
+
+        {/* Teste A/B: Quiz vs. LP Oficial */}
+        <Section className="mb-14">
+          <h2 className="text-lg md:text-xl font-bold uppercase tracking-tight mb-1">Teste A/B: Quiz vs. LP Oficial</h2>
+          <p className="text-sm text-muted-foreground font-medium mb-6 max-w-2xl">
+            As duas páginas começaram o período com a comunicação "Até o Natal" e foram trocadas pra comunicação
+            atual no meio do teste, então os números abaixo não refletem uma comparação limpa do início ao fim.
+          </p>
+          <div className="grid md:grid-cols-2 gap-4">
+            {[REPORT.abTest.quiz, REPORT.abTest.lp].map((variant) => (
               <a
-                key={creative.link}
-                href={creative.link}
+                key={variant.url}
+                href={variant.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center justify-between gap-4 bg-card border border-border hover:border-primary shadow-sm hover:shadow-premium-gold transition-all duration-300 p-5 md:p-6"
+                className="group bg-card border border-border hover:border-primary shadow-sm hover:shadow-premium-gold transition-all duration-300 p-6 md:p-8"
               >
-                <div className="flex items-center gap-4 min-w-0">
-                  <span className="flex-shrink-0 w-9 h-9 rounded-full bg-foreground text-primary font-bold flex items-center justify-center text-sm">
-                    {i + 1}
-                  </span>
-                  <div className="min-w-0">
-                    <p className="font-bold truncate">{creative.name}</p>
-                    <p className="text-sm text-muted-foreground font-medium">{creative.sales} vendas geradas</p>
+                <div className="flex items-center justify-between gap-3 mb-2">
+                  <span className="text-xs font-bold uppercase tracking-widest text-primary">{variant.label}</span>
+                  <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-primary flex-shrink-0 transition-colors" />
+                </div>
+                <p className="text-sm text-muted-foreground font-medium break-all mb-5">{variant.url}</p>
+                <div className="grid grid-cols-3 gap-2 text-center border-t border-border pt-4">
+                  <div>
+                    <p className="text-lg md:text-xl font-bold">{variant.sales}</p>
+                    <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-wide">Vendas</p>
+                  </div>
+                  <div>
+                    <p className="text-lg md:text-xl font-bold">R$ {formatBRL(variant.cpa)}</p>
+                    <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-wide">CPA</p>
+                  </div>
+                  <div>
+                    <p className="text-lg md:text-xl font-bold">{variant.ctr.toFixed(2)}%</p>
+                    <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-wide">CTR</p>
                   </div>
                 </div>
-                <ExternalLink className="w-5 h-5 text-muted-foreground group-hover:text-primary flex-shrink-0 transition-colors" />
               </a>
             ))}
           </div>
@@ -377,46 +486,6 @@ const RelatorioNatal = () => {
                 </li>
               ))}
             </ul>
-          </div>
-        </Section>
-
-        {/* Destaques */}
-        <Section className="mb-6">
-          <h2 className="text-lg md:text-xl font-bold uppercase tracking-tight mb-6">Destaques do período</h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            <a
-              href={REPORT.quizUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group bg-foreground text-background border-2 border-primary shadow-premium hover:-translate-y-1 transition-all duration-300 p-6 md:p-8 flex flex-col justify-between"
-            >
-              <div>
-                <span className="text-xs font-bold uppercase tracking-widest text-primary block mb-2">Nova LP</span>
-                <p className="text-lg font-bold uppercase tracking-tight mb-1">Funil de Quiz</p>
-                <p className="text-sm text-background/60 font-medium break-all">{REPORT.quizUrl}</p>
-              </div>
-              <div className="flex items-center gap-1.5 text-primary font-bold text-sm uppercase tracking-wide mt-4 group-hover:gap-2.5 transition-all">
-                Ver página <ArrowUpRight className="w-4 h-4" />
-              </div>
-            </a>
-
-            <a
-              href={REPORT.checkoutUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group bg-card border border-border hover:border-primary shadow-sm hover:shadow-premium-gold transition-all duration-300 p-6 md:p-8 flex flex-col justify-between"
-            >
-              <div>
-                <span className="text-xs font-bold uppercase tracking-widest text-primary block mb-2">Novo checkout</span>
-                <p className="text-lg font-bold uppercase tracking-tight mb-1">
-                  Melhor CPA da conta: R$ {formatBRL(REPORT.checkoutCpa)}
-                </p>
-                <p className="text-sm text-muted-foreground font-medium break-all">{REPORT.checkoutUrl}</p>
-              </div>
-              <div className="flex items-center gap-1.5 text-primary font-bold text-sm uppercase tracking-wide mt-4 group-hover:gap-2.5 transition-all">
-                Abrir checkout <ArrowUpRight className="w-4 h-4" />
-              </div>
-            </a>
           </div>
         </Section>
 
