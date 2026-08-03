@@ -21,6 +21,7 @@ import {
   ArrowUpRight,
   Info,
 } from "lucide-react";
+import { OBRA_PRONTA_CHECKOUT_URL } from "@/lib/constants-obra-pronta";
 
 // ============================================================
 // Dados do relatório — atualizar manualmente a cada novo período
@@ -73,9 +74,9 @@ const REPORT = {
     "O volume não será como antes no Meta, a não ser que dobremos o investimento atual, algo que ainda não aconselho.",
     "O botão \"Saiba mais\" dos anúncios é padronizado pelo Meta e não pode ser customizado. Sem selecionar esse botão, o Meta não permite nem subir os anúncios.",
   ],
-  quizUrl: "https://cronogramadenatal.inovandonasuaobra.com.br/natal-v2",
+  quizUrl: "https://inscricao.imersao.inovandonasuaobra.com.br/quiz",
   checkoutCpa: 16.68,
-  checkoutUrl: "https://pay.hotmart.com/T106814287G?checkoutMode=10&bid=1785243120866",
+  checkoutUrl: OBRA_PRONTA_CHECKOUT_URL,
 };
 
 const roas = REPORT.revenue / REPORT.invested;
@@ -205,7 +206,7 @@ const Section = ({ children, className = "" }: { children: React.ReactNode; clas
 const RelatorioNatal = () => {
   useEffect(() => {
     const originalTitle = document.title;
-    document.title = "Relatório de Performance | Imersão Cronograma Especial de Natal";
+    document.title = "Relatório de Performance | Imersão Cronograma Obra Pronta";
     return () => {
       document.title = originalTitle;
     };
@@ -219,7 +220,11 @@ const RelatorioNatal = () => {
       <div className="relative z-10 container mx-auto px-4 md:px-6 py-12 md:py-16 max-w-5xl">
         {/* Header */}
         <header className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-12 animate-fade-up">
-          <img src="/brand-natal/logo-horizontal.png" alt="Cronograma: Obra Pronta até o Natal" className="h-16 md:h-20 w-auto object-contain" />
+          <span className="flex flex-col items-start leading-none">
+            <span className="block text-xs font-bold tracking-[0.3em] uppercase text-foreground/70">Imersão</span>
+            <span className="block text-2xl md:text-3xl font-bold tracking-tight uppercase text-primary">Cronograma</span>
+            <span className="block text-xs font-bold tracking-[0.3em] uppercase text-foreground/70">Obra Pronta</span>
+          </span>
           <div className="text-left md:text-right">
             <span className="inline-flex items-center gap-2 bg-foreground text-background px-3 py-1.5 border border-primary shadow-premium text-xs font-bold uppercase tracking-widest">
               <Sparkles className="w-3.5 h-3.5 text-primary" /> Período: {REPORT.period}
@@ -232,8 +237,8 @@ const RelatorioNatal = () => {
             Relatório de Performance
           </h1>
           <p className="text-base md:text-lg text-muted-foreground font-medium leading-relaxed max-w-3xl">
-            Relatório de desempenho das campanhas de tráfego da Imersão Cronograma Obra Pronta Até o Natal. Dados
-            extraídos da conta de Meta Ads e dados comerciais da conta da Hotmart da Inovando Arquitetura.
+            Relatório de desempenho das campanhas de tráfego da Imersão Cronograma Obra Pronta. Dados extraídos da
+            conta de Meta Ads e dados comerciais da conta da Hotmart da Inovando Arquitetura.
           </p>
         </Section>
 
@@ -417,7 +422,7 @@ const RelatorioNatal = () => {
 
         <footer className="mt-16 pt-8 border-t border-border text-center">
           <p className="text-xs text-muted-foreground font-medium uppercase tracking-widest">
-            Imersão Cronograma Especial de Natal · Inovando na Sua Obra
+            Imersão Cronograma Obra Pronta · Inovando na Sua Obra
           </p>
         </footer>
       </div>
